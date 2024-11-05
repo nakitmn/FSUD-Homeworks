@@ -15,54 +15,154 @@ namespace Inventories
         public event Action<Item, Vector2Int> OnMoved;
         public event Action OnCleared;
 
-        public int Width => throw new NotImplementedException();
-        public int Height => throw new NotImplementedException();
-        public int Count => throw new NotImplementedException();
+        public int Width => _width;
+        public int Height => _height;
+        public int Count => _items.Count;
+
+        private readonly int _width;
+        private readonly int _height;
+        private readonly Dictionary<Item, List<Vector2Int>> _items;
 
         public Inventory(in int width, in int height)
-            => throw new NotImplementedException();
+        {
+            if (width <= 0 || height <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Invalid inventory size!");
+            }
+
+            _width = width;
+            _height = height;
+            _items = new Dictionary<Item, List<Vector2Int>>();
+        }
 
         public Inventory(
             in int width,
             in int height,
             params KeyValuePair<Item, Vector2Int>[] items
-        ) : this(width, height) => throw new NotImplementedException();
+        ) : this(width, height)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("Can't create inventory with null items!");
+            }
+
+            foreach (var (item, position) in items)
+            {
+                AddItem(item, position);
+            }
+        }
 
         public Inventory(
             in int width,
             in int height,
             params Item[] items
-        ) : this(width, height) => throw new NotImplementedException();
+        ) : this(width, height)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("Can't create inventory with null items!");
+            }
+            
+            foreach (var item in items)
+            {
+                AddItem(item);
+            }
+        }
 
         public Inventory(
             in int width,
             in int height,
             in IEnumerable<KeyValuePair<Item, Vector2Int>> items
-        ) : this(width, height) => throw new NotImplementedException();
+        ) : this(width, height)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("Can't create inventory with null items!");
+            }
+            
+            foreach (var (item, position) in items)
+            {
+                AddItem(item, position);
+            }
+        }
 
         public Inventory(
             in int width,
             in int height,
             in IEnumerable<Item> items
-        ) : this(width, height) => throw new NotImplementedException();
+        ) : this(width, height)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("Can't create inventory with null items!");
+            }
+            
+            foreach (var item in items)
+            {
+                AddItem(item);
+            }
+        }
 
         /// <summary>
         /// Checks for adding an item on a specified position
         /// </summary>
         public bool CanAddItem(in Item item, in Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            if (item == null)
+            {
+                return false;
+            }
+
+            for (var x = 1; x <= item.Size.x; x++)
+            {
+                for (var y = 1; y <= item.Size.y; y++)
+                {
+                    var checkingPosition = position + new Vector2Int(x, y);
+
+                    if (IsFree(checkingPosition) == false)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
 
         public bool CanAddItem(in Item item, in int posX, in int posY)
-            => throw new NotImplementedException();
+        {
+            return CanAddItem(item, new Vector2Int(posX, posY));
+        }
 
         /// <summary>
         /// Adds an item on a specified position if not exists
         /// </summary>
         public bool AddItem(in Item item, in Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            if (CanAddItem(item, position) == false)
+            {
+                return false;
+            }
+
+            List<Vector2Int> positions = new List<Vector2Int>();
+
+            for (var x = 1; x <= item.Size.x; x++)
+            {
+                for (var y = 1; y <= item.Size.y; y++)
+                {
+                    var checkingPosition = position + new Vector2Int(x, y);
+                    positions.Add(checkingPosition);
+                }
+            }
+
+            _items.Add(item, positions);
+            return true;
+        }
 
         public bool AddItem(in Item item, in int posX, in int posY)
-            => throw new NotImplementedException();
+        {
+            return AddItem(item, new Vector2Int(posX, posY));
+        }
 
         /// <summary>
         /// Checks for adding an item on a free position
@@ -81,12 +181,14 @@ namespace Inventories
         /// </summary>
         public bool FindFreePosition(in Vector2Int size, out Vector2Int freePosition)
             => throw new NotImplementedException();
-        
+
         /// <summary>
         /// Checks if a specified item exists
         /// </summary>
         public bool Contains(in Item item)
-            => throw new NotImplementedException();
+        {
+            return _items.ContainsKey(item);
+        }
 
         /// <summary>
         /// Checks if a specified position is occupied
@@ -101,10 +203,25 @@ namespace Inventories
         /// Checks if a position is free
         /// </summary>
         public bool IsFree(in Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            foreach (var (item, positions) in _items)
+            {
+                foreach (var checkingPosition in positions)
+                {
+                    if (checkingPosition == position)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
 
         public bool IsFree(in int x, in int y)
-            => throw new NotImplementedException();
+        {
+            return IsFree(new Vector2Int(x, y));
+        }
 
         /// <summary>
         /// Removes a specified item if exists
@@ -138,13 +255,13 @@ namespace Inventories
 
         public bool TryGetPositions(in Item item, out Vector2Int[] positions)
             => throw new NotImplementedException();
-        
+
         /// <summary>
         /// Clears all inventory items
         /// </summary>
         public void Clear()
             => throw new NotImplementedException();
-        
+
         /// <summary>
         /// Returns a count of items with a specified name
         /// </summary>
@@ -156,7 +273,7 @@ namespace Inventories
         /// </summary>
         public bool MoveItem(in Item item, in Vector2Int newPosition)
             => throw new NotImplementedException();
-        
+
         /// <summary>
         /// Reorganizes inventory space to make the free area uniform
         /// </summary>
