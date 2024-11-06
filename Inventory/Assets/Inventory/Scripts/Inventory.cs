@@ -112,12 +112,12 @@ namespace Inventories
             {
                 return false;
             }
-            
+
             if (IsInBounds(position) == false)
             {
                 return false;
             }
-            
+
             if (item.Size.x <= 0 || item.Size.y <= 0)
             {
                 throw new ArgumentException("Invalid item size!");
@@ -129,7 +129,7 @@ namespace Inventories
             }
 
             var otherPivot = position + item.Size - Vector2Int.one;
-            
+
             if (IsInBounds(otherPivot) == false)
             {
                 return false;
@@ -166,16 +166,7 @@ namespace Inventories
                 return false;
             }
 
-            List<Vector2Int> positions = new List<Vector2Int>();
-
-            for (var x = 0; x < item.Size.x; x++)
-            {
-                for (var y = 0; y < item.Size.y; y++)
-                {
-                    var checkingPosition = position + new Vector2Int(x, y);
-                    positions.Add(checkingPosition);
-                }
-            }
+            var positions = GetPositionsAt(position, item.Size);
 
             _items.Add(item, positions);
             OnAdded?.Invoke(item, position);
@@ -264,26 +255,26 @@ namespace Inventories
             {
                 return false;
             }
-            
+
             return _items.Remove(item);
         }
 
         public bool RemoveItem(in Item item, out Vector2Int position)
         {
             position = default;
-            
+
             if (item == null)
             {
                 return false;
             }
-            
+
             if (_items.Remove(item, out var positions))
             {
                 position = positions[0];
                 OnRemoved?.Invoke(item, position);
                 return true;
             }
-            
+
             return false;
         }
 
@@ -400,8 +391,40 @@ namespace Inventories
             {
                 throw new ArgumentNullException("Can't move null item!");
             }
+            
+            if (Contains(item) == false)
+            {
+                return false;
+            }
 
-            throw new NotImplementedException();
+            if (IsInBounds(newPosition) == false)
+            {
+                return false;
+            }
+            
+            var otherPivot = newPosition + item.Size - Vector2Int.one;
+
+            if (IsInBounds(otherPivot) == false)
+            {
+                return false;
+            }
+            
+            var newPositions = GetPositionsAt(newPosition, item.Size);
+            
+            foreach (var checkingPosition in newPositions)
+            {
+                if (TryGetItem(checkingPosition, out var itemAtPosition))
+                {
+                    if (item != itemAtPosition)
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            _items[item] = newPositions;
+            OnMoved?.Invoke(item, newPosition);
+            return true;
         }
 
         /// <summary>
@@ -433,13 +456,29 @@ namespace Inventories
         {
             return _items.Keys.GetEnumerator();
         }
-        
+
         private bool IsInBounds(Vector2Int position)
         {
             return position.x >= 0
                    && position.x < _width
                    && position.y >= 0
                    && position.y < _height;
+        }
+
+        private List<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
+        {
+            List<Vector2Int> positions = new List<Vector2Int>();
+
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    var checkingPosition = position + new Vector2Int(x, y);
+                    positions.Add(checkingPosition);
+                }
+            }
+
+            return positions;
         }
     }
 }
