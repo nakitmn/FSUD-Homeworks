@@ -62,7 +62,7 @@ namespace Inventories
             {
                 throw new ArgumentNullException("Can't create inventory with null items!");
             }
-            
+
             foreach (var item in items)
             {
                 AddItem(item);
@@ -79,7 +79,7 @@ namespace Inventories
             {
                 throw new ArgumentNullException("Can't create inventory with null items!");
             }
-            
+
             foreach (var (item, position) in items)
             {
                 AddItem(item, position);
@@ -96,7 +96,7 @@ namespace Inventories
             {
                 throw new ArgumentNullException("Can't create inventory with null items!");
             }
-            
+
             foreach (var item in items)
             {
                 AddItem(item);
@@ -112,10 +112,32 @@ namespace Inventories
             {
                 return false;
             }
-
-            for (var x = 1; x <= item.Size.x; x++)
+            
+            if (IsInBounds(position) == false)
             {
-                for (var y = 1; y <= item.Size.y; y++)
+                return false;
+            }
+            
+            if (item.Size.x <= 0 || item.Size.y <= 0)
+            {
+                throw new ArgumentException("Invalid item size!");
+            }
+
+            if (Contains(item))
+            {
+                return false;
+            }
+
+            var otherPivot = position + item.Size - Vector2Int.one;
+            
+            if (IsInBounds(otherPivot) == false)
+            {
+                return false;
+            }
+
+            for (var x = 0; x <= item.Size.x; x++)
+            {
+                for (var y = 0; y <= item.Size.y; y++)
                 {
                     var checkingPosition = position + new Vector2Int(x, y);
 
@@ -146,9 +168,9 @@ namespace Inventories
 
             List<Vector2Int> positions = new List<Vector2Int>();
 
-            for (var x = 1; x <= item.Size.x; x++)
+            for (var x = 0; x < item.Size.x; x++)
             {
-                for (var y = 1; y <= item.Size.y; y++)
+                for (var y = 0; y < item.Size.y; y++)
                 {
                     var checkingPosition = position + new Vector2Int(x, y);
                     positions.Add(checkingPosition);
@@ -156,6 +178,7 @@ namespace Inventories
             }
 
             _items.Add(item, positions);
+            OnAdded?.Invoke(item, position);
             return true;
         }
 
@@ -187,6 +210,11 @@ namespace Inventories
         /// </summary>
         public bool Contains(in Item item)
         {
+            if (item == null)
+            {
+                return false;
+            }
+
             return _items.ContainsKey(item);
         }
 
@@ -194,10 +222,14 @@ namespace Inventories
         /// Checks if a specified position is occupied
         /// </summary>
         public bool IsOccupied(in Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            return IsFree(position) == false;
+        }
 
         public bool IsOccupied(in int x, in int y)
-            => throw new NotImplementedException();
+        {
+            return IsOccupied(new Vector2Int(x, y));
+        }
 
         /// <summary>
         /// Checks if a position is free
@@ -227,52 +259,150 @@ namespace Inventories
         /// Removes a specified item if exists
         /// </summary>
         public bool RemoveItem(in Item item)
-            => throw new NotImplementedException();
+        {
+            if (item == null)
+            {
+                return false;
+            }
+            
+            return _items.Remove(item);
+        }
 
         public bool RemoveItem(in Item item, out Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            position = default;
+            
+            if (item == null)
+            {
+                return false;
+            }
+            
+            if (_items.Remove(item, out var positions))
+            {
+                position = positions[0];
+                OnRemoved?.Invoke(item, position);
+                return true;
+            }
+            
+            return false;
+        }
 
         /// <summary>
         /// Returns an item at specified position 
         /// </summary>
         public Item GetItem(in Vector2Int position)
-            => throw new NotImplementedException();
+        {
+            if (IsInBounds(position) == false)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            foreach (var (item, positions) in _items)
+            {
+                if (positions.Contains(position))
+                {
+                    return item;
+                }
+            }
+
+            throw new NullReferenceException("Item not found!");
+        }
 
         public Item GetItem(in int x, in int y)
-            => throw new NotImplementedException();
+        {
+            return GetItem(new Vector2Int(x, y));
+        }
 
         public bool TryGetItem(in Vector2Int position, out Item item)
-            => throw new NotImplementedException();
+        {
+            foreach (var (checkingItem, positions) in _items)
+            {
+                if (positions.Contains(position))
+                {
+                    item = checkingItem;
+                    return true;
+                }
+            }
+
+            item = null;
+            return false;
+        }
 
         public bool TryGetItem(in int x, in int y, out Item item)
-            => throw new NotImplementedException();
+        {
+            return TryGetItem(new Vector2Int(x, y), out item);
+        }
 
         /// <summary>
         /// Returns matrix positions of a specified item 
         /// </summary>
         public Vector2Int[] GetPositions(in Item item)
-            => throw new NotImplementedException();
+        {
+            if (item == null)
+            {
+                throw new NullReferenceException("Trying to get positions on null item!");
+            }
+
+            if (_items.TryGetValue(item, out var positionsList))
+            {
+                return positionsList.ToArray();
+            }
+
+            throw new KeyNotFoundException($"Inventory doesn't contain item with name {item.Name}!");
+        }
 
         public bool TryGetPositions(in Item item, out Vector2Int[] positions)
-            => throw new NotImplementedException();
+        {
+            positions = null;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            if (_items.TryGetValue(item, out var positionsList) == false)
+            {
+                return false;
+            }
+
+            positions = positionsList.ToArray();
+            return true;
+        }
 
         /// <summary>
         /// Clears all inventory items
         /// </summary>
         public void Clear()
-            => throw new NotImplementedException();
+        {
+            if (Count == 0)
+            {
+                return;
+            }
+
+            _items.Clear();
+            OnCleared?.Invoke();
+        }
 
         /// <summary>
         /// Returns a count of items with a specified name
         /// </summary>
         public int GetItemCount(string name)
-            => throw new NotImplementedException();
+        {
+            return _items.Count(it => it.Key.Name == name);
+        }
 
         /// <summary>
         /// Moves a specified item to a target position if it exists
         /// </summary>
         public bool MoveItem(in Item item, in Vector2Int newPosition)
-            => throw new NotImplementedException();
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException("Can't move null item!");
+            }
+
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Reorganizes inventory space to make the free area uniform
@@ -284,12 +414,32 @@ namespace Inventories
         /// Copies inventory items to a specified matrix
         /// </summary>
         public void CopyTo(in Item[,] matrix)
-            => throw new NotImplementedException();
+        {
+            foreach (var (item, positions) in _items)
+            {
+                foreach (var position in positions)
+                {
+                    matrix[position.y, position.x] = item;
+                }
+            }
+        }
 
         public IEnumerator<Item> GetEnumerator()
-            => throw new NotImplementedException();
+        {
+            return _items.Keys.GetEnumerator();
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
-            => throw new NotImplementedException();
+        {
+            return _items.Keys.GetEnumerator();
+        }
+        
+        private bool IsInBounds(Vector2Int position)
+        {
+            return position.x >= 0
+                   && position.x < _width
+                   && position.y >= 0
+                   && position.y < _height;
+        }
     }
 }

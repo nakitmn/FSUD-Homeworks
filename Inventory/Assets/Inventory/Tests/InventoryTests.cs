@@ -1141,7 +1141,7 @@ namespace Inventories
                 new KeyValuePair<Item, Vector2Int>(y, new Vector2Int(2, 0)),
                 new KeyValuePair<Item, Vector2Int>(z, new Vector2Int(0, 2))
             );
-
+            
             var expected = new[,]
             {
                 {x, x, z},
