@@ -113,12 +113,12 @@ namespace Inventories
                 return false;
             }
 
-            if (IsInBounds(position) == false)
+            if (IsPositionInBounds(position) == false)
             {
                 return false;
             }
 
-            if (item.Size.x <= 0 || item.Size.y <= 0)
+            if (IsValidSize(item.Size) == false)
             {
                 throw new ArgumentException("Invalid item size!");
             }
@@ -128,24 +128,14 @@ namespace Inventories
                 return false;
             }
 
-            var otherPivot = position + item.Size - Vector2Int.one;
-
-            if (IsInBounds(otherPivot) == false)
+            if (IsAreaInBounds(position, item.Size) == false)
             {
                 return false;
             }
 
-            for (var x = 0; x <= item.Size.x; x++)
+            if (IsAreaFree(position, item.Size) == false)
             {
-                for (var y = 0; y <= item.Size.y; y++)
-                {
-                    var checkingPosition = position + new Vector2Int(x, y);
-
-                    if (IsFree(checkingPosition) == false)
-                    {
-                        return false;
-                    }
-                }
+                return false;
             }
 
             return true;
@@ -182,19 +172,71 @@ namespace Inventories
         /// Checks for adding an item on a free position
         /// </summary>
         public bool CanAddItem(in Item item)
-            => throw new NotImplementedException();
+        {
+            if (item == null)
+            {
+                return false;
+            }
+
+            if (FindFreePosition(item.Size, out var position) == false)
+            {
+                return false;
+            }
+
+            return CanAddItem(item, position);
+        }
 
         /// <summary>
         /// Adds an item on a free position
         /// </summary>
         public bool AddItem(in Item item)
-            => throw new NotImplementedException();
+        {
+            if (CanAddItem(item) == false)
+            {
+                return false;
+            }
+            
+            if (FindFreePosition(item.Size, out var position) == false)
+            {
+                return false;
+            }
+
+            return AddItem(item, position);
+        }
 
         /// <summary>
         /// Returns a free position for a specified item
         /// </summary>
         public bool FindFreePosition(in Vector2Int size, out Vector2Int freePosition)
-            => throw new NotImplementedException();
+        {
+            if (IsValidSize(size) == false)
+            {
+                throw new ArgumentOutOfRangeException("Invalid item size!");
+            }
+
+            if (IsSizeFitsIn(size) == false)
+            {
+                freePosition = default;
+                return false;
+            }
+
+            for (var y = 0; y < _height; y++)
+            for (var x = 0; x < _width; x++)
+            {
+                var checkingPosition = new Vector2Int(x, y);
+
+                if (IsFree(checkingPosition)
+                    && IsAreaInBounds(checkingPosition, size)
+                    && IsAreaFree(checkingPosition, size))
+                {
+                    freePosition = checkingPosition;
+                    return true;
+                }
+            }
+
+            freePosition = default;
+            return false;
+        }
 
         /// <summary>
         /// Checks if a specified item exists
@@ -283,7 +325,7 @@ namespace Inventories
         /// </summary>
         public Item GetItem(in Vector2Int position)
         {
-            if (IsInBounds(position) == false)
+            if (IsPositionInBounds(position) == false)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -391,26 +433,26 @@ namespace Inventories
             {
                 throw new ArgumentNullException("Can't move null item!");
             }
-            
+
             if (Contains(item) == false)
             {
                 return false;
             }
 
-            if (IsInBounds(newPosition) == false)
+            if (IsPositionInBounds(newPosition) == false)
             {
                 return false;
             }
-            
+
             var otherPivot = newPosition + item.Size - Vector2Int.one;
 
-            if (IsInBounds(otherPivot) == false)
+            if (IsPositionInBounds(otherPivot) == false)
             {
                 return false;
             }
-            
+
             var newPositions = GetPositionsAt(newPosition, item.Size);
-            
+
             foreach (var checkingPosition in newPositions)
             {
                 if (TryGetItem(checkingPosition, out var itemAtPosition))
@@ -421,7 +463,7 @@ namespace Inventories
                     }
                 }
             }
-            
+
             _items[item] = newPositions;
             OnMoved?.Invoke(item, newPosition);
             return true;
@@ -457,12 +499,48 @@ namespace Inventories
             return _items.Keys.GetEnumerator();
         }
 
-        private bool IsInBounds(Vector2Int position)
+        private bool IsValidSize(Vector2Int size)
+        {
+            return size.x > 0
+                   && size.y > 0;
+        }
+
+        private bool IsSizeFitsIn(Vector2Int size)
+        {
+            return size.x <= _width
+                   && size.y <= _height;
+        }
+
+        private bool IsPositionInBounds(Vector2Int position)
         {
             return position.x >= 0
                    && position.x < _width
                    && position.y >= 0
                    && position.y < _height;
+        }
+
+        private bool IsAreaInBounds(Vector2Int position, Vector2Int size)
+        {
+            var otherPivot = position + size - Vector2Int.one;
+            return IsPositionInBounds(otherPivot);
+        }
+
+        private bool IsAreaFree(Vector2Int position, Vector2Int size)
+        {
+            for (var x = 0; x <= size.x; x++)
+            {
+                for (var y = 0; y <= size.y; y++)
+                {
+                    var checkingPosition = position + new Vector2Int(x, y);
+
+                    if (IsFree(checkingPosition) == false)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private List<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
