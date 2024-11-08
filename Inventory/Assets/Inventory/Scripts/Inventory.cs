@@ -473,7 +473,23 @@ namespace Inventories
         /// Reorganizes inventory space to make the free area uniform
         /// </summary>
         public void ReorganizeSpace()
-            => throw new NotImplementedException();
+        {
+            var items = _items.Keys.OrderByDescending(it => it.Size.x * it.Size.y).ToList();
+
+            items.ForEach(it => _items[it].Clear());
+
+            foreach (var item in items)
+            {
+                if (FindFreePosition(item.Size, out var position))
+                {
+                    MoveItem(item, position);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Can't find free space for item while reorganizing!");
+                }
+            }
+        }
 
         /// <summary>
         /// Copies inventory items to a specified matrix
