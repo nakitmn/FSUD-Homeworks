@@ -118,22 +118,9 @@ namespace Inventories
                 throw new ArgumentException("Invalid item size!");
             }
 
-            if (Contains(item))
-            {
-                return false;
-            }
-
-            if (IsAreaInBounds(position, item.Size) == false)
-            {
-                return false;
-            }
-
-            if (IsAreaFree(position, item.Size) == false)
-            {
-                return false;
-            }
-
-            return true;
+            return Contains(item) == false
+                && IsAreaInBounds(position, item.Size)
+                && IsAreaFree(position, item.Size);
         }
 
         public bool CanAddItem(in Item item, in int posX, in int posY)
@@ -173,12 +160,8 @@ namespace Inventories
                 return false;
             }
 
-            if (FindFreePosition(item.Size, out var position) == false)
-            {
-                return false;
-            }
-
-            return CanAddItem(item, position);
+            return FindFreePosition(item.Size, out var position)
+                && CanAddItem(item, position);
         }
 
         /// <summary>
@@ -186,17 +169,9 @@ namespace Inventories
         /// </summary>
         public bool AddItem(in Item item)
         {
-            if (CanAddItem(item) == false)
-            {
-                return false;
-            }
-
-            if (FindFreePosition(item.Size, out var position) == false)
-            {
-                return false;
-            }
-
-            return AddItem(item, position);
+            return CanAddItem(item)
+                && FindFreePosition(item.Size, out var position)
+                && AddItem(item, position);
         }
 
         /// <summary>
@@ -238,12 +213,7 @@ namespace Inventories
         /// </summary>
         public bool Contains(in Item item)
         {
-            if (item == null)
-            {
-                return false;
-            }
-
-            return _items.ContainsKey(item);
+            return item != null && _items.ContainsKey(item);
         }
 
         /// <summary>
@@ -429,12 +399,8 @@ namespace Inventories
                 throw new ArgumentNullException("Can't move null item!");
             }
 
-            if (Contains(item) == false)
-            {
-                return false;
-            }
-
-            if (IsAreaInBounds(newPosition, item.Size) == false)
+            if (Contains(item) == false
+                || IsAreaInBounds(newPosition, item.Size) == false)
             {
                 return false;
             }
@@ -485,12 +451,10 @@ namespace Inventories
         public void CopyTo(in Item[,] matrix)
         {
             foreach (var (item, positions) in _items)
-            {
                 foreach (var position in positions)
                 {
                     matrix[position.x, position.y] = item;
                 }
-            }
         }
 
         public IEnumerator<Item> GetEnumerator()
