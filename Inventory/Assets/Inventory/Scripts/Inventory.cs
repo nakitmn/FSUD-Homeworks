@@ -484,7 +484,7 @@ namespace Inventories
             {
                 foreach (var position in positions)
                 {
-                    matrix[position.y, position.x] = item;
+                    matrix[position.x, position.y] = item;
                 }
             }
         }
@@ -527,20 +527,8 @@ namespace Inventories
 
         private bool IsAreaFree(Vector2Int position, Vector2Int size)
         {
-            for (var x = 0; x <= size.x; x++)
-            {
-                for (var y = 0; y <= size.y; y++)
-                {
-                    var checkingPosition = position + new Vector2Int(x, y);
-
-                    if (IsFree(checkingPosition) == false)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            var positions = GetPositionsAt(position,size);
+            return positions.TrueForAll(pos => IsFree(pos));
         }
 
         private List<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
