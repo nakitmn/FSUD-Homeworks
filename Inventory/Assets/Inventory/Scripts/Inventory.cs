@@ -113,11 +113,6 @@ namespace Inventories
                 return false;
             }
 
-            if (IsPositionInBounds(position) == false)
-            {
-                return false;
-            }
-
             if (IsValidSize(item.Size) == false)
             {
                 throw new ArgumentException("Invalid item size!");
@@ -156,7 +151,7 @@ namespace Inventories
                 return false;
             }
 
-            var positions = GetPositionsAt(position, item.Size);
+            var positions = GetPositionsAt(position, item.Size).ToList();
 
             _items.Add(item, positions);
             OnAdded?.Invoke(item, position);
@@ -195,7 +190,7 @@ namespace Inventories
             {
                 return false;
             }
-            
+
             if (FindFreePosition(item.Size, out var position) == false)
             {
                 return false;
@@ -214,25 +209,25 @@ namespace Inventories
                 throw new ArgumentOutOfRangeException("Invalid item size!");
             }
 
-            if (IsSizeFitsIn(size) == false)
+            if (IsSizeFitsInInventory(size) == false)
             {
                 freePosition = default;
                 return false;
             }
 
             for (var y = 0; y < _height; y++)
-            for (var x = 0; x < _width; x++)
-            {
-                var checkingPosition = new Vector2Int(x, y);
-
-                if (IsFree(checkingPosition)
-                    && IsAreaInBounds(checkingPosition, size)
-                    && IsAreaFree(checkingPosition, size))
+                for (var x = 0; x < _width; x++)
                 {
-                    freePosition = checkingPosition;
-                    return true;
+                    var checkingPosition = new Vector2Int(x, y);
+
+                    if (IsFree(checkingPosition)
+                        && IsAreaInBounds(checkingPosition, size)
+                        && IsAreaFree(checkingPosition, size))
+                    {
+                        freePosition = checkingPosition;
+                        return true;
+                    }
                 }
-            }
 
             freePosition = default;
             return false;
@@ -439,19 +434,12 @@ namespace Inventories
                 return false;
             }
 
-            if (IsPositionInBounds(newPosition) == false)
+            if (IsAreaInBounds(newPosition, item.Size) == false)
             {
                 return false;
             }
 
-            var otherPivot = newPosition + item.Size - Vector2Int.one;
-
-            if (IsPositionInBounds(otherPivot) == false)
-            {
-                return false;
-            }
-
-            var newPositions = GetPositionsAt(newPosition, item.Size);
+            var newPositions = GetPositionsAt(newPosition, item.Size).ToList();
 
             foreach (var checkingPosition in newPositions)
             {
@@ -521,7 +509,7 @@ namespace Inventories
                    && size.y > 0;
         }
 
-        private bool IsSizeFitsIn(Vector2Int size)
+        private bool IsSizeFitsInInventory(Vector2Int size)
         {
             return size.x <= _width
                    && size.y <= _height;
@@ -537,30 +525,24 @@ namespace Inventories
 
         private bool IsAreaInBounds(Vector2Int position, Vector2Int size)
         {
-            var otherPivot = position + size - Vector2Int.one;
-            return IsPositionInBounds(otherPivot);
+            var sizedPivot = position + size - Vector2Int.one;
+            return IsPositionInBounds(position) && IsPositionInBounds(sizedPivot);
         }
 
         private bool IsAreaFree(Vector2Int position, Vector2Int size)
         {
-            var positions = GetPositionsAt(position,size);
-            return positions.TrueForAll(pos => IsFree(pos));
+            return GetPositionsAt(position, size)
+                 .All(pos => IsFree(pos));
         }
 
-        private List<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
+        private IEnumerable<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
         {
-            List<Vector2Int> positions = new List<Vector2Int>();
-
             for (var x = 0; x < size.x; x++)
-            {
                 for (var y = 0; y < size.y; y++)
                 {
                     var checkingPosition = position + new Vector2Int(x, y);
-                    positions.Add(checkingPosition);
+                    yield return checkingPosition;
                 }
-            }
-
-            return positions;
         }
     }
 }
