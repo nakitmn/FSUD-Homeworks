@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Homework
@@ -35,6 +34,9 @@ namespace Homework
         private int _toConvertAmount;
         private int _readyAmount;
 
+        public int ConvertAmount => _toConvertAmount;
+        public int ReadyAmount => _readyAmount;
+        
         public Converter(
             int inputCapacity,
             int outputCapacity,
@@ -113,16 +115,6 @@ namespace Homework
             _toConvertAmount = newInputAmount;
             _readyAmount = newOutputAmount;
             return true;
-        }
-
-        public int GetConvertAmount()
-        {
-            return _toConvertAmount;
-        }
-
-        public int GetReadyAmount()
-        {
-            return _readyAmount;
         }
 
         public bool Take()
