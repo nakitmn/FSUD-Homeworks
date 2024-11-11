@@ -78,7 +78,7 @@ namespace Homework
             {
                 throw new ArgumentOutOfRangeException(nameof(amount));
             }
-            
+
             var freeSpace = _inputCapacity - _toConvertAmount;
             var addAmount = Mathf.Min(amount, freeSpace);
             _toConvertAmount += addAmount;
@@ -91,17 +91,30 @@ namespace Homework
             {
                 return false;
             }
-            
+
             if (_readyAmount == _outputCapacity)
             {
                 return false;
             }
+
+            var newInputAmount = _toConvertAmount - _instruction.InputConvertCount;
+            var newOutputAmount = _readyAmount + _instruction.OutputConvertCount;
+
+            if (newInputAmount < 0)
+            {
+                return false;
+            }
             
-            _toConvertAmount--;
-            _readyAmount++;
+            if (newOutputAmount > _inputCapacity)
+            {
+                return false;
+            }
+
+            _toConvertAmount = newInputAmount;
+            _readyAmount = newOutputAmount;
             return true;
         }
-        
+
         public int GetConvertAmount()
         {
             return _toConvertAmount;
@@ -118,7 +131,7 @@ namespace Homework
             {
                 return false;
             }
-            
+
             _readyAmount--;
             return true;
         }
@@ -129,12 +142,12 @@ namespace Homework
             {
                 throw new ArgumentOutOfRangeException(nameof(amount));
             }
-            
+
             if (amount > _readyAmount)
             {
                 return false;
             }
-            
+
             _readyAmount -= amount;
             return true;
         }

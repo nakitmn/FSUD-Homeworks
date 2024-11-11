@@ -104,20 +104,73 @@ namespace Homework
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Put(addAmount); });
         }
 
-        [Test]
-        public void Convert()
+        [TestCaseSource(nameof(ConvertCases))]
+        public void Convert(ConvertInstruction convertInstruction, int putAmount, bool expectedResult,
+            int expectedInputAmount,
+            int expectedOutputAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
-            converter.Put(5);
+            var converter = new Converter(10, 10, convertInstruction);
+            converter.Put(putAmount);
 
             //Act:
             bool result = converter.Convert();
 
             //Assert:
-            Assert.IsTrue(result);
-            Assert.AreEqual(4, converter.GetConvertAmount());
-            Assert.AreEqual(1, converter.GetReadyAmount());
+            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(converter.GetConvertAmount(), expectedInputAmount);
+            Assert.AreEqual(converter.GetReadyAmount(), expectedOutputAmount);
+        }
+
+        private static IEnumerable<TestCaseData> ConvertCases()
+        {
+            IResource wood = new ResourceItem("wood");
+            IResource plank = new ResourceItem("plank");
+
+            yield return new(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 3),
+                    new KeyValuePair<IResource, int>(plank, 6),
+                    1f
+                ),
+                5, true, 2, 6
+            );
+            
+            yield return new(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 1),
+                    new KeyValuePair<IResource, int>(plank, 1),
+                    1f
+                ), 
+                5, true, 4, 1
+            );
+            
+            yield return new(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 2),
+                    new KeyValuePair<IResource, int>(plank, 2),
+                    1f
+                ), 
+                5, true, 3, 2
+            );
+            
+            yield return new(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 6),
+                    new KeyValuePair<IResource, int>(plank, 1),
+                    1f
+                ), 
+                5, false, 5, 0
+            );
+            
+            yield return new(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 1),
+                    new KeyValuePair<IResource, int>(plank, 11),
+                    1f
+                ), 
+                5, false, 5, 0
+            );
         }
 
         [Test]
@@ -238,9 +291,9 @@ namespace Homework
             IResource plank = new ResourceItem("plank");
 
             return new ConvertInstruction(
-                inputResource: wood,
-                outputResource: plank,
-                convertDuration: 1f
+                new KeyValuePair<IResource, int>(wood, 1),
+                new KeyValuePair<IResource, int>(plank, 1),
+                1f
             );
         }
     }
