@@ -46,8 +46,7 @@ namespace Enemy.Agents
 
         private void Fire()
         {
-            Vector2 targetPosition = _target.transform.position;
-            _ship.FireTo(targetPosition);
+            _ship.FireTo(_target.Position);
         }
     }
 }

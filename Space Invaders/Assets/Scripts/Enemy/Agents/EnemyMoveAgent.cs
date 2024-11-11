@@ -35,7 +35,7 @@ namespace Enemy.Agents
                 return;
             }
 
-            Vector2 toDestination = _destination - (Vector2) _ship.transform.position;
+            Vector2 toDestination = _destination - _ship.Position;
             if (toDestination.magnitude <= _stopDistance)
             {
                 IsReached = true;

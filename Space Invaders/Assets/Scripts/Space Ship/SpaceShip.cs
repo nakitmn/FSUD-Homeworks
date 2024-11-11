@@ -1,5 +1,4 @@
 using System;
-using Bullets;
 using Bullets.Interfaces;
 using Common.Interfaces;
 using Space_Ship.Components;
@@ -20,6 +19,12 @@ namespace Space_Ship
 
         public bool IsDead => _healthComponent.IsDead;
         public Vector2 FireForward => _firePoint.up;
+
+        public Vector2 Position
+        {
+            get => transform.position;
+            set => transform.position = value;
+        }
 
         private MoveComponent _moveComponent;
         private HealthComponent _healthComponent;
@@ -46,7 +51,7 @@ namespace Space_Ship
         {
             _fireComponent.FireTo(position);
         }
-        
+
         public void Fire(Vector2 direction)
         {
             _fireComponent.Fire(direction);

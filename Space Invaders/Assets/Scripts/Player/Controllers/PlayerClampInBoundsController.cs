@@ -17,9 +17,9 @@ namespace Player.Controllers
 
         public void Update()
         {
-            Vector3 currentPosition = _ship.transform.position;
+            Vector3 currentPosition = _ship.Position;
             Vector2 clampedPosition = _levelBounds.ClampInBounds(currentPosition);
-            _ship.transform.position = clampedPosition;
+            _ship.Position = clampedPosition;
         }
     }
 }
