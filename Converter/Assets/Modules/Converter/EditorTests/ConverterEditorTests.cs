@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Homework
 {
-    public sealed class ConverterTests
+    public sealed class ConverterEditorTests
     {
         [Test]
         public void Instantiate()
@@ -52,7 +52,7 @@ namespace Homework
 
             //Assert:
             Assert.IsTrue(result);
-            Assert.AreEqual(1, converter.ConvertAmount);
+            Assert.AreEqual(1, converter.InputAmount);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Homework
 
             //Assert:
             Assert.IsFalse(result);
-            Assert.AreEqual(1, converter.ConvertAmount);
+            Assert.AreEqual(1, converter.InputAmount);
         }
 
         [TestCaseSource(nameof(PutMultipleCases))]
@@ -80,7 +80,7 @@ namespace Homework
             int returnAmount = converter.Put(addAmount);
 
             //Assert:
-            Assert.AreEqual(converter.ConvertAmount, expectedResourceAmount);
+            Assert.AreEqual(converter.InputAmount, expectedResourceAmount);
             Assert.AreEqual(returnAmount, expectedReturnAmount);
         }
 
@@ -118,8 +118,8 @@ namespace Homework
 
             //Assert:
             Assert.AreEqual(result, expectedResult);
-            Assert.AreEqual(converter.ConvertAmount, expectedInputAmount);
-            Assert.AreEqual(converter.ReadyAmount, expectedOutputAmount);
+            Assert.AreEqual(converter.InputAmount, expectedInputAmount);
+            Assert.AreEqual(converter.OutputAmount, expectedOutputAmount);
         }
 
         private static IEnumerable<TestCaseData> ConvertCases()
@@ -184,8 +184,8 @@ namespace Homework
 
             //Assert:
             Assert.IsFalse(result);
-            Assert.Zero(converter.ConvertAmount);
-            Assert.Zero(converter.ReadyAmount);
+            Assert.Zero(converter.InputAmount);
+            Assert.Zero(converter.OutputAmount);
         }
 
         [Test]
@@ -201,8 +201,8 @@ namespace Homework
 
             //Assert:
             Assert.IsFalse(result);
-            Assert.AreEqual(4, converter.ConvertAmount);
-            Assert.AreEqual(1, converter.ReadyAmount);
+            Assert.AreEqual(4, converter.InputAmount);
+            Assert.AreEqual(1, converter.OutputAmount);
         }
 
         [TestCaseSource(nameof(CanConvertCases))]
@@ -271,8 +271,8 @@ namespace Homework
 
             //Assert:
             Assert.IsTrue(result);
-            Assert.AreEqual(4, converter.ConvertAmount);
-            Assert.Zero(converter.ReadyAmount);
+            Assert.AreEqual(4, converter.InputAmount);
+            Assert.Zero(converter.OutputAmount);
         }
 
         [Test]
@@ -287,8 +287,8 @@ namespace Homework
 
             //Assert:
             Assert.IsFalse(result);
-            Assert.AreEqual(5, converter.ConvertAmount);
-            Assert.Zero(converter.ReadyAmount);
+            Assert.AreEqual(5, converter.InputAmount);
+            Assert.Zero(converter.OutputAmount);
         }
 
         [TestCaseSource(nameof(TakeMultipleCases))]
@@ -309,7 +309,7 @@ namespace Homework
 
             //Assert:
             Assert.AreEqual(result, expectedResult);
-            Assert.AreEqual(converter.ReadyAmount, expectedOutputAmount);
+            Assert.AreEqual(converter.OutputAmount, expectedOutputAmount);
         }
 
         private static IEnumerable<TestCaseData> TakeMultipleCases()

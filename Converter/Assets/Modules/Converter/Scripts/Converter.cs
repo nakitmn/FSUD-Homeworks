@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Homework
@@ -31,12 +33,13 @@ namespace Homework
         private readonly int _outputCapacity;
         private readonly ConvertInstruction _instruction;
 
-        private int _toConvertAmount;
-        private int _readyAmount;
+        private int _inputAmount;
+        private int _outputAmount;
+        private CancellationTokenSource _cancellationTokenSource;
 
-        public int ConvertAmount => _toConvertAmount;
-        public int ReadyAmount => _readyAmount;
-        public bool IsConverting => false;
+        public int InputAmount => _inputAmount;
+        public int OutputAmount => _outputAmount;
+        public bool IsConverting { get; private set; }
 
         public Converter(
             int inputCapacity,
@@ -66,12 +69,12 @@ namespace Homework
 
         public bool Put()
         {
-            if (_toConvertAmount == _inputCapacity)
+            if (_inputAmount == _inputCapacity)
             {
                 return false;
             }
 
-            _toConvertAmount++;
+            _inputAmount++;
             return true;
         }
 
@@ -82,16 +85,16 @@ namespace Homework
                 throw new ArgumentOutOfRangeException(nameof(amount));
             }
 
-            var freeSpace = _inputCapacity - _toConvertAmount;
+            var freeSpace = _inputCapacity - _inputAmount;
             var addAmount = Mathf.Min(amount, freeSpace);
-            _toConvertAmount += addAmount;
+            _inputAmount += addAmount;
             return amount - addAmount;
         }
 
         public bool CanConvert()
         {
-            var newInputAmount = _toConvertAmount - _instruction.InputConvertCount;
-            var newOutputAmount = _readyAmount + _instruction.OutputConvertCount;
+            var newInputAmount = _inputAmount - _instruction.InputConvertCount;
+            var newOutputAmount = _outputAmount + _instruction.OutputConvertCount;
 
             return newInputAmount >= 0 && newOutputAmount <= _outputCapacity;
         }
@@ -103,19 +106,19 @@ namespace Homework
                 return false;
             }
 
-            _toConvertAmount -= _instruction.InputConvertCount;
-            _readyAmount += _instruction.OutputConvertCount;
+            _inputAmount -= _instruction.InputConvertCount;
+            _outputAmount += _instruction.OutputConvertCount;
             return true;
         }
 
         public bool Take()
         {
-            if (_readyAmount == 0)
+            if (_outputAmount == 0)
             {
                 return false;
             }
 
-            _readyAmount--;
+            _outputAmount--;
             return true;
         }
 
@@ -126,18 +129,55 @@ namespace Homework
                 throw new ArgumentOutOfRangeException(nameof(amount));
             }
 
-            if (amount > _readyAmount)
+            if (amount > _outputAmount)
             {
                 return false;
             }
 
-            _readyAmount -= amount;
+            _outputAmount -= amount;
             return true;
         }
 
-        public void StartConversion()
+        public async UniTaskVoid StartConversion()
         {
-            throw new NotImplementedException();
+            if (IsConverting)
+            {
+                return;
+            }
+
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
+            await ConvertAllAsync();
+        }
+
+        public void StopConversion()
+        {
+            if (IsConverting == false)
+            {
+                return;
+            }
+
+            _cancellationTokenSource.Cancel();
+            Put(_instruction.InputConvertCount);
+            IsConverting = false;
+        }
+        
+        private async UniTask ConvertAllAsync()
+        {
+            var convertDelay = TimeSpan.FromSeconds(_instruction.ConvertDuration);
+
+            IsConverting = true;
+
+            while (CanConvert())
+            {
+                _inputAmount -= _instruction.InputConvertCount;
+                await UniTask.Delay(convertDelay, cancellationToken: _cancellationTokenSource.Token);
+                
+                Put(_instruction.InputConvertCount);
+                Convert();
+            }
+
+            IsConverting = false;
         }
     }
 }
