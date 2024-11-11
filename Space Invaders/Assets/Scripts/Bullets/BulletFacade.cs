@@ -1,4 +1,4 @@
-using Bullets.Controllers;
+using System.Collections.Generic;
 using Bullets.Interfaces;
 using Common;
 using Level;
@@ -13,29 +13,19 @@ namespace Bullets
         [SerializeField] private LevelBounds _levelBounds;
         [SerializeField] private MonoPool<Bullet> _bulletPool;
 
-        private BulletBoundsController _bulletBoundsController;
+        private readonly List<Bullet> _cache = new();
+
         private BulletFactory _bulletFactory;
 
         private void Awake()
         {
             _bulletPool.Prewarm(PREWARM_POOL_COUNT);
             _bulletFactory = new BulletFactory(_bulletPool);
-            _bulletBoundsController = new BulletBoundsController(_bulletFactory, _levelBounds);
-        }
-
-        private void OnEnable()
-        {
-            _bulletBoundsController.OnBulletOutOfBounds += OnBulletOutOfBounds;
-        }
-
-        private void OnDisable()
-        {
-            _bulletBoundsController.OnBulletOutOfBounds -= OnBulletOutOfBounds;
         }
 
         private void FixedUpdate()
         {
-            _bulletBoundsController.OnUpdate();
+            DespawnOutOfBoundsBullets();
         }
 
         public Bullet SpawnBullet(BulletParams bulletParams)
@@ -50,10 +40,20 @@ namespace Bullets
             bullet.OnCollisionEntered -= OnBulletCollision;
             _bulletFactory.Despawn(bullet);
         }
-
-        private void OnBulletOutOfBounds(Bullet bullet)
+        
+        private void DespawnOutOfBoundsBullets()
         {
-            Despawn(bullet);
+            _cache.Clear();
+            _cache.AddRange(_bulletFactory.ActiveBullets);
+
+            for (int i = 0, count = _cache.Count; i < count; i++)
+            {
+                Bullet bullet = _cache[i];
+                if (!_levelBounds.InBounds(bullet.transform.position))
+                {
+                    Despawn(bullet);
+                }
+            }
         }
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)

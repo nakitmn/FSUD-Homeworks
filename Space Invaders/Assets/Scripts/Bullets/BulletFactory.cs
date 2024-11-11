@@ -4,7 +4,7 @@ using Common;
 
 namespace Bullets
 {
-    public sealed class BulletFactory : IActiveBulletsProvider, IBulletFactory
+    public sealed class BulletFactory : IBulletFactory
     {
         private readonly MonoPool<Bullet> _bulletPool;
 
