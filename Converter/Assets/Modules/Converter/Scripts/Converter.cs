@@ -36,6 +36,7 @@ namespace Homework
 
         public int ConvertAmount => _toConvertAmount;
         public int ReadyAmount => _readyAmount;
+        public bool IsConverting => false;
 
         public Converter(
             int inputCapacity,
@@ -132,6 +133,11 @@ namespace Homework
 
             _readyAmount -= amount;
             return true;
+        }
+
+        public void StartConversion()
+        {
+            throw new NotImplementedException();
         }
     }
 }
