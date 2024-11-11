@@ -42,6 +42,11 @@ namespace Space_Ship
             _healthComponent.TakeDamage(damage);
         }
 
+        public void FireTo(Vector2 position)
+        {
+            _fireComponent.FireTo(position);
+        }
+        
         public void Fire(Vector2 direction)
         {
             _fireComponent.Fire(direction);

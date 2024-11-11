@@ -17,6 +17,14 @@ namespace Space_Ship.Components
             _firePoint = firePoint;
         }
 
+        public void FireTo(Vector2 position)
+        {
+            Vector2 startPosition = _firePoint.position;
+            Vector2 vector = position - startPosition;
+            Vector2 direction = vector.normalized;
+            Fire(direction);
+        }
+        
         public void Fire(Vector2 direction)
         {
             _bulletFactory.SpawnBullet(new()
