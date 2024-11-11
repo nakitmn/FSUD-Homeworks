@@ -36,7 +36,7 @@ namespace Homework
 
         public int ConvertAmount => _toConvertAmount;
         public int ReadyAmount => _readyAmount;
-        
+
         public Converter(
             int inputCapacity,
             int outputCapacity,
@@ -87,33 +87,23 @@ namespace Homework
             return amount - addAmount;
         }
 
-        public bool Convert()
+        public bool CanConvert()
         {
-            if (_toConvertAmount == 0)
-            {
-                return false;
-            }
-
-            if (_readyAmount == _outputCapacity)
-            {
-                return false;
-            }
-
             var newInputAmount = _toConvertAmount - _instruction.InputConvertCount;
             var newOutputAmount = _readyAmount + _instruction.OutputConvertCount;
 
-            if (newInputAmount < 0)
-            {
-                return false;
-            }
-            
-            if (newOutputAmount > _inputCapacity)
+            return newInputAmount >= 0 && newOutputAmount <= _outputCapacity;
+        }
+
+        public bool Convert()
+        {
+            if (CanConvert() == false)
             {
                 return false;
             }
 
-            _toConvertAmount = newInputAmount;
-            _readyAmount = newOutputAmount;
+            _toConvertAmount -= _instruction.InputConvertCount;
+            _readyAmount += _instruction.OutputConvertCount;
             return true;
         }
 

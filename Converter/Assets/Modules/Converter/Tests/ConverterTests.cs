@@ -205,6 +205,59 @@ namespace Homework
             Assert.AreEqual(1, converter.ReadyAmount);
         }
 
+        [TestCaseSource(nameof(CanConvertCases))]
+        public bool CanConvert(ConvertInstruction convertInstruction, int putAmount)
+        {
+            //Arrange:
+            var converter = new Converter(10, 10, convertInstruction);
+            converter.Put(putAmount);
+            
+            //Act:
+            return converter.CanConvert();
+        }
+        
+        private static IEnumerable<TestCaseData> CanConvertCases()
+        {
+            IResource wood = new ResourceItem("wood");
+            IResource plank = new ResourceItem("plank");
+
+            yield return new TestCaseData(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 3),
+                    new KeyValuePair<IResource, int>(plank, 6),
+                    1f
+                ),
+                5
+            ).Returns(true);
+            
+            yield return new TestCaseData(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 3),
+                    new KeyValuePair<IResource, int>(plank, 11),
+                    1f
+                ),
+                5
+            ).Returns(false);
+        
+            yield return new TestCaseData(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 3),
+                    new KeyValuePair<IResource, int>(plank, 6),
+                    1f
+                ),
+                2
+            ).Returns(false);
+            
+            yield return new TestCaseData(
+                new ConvertInstruction(
+                    new KeyValuePair<IResource, int>(wood, 3),
+                    new KeyValuePair<IResource, int>(plank, 10),
+                    1f
+                ),
+                3
+            ).Returns(true);
+        }
+
         [Test]
         public void Take()
         {
