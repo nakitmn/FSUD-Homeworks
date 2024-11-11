@@ -152,6 +152,86 @@ namespace Homework
             Assert.AreEqual(1, converter.GetReadyAmount());
         }
 
+        [Test]
+        public void Take()
+        {
+            //Arrange:
+            var converter = new Converter(10, 10, CreateInstruction());
+            converter.Put(5);
+            converter.Convert();
+
+            //Act:
+            bool result = converter.Take();
+
+            //Assert:
+            Assert.IsTrue(result);
+            Assert.AreEqual(4, converter.GetConvertAmount());
+            Assert.Zero(converter.GetReadyAmount());
+        }
+
+        [Test]
+        public void WhenTakeWhileOutputEmptyThenFalse()
+        {
+            //Arrange:
+            var converter = new Converter(10, 10, CreateInstruction());
+            converter.Put(5);
+
+            //Act:
+            bool result = converter.Take();
+
+            //Assert:
+            Assert.IsFalse(result);
+            Assert.AreEqual(5, converter.GetConvertAmount());
+            Assert.Zero(converter.GetReadyAmount());
+        }
+
+        [TestCaseSource(nameof(TakeMultipleCases))]
+        public void TakeMultiple(int takeAmount, bool expectedResult, int expectedOutputAmount)
+        {
+            //Arrange:
+            var converter = new Converter(10, 10, CreateInstruction());
+
+            converter.Put(5);
+
+            for (var i = 0; i < 3; i++)
+            {
+                converter.Convert();
+            }
+
+            //Act:
+            bool result = converter.Take(takeAmount);
+
+            //Assert:
+            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(converter.GetReadyAmount(), expectedOutputAmount);
+        }
+
+        private static IEnumerable<TestCaseData> TakeMultipleCases()
+        {
+            yield return new(3, true, 0);
+            yield return new(1, true, 2);
+            yield return new(4, false, 3);
+            yield return new(0, true, 3);
+        }
+
+        [TestCase(-1)]
+        [TestCase(-2)]
+        public void WhenTakeMultipleWithNegativeAmountThenThrow(int takeAmount)
+        {
+            //Arrange:
+            var converter = new Converter(10, 10, CreateInstruction());
+
+            converter.Put(5);
+
+            for (var i = 0; i < 3; i++)
+            {
+                converter.Convert();
+            }
+
+            //Assert:
+            Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Take(takeAmount); });
+        }
+
         private static ConvertInstruction CreateInstruction()
         {
             IResource wood = new ResourceItem("wood");

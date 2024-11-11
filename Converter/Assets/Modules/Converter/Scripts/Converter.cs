@@ -111,5 +111,32 @@ namespace Homework
         {
             return _readyAmount;
         }
+
+        public bool Take()
+        {
+            if (_readyAmount == 0)
+            {
+                return false;
+            }
+            
+            _readyAmount--;
+            return true;
+        }
+
+        public bool Take(int amount)
+        {
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount));
+            }
+            
+            if (amount > _readyAmount)
+            {
+                return false;
+            }
+            
+            _readyAmount -= amount;
+            return true;
+        }
     }
 }
