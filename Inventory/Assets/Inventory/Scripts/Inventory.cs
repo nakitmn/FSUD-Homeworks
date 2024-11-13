@@ -21,7 +21,7 @@ namespace Inventories
         public int Count => _cachedItems.Count;
 
         private readonly Item[,] _cells;
-        private readonly HashSet<Item> _cachedItems;
+        private readonly Dictionary<Item, Vector2Int> _cachedItems;
 
         public Inventory(in int width, in int height)
         {
@@ -31,7 +31,7 @@ namespace Inventories
             }
 
             _cells = new Item[width, height];
-            _cachedItems = new HashSet<Item>();
+            _cachedItems = new Dictionary<Item, Vector2Int>();
         }
 
         public Inventory(
@@ -118,8 +118,8 @@ namespace Inventories
             }
 
             return Contains(item) == false
-                && IsAreaInBounds(position, item.Size)
-                && IsAreaFree(position, item.Size);
+                   && IsAreaInBounds(position, item.Size)
+                   && IsAreaFree(position, item.Size);
         }
 
         public bool CanAddItem(in Item item, in int posX, in int posY)
@@ -142,7 +142,7 @@ namespace Inventories
                 _cells[addPosition.x, addPosition.y] = item;
             }
 
-            _cachedItems.Add(item);
+            _cachedItems.Add(item, position);
             OnAdded?.Invoke(item, position);
             return true;
         }
@@ -163,7 +163,7 @@ namespace Inventories
             }
 
             return FindFreePosition(item.Size, out var position)
-                && CanAddItem(item, position);
+                   && CanAddItem(item, position);
         }
 
         /// <summary>
@@ -172,8 +172,8 @@ namespace Inventories
         public bool AddItem(in Item item)
         {
             return CanAddItem(item)
-                && FindFreePosition(item.Size, out var position)
-                && AddItem(item, position);
+                   && FindFreePosition(item.Size, out var position)
+                   && AddItem(item, position);
         }
 
         /// <summary>
@@ -193,18 +193,17 @@ namespace Inventories
             }
 
             for (var row = 0; row < Height; row++)
-                for (var col = 0; col < Width; col++)
-                {
-                    var checkingPosition = new Vector2Int(col, row);
+            for (var col = 0; col < Width; col++)
+            {
+                var checkingPosition = new Vector2Int(col, row);
 
-                    if (IsFree(checkingPosition)
-                        && IsAreaInBounds(checkingPosition, size)
-                        && IsAreaFree(checkingPosition, size))
-                    {
-                        freePosition = checkingPosition;
-                        return true;
-                    }
+                if (IsAreaInBounds(checkingPosition, size)
+                    && IsAreaFree(checkingPosition, size))
+                {
+                    freePosition = checkingPosition;
+                    return true;
                 }
+            }
 
             freePosition = default;
             return false;
@@ -215,7 +214,7 @@ namespace Inventories
         /// </summary>
         public bool Contains(in Item item)
         {
-            return item != null && _cachedItems.Contains(item);
+            return item != null && _cachedItems.ContainsKey(item);
         }
 
         /// <summary>
@@ -254,16 +253,12 @@ namespace Inventories
                 return false;
             }
 
-            _cachedItems.Remove(item);
+            _cachedItems.Remove(item, out var pivotPosition);
 
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    if (_cells[row, col] == item)
-                    {
-                        _cells[row, col] = null;
-                    }
-                }
+            foreach (var itemPosition in GetPositionsAt(pivotPosition, item.Size))
+            {
+                _cells[itemPosition.x, itemPosition.y] = null;
+            }
 
             return true;
         }
@@ -277,23 +272,12 @@ namespace Inventories
                 return false;
             }
 
-            var isFirstPosition = true;
-            _cachedItems.Remove(item);
+            _cachedItems.Remove(item, out position);
 
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    if (_cells[row, col] == item)
-                    {
-                        _cells[row, col] = null;
-
-                        if (isFirstPosition)
-                        {
-                            position = new Vector2Int(row, col);
-                            isFirstPosition = false;
-                        }
-                    }
-                }
+            foreach (var itemPosition in GetPositionsAt(position, item.Size))
+            {
+                _cells[itemPosition.x, itemPosition.y] = null;
+            }
 
             OnRemoved?.Invoke(item, position);
             return true;
@@ -358,18 +342,7 @@ namespace Inventories
                 throw new KeyNotFoundException();
             }
 
-            var positions = new List<Vector2Int>();
-
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    if (_cells[row, col] == item)
-                    {
-                        positions.Add(new(row, col));
-                    }
-                }
-
-            return positions.ToArray();
+            return GetPositionsAt(_cachedItems[item], item.Size).ToArray();
         }
 
         public bool TryGetPositions(in Item item, out Vector2Int[] positions)
@@ -381,20 +354,13 @@ namespace Inventories
                 return false;
             }
 
-            var positionsList = new List<Vector2Int>();
+            if (_cachedItems.TryGetValue(item, out var position))
+            {
+                positions = GetPositionsAt(position, item.Size).ToArray();
+                return true;
+            }
 
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    if (_cells[row, col] == item)
-                    {
-                        positionsList.Add(new(row, col));
-                    }
-                }
-
-            positions = positionsList.ToArray();
-
-            return positions.Length > 0;
+            return false;
         }
 
         /// <summary>
@@ -408,13 +374,7 @@ namespace Inventories
             }
 
             _cachedItems.Clear();
-
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    _cells[row, col] = null;
-                }
-
+            Array.Clear(_cells, 0, _cells.Length);
             OnCleared?.Invoke();
         }
 
@@ -423,7 +383,7 @@ namespace Inventories
         /// </summary>
         public int GetItemCount(string name)
         {
-            return _cachedItems.Count(it => it.Name == name);
+            return _cachedItems.Keys.Count(it => it.Name == name);
         }
 
         /// <summary>
@@ -465,6 +425,8 @@ namespace Inventories
                 _cells[checkingPosition.x, checkingPosition.y] = item;
             }
 
+            _cachedItems[item] = newPosition;
+
             OnMoved?.Invoke(item, newPosition);
             return true;
         }
@@ -474,19 +436,22 @@ namespace Inventories
         /// </summary>
         public void ReorganizeSpace()
         {
-            var items = _cachedItems.OrderByDescending(it => it.Size.x * it.Size.y);
+            var items = _cachedItems.Keys
+                .OrderByDescending(it => it.Size.x * it.Size.y)
+                .ToArray();
 
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    _cells[row, col] = null;
-                }
+            Array.Clear(_cells, 0, _cells.Length);
 
             foreach (var item in items)
             {
                 if (FindFreePosition(item.Size, out var position))
                 {
-                    MoveItem(item, position);
+                    foreach (var checkingPosition in GetPositionsAt(position, item.Size))
+                    {
+                        _cells[checkingPosition.x, checkingPosition.y] = item;
+                    }
+                    
+                    _cachedItems[item] = position;
                 }
                 else
                 {
@@ -500,21 +465,17 @@ namespace Inventories
         /// </summary>
         public void CopyTo(in Item[,] matrix)
         {
-            for (int row = 0; row < Height; row++)
-                for (int col = 0; col < Width; col++)
-                {
-                    matrix[row, col] = _cells[row, col];
-                }
+            Array.Copy(_cells, matrix, _cells.Length);
         }
 
         public IEnumerator<Item> GetEnumerator()
         {
-            return _cachedItems.GetEnumerator();
+            return _cachedItems.Keys.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _cachedItems.GetEnumerator();
+            return _cachedItems.Keys.GetEnumerator();
         }
 
         private bool IsValidSize(Vector2Int size)
@@ -546,17 +507,17 @@ namespace Inventories
         private bool IsAreaFree(Vector2Int position, Vector2Int size)
         {
             return GetPositionsAt(position, size)
-                 .All(pos => IsFree(pos));
+                .All(pos => IsFree(pos));
         }
 
         private IEnumerable<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
         {
             for (var x = 0; x < size.x; x++)
-                for (var y = 0; y < size.y; y++)
-                {
-                    var checkingPosition = position + new Vector2Int(x, y);
-                    yield return checkingPosition;
-                }
+            for (var y = 0; y < size.y; y++)
+            {
+                var checkingPosition = position + new Vector2Int(x, y);
+                yield return checkingPosition;
+            }
         }
     }
 }
