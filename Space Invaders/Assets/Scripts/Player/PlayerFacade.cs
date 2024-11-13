@@ -1,11 +1,9 @@
-using System;
 using Bullets;
 using Level;
 using Player.Controllers;
 using Player.Observers;
 using Space_Ship;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -15,13 +13,10 @@ namespace Player
         [SerializeField] private SpaceShip _ship;
         [SerializeField] private BulletFacade _bulletFacade;
         [SerializeField] private LevelBounds _levelBounds;
-        
-        private PlayerInput _playerInput;
 
+        private PlayerInput _playerInput;
         private PlayerMoveController _moveController;
         private PlayerFireController _fireController;
-        private PlayerClampInBoundsController _clampInBoundsController;
-
         private PlayerDieObserver _dieObserver;
 
         private void Awake()
@@ -32,7 +27,6 @@ namespace Player
 
             _moveController = new PlayerMoveController(_ship, _playerInput);
             _fireController = new PlayerFireController(_ship, _playerInput);
-            _clampInBoundsController = new PlayerClampInBoundsController(_ship, _levelBounds);
 
             _dieObserver = new PlayerDieObserver(_ship);
         }
@@ -61,7 +55,12 @@ namespace Player
 
         private void LateUpdate()
         {
-            _clampInBoundsController.Update();
+            ClampPlayerInBounds();
+        }
+
+        private void ClampPlayerInBounds()
+        {
+            _ship.Position = _levelBounds.ClampInBounds(_ship.Position);
         }
     }
 }

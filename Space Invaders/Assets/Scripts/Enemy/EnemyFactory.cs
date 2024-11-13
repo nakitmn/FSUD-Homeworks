@@ -7,7 +7,7 @@ using Space_Ship;
 
 namespace Enemy
 {
-    public class EnemyFactory : IEnemyFactory, IActiveEnemiesProvider
+    public class EnemyFactory : IEnemyFactory
     {
         private readonly MonoPool<Enemy> _enemyPool;
         private readonly SpaceShip _player;

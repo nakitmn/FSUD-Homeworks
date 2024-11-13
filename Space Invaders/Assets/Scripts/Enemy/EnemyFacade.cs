@@ -1,9 +1,8 @@
+using System.Linq;
 using Bullets;
 using Common;
-using Enemy.Controllers;
 using Space_Ship;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemy
 {
@@ -16,7 +15,6 @@ namespace Enemy
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private MonoPool<Enemy> _enemyPool;
 
-        private DiedEnemiesDestroyController _diedEnemiesDestroyController;
         private EnemyFactory _enemyFactory;
 
         private void Awake()
@@ -24,7 +22,6 @@ namespace Enemy
             _enemyPool.Prewarm(PREWARM_POOL_COUNT);
 
             _enemyFactory = new EnemyFactory(_enemyPool, _player, _bulletFacade);
-            _diedEnemiesDestroyController = new DiedEnemiesDestroyController(_enemyFactory, _enemyFactory);
 
             _enemySpawner.Construct(_enemyFactory);
         }
@@ -36,7 +33,18 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            _diedEnemiesDestroyController.Update();
+            DestroyDiedEnemies();
+        }
+
+        private void DestroyDiedEnemies()
+        {
+            foreach (Enemy enemy in _enemyFactory.ActiveEnemies.ToArray())
+            {
+                if (enemy.IsDead)
+                {
+                    _enemyFactory.Despawn(enemy);
+                }
+            }
         }
     }
 }
