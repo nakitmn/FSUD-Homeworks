@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace Inventories
 {
-    public sealed class Inventory : IEnumerable<Item>
+    public sealed class Inventory : IEnumerable<Item>, IComparer<Item>
     {
         public event Action<Item, Vector2Int> OnAdded;
         public event Action<Item, Vector2Int> OnRemoved;
@@ -342,7 +342,7 @@ namespace Inventories
                 throw new KeyNotFoundException();
             }
 
-            return GetPositionsAt(_cachedItems[item], item.Size).ToArray();
+            return GetPositionsAt(_cachedItems[item], item.Size);
         }
 
         public bool TryGetPositions(in Item item, out Vector2Int[] positions)
@@ -356,7 +356,7 @@ namespace Inventories
 
             if (_cachedItems.TryGetValue(item, out var position))
             {
-                positions = GetPositionsAt(position, item.Size).ToArray();
+                positions = GetPositionsAt(position, item.Size);
                 return true;
             }
 
@@ -383,7 +383,17 @@ namespace Inventories
         /// </summary>
         public int GetItemCount(string name)
         {
-            return _cachedItems.Keys.Count(it => it.Name == name);
+            int count = 0;
+
+            foreach (var item in _cachedItems.Keys)
+            {
+                if (item.Name == name)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -436,21 +446,21 @@ namespace Inventories
         /// </summary>
         public void ReorganizeSpace()
         {
-            var items = _cachedItems.Keys
-                .OrderByDescending(it => it.Size.x * it.Size.y)
-                .ToArray();
-
+            var items = _cachedItems.Keys.ToList();
+            items.Sort(this);
             Array.Clear(_cells, 0, _cells.Length);
 
-            foreach (var item in items)
+            for (var i = 0; i < items.Count; i++)
             {
+                var item = items[i];
+
                 if (FindFreePosition(item.Size, out var position))
                 {
                     foreach (var checkingPosition in GetPositionsAt(position, item.Size))
                     {
                         _cells[checkingPosition.x, checkingPosition.y] = item;
                     }
-                    
+
                     _cachedItems[item] = position;
                 }
                 else
@@ -476,6 +486,13 @@ namespace Inventories
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _cachedItems.Keys.GetEnumerator();
+        }
+
+        public int Compare(Item first, Item second)
+        {
+            var firstSpace = first.Size.x * first.Size.y;
+            var secondSpace = second.Size.x * second.Size.y;
+            return (firstSpace - secondSpace) * -1;
         }
 
         private bool IsValidSize(Vector2Int size)
@@ -506,18 +523,23 @@ namespace Inventories
 
         private bool IsAreaFree(Vector2Int position, Vector2Int size)
         {
-            return GetPositionsAt(position, size)
-                .All(pos => IsFree(pos));
+            var positions = GetPositionsAt(position, size);
+            return Array.TrueForAll(positions, pos => IsFree(pos));
         }
 
-        private IEnumerable<Vector2Int> GetPositionsAt(Vector2Int position, Vector2Int size)
+        private Vector2Int[] GetPositionsAt(Vector2Int position, Vector2Int size)
         {
+            var result = new Vector2Int[size.x * size.y];
+            int index = 0;
+
             for (var x = 0; x < size.x; x++)
             for (var y = 0; y < size.y; y++)
             {
                 var checkingPosition = position + new Vector2Int(x, y);
-                yield return checkingPosition;
+                result[index++] = checkingPosition;
             }
+
+            return result;
         }
     }
 }
