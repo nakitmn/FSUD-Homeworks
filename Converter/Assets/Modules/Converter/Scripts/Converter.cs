@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Homework
@@ -35,7 +33,7 @@ namespace Homework
 
         private int _inputAmount;
         private int _outputAmount;
-        private CancellationTokenSource _cancellationTokenSource;
+        private float _passedTime;
 
         public int InputAmount => _inputAmount;
         public int OutputAmount => _outputAmount;
@@ -138,16 +136,14 @@ namespace Homework
             return true;
         }
 
-        public async UniTaskVoid StartConversion()
+        public void StartConversion()
         {
             if (IsConverting)
             {
                 return;
             }
 
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
-            await ConvertAllAsync();
+            IsConverting = true;
         }
 
         public void StopConversion()
@@ -157,27 +153,34 @@ namespace Homework
                 return;
             }
 
-            _cancellationTokenSource.Cancel();
-            Put(_instruction.InputConvertCount);
             IsConverting = false;
         }
-        
-        private async UniTask ConvertAllAsync()
+
+        public void Update(float deltaTime)
         {
-            var convertDelay = TimeSpan.FromSeconds(_instruction.ConvertDuration);
-
-            IsConverting = true;
-
-            while (CanConvert())
+            if (IsConverting == false)
             {
-                _inputAmount -= _instruction.InputConvertCount;
-                await UniTask.Delay(convertDelay, cancellationToken: _cancellationTokenSource.Token);
-                
-                Put(_instruction.InputConvertCount);
-                Convert();
+                return;
             }
-
-            IsConverting = false;
+            
+            _passedTime += deltaTime;
+            var convertsCount = Mathf.FloorToInt(_passedTime / _instruction.ConvertDuration);
+            
+            for (var i = 0; i < convertsCount; i++)
+            {
+                if (Convert() == false)
+                {
+                    break;
+                }
+                
+                _passedTime -= _instruction.ConvertDuration;
+            }
+            
+            if (CanConvert() == false)
+            {
+                IsConverting = false;
+                _passedTime = 0f;
+            }
         }
     }
 }

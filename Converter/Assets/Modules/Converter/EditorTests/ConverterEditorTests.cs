@@ -332,6 +332,132 @@ namespace Homework
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Take(takeAmount); });
         }
 
+        [Test]
+        public void StartConversion()
+        {
+            //Arrange:
+            var convertInstruction = new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 1),
+                new KeyValuePair<string, int>("plank", 2),
+                0.5f
+            );
+            var converter = new Converter<string>(10, 10, convertInstruction);
+            converter.Put(4);
+
+            //Act:
+            converter.StartConversion();
+            converter.Update(2f);
+
+            //Assert:
+            Assert.IsFalse(converter.IsConverting);
+            Assert.AreEqual(0, converter.InputAmount);
+            Assert.AreEqual(8, converter.OutputAmount);
+        }
+
+        [Test]
+        public void StartConversionWithOutputOverload()
+        {
+            //Arrange:
+            var convertInstruction = new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 1),
+                new KeyValuePair<string, int>("plank", 4),
+                0.5f
+            );
+            var converter = new Converter<string>(10, 10, convertInstruction);
+            converter.Put(4);
+
+            //Act:
+            converter.StartConversion();
+            converter.Update(2f);
+
+            //Assert:
+            Assert.IsFalse(converter.IsConverting);
+            Assert.AreEqual(2, converter.InputAmount);
+            Assert.AreEqual(8, converter.OutputAmount);
+        }
+
+        [Test]
+        public void StopConversion()
+        {
+            //Arrange:
+            var convertInstruction = new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 1),
+                new KeyValuePair<string, int>("plank", 1),
+                1f
+            );
+            var converter = new Converter<string>(10, 10, convertInstruction);
+            converter.Put(10);
+            converter.StartConversion();
+
+            converter.Update(2.5f);
+
+            Assert.AreEqual(8, converter.InputAmount);
+
+            //Act:
+            converter.StopConversion();
+
+            //Assert:
+            Assert.IsFalse(converter.IsConverting);
+            Assert.AreEqual(8, converter.InputAmount);
+            Assert.AreEqual(2, converter.OutputAmount);
+
+            converter.Update(1f);
+
+            Assert.IsFalse(converter.IsConverting);
+            Assert.AreEqual(8, converter.InputAmount);
+            Assert.AreEqual(2, converter.OutputAmount);
+        }
+
+        [Test]
+        public void PutBeforeStopConversion()
+        {
+            //Arrange:
+            var convertInstruction = new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 3),
+                new KeyValuePair<string, int>("plank", 1),
+                1f
+            );
+            var converter = new Converter<string>(10, 10, convertInstruction);
+            converter.Put(10);
+            converter.StartConversion();
+
+            converter.Update(2.2f);
+
+            Assert.AreEqual(4, converter.InputAmount);
+
+            //Act:
+            converter.Put(3);
+            converter.StopConversion();
+
+            //Assert:
+            Assert.AreEqual(7, converter.InputAmount);
+        }
+
+        [Test]
+        public void PutFullBeforeStopConversion()
+        {
+            //Arrange:
+            var convertInstruction = new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 3),
+                new KeyValuePair<string, int>("plank", 1),
+                1f
+            );
+            var converter = new Converter<string>(10, 10, convertInstruction);
+            converter.Put(10);
+            converter.StartConversion();
+
+            converter.Update(2.1f);
+
+            Assert.AreEqual(4, converter.InputAmount);
+
+            //Act:
+            converter.Put(9);
+            converter.StopConversion();
+
+            //Assert:
+            Assert.AreEqual(10, converter.InputAmount);
+        }
+
         private static ConvertInstruction<string> CreateInstruction()
         {
             return new ConvertInstruction<string>(
