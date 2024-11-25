@@ -27,11 +27,11 @@ namespace Homework
        - Время преобразования ресурсов
        - Состояние: вкл/выкл
      */
-    public sealed class Converter
+    public sealed class Converter<TResource>
     {
         private readonly int _inputCapacity;
         private readonly int _outputCapacity;
-        private readonly ConvertInstruction _instruction;
+        private readonly ConvertInstruction<TResource> _instruction;
 
         private int _inputAmount;
         private int _outputAmount;
@@ -44,7 +44,7 @@ namespace Homework
         public Converter(
             int inputCapacity,
             int outputCapacity,
-            ConvertInstruction instruction
+            ConvertInstruction<TResource> instruction
         )
         {
             if (instruction == null)

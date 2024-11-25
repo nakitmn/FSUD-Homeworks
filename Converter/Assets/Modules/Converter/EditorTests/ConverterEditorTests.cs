@@ -10,7 +10,7 @@ namespace Homework
         public void Instantiate()
         {
             //Act:
-            var converter = new Converter(
+            var converter = new Converter<string>(
                 inputCapacity: 10,
                 outputCapacity: 10,
                 instruction: CreateInstruction()
@@ -26,7 +26,7 @@ namespace Homework
             //Assert:
             Assert.Catch<ArgumentNullException>(() =>
             {
-                var converter = new Converter(10, 10, null);
+                var converter = new Converter<string>(10, 10, null);
             });
         }
 
@@ -37,7 +37,7 @@ namespace Homework
             //Assert:
             Assert.Catch<ArgumentOutOfRangeException>(() =>
             {
-                var converter = new Converter(inputCapacity, outputCapacity, CreateInstruction());
+                var converter = new Converter<string>(inputCapacity, outputCapacity, CreateInstruction());
             });
         }
 
@@ -45,7 +45,7 @@ namespace Homework
         public void Put()
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             //Act:
             bool result = converter.Put();
@@ -59,7 +59,7 @@ namespace Homework
         public void WhenPutWhileFullThenFalse()
         {
             //Arrange:
-            var converter = new Converter(1, 10, CreateInstruction());
+            var converter = new Converter<string>(1, 10, CreateInstruction());
 
             //Act:
             converter.Put();
@@ -74,7 +74,7 @@ namespace Homework
         public void PutMultiple(int addAmount, int expectedResourceAmount, int expectedReturnAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             //Act:
             int returnAmount = converter.Put(addAmount);
@@ -98,19 +98,19 @@ namespace Homework
         public void WhenPutNegativeAmountThenThrow(int addAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             //Assert:
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Put(addAmount); });
         }
 
         [TestCaseSource(nameof(ConvertCases))]
-        public void Convert(ConvertInstruction convertInstruction, int putAmount, bool expectedResult,
+        public void Convert(ConvertInstruction<string> convertInstruction, int putAmount, bool expectedResult,
             int expectedInputAmount,
             int expectedOutputAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, convertInstruction);
+            var converter = new Converter<string>(10, 10, convertInstruction);
             converter.Put(putAmount);
 
             //Act:
@@ -124,49 +124,46 @@ namespace Homework
 
         private static IEnumerable<TestCaseData> ConvertCases()
         {
-            IResource wood = new ResourceItem("wood");
-            IResource plank = new ResourceItem("plank");
-
             yield return new(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 3),
-                    new KeyValuePair<IResource, int>(plank, 6),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 3),
+                    new KeyValuePair<string, int>("plank", 6),
                     1f
                 ),
                 5, true, 2, 6
             );
 
             yield return new(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 1),
-                    new KeyValuePair<IResource, int>(plank, 1),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 1),
+                    new KeyValuePair<string, int>("plank", 1),
                     1f
                 ),
                 5, true, 4, 1
             );
 
             yield return new(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 2),
-                    new KeyValuePair<IResource, int>(plank, 2),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 2),
+                    new KeyValuePair<string, int>("plank", 2),
                     1f
                 ),
                 5, true, 3, 2
             );
 
             yield return new(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 6),
-                    new KeyValuePair<IResource, int>(plank, 1),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 6),
+                    new KeyValuePair<string, int>("plank", 1),
                     1f
                 ),
                 5, false, 5, 0
             );
 
             yield return new(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 1),
-                    new KeyValuePair<IResource, int>(plank, 11),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 1),
+                    new KeyValuePair<string, int>("plank", 11),
                     1f
                 ),
                 5, false, 5, 0
@@ -177,7 +174,7 @@ namespace Homework
         public void WhenConvertWhileInputEmptyThenFalse()
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             //Act:
             bool result = converter.Convert();
@@ -192,7 +189,7 @@ namespace Homework
         public void WhenConvertWhileFullOutputThenFalse()
         {
             //Arrange:
-            var converter = new Converter(10, 1, CreateInstruction());
+            var converter = new Converter<string>(10, 1, CreateInstruction());
             converter.Put(5);
             converter.Convert();
 
@@ -206,10 +203,10 @@ namespace Homework
         }
 
         [TestCaseSource(nameof(CanConvertCases))]
-        public bool CanConvert(ConvertInstruction convertInstruction, int putAmount)
+        public bool CanConvert(ConvertInstruction<string> convertInstruction, int putAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, convertInstruction);
+            var converter = new Converter<string>(10, 10, convertInstruction);
             converter.Put(putAmount);
 
             //Act:
@@ -218,40 +215,37 @@ namespace Homework
 
         private static IEnumerable<TestCaseData> CanConvertCases()
         {
-            IResource wood = new ResourceItem("wood");
-            IResource plank = new ResourceItem("plank");
-
             yield return new TestCaseData(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 3),
-                    new KeyValuePair<IResource, int>(plank, 6),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 3),
+                    new KeyValuePair<string, int>("plank", 6),
                     1f
                 ),
                 5
             ).Returns(true);
 
             yield return new TestCaseData(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 3),
-                    new KeyValuePair<IResource, int>(plank, 11),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 3),
+                    new KeyValuePair<string, int>("plank", 11),
                     1f
                 ),
                 5
             ).Returns(false);
 
             yield return new TestCaseData(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 3),
-                    new KeyValuePair<IResource, int>(plank, 6),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 3),
+                    new KeyValuePair<string, int>("plank", 6),
                     1f
                 ),
                 2
             ).Returns(false);
 
             yield return new TestCaseData(
-                new ConvertInstruction(
-                    new KeyValuePair<IResource, int>(wood, 3),
-                    new KeyValuePair<IResource, int>(plank, 10),
+                new ConvertInstruction<string>(
+                    new KeyValuePair<string, int>("wood", 3),
+                    new KeyValuePair<string, int>("plank", 10),
                     1f
                 ),
                 3
@@ -262,7 +256,7 @@ namespace Homework
         public void Take()
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
             converter.Put(5);
             converter.Convert();
 
@@ -279,7 +273,7 @@ namespace Homework
         public void WhenTakeWhileOutputEmptyThenFalse()
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
             converter.Put(5);
 
             //Act:
@@ -295,7 +289,7 @@ namespace Homework
         public void TakeMultiple(int takeAmount, bool expectedResult, int expectedOutputAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             converter.Put(5);
 
@@ -325,7 +319,7 @@ namespace Homework
         public void WhenTakeMultipleWithNegativeAmountThenThrow(int takeAmount)
         {
             //Arrange:
-            var converter = new Converter(10, 10, CreateInstruction());
+            var converter = new Converter<string>(10, 10, CreateInstruction());
 
             converter.Put(5);
 
@@ -338,14 +332,11 @@ namespace Homework
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Take(takeAmount); });
         }
 
-        private static ConvertInstruction CreateInstruction()
+        private static ConvertInstruction<string> CreateInstruction()
         {
-            IResource wood = new ResourceItem("wood");
-            IResource plank = new ResourceItem("plank");
-
-            return new ConvertInstruction(
-                new KeyValuePair<IResource, int>(wood, 1),
-                new KeyValuePair<IResource, int>(plank, 1),
+            return new ConvertInstruction<string>(
+                new KeyValuePair<string, int>("wood", 1),
+                new KeyValuePair<string, int>("plank", 1),
                 1f
             );
         }

@@ -11,15 +11,12 @@ public class ConverterPlayModeTests
     public IEnumerator StartConversion()
     {
         //Arrange:
-        IResource wood = new ResourceItem("wood");
-        IResource plank = new ResourceItem("plank");
-
-        var convertInstruction = new ConvertInstruction(
-            new KeyValuePair<IResource, int>(wood, 1),
-            new KeyValuePair<IResource, int>(plank, 2),
+        var convertInstruction = new ConvertInstruction<string>(
+            new KeyValuePair<string, int>("wood", 1),
+            new KeyValuePair<string, int>("plank", 2),
             0.5f
         );
-        var converter = new Converter(10, 10, convertInstruction);
+        var converter = new Converter<string>(10, 10, convertInstruction);
         converter.Put(4);
 
         //Act:
@@ -39,15 +36,12 @@ public class ConverterPlayModeTests
     public IEnumerator StartConversionWithOutputOverload()
     {
         //Arrange:
-        IResource wood = new ResourceItem("wood");
-        IResource plank = new ResourceItem("plank");
-
-        var convertInstruction = new ConvertInstruction(
-            new KeyValuePair<IResource, int>(wood, 1),
-            new KeyValuePair<IResource, int>(plank, 4),
+        var convertInstruction = new ConvertInstruction<string>(
+            new KeyValuePair<string, int>("wood", 1),
+            new KeyValuePair<string, int>("plank", 4),
             0.5f
         );
-        var converter = new Converter(10, 10, convertInstruction);
+        var converter = new Converter<string>(10, 10, convertInstruction);
         converter.Put(4);
 
         //Act:
@@ -67,15 +61,12 @@ public class ConverterPlayModeTests
     public IEnumerator StopConversion()
     {
         //Arrange:
-        IResource wood = new ResourceItem("wood");
-        IResource plank = new ResourceItem("plank");
-
-        var convertInstruction = new ConvertInstruction(
-            new KeyValuePair<IResource, int>(wood, 1),
-            new KeyValuePair<IResource, int>(plank, 1),
+        var convertInstruction = new ConvertInstruction<string>(
+            new KeyValuePair<string, int>("wood", 1),
+            new KeyValuePair<string, int>("plank", 1),
             1f
         );
-        var converter = new Converter(10, 10, convertInstruction);
+        var converter = new Converter<string>(10, 10, convertInstruction);
         converter.Put(10);
         converter.StartConversion();
 
@@ -102,15 +93,12 @@ public class ConverterPlayModeTests
     public IEnumerator PutBeforeStopConversion()
     {
         //Arrange:
-        IResource wood = new ResourceItem("wood");
-        IResource plank = new ResourceItem("plank");
-
-        var convertInstruction = new ConvertInstruction(
-            new KeyValuePair<IResource, int>(wood, 3),
-            new KeyValuePair<IResource, int>(plank, 1),
+        var convertInstruction = new ConvertInstruction<string>(
+            new KeyValuePair<string, int>("wood", 3),
+            new KeyValuePair<string, int>("plank", 1),
             1f
         );
-        var converter = new Converter(10, 10, convertInstruction);
+        var converter = new Converter<string>(10, 10, convertInstruction);
         converter.Put(10);
         converter.StartConversion();
 
@@ -131,15 +119,12 @@ public class ConverterPlayModeTests
     public IEnumerator PutFullBeforeStopConversion()
     {
         //Arrange:
-        IResource wood = new ResourceItem("wood");
-        IResource plank = new ResourceItem("plank");
-
-        var convertInstruction = new ConvertInstruction(
-            new KeyValuePair<IResource, int>(wood, 3),
-            new KeyValuePair<IResource, int>(plank, 1),
+        var convertInstruction = new ConvertInstruction<string>(
+            new KeyValuePair<string, int>("wood", 3),
+            new KeyValuePair<string, int>("plank", 1),
             1f
         );
-        var converter = new Converter(10, 10, convertInstruction);
+        var converter = new Converter<string>(10, 10, convertInstruction);
         converter.Put(10);
         converter.StartConversion();
 

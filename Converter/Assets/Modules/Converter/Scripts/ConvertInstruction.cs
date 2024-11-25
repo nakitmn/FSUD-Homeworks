@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace Homework
 {
-    public class ConvertInstruction
+    public class ConvertInstruction<TResource>
     {
-        public IResource InputResource { get; }
+        public TResource InputResource { get; }
         public int InputConvertCount { get; }
-        public IResource OutputResource { get; }
+        public TResource OutputResource { get; }
         public int OutputConvertCount { get; }
         public float ConvertDuration { get; }
 
-        public ConvertInstruction(IResource inputResource,
+        public ConvertInstruction(TResource inputResource,
             int inputConvertCount,
-            IResource outputResource,
+            TResource outputResource,
             int outputConvertCount,
             float convertDuration
         )
@@ -25,8 +25,8 @@ namespace Homework
         }
 
         public ConvertInstruction(
-            KeyValuePair<IResource, int> inputResource,
-            KeyValuePair<IResource, int> outputResource,
+            KeyValuePair<TResource, int> inputResource,
+            KeyValuePair<TResource, int> outputResource,
             float convertDuration
         )
         {
