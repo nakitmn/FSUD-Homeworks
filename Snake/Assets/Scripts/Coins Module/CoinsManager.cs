@@ -5,7 +5,7 @@ using SnakeGame;
 using UnityEngine;
 using Zenject;
 
-namespace DefaultNamespace
+namespace Coins_Module
 {
     public sealed class CoinsManager : IInitializable, IDisposable
     {

@@ -2,7 +2,7 @@ using Input_Module;
 using Modules;
 using Zenject;
 
-namespace DefaultNamespace
+namespace Snake_Module
 {
     public sealed class SnakeMoveController : ITickable
     {

@@ -1,7 +1,7 @@
 using Modules;
 using Zenject;
 
-namespace DefaultNamespace
+namespace Coins_Module
 {
     public sealed class CoinsPool : MonoMemoryPool<Coin>, ICoinsPool
     {

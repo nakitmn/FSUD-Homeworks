@@ -3,7 +3,7 @@ using Modules;
 using SnakeGame;
 using Zenject;
 
-namespace DefaultNamespace
+namespace Level_Module
 {
     public sealed class GameOverController : IInitializable, ITickable, IDisposable
     {

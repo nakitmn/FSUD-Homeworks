@@ -3,7 +3,7 @@ using Modules;
 using SnakeGame;
 using Zenject;
 
-namespace DefaultNamespace
+namespace UI_Module
 {
     public sealed class GameUiPresenter : IInitializable, IDisposable
     {

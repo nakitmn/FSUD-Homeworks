@@ -1,8 +1,9 @@
 using System;
+using Coins_Module;
 using Modules;
 using Zenject;
 
-namespace DefaultNamespace
+namespace Level_Module
 {
     public sealed class LevelManager : IInitializable, IDisposable
     {
