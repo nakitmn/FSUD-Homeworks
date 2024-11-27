@@ -1,4 +1,5 @@
 using System;
+using Level_Module;
 using Modules;
 using SnakeGame;
 using Zenject;
@@ -7,12 +8,14 @@ namespace UI_Module
 {
     public sealed class GameUiPresenter : IInitializable, IDisposable
     {
+        private readonly LevelManager _levelManager;
         private readonly IDifficulty _difficulty;
         private readonly IScore _score;
         private readonly IGameUI _gameUI;
 
-        public GameUiPresenter(IDifficulty difficulty, IScore score, IGameUI gameUI)
+        public GameUiPresenter(LevelManager levelManager,IDifficulty difficulty, IScore score, IGameUI gameUI)
         {
+            _levelManager = levelManager;
             _difficulty = difficulty;
             _score = score;
             _gameUI = gameUI;
@@ -20,6 +23,7 @@ namespace UI_Module
 
         void IInitializable.Initialize()
         {
+            _levelManager.OnGameOver += _gameUI.GameOver;
             _difficulty.OnStateChanged += OnLevelChanged;
             _score.OnStateChanged += OnScoreChanged;
 
@@ -29,6 +33,7 @@ namespace UI_Module
 
         void IDisposable.Dispose()
         {
+            _levelManager.OnGameOver -= _gameUI.GameOver;
             _difficulty.OnStateChanged -= OnLevelChanged;
             _score.OnStateChanged -= OnScoreChanged;
         }

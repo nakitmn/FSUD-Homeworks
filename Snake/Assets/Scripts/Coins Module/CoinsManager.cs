@@ -51,7 +51,7 @@ namespace Coins_Module
 
         private void SpawnSingle()
         {
-            Vector2Int position = Vector2Int.zero;
+            var position = Vector2Int.zero;
 
             do
             {
@@ -66,14 +66,16 @@ namespace Coins_Module
 
         private void OnSnakeMoved(Vector2Int position)
         {
-            if (_spawnedCoins.Remove(position, out var coin))
+            if (_spawnedCoins.Remove(position, out var coin) == false)
             {
-                ApplyCoin(coin);
+                return;
+            }
 
-                if (_spawnedCoins.Count == 0)
-                {
-                    OnAllCoinsCollected?.Invoke();
-                }
+            ApplyCoin(coin);
+
+            if (_spawnedCoins.Count == 0)
+            {
+                OnAllCoinsCollected?.Invoke();
             }
         }
 
@@ -81,7 +83,7 @@ namespace Coins_Module
         {
             _snake.Expand(coin.Bones);
             _score.Add(coin.Score);
-                
+
             _coinsPool.Despawn(coin);
         }
     }
