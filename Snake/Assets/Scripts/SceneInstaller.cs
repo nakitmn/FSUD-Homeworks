@@ -1,12 +1,17 @@
 using Input_Module;
 using Modules;
 using SnakeGame;
+using UnityEngine;
 using Zenject;
 
 namespace DefaultNamespace
 {
     public sealed class SceneInstaller : MonoInstaller
     {
+        [SerializeField] private GameObject _coinPrefab;
+        [SerializeField] private Transform _coinsContainer;
+        [SerializeField] private int _levelsCount = 9;
+
         public override void InstallBindings()
         {
             Container.Bind<ISnake>()
@@ -31,6 +36,23 @@ namespace DefaultNamespace
             Container.BindInterfacesTo<GameOverController>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<CoinsManager>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container.BindInterfacesTo<LevelManager>()
+                .AsSingle()
+                .NonLazy();
+
+            Container.BindInterfacesTo<Difficulty>()
+                .AsSingle()
+                .WithArguments(_levelsCount);
+
+            Container.BindMemoryPoolCustomInterface<Coin,CoinsPool,ICoinsPool>()
+                .FromComponentInNewPrefab(_coinPrefab)
+                .UnderTransform(_coinsContainer)
+                .AsSingle();
         }
     }
 }
