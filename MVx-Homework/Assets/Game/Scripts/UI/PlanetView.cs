@@ -1,3 +1,5 @@
+using System;
+using Modules.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +8,14 @@ namespace Game.Scripts.UI
 {
     public sealed class PlanetView : MonoBehaviour
     {
+        public event Action OnClick
+        {
+            add => _smartButton.OnClick += value;
+            remove => _smartButton.OnClick -= value;
+        }
+
+        [SerializeField] private SmartButton _smartButton;
+        
         [SerializeField] private Image _icon;
         [SerializeField] private GameObject _lockIcon;
         [SerializeField] private GameObject _incomeReadyMarker;

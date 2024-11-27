@@ -495,6 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9774e25736c49a2ba8da0d86b4c91cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _smartButton: {fileID: 5583372068559771244}
   _icon: {fileID: 606508972301849034}
   _lockIcon: {fileID: 7085741634984397813}
   _incomeReadyMarker: {fileID: 320550912344372757}

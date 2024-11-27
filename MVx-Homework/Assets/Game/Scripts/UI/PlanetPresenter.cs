@@ -21,6 +21,8 @@ namespace Game.Scripts.UI
             _planet.OnUnlocked += OnUnlocked;
             _planet.OnIncomeReady += OnIncomeReady;
 
+            _planetView.OnClick += OnPlanetClicked;
+
             UpdateView();
         }
 
@@ -29,6 +31,8 @@ namespace Game.Scripts.UI
             _planet.OnIncomeTimeChanged -= OnIncomeTimeChanged;
             _planet.OnUnlocked -= OnUnlocked;
             _planet.OnIncomeReady -= OnIncomeReady;
+
+            _planetView.OnClick -= OnPlanetClicked;
         }
 
         private void UpdateView()
@@ -40,6 +44,18 @@ namespace Game.Scripts.UI
             _planetView.SetIncomeReady(_planet.IsUnlocked && _planet.IsIncomeReady);
             _planetView.SetProgressEnabled(_planet.IsUnlocked && _planet.IsIncomeReady == false);
             _planetView.SetProgress(_planet.IncomeProgress);
+        }
+
+        private void OnPlanetClicked()
+        {
+            if (_planet.IsUnlocked)
+            {
+                _planet.GatherIncome();
+            }
+            else
+            {
+                _planet.Unlock();
+            }
         }
 
         private void OnIncomeTimeChanged(float time)
