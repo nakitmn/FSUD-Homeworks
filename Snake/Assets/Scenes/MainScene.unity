@@ -1208,6 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinPrefab: {fileID: 6356347121215630505, guid: f37c023e6b8b06149a4215320dd7e482, type: 3}
   _coinsContainer: {fileID: 1241502361}
+  _levelsCount: 3
 --- !u!114 &1701605172
 MonoBehaviour:
   m_ObjectHideFlags: 0

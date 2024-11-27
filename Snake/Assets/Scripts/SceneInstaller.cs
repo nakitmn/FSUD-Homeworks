@@ -41,7 +41,7 @@ namespace DefaultNamespace
                 .AsSingle()
                 .NonLazy();
             
-            Container.BindInterfacesTo<LevelManager>()
+            Container.BindInterfacesAndSelfTo<LevelManager>()
                 .AsSingle()
                 .NonLazy();
 
