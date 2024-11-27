@@ -1,5 +1,6 @@
 using Input_Module;
 using Modules;
+using SnakeGame;
 using Zenject;
 
 namespace DefaultNamespace
@@ -12,10 +13,22 @@ namespace DefaultNamespace
                 .FromComponentInHierarchy()
                 .AsSingle();
             
+            Container.Bind<IGameUI>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<IWorldBounds>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
             Container.BindInterfacesTo<PlayerInput>()
                 .AsSingle();
             
             Container.BindInterfacesTo<SnakeMoveController>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container.BindInterfacesTo<GameOverController>()
                 .AsSingle()
                 .NonLazy();
         }
