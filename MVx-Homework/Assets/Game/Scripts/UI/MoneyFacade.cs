@@ -1,0 +1,61 @@
+using DG.Tweening;
+using Modules.Money;
+using Zenject;
+
+namespace Game.Scripts.UI
+{
+    public sealed class MoneyFacade : IInitializable
+    {
+        private readonly IMoneyStorage _moneyStorage;
+        private readonly MoneyView _moneyView;
+
+        private int _visualAmount;
+        private Tweener _counterAnimation;
+
+        public MoneyFacade(IMoneyStorage moneyStorage, MoneyView moneyView)
+        {
+            _moneyStorage = moneyStorage;
+            _moneyView = moneyView;
+        }
+
+        void IInitializable.Initialize()
+        {
+            Sync();
+        }
+
+        public void Print()
+        {
+            _moneyView.SetAmount(_visualAmount.ToString());
+        }
+
+        public void Sync()
+        {
+            _visualAmount = _moneyStorage.Money;
+            Print();
+        }
+
+        public void SyncWithCounter()
+        {
+            PlayCounter(_moneyStorage.Money);
+        }
+
+        private void PlayCounter(int to)
+        {
+            if (_counterAnimation.IsActive())
+            {
+                _counterAnimation.Kill();
+            }
+
+            _counterAnimation = DOVirtual.Int(
+                _visualAmount,
+                to,
+                0.3f,
+                newAmount =>
+                {
+                    _visualAmount = newAmount;
+                    Print();
+                }
+            );
+        }
+    }
+}

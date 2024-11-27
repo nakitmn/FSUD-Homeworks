@@ -1,4 +1,5 @@
-﻿using Modules.Money;
+﻿using Game.Scripts.UI;
+using Modules.Money;
 using Zenject;
 
 namespace Game.Gameplay
@@ -20,6 +21,13 @@ namespace Game.Gameplay
                 .BindInterfacesTo<MoneyAdapter>()
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<MoneyView>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<MoneyFacade>()
+                .AsSingle();
         }
     }
 }

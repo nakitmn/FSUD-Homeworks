@@ -8,11 +8,13 @@ namespace Game.Scripts.UI
     {
         private readonly Planet _planet;
         private readonly PlanetView _planetView;
+        private readonly MoneyFacade _moneyFacade;
 
-        public PlanetPresenter(Planet planet, PlanetView planetView)
+        public PlanetPresenter(Planet planet, PlanetView planetView, MoneyFacade moneyFacade)
         {
             _planet = planet;
             _planetView = planetView;
+            _moneyFacade = moneyFacade;
         }
 
         public void Initialize()
@@ -50,11 +52,17 @@ namespace Game.Scripts.UI
         {
             if (_planet.IsUnlocked)
             {
-                _planet.GatherIncome();
+                if (_planet.GatherIncome())
+                {
+                    _moneyFacade.SyncWithCounter();
+                }
             }
             else
             {
-                _planet.Unlock();
+                if (_planet.Unlock())
+                {
+                    _moneyFacade.SyncWithCounter();
+                }
             }
         }
 
