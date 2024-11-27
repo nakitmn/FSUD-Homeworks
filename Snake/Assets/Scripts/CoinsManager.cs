@@ -10,18 +10,25 @@ namespace DefaultNamespace
     public sealed class CoinsManager : IInitializable, IDisposable
     {
         public event Action OnAllCoinsCollected;
-        
+
         private readonly IWorldBounds _worldBounds;
         private readonly ISnake _snake;
         private readonly ICoinsPool _coinsPool;
+        private readonly IScore _score;
 
         private readonly Dictionary<Vector2Int, ICoin> _spawnedCoins = new();
 
-        public CoinsManager(IWorldBounds worldBounds, ISnake snake, ICoinsPool coinsPool)
+        public CoinsManager(
+            IWorldBounds worldBounds,
+            ISnake snake,
+            ICoinsPool coinsPool,
+            IScore score
+        )
         {
             _worldBounds = worldBounds;
             _snake = snake;
             _coinsPool = coinsPool;
+            _score = score;
         }
 
         void IInitializable.Initialize()
@@ -61,14 +68,21 @@ namespace DefaultNamespace
         {
             if (_spawnedCoins.Remove(position, out var coin))
             {
-                _snake.Expand(coin.Bones);
-                _coinsPool.Despawn(coin);
-                
+                ApplyCoin(coin);
+
                 if (_spawnedCoins.Count == 0)
                 {
                     OnAllCoinsCollected?.Invoke();
                 }
             }
+        }
+
+        private void ApplyCoin(ICoin coin)
+        {
+            _snake.Expand(coin.Bones);
+            _score.Add(coin.Score);
+                
+            _coinsPool.Despawn(coin);
         }
     }
 }

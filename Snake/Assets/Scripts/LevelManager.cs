@@ -12,7 +12,7 @@ namespace DefaultNamespace
         private readonly IDifficulty _difficulty;
         private readonly ISnake _snake;
 
-        public LevelManager(CoinsManager coinsManager, IDifficulty difficulty,ISnake snake)
+        public LevelManager(CoinsManager coinsManager, IDifficulty difficulty, ISnake snake)
         {
             _coinsManager = coinsManager;
             _difficulty = difficulty;

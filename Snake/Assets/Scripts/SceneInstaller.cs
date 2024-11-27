@@ -17,30 +17,33 @@ namespace DefaultNamespace
             Container.Bind<ISnake>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
             Container.Bind<IGameUI>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
             Container.Bind<IWorldBounds>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
+            Container.BindInterfacesTo<Score>()
+                .AsSingle();
+
             Container.BindInterfacesTo<PlayerInput>()
                 .AsSingle();
-            
+
             Container.BindInterfacesTo<SnakeMoveController>()
                 .AsSingle()
                 .NonLazy();
-            
+
             Container.BindInterfacesTo<GameOverController>()
                 .AsSingle()
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<CoinsManager>()
                 .AsSingle()
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<LevelManager>()
                 .AsSingle()
                 .NonLazy();
@@ -49,10 +52,14 @@ namespace DefaultNamespace
                 .AsSingle()
                 .WithArguments(_levelsCount);
 
-            Container.BindMemoryPoolCustomInterface<Coin,CoinsPool,ICoinsPool>()
+            Container.BindMemoryPoolCustomInterface<Coin, CoinsPool, ICoinsPool>()
                 .FromComponentInNewPrefab(_coinPrefab)
                 .UnderTransform(_coinsContainer)
                 .AsSingle();
+
+            Container.BindInterfacesTo<GameUiPresenter>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }
