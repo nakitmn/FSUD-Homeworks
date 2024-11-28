@@ -14,8 +14,13 @@ namespace Game.Scripts.UI
             remove => _smartButton.OnClick -= value;
         }
 
+        public event Action OnHold
+        {
+            add => _smartButton.OnHold += value;
+            remove => _smartButton.OnHold -= value;
+        }
+
         [SerializeField] private SmartButton _smartButton;
-        
         [SerializeField] private Image _icon;
         [SerializeField] private GameObject _lockIcon;
         [SerializeField] private GameObject _incomeReadyMarker;

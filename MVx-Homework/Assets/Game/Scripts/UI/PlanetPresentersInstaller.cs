@@ -12,6 +12,10 @@ namespace Game.Scripts.UI
 
             Container.BindInterfacesTo<PlanetPresentersLinker>()
                 .AsSingle();
+            
+            Container.Bind<PlanetInfoPopup>()
+                .FromComponentsInHierarchy()
+                .AsSingle();
         }
     }
 }

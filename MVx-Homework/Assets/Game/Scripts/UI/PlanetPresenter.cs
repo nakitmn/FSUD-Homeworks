@@ -9,12 +9,14 @@ namespace Game.Scripts.UI
         private readonly Planet _planet;
         private readonly PlanetView _planetView;
         private readonly MoneyFacade _moneyFacade;
+        private readonly PlanetInfoPopup _planetInfoPopup;
 
-        public PlanetPresenter(Planet planet, PlanetView planetView, MoneyFacade moneyFacade)
+        public PlanetPresenter(Planet planet, PlanetView planetView, MoneyFacade moneyFacade, PlanetInfoPopup planetInfoPopup)
         {
             _planet = planet;
             _planetView = planetView;
             _moneyFacade = moneyFacade;
+            _planetInfoPopup = planetInfoPopup;
         }
 
         public void Initialize()
@@ -24,6 +26,7 @@ namespace Game.Scripts.UI
             _planet.OnIncomeReady += OnIncomeReady;
 
             _planetView.OnClick += OnPlanetClicked;
+            _planetView.OnHold += OnPlanetHold;
 
             UpdateView();
         }
@@ -35,6 +38,7 @@ namespace Game.Scripts.UI
             _planet.OnIncomeReady -= OnIncomeReady;
 
             _planetView.OnClick -= OnPlanetClicked;
+            _planetView.OnHold -= OnPlanetHold;
         }
 
         private void UpdateView()
@@ -64,6 +68,16 @@ namespace Game.Scripts.UI
                     _moneyFacade.SyncWithCounter();
                 }
             }
+        }
+
+        private void OnPlanetHold()
+        {
+            if (_planet.IsUnlocked == false)
+            {
+                return;
+            }
+
+            _planetInfoPopup.Show(new PlanetInfoPM(_planet));
         }
 
         private void OnIncomeTimeChanged(float time)
