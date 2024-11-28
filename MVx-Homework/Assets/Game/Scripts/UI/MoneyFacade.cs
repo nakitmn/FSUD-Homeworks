@@ -38,9 +38,13 @@ namespace Game.Scripts.UI
             Print();
         }
 
-        public void PlayCoin(RectTransform from)
+        public void PlayCoin(RectTransform from, int addAmount)
         {
-            _particleAnimator.Emit(from.position,_moneyView.IconPivot.position, onFinished:SyncWithCounter);
+            _particleAnimator.Emit(
+                from.position,
+                _moneyView.IconPivot.position,
+                onFinished: () => AddWithCounter(addAmount)
+            );
         }
 
         public void SyncWithCounter()
@@ -48,11 +52,16 @@ namespace Game.Scripts.UI
             PlayCounter(_moneyStorage.Money);
         }
 
+        public void AddWithCounter(int amount)
+        {
+            PlayCounter(_visualAmount + amount);
+        }
+
         private void PlayCounter(int to)
         {
             if (_counterAnimation.IsActive())
             {
-                _counterAnimation.Kill();
+                _counterAnimation.Complete();
             }
 
             _counterAnimation = DOVirtual.Int(

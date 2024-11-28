@@ -63,9 +63,10 @@ namespace Game.Scripts.UI
         {
             if (_planet.IsUnlocked)
             {
+                var income = _planet.MinuteIncome;
                 if (_planet.GatherIncome())
                 {
-                    _moneyFacade.PlayCoin(_planetView.CoinPivot);
+                    _moneyFacade.PlayCoin(_planetView.CoinPivot, income);
                 }
             }
             else
