@@ -1,8 +1,9 @@
 using System;
+using Game.Scripts.UI.Money;
 using Modules.Planets;
 using Unity.VisualScripting;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.UI.Planets
 {
     public sealed class PlanetPresenter : IInitializable, IDisposable
     {

@@ -1,7 +1,7 @@
 using System;
 using Modules.Planets;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.UI.Planets
 {
     public sealed class PlanetInfoPM : IPlanetInfoPM
     {

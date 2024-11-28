@@ -1,10 +1,11 @@
 using System;
+using Game.Scripts.UI.Countdown;
 using Modules.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.UI.Planets
 {
     public sealed class PlanetView : MonoBehaviour
     {

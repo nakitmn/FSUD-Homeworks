@@ -1,9 +1,11 @@
+using Game.Scripts.UI.Money;
+using Game.Scripts.UI.Planets;
 using Modules.UI;
 using Zenject;
 
 namespace Game.Scripts.UI
 {
-    public sealed class PlanetPresentersInstaller : Installer<PlanetPresentersInstaller>
+    public sealed class UiInstaller : Installer<UiInstaller>
     {
         public override void InstallBindings()
         {
@@ -20,6 +22,13 @@ namespace Game.Scripts.UI
             
             Container.Bind<ParticleAnimator>()
                 .FromComponentsInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<MoneyView>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<MoneyFacade>()
                 .AsSingle();
         }
     }

@@ -18,7 +18,7 @@ namespace Gameplay
         {
             MoneyInstaller.Install(this.Container, _initialMoney);
             PlanetInstaller.Install(this.Container, _catalog);
-            PlanetPresentersInstaller.Install(Container);
+            UiInstaller.Install(Container);
         }
     }
 }

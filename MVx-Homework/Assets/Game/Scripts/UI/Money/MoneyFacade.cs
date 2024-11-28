@@ -4,7 +4,7 @@ using Modules.UI;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.UI.Money
 {
     public sealed class MoneyFacade : IInitializable
     {
@@ -12,8 +12,8 @@ namespace Game.Scripts.UI
         private readonly MoneyView _moneyView;
         private readonly ParticleAnimator _particleAnimator;
 
-        private int _visualAmount;
         private Tweener _counterAnimation;
+        private int _visualAmount;
 
         public MoneyFacade(IMoneyStorage moneyStorage, MoneyView moneyView, ParticleAnimator particleAnimator)
         {
@@ -25,11 +25,6 @@ namespace Game.Scripts.UI
         void IInitializable.Initialize()
         {
             Sync();
-        }
-
-        public void Print()
-        {
-            _moneyView.SetAmount(_visualAmount.ToString());
         }
 
         public void Sync()
@@ -74,6 +69,11 @@ namespace Game.Scripts.UI
                     Print();
                 }
             );
+        }
+
+        private void Print()
+        {
+            _moneyView.SetAmount(_visualAmount.ToString());
         }
     }
 }

@@ -21,13 +21,6 @@ namespace Game.Gameplay
                 .BindInterfacesTo<MoneyAdapter>()
                 .AsSingle()
                 .NonLazy();
-
-            Container.Bind<MoneyView>()
-                .FromComponentInHierarchy()
-                .AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<MoneyFacade>()
-                .AsSingle();
         }
     }
 }
