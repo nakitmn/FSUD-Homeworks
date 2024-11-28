@@ -1,3 +1,4 @@
+using Modules.UI;
 using Zenject;
 
 namespace Game.Scripts.UI
@@ -14,6 +15,10 @@ namespace Game.Scripts.UI
                 .AsSingle();
             
             Container.Bind<PlanetInfoPopup>()
+                .FromComponentsInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<ParticleAnimator>()
                 .FromComponentsInHierarchy()
                 .AsSingle();
         }

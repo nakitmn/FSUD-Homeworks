@@ -1,5 +1,7 @@
 using DG.Tweening;
 using Modules.Money;
+using Modules.UI;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.UI
@@ -8,14 +10,16 @@ namespace Game.Scripts.UI
     {
         private readonly IMoneyStorage _moneyStorage;
         private readonly MoneyView _moneyView;
+        private readonly ParticleAnimator _particleAnimator;
 
         private int _visualAmount;
         private Tweener _counterAnimation;
 
-        public MoneyFacade(IMoneyStorage moneyStorage, MoneyView moneyView)
+        public MoneyFacade(IMoneyStorage moneyStorage, MoneyView moneyView, ParticleAnimator particleAnimator)
         {
             _moneyStorage = moneyStorage;
             _moneyView = moneyView;
+            _particleAnimator = particleAnimator;
         }
 
         void IInitializable.Initialize()
@@ -32,6 +36,11 @@ namespace Game.Scripts.UI
         {
             _visualAmount = _moneyStorage.Money;
             Print();
+        }
+
+        public void PlayCoin(RectTransform from)
+        {
+            _particleAnimator.Emit(from.position,_moneyView.IconPivot.position, onFinished:SyncWithCounter);
         }
 
         public void SyncWithCounter()

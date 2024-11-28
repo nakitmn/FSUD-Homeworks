@@ -24,9 +24,12 @@ namespace Game.Scripts.UI
         [SerializeField] private Image _icon;
         [SerializeField] private GameObject _lockIcon;
         [SerializeField] private GameObject _incomeReadyMarker;
+        [SerializeField] private RectTransform _coinPivot;
         [SerializeField] private CountdownView _progressView;
         [SerializeField] private GameObject _priceContainer;
         [SerializeField] private TMP_Text _price;
+
+        public RectTransform CoinPivot => _coinPivot;
 
         public void SetIcon(Sprite icon)
         {
