@@ -22,6 +22,70 @@ namespace Modules.Converter.EditorTests
         }
 
         [Test]
+        public void InstantiateWithInitialCount()
+        {
+            //Act:
+            var converter = new Converter<string>(
+                10,
+                10,
+                CreateInstruction(),
+                2,
+                3
+            );
+
+            //Assert:
+            Assert.NotNull(converter);
+            Assert.AreEqual(2, converter.InputAmount);
+            Assert.AreEqual(3, converter.OutputAmount);
+        }
+
+        [Test]
+        public void WhenInstantiateWithNegativeInitialCountThenThrow()
+        {
+            //Assert:
+            Assert.Catch<ArgumentOutOfRangeException>(() =>
+            {
+                new Converter<string>(
+                    10,
+                    10,
+                    CreateInstruction(),
+                    -2,
+                    3
+                );
+            });
+
+            Assert.Catch<ArgumentOutOfRangeException>(() =>
+            {
+                new Converter<string>(
+                    10,
+                    10,
+                    CreateInstruction(),
+                    2,
+                    -3
+                );
+            });
+        }
+
+
+        [Test]
+        public void WhenInstantiateWithInitialCountMoreThanCapacityThenTrim()
+        {
+            //Act:
+            var converter = new Converter<string>(
+                10,
+                10,
+                CreateInstruction(),
+                11,
+                23
+            );
+
+            //Assert:
+            Assert.NotNull(converter);
+            Assert.AreEqual(10, converter.InputAmount);
+            Assert.AreEqual(10, converter.OutputAmount);
+        }
+
+        [Test]
         public void WhenInstantiateWithNullInstructionThenThrow()
         {
             //Assert:
@@ -205,6 +269,30 @@ namespace Modules.Converter.EditorTests
             yield return new(4, false, 3);
             yield return new(0, true, 3);
         }
+        
+        [TestCase(4,6)]
+        [TestCase(1,9)]
+        [TestCase(5,5)]
+        public void TakeWhileConverting(int takeAmount,int expectedOutputAmount)
+        {
+            //Arrange:
+            var converter = new Converter<string>(10, 10, new(
+                new KeyValuePair<string, int>("wood", 1),
+                new KeyValuePair<string, int>("plank", 1),
+                1f
+            ),10);
+            converter.StartConversion();
+
+            converter.Update(5.1f);
+
+            //Act:
+            converter.Take(takeAmount);
+            converter.Update(5.1f);
+
+            //Assert:
+            Assert.IsFalse(converter.IsConverting);
+            Assert.AreEqual(expectedOutputAmount, converter.OutputAmount);
+        }
 
         [TestCase(-1)]
         [TestCase(-2)]
@@ -246,7 +334,7 @@ namespace Modules.Converter.EditorTests
                 new KeyValuePair<string, int>("wood", 1),
                 new KeyValuePair<string, int>("plank", 4),
                 1f
-            ),4);
+            ), 4);
 
             //Act:
             converter.StartConversion();
@@ -289,16 +377,17 @@ namespace Modules.Converter.EditorTests
             Assert.AreEqual(2, converter.OutputAmount);
         }
 
-        [Test]
-        public void PutBeforeStopConversion()
+        [TestCase(2,6)]
+        [TestCase(9,10)]
+        [TestCase(100,10)]
+        public void PutWhileConverting(int putAmount,int expectedInputAmount)
         {
             //Arrange:
             var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 3),
                 new KeyValuePair<string, int>("plank", 1),
                 1f
-            ));
-            converter.Put(10);
+            ), 10);
             converter.StartConversion();
 
             converter.Update(2.2f);
@@ -306,35 +395,11 @@ namespace Modules.Converter.EditorTests
             Assert.AreEqual(1, converter.InputAmount);
 
             //Act:
-            converter.Put(2);
+            converter.Put(putAmount);
             converter.StopConversion();
 
             //Assert:
-            Assert.AreEqual(6, converter.InputAmount);
-        }
-
-        [Test]
-        public void PutFullBeforeStopConversion()
-        {
-            //Arrange:
-            var converter = new Converter<string>(10, 10, new(
-                new KeyValuePair<string, int>("wood", 3),
-                new KeyValuePair<string, int>("plank", 1),
-                1f
-            ));
-            converter.Put(10);
-            converter.StartConversion();
-
-            converter.Update(2.1f);
-
-            Assert.AreEqual(1, converter.InputAmount);
-
-            //Act:
-            converter.Put(9);
-            converter.StopConversion();
-
-            //Assert:
-            Assert.AreEqual(10, converter.InputAmount);
+            Assert.AreEqual(expectedInputAmount, converter.InputAmount);
         }
 
         private static Converter<string>.Instruction CreateInstruction()

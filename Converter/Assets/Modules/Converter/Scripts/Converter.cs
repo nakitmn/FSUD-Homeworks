@@ -63,11 +63,21 @@ namespace Modules.Converter.Scripts
                 throw new ArgumentOutOfRangeException(nameof(inputCapacity));
             }
 
+            if (inputAmount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(inputAmount));
+            }
+
+            if (outputAmount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(outputAmount));
+            }
+
             _inputCapacity = inputCapacity;
             _outputCapacity = outputCapacity;
             _instruction = instruction;
-            _inputAmount = inputAmount;
-            _outputAmount = outputAmount;
+            _inputAmount = Mathf.Min(inputCapacity, inputAmount);
+            _outputAmount = Mathf.Min(outputCapacity, outputAmount);
         }
 
         public bool Put()
@@ -159,7 +169,7 @@ namespace Modules.Converter.Scripts
             }
 
             _passedTime += deltaTime;
-            
+
             while (_passedTime >= _instruction.ConvertDuration)
             {
                 _outputAmount += _instruction.OutputConvertCount;
@@ -176,17 +186,6 @@ namespace Modules.Converter.Scripts
                     return;
                 }
             }
-        }
-
-        public int GetAvailableConvertsCount()
-        {
-            var freeInputSpace = _inputCapacity - _inputAmount;
-            var availableInputConverts = freeInputSpace / _instruction.InputConvertCount;
-            
-            var freeOutputSpace = _outputCapacity - _outputAmount;
-            var availableOutputConverts = freeOutputSpace / _instruction.OutputConvertCount;
-            
-            return Mathf.Min(availableInputConverts, availableOutputConverts);
         }
 
         public class Instruction
