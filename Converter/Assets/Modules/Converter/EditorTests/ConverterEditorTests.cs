@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Modules.Converter.Scripts;
 using NUnit.Framework;
 
-namespace Homework
+namespace Modules.Converter.EditorTests
 {
     public sealed class ConverterEditorTests
     {
@@ -104,109 +105,10 @@ namespace Homework
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Put(addAmount); });
         }
 
-        [TestCaseSource(nameof(ConvertCases))]
-        public void Convert(ConvertInstruction<string> convertInstruction, int putAmount, bool expectedResult,
-            int expectedInputAmount,
-            int expectedOutputAmount)
-        {
-            //Arrange:
-            var converter = new Converter<string>(10, 10, convertInstruction);
-            converter.Put(putAmount);
-
-            //Act:
-            bool result = converter.Convert();
-
-            //Assert:
-            Assert.AreEqual(result, expectedResult);
-            Assert.AreEqual(converter.InputAmount, expectedInputAmount);
-            Assert.AreEqual(converter.OutputAmount, expectedOutputAmount);
-        }
-
-        private static IEnumerable<TestCaseData> ConvertCases()
-        {
-            yield return new(
-                new ConvertInstruction<string>(
-                    new KeyValuePair<string, int>("wood", 3),
-                    new KeyValuePair<string, int>("plank", 6),
-                    1f
-                ),
-                5, true, 2, 6
-            );
-
-            yield return new(
-                new ConvertInstruction<string>(
-                    new KeyValuePair<string, int>("wood", 1),
-                    new KeyValuePair<string, int>("plank", 1),
-                    1f
-                ),
-                5, true, 4, 1
-            );
-
-            yield return new(
-                new ConvertInstruction<string>(
-                    new KeyValuePair<string, int>("wood", 2),
-                    new KeyValuePair<string, int>("plank", 2),
-                    1f
-                ),
-                5, true, 3, 2
-            );
-
-            yield return new(
-                new ConvertInstruction<string>(
-                    new KeyValuePair<string, int>("wood", 6),
-                    new KeyValuePair<string, int>("plank", 1),
-                    1f
-                ),
-                5, false, 5, 0
-            );
-
-            yield return new(
-                new ConvertInstruction<string>(
-                    new KeyValuePair<string, int>("wood", 1),
-                    new KeyValuePair<string, int>("plank", 11),
-                    1f
-                ),
-                5, false, 5, 0
-            );
-        }
-
-        [Test]
-        public void WhenConvertWhileInputEmptyThenFalse()
-        {
-            //Arrange:
-            var converter = new Converter<string>(10, 10, CreateInstruction());
-
-            //Act:
-            bool result = converter.Convert();
-
-            //Assert:
-            Assert.IsFalse(result);
-            Assert.Zero(converter.InputAmount);
-            Assert.Zero(converter.OutputAmount);
-        }
-
-        [Test]
-        public void WhenConvertWhileFullOutputThenFalse()
-        {
-            //Arrange:
-            var converter = new Converter<string>(10, 1, CreateInstruction());
-            converter.Put(5);
-            converter.Convert();
-
-            //Act:
-            bool result = converter.Convert();
-
-            //Assert:
-            Assert.IsFalse(result);
-            Assert.AreEqual(4, converter.InputAmount);
-            Assert.AreEqual(1, converter.OutputAmount);
-        }
-
         [TestCaseSource(nameof(CanConvertCases))]
-        public bool CanConvert(ConvertInstruction<string> convertInstruction, int putAmount)
+        public bool CanConvert(Converter<string> converter, int putAmount)
         {
             //Arrange:
-            var converter = new Converter<string>(10, 10, convertInstruction);
             converter.Put(putAmount);
 
             //Act:
@@ -216,38 +118,38 @@ namespace Homework
         private static IEnumerable<TestCaseData> CanConvertCases()
         {
             yield return new TestCaseData(
-                new ConvertInstruction<string>(
+                new Converter<string>(10, 10, new(
                     new KeyValuePair<string, int>("wood", 3),
                     new KeyValuePair<string, int>("plank", 6),
                     1f
-                ),
+                )),
                 5
             ).Returns(true);
 
             yield return new TestCaseData(
-                new ConvertInstruction<string>(
+                new Converter<string>(10, 10, new(
                     new KeyValuePair<string, int>("wood", 3),
                     new KeyValuePair<string, int>("plank", 11),
                     1f
-                ),
+                )),
                 5
             ).Returns(false);
 
             yield return new TestCaseData(
-                new ConvertInstruction<string>(
+                new Converter<string>(10, 10, new(
                     new KeyValuePair<string, int>("wood", 3),
                     new KeyValuePair<string, int>("plank", 6),
                     1f
-                ),
+                )),
                 2
             ).Returns(false);
 
             yield return new TestCaseData(
-                new ConvertInstruction<string>(
+                new Converter<string>(10, 10, new(
                     new KeyValuePair<string, int>("wood", 3),
                     new KeyValuePair<string, int>("plank", 10),
                     1f
-                ),
+                )),
                 3
             ).Returns(true);
         }
@@ -256,16 +158,13 @@ namespace Homework
         public void Take()
         {
             //Arrange:
-            var converter = new Converter<string>(10, 10, CreateInstruction());
-            converter.Put(5);
-            converter.Convert();
+            var converter = new Converter<string>(10, 10, CreateInstruction(), outputAmount: 1);
 
             //Act:
             bool result = converter.Take();
 
             //Assert:
             Assert.IsTrue(result);
-            Assert.AreEqual(4, converter.InputAmount);
             Assert.Zero(converter.OutputAmount);
         }
 
@@ -289,14 +188,7 @@ namespace Homework
         public void TakeMultiple(int takeAmount, bool expectedResult, int expectedOutputAmount)
         {
             //Arrange:
-            var converter = new Converter<string>(10, 10, CreateInstruction());
-
-            converter.Put(5);
-
-            for (var i = 0; i < 3; i++)
-            {
-                converter.Convert();
-            }
+            var converter = new Converter<string>(10, 10, CreateInstruction(), 2, 3);
 
             //Act:
             bool result = converter.Take(takeAmount);
@@ -319,14 +211,7 @@ namespace Homework
         public void WhenTakeMultipleWithNegativeAmountThenThrow(int takeAmount)
         {
             //Arrange:
-            var converter = new Converter<string>(10, 10, CreateInstruction());
-
-            converter.Put(5);
-
-            for (var i = 0; i < 3; i++)
-            {
-                converter.Convert();
-            }
+            var converter = new Converter<string>(10, 10, CreateInstruction(), 2, 3);
 
             //Assert:
             Assert.Catch<ArgumentOutOfRangeException>(() => { converter.Take(takeAmount); });
@@ -336,12 +221,11 @@ namespace Homework
         public void StartConversion()
         {
             //Arrange:
-            var convertInstruction = new ConvertInstruction<string>(
+            var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 1),
                 new KeyValuePair<string, int>("plank", 2),
                 0.5f
-            );
-            var converter = new Converter<string>(10, 10, convertInstruction);
+            ));
             converter.Put(4);
 
             //Act:
@@ -358,17 +242,15 @@ namespace Homework
         public void StartConversionWithOutputOverload()
         {
             //Arrange:
-            var convertInstruction = new ConvertInstruction<string>(
+            var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 1),
                 new KeyValuePair<string, int>("plank", 4),
-                0.5f
-            );
-            var converter = new Converter<string>(10, 10, convertInstruction);
-            converter.Put(4);
+                1f
+            ),4);
 
             //Act:
             converter.StartConversion();
-            converter.Update(2f);
+            converter.Update(4f);
 
             //Assert:
             Assert.IsFalse(converter.IsConverting);
@@ -380,18 +262,17 @@ namespace Homework
         public void StopConversion()
         {
             //Arrange:
-            var convertInstruction = new ConvertInstruction<string>(
+            var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 1),
                 new KeyValuePair<string, int>("plank", 1),
                 1f
-            );
-            var converter = new Converter<string>(10, 10, convertInstruction);
+            ));
             converter.Put(10);
             converter.StartConversion();
 
             converter.Update(2.5f);
 
-            Assert.AreEqual(8, converter.InputAmount);
+            Assert.AreEqual(7, converter.InputAmount);
 
             //Act:
             converter.StopConversion();
@@ -412,43 +293,41 @@ namespace Homework
         public void PutBeforeStopConversion()
         {
             //Arrange:
-            var convertInstruction = new ConvertInstruction<string>(
+            var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 3),
                 new KeyValuePair<string, int>("plank", 1),
                 1f
-            );
-            var converter = new Converter<string>(10, 10, convertInstruction);
+            ));
             converter.Put(10);
             converter.StartConversion();
 
             converter.Update(2.2f);
 
-            Assert.AreEqual(4, converter.InputAmount);
+            Assert.AreEqual(1, converter.InputAmount);
 
             //Act:
-            converter.Put(3);
+            converter.Put(2);
             converter.StopConversion();
 
             //Assert:
-            Assert.AreEqual(7, converter.InputAmount);
+            Assert.AreEqual(6, converter.InputAmount);
         }
 
         [Test]
         public void PutFullBeforeStopConversion()
         {
             //Arrange:
-            var convertInstruction = new ConvertInstruction<string>(
+            var converter = new Converter<string>(10, 10, new(
                 new KeyValuePair<string, int>("wood", 3),
                 new KeyValuePair<string, int>("plank", 1),
                 1f
-            );
-            var converter = new Converter<string>(10, 10, convertInstruction);
+            ));
             converter.Put(10);
             converter.StartConversion();
 
             converter.Update(2.1f);
 
-            Assert.AreEqual(4, converter.InputAmount);
+            Assert.AreEqual(1, converter.InputAmount);
 
             //Act:
             converter.Put(9);
@@ -458,9 +337,9 @@ namespace Homework
             Assert.AreEqual(10, converter.InputAmount);
         }
 
-        private static ConvertInstruction<string> CreateInstruction()
+        private static Converter<string>.Instruction CreateInstruction()
         {
-            return new ConvertInstruction<string>(
+            return new(
                 new KeyValuePair<string, int>("wood", 1),
                 new KeyValuePair<string, int>("plank", 1),
                 1f

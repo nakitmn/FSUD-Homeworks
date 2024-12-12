@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Homework
+namespace Modules.Converter.Scripts
 {
     /**
        Конвертер представляет собой преобразователь ресурсов, который берет ресурсы
@@ -29,7 +30,7 @@ namespace Homework
     {
         private readonly int _inputCapacity;
         private readonly int _outputCapacity;
-        private readonly ConvertInstruction<TResource> _instruction;
+        private readonly Instruction _instruction;
 
         private int _inputAmount;
         private int _outputAmount;
@@ -42,7 +43,9 @@ namespace Homework
         public Converter(
             int inputCapacity,
             int outputCapacity,
-            ConvertInstruction<TResource> instruction
+            Instruction instruction,
+            int inputAmount = 0,
+            int outputAmount = 0
         )
         {
             if (instruction == null)
@@ -63,6 +66,8 @@ namespace Homework
             _inputCapacity = inputCapacity;
             _outputCapacity = outputCapacity;
             _instruction = instruction;
+            _inputAmount = inputAmount;
+            _outputAmount = outputAmount;
         }
 
         public bool Put()
@@ -95,18 +100,6 @@ namespace Homework
             var newOutputAmount = _outputAmount + _instruction.OutputConvertCount;
 
             return newInputAmount >= 0 && newOutputAmount <= _outputCapacity;
-        }
-
-        public bool Convert()
-        {
-            if (CanConvert() == false)
-            {
-                return false;
-            }
-
-            _inputAmount -= _instruction.InputConvertCount;
-            _outputAmount += _instruction.OutputConvertCount;
-            return true;
         }
 
         public bool Take()
@@ -144,6 +137,7 @@ namespace Homework
             }
 
             IsConverting = true;
+            _inputAmount -= _instruction.InputConvertCount;
         }
 
         public void StopConversion()
@@ -154,6 +148,7 @@ namespace Homework
             }
 
             IsConverting = false;
+            Put(_instruction.InputConvertCount);
         }
 
         public void Update(float deltaTime)
@@ -162,24 +157,71 @@ namespace Homework
             {
                 return;
             }
-            
+
             _passedTime += deltaTime;
-            var convertsCount = Mathf.FloorToInt(_passedTime / _instruction.ConvertDuration);
             
-            for (var i = 0; i < convertsCount; i++)
+            while (_passedTime >= _instruction.ConvertDuration)
             {
-                if (Convert() == false)
-                {
-                    break;
-                }
-                
+                _outputAmount += _instruction.OutputConvertCount;
                 _passedTime -= _instruction.ConvertDuration;
+
+                if (CanConvert())
+                {
+                    _inputAmount -= _instruction.InputConvertCount;
+                }
+                else
+                {
+                    IsConverting = false;
+                    _passedTime = 0f;
+                    return;
+                }
             }
+        }
+
+        public int GetAvailableConvertsCount()
+        {
+            var freeInputSpace = _inputCapacity - _inputAmount;
+            var availableInputConverts = freeInputSpace / _instruction.InputConvertCount;
             
-            if (CanConvert() == false)
+            var freeOutputSpace = _outputCapacity - _outputAmount;
+            var availableOutputConverts = freeOutputSpace / _instruction.OutputConvertCount;
+            
+            return Mathf.Min(availableInputConverts, availableOutputConverts);
+        }
+
+        public class Instruction
+        {
+            public TResource InputResource { get; }
+            public int InputConvertCount { get; }
+            public TResource OutputResource { get; }
+            public int OutputConvertCount { get; }
+            public float ConvertDuration { get; }
+
+            public Instruction(TResource inputResource,
+                int inputConvertCount,
+                TResource outputResource,
+                int outputConvertCount,
+                float convertDuration
+            )
             {
-                IsConverting = false;
-                _passedTime = 0f;
+                InputResource = inputResource;
+                InputConvertCount = inputConvertCount;
+                OutputResource = outputResource;
+                OutputConvertCount = outputConvertCount;
+                ConvertDuration = convertDuration;
+            }
+
+            public Instruction(
+                KeyValuePair<TResource, int> inputResource,
+                KeyValuePair<TResource, int> outputResource,
+                float convertDuration
+            )
+            {
+                InputResource = inputResource.Key;
+                InputConvertCount = inputResource.Value;
+                OutputResource = outputResource.Key;
+                OutputConvertCount = outputResource.Value;
+                ConvertDuration = convertDuration;
             }
         }
     }
