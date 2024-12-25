@@ -1,19 +1,19 @@
 using System;
-using Game.Scripts.UI.Money;
-using Modules.Planets;
+using Game.Scripts.Presenters.Money;
+using Game.Scripts.Views.Planet;
 using Unity.VisualScripting;
 
-namespace Game.Scripts.UI.Planets
+namespace Game.Scripts.Presenters.Planet
 {
     public sealed class PlanetPresenter : IInitializable, IDisposable
     {
-        private readonly Planet _planet;
+        private readonly Modules.Planets.Planet _planet;
         private readonly PlanetView _planetView;
         private readonly MoneyFacade _moneyFacade;
         private readonly PlanetInfoPopup _planetInfoPopup;
 
         public PlanetPresenter(
-            Planet planet,
+            Modules.Planets.Planet planet,
             PlanetView planetView,
             MoneyFacade moneyFacade,
             PlanetInfoPopup planetInfoPopup

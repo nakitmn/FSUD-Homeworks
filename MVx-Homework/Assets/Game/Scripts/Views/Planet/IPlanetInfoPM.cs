@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Scripts.UI.Planets
+namespace Game.Scripts.Views.Planet
 {
     public interface IPlanetInfoPM
     {

@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Modules.Planets;
+using Game.Scripts.Views.Planet;
 using Zenject;
 
-namespace Game.Scripts.UI.Planets
+namespace Game.Scripts.Presenters.Planet
 {
     public sealed class PlanetPresentersLinker : IInitializable, IDisposable
     {
         private readonly DiContainer _container;
-        private readonly Planet[] _planets;
+        private readonly Modules.Planets.Planet[] _planets;
         private readonly PlanetView[] _views;
 
         private readonly List<PlanetPresenter> _planetPresenters = new();
 
-        public PlanetPresentersLinker(DiContainer container, Planet[] planets, PlanetView[] views)
+        public PlanetPresentersLinker(DiContainer container, Modules.Planets.Planet[] planets, PlanetView[] views)
         {
             _container = container;
             _planets = planets;

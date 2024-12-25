@@ -1,10 +1,11 @@
 using DG.Tweening;
+using Game.Scripts.Views.Money;
 using Modules.Money;
 using Modules.UI;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.UI.Money
+namespace Game.Scripts.Presenters.Money
 {
     public sealed class MoneyFacade : IInitializable
     {

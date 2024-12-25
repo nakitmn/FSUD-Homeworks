@@ -1,13 +1,13 @@
 using System;
-using Modules.Planets;
+using Game.Scripts.Views.Planet;
 
-namespace Game.Scripts.UI.Planets
+namespace Game.Scripts.Presenters.Planet
 {
     public sealed class PlanetInfoPM : IPlanetInfoPM
     {
         public event Action OnStateChanged;
 
-        private readonly Planet _planet;
+        private readonly Modules.Planets.Planet _planet;
 
         public string PlanetName => _planet.Name;
         public string Population => $"Population: {_planet.Population}";
@@ -16,7 +16,7 @@ namespace Game.Scripts.UI.Planets
         public string Price => _planet.Price.ToString();
         public bool CanUpgrade => _planet.CanUpgrade;
 
-        public PlanetInfoPM(Planet planet)
+        public PlanetInfoPM(Modules.Planets.Planet planet)
         {
             _planet = planet;
         }

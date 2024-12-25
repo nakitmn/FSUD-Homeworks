@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Scripts.UI.Countdown
+namespace Game.Scripts.Views.Countdown
 {
     public sealed class CountdownView : MonoBehaviour
     {

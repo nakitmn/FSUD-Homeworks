@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Scripts.UI.Planets
+namespace Game.Scripts.Views.Planet
 {
     public sealed class PlanetInfoPopup : MonoBehaviour
     {
