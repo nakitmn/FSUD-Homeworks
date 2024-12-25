@@ -4,8 +4,9 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay
+namespace Game.Gameplay
 {
+    //Don't modify
     public sealed class GameplayDebug : MonoBehaviour
     {
         [Inject]

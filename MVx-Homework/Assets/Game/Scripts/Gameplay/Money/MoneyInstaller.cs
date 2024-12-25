@@ -1,9 +1,9 @@
-﻿using Game.Scripts.UI;
-using Modules.Money;
+﻿using Modules.Money;
 using Zenject;
 
 namespace Game.Gameplay
 {
+    //Don't modify
     public sealed class MoneyInstaller : Installer<int, MoneyInstaller>
     {
         [Inject]

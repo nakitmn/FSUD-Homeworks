@@ -3,6 +3,7 @@ using Zenject;
 
 namespace Game.Gameplay
 {
+    //Don't modify
     public sealed class PlanetInstaller : Installer<PlanetCatalog, PlanetInstaller>
     {
         [Inject]

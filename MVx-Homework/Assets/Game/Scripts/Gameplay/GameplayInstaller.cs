@@ -1,12 +1,15 @@
-using Game.Gameplay;
-using Game.Scripts.UI;
 using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay
+namespace Game.Gameplay
 {
-    public sealed class GameplayInstaller : MonoInstaller
+    //Don't modify
+    [CreateAssetMenu(
+        fileName = "GameplayInstaller",
+        menuName = "Zenject/New GameplayInstaller"
+    )]
+    public sealed class GameplayInstaller : ScriptableObjectInstaller
     {
         [SerializeField]
         private int _initialMoney = 300;
