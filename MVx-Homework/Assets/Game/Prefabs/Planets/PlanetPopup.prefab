@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planetNameField: {fileID: 9209584536786063595}
+  _planetIcon: {fileID: 328163744762118583}
   _populationField: {fileID: 2821577711935674451}
   _levelField: {fileID: 5472911088123096804}
   _incomeField: {fileID: 159619003737596086}

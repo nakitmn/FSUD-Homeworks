@@ -1,14 +1,19 @@
 using System;
 using Game.Scripts.Views.Planet;
+using UnityEngine;
 
 namespace Game.Scripts.Presenters.Planet
 {
     public sealed class PlanetInfoPM : IPlanetInfoPM
     {
         public event Action OnStateChanged;
+        public event Action OnIncomeChanged;
+        public event Action OnPopulationChanged;
+        public event Action OnUpgraded;
 
         private readonly Modules.Planets.Planet _planet;
 
+        public Sprite PlanetIcon => _planet.GetIcon(true);
         public string PlanetName => _planet.Name;
         public string Population => $"Population: {_planet.Population}";
         public string Level => $"Level: {_planet.Level}/{_planet.MaxLevel}";
@@ -24,16 +29,16 @@ namespace Game.Scripts.Presenters.Planet
 
         public void Enable()
         {
-            _planet.OnPopulationChanged += OnPopulationChanged;
-            _planet.OnUpgraded += OnUpgraded;
-            _planet.OnIncomeChanged += OnIncomeChanged;
+            _planet.OnPopulationChanged += InvokePopulationChanged;
+            _planet.OnUpgraded += InvokeUpgraded;
+            _planet.OnIncomeChanged += InvokeIncomeChanged;
         }
 
         public void Disable()
         {
-            _planet.OnPopulationChanged -= OnPopulationChanged;
-            _planet.OnUpgraded -= OnUpgraded;
-            _planet.OnIncomeChanged -= OnIncomeChanged;
+            _planet.OnPopulationChanged -= InvokePopulationChanged;
+            _planet.OnUpgraded -= InvokeUpgraded;
+            _planet.OnIncomeChanged -= InvokeIncomeChanged;
         }
 
         public void OnUpgradeClicked()
@@ -41,19 +46,19 @@ namespace Game.Scripts.Presenters.Planet
             _planet.Upgrade();
         }
 
-        private void OnIncomeChanged(int obj)
+        private void InvokeIncomeChanged(int obj)
         {
-            OnStateChanged?.Invoke();
+            OnIncomeChanged?.Invoke();
         }
 
-        private void OnUpgraded(int obj)
+        private void InvokeUpgraded(int obj)
         {
-            OnStateChanged?.Invoke();
+            OnUpgraded?.Invoke();
         }
 
-        private void OnPopulationChanged(int obj)
+        private void InvokePopulationChanged(int obj)
         {
-            OnStateChanged?.Invoke();
+            OnPopulationChanged?.Invoke();
         }
     }
 }

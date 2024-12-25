@@ -7,6 +7,7 @@ namespace Game.Scripts.Views.Planet
     public sealed class PlanetInfoPopup : MonoBehaviour
     {
         [SerializeField] private TMP_Text _planetNameField;
+        [SerializeField] private Image _planetIcon;
         [SerializeField] private TMP_Text _populationField;
         [SerializeField] private TMP_Text _levelField;
         [SerializeField] private TMP_Text _incomeField;
@@ -26,6 +27,9 @@ namespace Game.Scripts.Views.Planet
             _closeButton.onClick.AddListener(Hide);
             
             _pm.OnStateChanged += UpdateView;
+            _pm.OnIncomeChanged += OnIncomeChanged;
+            _pm.OnPopulationChanged += OnPopulationChanged;
+            _pm.OnUpgraded += OnUpgraded;
             _pm.Enable();
             
             gameObject.SetActive(true);
@@ -38,6 +42,9 @@ namespace Game.Scripts.Views.Planet
             _closeButton.onClick.RemoveListener(Hide);
 
             _pm.OnStateChanged -= UpdateView;
+            _pm.OnIncomeChanged -= OnIncomeChanged;
+            _pm.OnPopulationChanged -= OnPopulationChanged;
+            _pm.OnUpgraded -= OnUpgraded;
             _pm.Disable();
             _pm = null;
             
@@ -46,6 +53,7 @@ namespace Game.Scripts.Views.Planet
 
         private void UpdateView()
         {
+            _planetIcon.sprite = _pm.PlanetIcon;
             _planetNameField.text = _pm.PlanetName;
             _populationField.text = _pm.Population;
             _levelField.text = _pm.Level;
@@ -55,6 +63,26 @@ namespace Game.Scripts.Views.Planet
             _upgradeContainer.SetActive(_pm.IsMaxLevel == false);
             _maxLevelField.gameObject.SetActive(_pm.IsMaxLevel);
             _maxLevelField.text = "MAX LEVEL";
+        }
+        
+        private void OnUpgraded()
+        {
+            _levelField.text = _pm.Level;
+            _priceField.text = _pm.Price;
+            _upgradeButton.interactable = _pm.CanUpgrade;
+            _upgradeContainer.SetActive(_pm.IsMaxLevel == false);
+            _maxLevelField.gameObject.SetActive(_pm.IsMaxLevel);
+            _maxLevelField.text = "MAX LEVEL";
+        }
+
+        private void OnPopulationChanged()
+        {
+            _populationField.text = _pm.Population;
+        }
+
+        private void OnIncomeChanged()
+        {
+            _incomeField.text = _pm.Income;
         }
     }
 }
