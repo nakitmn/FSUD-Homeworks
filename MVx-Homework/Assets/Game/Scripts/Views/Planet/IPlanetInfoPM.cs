@@ -12,6 +12,7 @@ namespace Game.Scripts.Views.Planet
         string Income { get; }
         string Price { get; }
         bool CanUpgrade { get; }
+        bool IsMaxLevel { get; }
 
         void OnUpgradeClicked();
         void Enable();

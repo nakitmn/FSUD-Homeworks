@@ -13,7 +13,9 @@ namespace Game.Scripts.Views.Planet
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private Button _closeButton;
         [SerializeField] private TMP_Text _priceField;
-
+        [SerializeField] private GameObject _upgradeContainer;
+        [SerializeField] private TMP_Text _maxLevelField;
+        
         private IPlanetInfoPM _pm;
 
         public void Show(IPlanetInfoPM pm)
@@ -22,10 +24,10 @@ namespace Game.Scripts.Views.Planet
 
             _upgradeButton.onClick.AddListener(_pm.OnUpgradeClicked);
             _closeButton.onClick.AddListener(Hide);
-
+            
             _pm.OnStateChanged += UpdateView;
-
             _pm.Enable();
+            
             gameObject.SetActive(true);
             UpdateView();
         }
@@ -36,7 +38,6 @@ namespace Game.Scripts.Views.Planet
             _closeButton.onClick.RemoveListener(Hide);
 
             _pm.OnStateChanged -= UpdateView;
-
             _pm.Disable();
             _pm = null;
             
@@ -51,6 +52,9 @@ namespace Game.Scripts.Views.Planet
             _incomeField.text = _pm.Income;
             _priceField.text = _pm.Price;
             _upgradeButton.interactable = _pm.CanUpgrade;
+            _upgradeContainer.SetActive(_pm.IsMaxLevel == false);
+            _maxLevelField.gameObject.SetActive(_pm.IsMaxLevel);
+            _maxLevelField.text = "MAX LEVEL";
         }
     }
 }
