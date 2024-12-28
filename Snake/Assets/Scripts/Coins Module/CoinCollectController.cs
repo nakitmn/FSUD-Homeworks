@@ -28,7 +28,7 @@ namespace Coins_Module
 
         private void OnSnakeMoved(Vector2Int position)
         {
-            _coinsManager.TryCollect(position);
+            _coinsManager.TryCollectCoin(position);
         }
     }
 }

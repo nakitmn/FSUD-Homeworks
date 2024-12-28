@@ -3,7 +3,7 @@ using DefaultNamespace;
 using Modules;
 using Zenject;
 
-namespace Level_Module
+namespace Snake_Module
 {
     public sealed class SnakeSpeedUpController : IInitializable, IDisposable
     {
