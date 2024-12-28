@@ -1,9 +1,9 @@
-using UnityEngine;
+using Modules;
 
 namespace Input_Module
 {
     public interface IPlayerInput
     {
-        Vector2 Direction { get; }
+        SnakeDirection Direction { get; }
     }
 }

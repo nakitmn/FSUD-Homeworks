@@ -17,28 +17,7 @@ namespace Snake_Module
 
         void ITickable.Tick()
         {
-            var direction = _playerInput.Direction;
-            
-            if (direction.x < 0f)
-            {
-                _snake.Turn(SnakeDirection.LEFT);
-            }
-            else if (direction.x > 0f)
-            {
-                _snake.Turn(SnakeDirection.RIGHT);
-            }
-            else if (direction.y < 0f)
-            {
-                _snake.Turn(SnakeDirection.DOWN);
-            }
-            else if (direction.y > 0f)
-            {
-                _snake.Turn(SnakeDirection.UP);
-            }
-            else
-            {
-                _snake.Turn(SnakeDirection.NONE);
-            }
+            _snake.Turn(_playerInput.Direction);
         }
     }
 }
