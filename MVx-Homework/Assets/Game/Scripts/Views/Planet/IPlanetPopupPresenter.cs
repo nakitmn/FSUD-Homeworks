@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Game.Scripts.Views.Planet
+namespace Game.Views
 {
-    public interface IPlanetInfoPM
+    public interface IPlanetPopupPresenter
     {
         event Action OnStateChanged;
         event Action OnIncomeChanged;
@@ -18,6 +18,7 @@ namespace Game.Scripts.Views.Planet
         string Price { get; }
         bool CanUpgrade { get; }
         bool IsMaxLevel { get; }
+        string MaxLevel { get; }
 
         void OnUpgradeClicked();
         void Enable();

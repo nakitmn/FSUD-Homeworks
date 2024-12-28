@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Game.Scripts.Views.Money
+namespace Game.Views
 {
     public sealed class MoneyView : MonoBehaviour
     {

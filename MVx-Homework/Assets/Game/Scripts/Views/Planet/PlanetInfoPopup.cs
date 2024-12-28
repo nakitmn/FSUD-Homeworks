@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Scripts.Views.Planet
+namespace Game.Views
 {
     public sealed class PlanetInfoPopup : MonoBehaviour
     {
@@ -17,20 +17,20 @@ namespace Game.Scripts.Views.Planet
         [SerializeField] private GameObject _upgradeContainer;
         [SerializeField] private TMP_Text _maxLevelField;
         
-        private IPlanetInfoPM _pm;
+        private IPlanetPopupPresenter _presenter;
 
-        public void Show(IPlanetInfoPM pm)
+        public void Show(IPlanetPopupPresenter presenter)
         {
-            _pm = pm;
+            _presenter = presenter;
 
-            _upgradeButton.onClick.AddListener(_pm.OnUpgradeClicked);
+            _upgradeButton.onClick.AddListener(_presenter.OnUpgradeClicked);
             _closeButton.onClick.AddListener(Hide);
             
-            _pm.OnStateChanged += UpdateView;
-            _pm.OnIncomeChanged += OnIncomeChanged;
-            _pm.OnPopulationChanged += OnPopulationChanged;
-            _pm.OnUpgraded += OnUpgraded;
-            _pm.Enable();
+            _presenter.OnStateChanged += UpdateView;
+            _presenter.OnIncomeChanged += OnIncomeChanged;
+            _presenter.OnPopulationChanged += OnPopulationChanged;
+            _presenter.OnUpgraded += OnUpgraded;
+            _presenter.Enable();
             
             gameObject.SetActive(true);
             UpdateView();
@@ -38,51 +38,51 @@ namespace Game.Scripts.Views.Planet
 
         public void Hide()
         {
-            _upgradeButton.onClick.RemoveListener(_pm.OnUpgradeClicked);
+            _upgradeButton.onClick.RemoveListener(_presenter.OnUpgradeClicked);
             _closeButton.onClick.RemoveListener(Hide);
 
-            _pm.OnStateChanged -= UpdateView;
-            _pm.OnIncomeChanged -= OnIncomeChanged;
-            _pm.OnPopulationChanged -= OnPopulationChanged;
-            _pm.OnUpgraded -= OnUpgraded;
-            _pm.Disable();
-            _pm = null;
+            _presenter.OnStateChanged -= UpdateView;
+            _presenter.OnIncomeChanged -= OnIncomeChanged;
+            _presenter.OnPopulationChanged -= OnPopulationChanged;
+            _presenter.OnUpgraded -= OnUpgraded;
+            _presenter.Disable();
+            _presenter = null;
             
             gameObject.SetActive(false);
         }
 
         private void UpdateView()
         {
-            _planetIcon.sprite = _pm.PlanetIcon;
-            _planetNameField.text = _pm.PlanetName;
-            _populationField.text = _pm.Population;
-            _levelField.text = _pm.Level;
-            _incomeField.text = _pm.Income;
-            _priceField.text = _pm.Price;
-            _upgradeButton.interactable = _pm.CanUpgrade;
-            _upgradeContainer.SetActive(_pm.IsMaxLevel == false);
-            _maxLevelField.gameObject.SetActive(_pm.IsMaxLevel);
-            _maxLevelField.text = "MAX LEVEL";
+            _planetIcon.sprite = _presenter.PlanetIcon;
+            _planetNameField.text = _presenter.PlanetName;
+            _populationField.text = _presenter.Population;
+            _levelField.text = _presenter.Level;
+            _incomeField.text = _presenter.Income;
+            _priceField.text = _presenter.Price;
+            _upgradeButton.interactable = _presenter.CanUpgrade;
+            _upgradeContainer.SetActive(_presenter.IsMaxLevel == false);
+            _maxLevelField.gameObject.SetActive(_presenter.IsMaxLevel);
+            _maxLevelField.text = _presenter.MaxLevel;
         }
         
         private void OnUpgraded()
         {
-            _levelField.text = _pm.Level;
-            _priceField.text = _pm.Price;
-            _upgradeButton.interactable = _pm.CanUpgrade;
-            _upgradeContainer.SetActive(_pm.IsMaxLevel == false);
-            _maxLevelField.gameObject.SetActive(_pm.IsMaxLevel);
-            _maxLevelField.text = "MAX LEVEL";
+            _levelField.text = _presenter.Level;
+            _priceField.text = _presenter.Price;
+            _upgradeButton.interactable = _presenter.CanUpgrade;
+            _upgradeContainer.SetActive(_presenter.IsMaxLevel == false);
+            _maxLevelField.gameObject.SetActive(_presenter.IsMaxLevel);
+            _maxLevelField.text = _presenter.MaxLevel;
         }
 
         private void OnPopulationChanged()
         {
-            _populationField.text = _pm.Population;
+            _populationField.text = _presenter.Population;
         }
 
         private void OnIncomeChanged()
         {
-            _incomeField.text = _pm.Income;
+            _incomeField.text = _presenter.Income;
         }
     }
 }

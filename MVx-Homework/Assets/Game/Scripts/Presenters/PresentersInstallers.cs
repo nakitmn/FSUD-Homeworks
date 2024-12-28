@@ -1,9 +1,7 @@
-using Game.Scripts.Presenters.Money;
-using Game.Scripts.Presenters.Planet;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Presenters
+namespace Game.Presenters
 {
     [CreateAssetMenu(
         fileName = "PresentersInstallers",
@@ -17,6 +15,12 @@ namespace Game.Scripts.Presenters
                 .AsSingle();
 
             Container.BindInterfacesAndSelfTo<MoneyFacade>()
+                .AsSingle();
+
+            Container.Bind<PlanetPopupPresenter>()
+                .AsSingle();
+            
+            Container.Bind<PlanetPopupShower>()
                 .AsSingle();
         }
     }

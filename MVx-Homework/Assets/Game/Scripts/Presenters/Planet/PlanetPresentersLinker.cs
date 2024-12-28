@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Game.Scripts.Views.Planet;
+using Game.Views;
 using Zenject;
 
-namespace Game.Scripts.Presenters.Planet
+namespace Game.Presenters
 {
     public sealed class PlanetPresentersLinker : IInitializable, IDisposable
     {

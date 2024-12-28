@@ -1,28 +1,27 @@
 using System;
-using Game.Scripts.Presenters.Money;
-using Game.Scripts.Views.Planet;
-using Unity.VisualScripting;
+using Game.Views;
+using Zenject;
 
-namespace Game.Scripts.Presenters.Planet
+namespace Game.Presenters
 {
     public sealed class PlanetPresenter : IInitializable, IDisposable
     {
         private readonly Modules.Planets.Planet _planet;
         private readonly PlanetView _planetView;
         private readonly MoneyFacade _moneyFacade;
-        private readonly PlanetInfoPopup _planetInfoPopup;
+        private readonly PlanetPopupShower _popupShower;
 
         public PlanetPresenter(
             Modules.Planets.Planet planet,
             PlanetView planetView,
             MoneyFacade moneyFacade,
-            PlanetInfoPopup planetInfoPopup
+            PlanetPopupShower popupShower
         )
         {
             _planet = planet;
             _planetView = planetView;
             _moneyFacade = moneyFacade;
-            _planetInfoPopup = planetInfoPopup;
+            _popupShower = popupShower;
         }
 
         public void Initialize()
@@ -86,7 +85,7 @@ namespace Game.Scripts.Presenters.Planet
                 return;
             }
 
-            _planetInfoPopup.Show(new PlanetInfoPM(_planet));
+            _popupShower.Show(_planet);
         }
 
         private void OnIncomeTimeChanged(float time)

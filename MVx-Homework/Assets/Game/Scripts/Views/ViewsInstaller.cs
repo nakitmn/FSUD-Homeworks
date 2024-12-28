@@ -1,9 +1,7 @@
-using Game.Scripts.Views.Money;
-using Game.Scripts.Views.Planet;
 using Modules.UI;
 using Zenject;
 
-namespace Game.Scripts.Views
+namespace Game.Views
 {
     public sealed class ViewsInstaller : MonoInstaller
     {

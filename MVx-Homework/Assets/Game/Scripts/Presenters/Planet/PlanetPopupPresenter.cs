@@ -1,17 +1,17 @@
 using System;
-using Game.Scripts.Views.Planet;
+using Game.Views;
 using UnityEngine;
 
-namespace Game.Scripts.Presenters.Planet
+namespace Game.Presenters
 {
-    public sealed class PlanetInfoPM : IPlanetInfoPM
+    public sealed class PlanetPopupPresenter : IPlanetPopupPresenter
     {
         public event Action OnStateChanged;
         public event Action OnIncomeChanged;
         public event Action OnPopulationChanged;
         public event Action OnUpgraded;
 
-        private readonly Modules.Planets.Planet _planet;
+        private Modules.Planets.Planet _planet;
 
         public Sprite PlanetIcon => _planet.GetIcon(true);
         public string PlanetName => _planet.Name;
@@ -21,10 +21,17 @@ namespace Game.Scripts.Presenters.Planet
         public string Price => _planet.Price.ToString();
         public bool CanUpgrade => _planet.CanUpgrade;
         public bool IsMaxLevel => _planet.IsMaxLevel;
+        public string MaxLevel => "MAX LEVEL";
 
-        public PlanetInfoPM(Modules.Planets.Planet planet)
+        public void Init(Modules.Planets.Planet planet)
         {
+            if (_planet != null)
+            {
+                Disable();
+            }
+
             _planet = planet;
+            OnStateChanged?.Invoke();
         }
 
         public void Enable()
