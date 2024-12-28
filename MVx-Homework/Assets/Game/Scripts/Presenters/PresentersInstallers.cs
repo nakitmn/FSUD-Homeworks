@@ -16,7 +16,7 @@ namespace Game.Presenters
             Container.BindInterfacesTo<PlanetCollectionPresenter>()
                 .AsSingle();
 
-            Container.BindInterfacesAndSelfTo<MoneyFacade>()
+            Container.BindInterfacesAndSelfTo<MoneyPresenter>()
                 .AsSingle();
 
             Container.Bind<PlanetPopupPresenter>()

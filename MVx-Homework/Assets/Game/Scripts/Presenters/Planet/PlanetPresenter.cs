@@ -8,19 +8,19 @@ namespace Game.Presenters
     {
         private readonly Modules.Planets.Planet _planet;
         private readonly PlanetView _planetView;
-        private readonly MoneyFacade _moneyFacade;
+        private readonly MoneyPresenter _moneyPresenter;
         private readonly PlanetPopupShower _popupShower;
 
         public PlanetPresenter(
             Modules.Planets.Planet planet,
             PlanetView planetView,
-            MoneyFacade moneyFacade,
+            MoneyPresenter moneyPresenter,
             PlanetPopupShower popupShower
         )
         {
             _planet = planet;
             _planetView = planetView;
-            _moneyFacade = moneyFacade;
+            _moneyPresenter = moneyPresenter;
             _popupShower = popupShower;
         }
 
@@ -66,14 +66,14 @@ namespace Game.Presenters
                 var income = _planet.MinuteIncome;
                 if (_planet.GatherIncome())
                 {
-                    _moneyFacade.PlayCoin(_planetView.CoinPivot, income);
+                    _moneyPresenter.PlayCoin(_planetView.CoinPivot, income);
                 }
             }
             else
             {
                 if (_planet.Unlock())
                 {
-                    _moneyFacade.SyncWithCounter();
+                    _moneyPresenter.SyncWithCounter();
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace Game.Presenters
 
         private void OnUpgraded(int obj)
         {
-            _moneyFacade.SyncWithCounter();
+            _moneyPresenter.SyncWithCounter();
         }
     }
 }
