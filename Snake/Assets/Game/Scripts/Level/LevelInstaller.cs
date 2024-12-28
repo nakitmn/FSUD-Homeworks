@@ -21,7 +21,7 @@ namespace Level_Module
             Container.BindInterfacesTo<Score>()
                 .AsSingle();
 
-            Container.BindInterfacesAndSelfTo<LevelManager>()
+            Container.BindInterfacesAndSelfTo<GameCycle>()
                 .AsSingle();
 
             Container.BindInterfacesTo<ScoreIncreaseController>()

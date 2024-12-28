@@ -7,30 +7,30 @@ namespace Level_Module
 {
     public sealed class LoseGameController : IInitializable, ITickable, IDisposable
     {
-        private readonly LevelManager _levelManager;
+        private readonly GameCycle _gameCycle;
         private readonly ISnake _snake;
         private readonly IWorldBounds _worldBounds;
 
-        public LoseGameController(LevelManager levelManager, ISnake snake, IWorldBounds worldBounds)
+        public LoseGameController(GameCycle gameCycle, ISnake snake, IWorldBounds worldBounds)
         {
-            _levelManager = levelManager;
+            _gameCycle = gameCycle;
             _snake = snake;
             _worldBounds = worldBounds;
         }
 
         void IInitializable.Initialize()
         {
-            _snake.OnSelfCollided += _levelManager.LoseGame;
+            _snake.OnSelfCollided += _gameCycle.LoseGame;
         }
 
         void IDisposable.Dispose()
         {
-            _snake.OnSelfCollided -= _levelManager.LoseGame;
+            _snake.OnSelfCollided -= _gameCycle.LoseGame;
         }
 
         void ITickable.Tick()
         {
-            if (_levelManager.IsRunning == false)
+            if (_gameCycle.IsRunning == false)
             {
                 return;
             }
@@ -42,7 +42,7 @@ namespace Level_Module
         {
             if (_worldBounds.IsInBounds(_snake.HeadPosition) == false)
             {
-                _levelManager.LoseGame();
+                _gameCycle.LoseGame();
             }
         }
     }

@@ -10,32 +10,32 @@ namespace Level_Module
     public sealed class CoinsSpawnController : IInitializable, IDisposable
     {
         private readonly CoinsManager _coinsManager;
-        private readonly LevelManager _levelManager;
+        private readonly IDifficulty _difficulty;
         private readonly ISnake _snake;
         private readonly IWorldBounds _worldBounds;
 
-        public CoinsSpawnController(CoinsManager coinsManager, LevelManager levelManager, ISnake snake,
+        public CoinsSpawnController(CoinsManager coinsManager, IDifficulty difficulty, ISnake snake,
             IWorldBounds worldBounds)
         {
             _snake = snake;
             _worldBounds = worldBounds;
             _coinsManager = coinsManager;
-            _levelManager = levelManager;
+            _difficulty = difficulty;
         }
 
         void IInitializable.Initialize()
         {
-            _levelManager.OnLevelChanged += OnLevelChanged;
+            _difficulty.OnStateChanged += OnLevelChanged;
         }
 
         void IDisposable.Dispose()
         {
-            _levelManager.OnLevelChanged -= OnLevelChanged;
+            _difficulty.OnStateChanged -= OnLevelChanged;
         }
 
         private void OnLevelChanged()
         {
-            for (var i = 0; i < _levelManager.CurrentLevel; i++)
+            for (var i = 0; i < _difficulty.Current; i++)
             {
                 SpawnCoin();
             }

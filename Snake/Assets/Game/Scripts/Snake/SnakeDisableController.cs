@@ -8,22 +8,22 @@ namespace Snake_Module
     public sealed class SnakeDisableController : IInitializable, IDisposable
     {
         private readonly ISnake _snake;
-        private readonly LevelManager _levelManager;
+        private readonly GameCycle _gameCycle;
 
-        public SnakeDisableController(ISnake snake, LevelManager levelManager)
+        public SnakeDisableController(ISnake snake, GameCycle gameCycle)
         {
             _snake = snake;
-            _levelManager = levelManager;
+            _gameCycle = gameCycle;
         }
 
         void IInitializable.Initialize()
         {
-            _levelManager.OnGameOver += OnGameOver;
+            _gameCycle.OnGameOver += OnGameOver;
         }
 
         void IDisposable.Dispose()
         {
-            _levelManager.OnGameOver -= OnGameOver;
+            _gameCycle.OnGameOver -= OnGameOver;
         }
 
         private void OnGameOver(bool obj)

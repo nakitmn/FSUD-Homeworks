@@ -1,3 +1,4 @@
+using Modules;
 using UnityEngine;
 using Zenject;
 
@@ -5,17 +6,20 @@ namespace Level_Module
 {
     public sealed class StartGameController : MonoBehaviour
     {
-        private LevelManager _levelManager;
+        private GameCycle _gameCycle;
+        private IDifficulty _difficulty;
 
         [Inject]
-        public void Construct(LevelManager levelManager)
+        public void Construct(GameCycle gameCycle, IDifficulty difficulty)
         {
-            _levelManager = levelManager;
+            _difficulty = difficulty;
+            _gameCycle = gameCycle;
         }
 
         private void Start()
         {
-            _levelManager.StartGame();
+            _gameCycle.StartGame();
+            _difficulty.Next(out _);
         }
     }
 }
