@@ -67,6 +67,9 @@ namespace Modules.Planets
 
         [ShowInInspector, ReadOnly]
         public int MinuteIncome => !IsUnlocked ? 0 : _config.GetIncome(Level);
+        
+        [ShowInInspector, ReadOnly]
+        public int SecondIncome => (int)(MinuteIncome / _config.IncomeDuration);
 
         [ShowInInspector, ReadOnly]
         public int NextMinuteIncome => !IsUnlocked

@@ -17,7 +17,7 @@ namespace Game.Presenters
         public string PlanetName => _planet.Name;
         public string Population => $"Population: {_planet.Population}";
         public string Level => $"Level: {_planet.Level}/{_planet.MaxLevel}";
-        public string Income => $"Income: {_planet.MinuteIncome}/sec";
+        public string Income => $"Income: {_planet.SecondIncome}/sec";
         public string Price => _planet.Price.ToString();
         public bool CanUpgrade => _planet.CanUpgrade;
         public bool IsMaxLevel => _planet.IsMaxLevel;
