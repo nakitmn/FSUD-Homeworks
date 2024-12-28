@@ -91,7 +91,8 @@ namespace Game.Presenters
         private void OnIncomeTimeChanged(float time)
         {
             UpdateView();
-            _planetView.SetProgressText(time.ToString("N1"));
+            var timeSpan = TimeSpan.FromSeconds(time + 1);
+            _planetView.SetProgressText(timeSpan.ToString(@"mm\:ss"));
         }
 
         private void OnUnlocked()
