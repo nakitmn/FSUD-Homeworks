@@ -5,17 +5,18 @@ using Zenject;
 
 namespace Game.Presenters
 {
-    public sealed class PlanetPresentersLinker : IInitializable, IDisposable
+    public sealed class PlanetCollectionPresenter : IInitializable, IDisposable
     {
-        private readonly DiContainer _container;
+        private readonly IPlanetPresenterFactory _factory;
         private readonly Modules.Planets.Planet[] _planets;
         private readonly PlanetView[] _views;
 
         private readonly List<PlanetPresenter> _planetPresenters = new();
 
-        public PlanetPresentersLinker(DiContainer container, Modules.Planets.Planet[] planets, PlanetView[] views)
+        public PlanetCollectionPresenter(IPlanetPresenterFactory factory, Modules.Planets.Planet[] planets,
+            PlanetView[] views)
         {
-            _container = container;
+            _factory = factory;
             _planets = planets;
             _views = views;
         }
@@ -27,8 +28,9 @@ namespace Game.Presenters
                 var planet = _planets[i];
                 var view = _views[i];
 
-                var planetPresenter = _container.Instantiate<PlanetPresenter>(new object[] { planet, view });
+                var planetPresenter = _factory.Create(planet, view);
                 _planetPresenters.Add(planetPresenter);
+                
                 planetPresenter.Initialize();
             }
         }
