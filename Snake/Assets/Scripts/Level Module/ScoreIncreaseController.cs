@@ -1,7 +1,7 @@
 using Coins_Module;
 using Modules;
 
-namespace Score_Module
+namespace Level_Module
 {
     public sealed class ScoreIncreaseController : ICoinCollectedListener
     {
