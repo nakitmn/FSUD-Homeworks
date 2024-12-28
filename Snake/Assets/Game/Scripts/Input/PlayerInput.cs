@@ -1,7 +1,7 @@
 using Modules;
 using UnityEngine;
 
-namespace Input_Module
+namespace Game.Gameplay
 {
     public sealed class PlayerInput : IPlayerInput
     {

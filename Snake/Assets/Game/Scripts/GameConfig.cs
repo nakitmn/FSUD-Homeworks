@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Game.Gameplay
 {
     [CreateAssetMenu(menuName = "Configs/Game", order = 0)]
     public sealed class GameConfig : ScriptableObject

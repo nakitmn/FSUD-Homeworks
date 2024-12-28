@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Input_Module
+namespace Game.Gameplay
 {
     public sealed class InputInstaller : Installer<InputInstaller>
     {

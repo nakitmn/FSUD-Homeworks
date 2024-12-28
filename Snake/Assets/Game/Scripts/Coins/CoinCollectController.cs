@@ -3,7 +3,7 @@ using Modules;
 using UnityEngine;
 using Zenject;
 
-namespace Coins_Module
+namespace Game.Gameplay
 {
     public sealed class CoinCollectController : IInitializable, IDisposable
     {

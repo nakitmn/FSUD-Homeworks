@@ -1,6 +1,6 @@
 using System;
 
-namespace Level_Module
+namespace Game.Gameplay
 {
     public sealed class GameCycle
     {

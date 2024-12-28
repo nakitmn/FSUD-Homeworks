@@ -1,7 +1,6 @@
-using Coins_Module;
 using Modules;
 
-namespace Level_Module
+namespace Game.Gameplay
 {
     public sealed class ScoreIncreaseController : ICoinCollectedListener
     {

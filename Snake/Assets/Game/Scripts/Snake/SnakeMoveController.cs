@@ -1,8 +1,7 @@
-using Input_Module;
 using Modules;
 using Zenject;
 
-namespace Snake_Module
+namespace Game.Gameplay
 {
     public sealed class SnakeMoveController : ITickable
     {

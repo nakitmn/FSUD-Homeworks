@@ -1,10 +1,10 @@
 using System;
-using Level_Module;
+using Game.Gameplay;
 using Modules;
 using SnakeGame;
 using Zenject;
 
-namespace UI_Module
+namespace Game.UI
 {
     public sealed class GameUiPresenter : IInitializable, IDisposable
     {

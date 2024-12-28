@@ -3,7 +3,7 @@ using Modules;
 using SnakeGame;
 using Zenject;
 
-namespace Level_Module
+namespace Game.Gameplay
 {
     public sealed class LoseGameController : IInitializable, ITickable, IDisposable
     {

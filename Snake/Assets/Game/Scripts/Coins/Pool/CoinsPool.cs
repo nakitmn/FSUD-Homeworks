@@ -1,7 +1,7 @@
 using Modules;
 using Zenject;
 
-namespace Coins_Module
+namespace Game.Gameplay
 {
     public sealed class CoinsPool : MonoMemoryPool<Coin>, ICoinsPool
     {

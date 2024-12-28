@@ -1,7 +1,6 @@
-using Coins_Module;
 using Modules;
 
-namespace Snake_Module
+namespace Game.Gameplay
 {
     public sealed class SnakeExpandController : ICoinCollectedListener
     {

@@ -1,9 +1,8 @@
 using System;
-using DefaultNamespace;
 using Modules;
 using Zenject;
 
-namespace Snake_Module
+namespace Game.Gameplay
 {
     public sealed class SnakeSpeedUpController : IInitializable, IDisposable
     {

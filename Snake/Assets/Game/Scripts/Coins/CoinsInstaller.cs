@@ -1,9 +1,8 @@
-using Level_Module;
 using Modules;
 using UnityEngine;
 using Zenject;
 
-namespace Coins_Module
+namespace Game.Gameplay
 {
     public sealed class CoinsInstaller : Installer<GameObject, Transform, CoinsInstaller>
     {

@@ -1,11 +1,10 @@
 using System;
-using Coins_Module;
 using Modules;
 using SnakeGame;
 using UnityEngine;
 using Zenject;
 
-namespace Level_Module
+namespace Game.Gameplay
 {
     public sealed class CoinsSpawnController : IInitializable, IDisposable
     {

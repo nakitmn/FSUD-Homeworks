@@ -1,6 +1,6 @@
 using Modules;
 
-namespace Coins_Module
+namespace Game.Gameplay
 {
     public interface ICoinCollectedListener
     {

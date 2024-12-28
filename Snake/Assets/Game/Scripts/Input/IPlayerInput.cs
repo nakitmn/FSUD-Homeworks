@@ -1,6 +1,6 @@
 using Modules;
 
-namespace Input_Module
+namespace Game.Gameplay
 {
     public interface IPlayerInput
     {

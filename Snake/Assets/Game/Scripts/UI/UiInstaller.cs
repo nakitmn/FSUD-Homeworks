@@ -1,7 +1,7 @@
 using SnakeGame;
 using Zenject;
 
-namespace UI_Module
+namespace Game.UI
 {
     public sealed class UiInstaller : Installer<UiInstaller>
     {
