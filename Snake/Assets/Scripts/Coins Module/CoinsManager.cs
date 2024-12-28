@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using Modules;
 using SnakeGame;
 using UnityEngine;
-using Zenject;
 
 namespace Coins_Module
 {
-    public sealed class CoinsManager : IInitializable, IDisposable
+    public sealed class CoinsManager
     {
         public event Action OnAllCoinsCollected;
 
         private readonly IWorldBounds _worldBounds;
         private readonly ISnake _snake;
         private readonly ICoinsPool _coinsPool;
-        private readonly IScore _score;
+        private readonly ICoinCollectedListener[] _coinCollectedHandlers;
 
         private readonly Dictionary<Vector2Int, ICoin> _spawnedCoins = new();
 
@@ -22,23 +21,13 @@ namespace Coins_Module
             IWorldBounds worldBounds,
             ISnake snake,
             ICoinsPool coinsPool,
-            IScore score
+            ICoinCollectedListener[] coinCollectedHandlers
         )
         {
             _worldBounds = worldBounds;
             _snake = snake;
             _coinsPool = coinsPool;
-            _score = score;
-        }
-
-        void IInitializable.Initialize()
-        {
-            _snake.OnMoved += OnSnakeMoved;
-        }
-
-        void IDisposable.Dispose()
-        {
-            _snake.OnMoved -= OnSnakeMoved;
+            _coinCollectedHandlers = coinCollectedHandlers;
         }
 
         public void SpawnCoins(int count)
@@ -46,6 +35,21 @@ namespace Coins_Module
             for (var i = 0; i < count; i++)
             {
                 SpawnSingle();
+            }
+        }
+
+        public void TryCollect(Vector2Int coinPosition)
+        {
+            if (_spawnedCoins.Remove(coinPosition, out var coin) == false)
+            {
+                return;
+            }
+
+            ApplyCoin(coin);
+
+            if (_spawnedCoins.Count == 0)
+            {
+                OnAllCoinsCollected?.Invoke();
             }
         }
 
@@ -64,26 +68,9 @@ namespace Coins_Module
             _spawnedCoins.Add(position, coin);
         }
 
-        private void OnSnakeMoved(Vector2Int position)
-        {
-            if (_spawnedCoins.Remove(position, out var coin) == false)
-            {
-                return;
-            }
-
-            ApplyCoin(coin);
-
-            if (_spawnedCoins.Count == 0)
-            {
-                OnAllCoinsCollected?.Invoke();
-            }
-        }
-
         private void ApplyCoin(ICoin coin)
         {
-            _snake.Expand(coin.Bones);
-            _score.Add(coin.Score);
-
+            Array.ForEach(_coinCollectedHandlers, it => it.OnCollected(coin));
             _coinsPool.Despawn(coin);
         }
     }

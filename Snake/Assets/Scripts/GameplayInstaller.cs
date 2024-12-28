@@ -3,6 +3,7 @@ using DefaultNamespace;
 using Input_Module;
 using Level_Module;
 using Modules;
+using Score_Module;
 using Snake_Module;
 using SnakeGame;
 using UI_Module;
@@ -44,6 +45,15 @@ public sealed class GameplayInstaller : MonoInstaller
         Container.BindMemoryPoolCustomInterface<Coin, CoinsPool, ICoinsPool>()
             .FromComponentInNewPrefab(_gameConfig.CoinPrefab)
             .UnderTransform(_coinsContainer)
+            .AsSingle();
+
+        Container.BindInterfacesTo<ScoreIncreaseController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<SnakeExpandController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<CoinCollectController>()
             .AsSingle();
     }
 
