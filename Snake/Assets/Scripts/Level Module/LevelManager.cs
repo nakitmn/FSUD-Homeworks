@@ -1,15 +1,21 @@
 using System;
 using Modules;
-using Zenject;
 
 namespace Level_Module
 {
     public sealed class LevelManager
     {
         public event Action<bool> OnGameOver;
-
+        public event Action OnLevelChanged
+        {
+            add => _difficulty.OnStateChanged += value;
+            remove => _difficulty.OnStateChanged -= value;
+        }
+        
         private readonly IDifficulty _difficulty;
 
+        public int CurrentLevel => _difficulty.Current;
+        public int MaxLevel => _difficulty.Max;
         public bool IsRunning { get; private set; }
 
         public LevelManager(IDifficulty difficulty)
