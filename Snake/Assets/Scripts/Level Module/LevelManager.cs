@@ -1,101 +1,46 @@
 using System;
-using Coins_Module;
-using DefaultNamespace;
 using Modules;
-using SnakeGame;
 using Zenject;
 
 namespace Level_Module
 {
-    public sealed class LevelManager : IInitializable, ITickable, IDisposable
+    public sealed class LevelManager
     {
         public event Action<bool> OnGameOver;
 
-        private readonly GameConfig _gameConfig;
-        private readonly CoinsManager _coinsManager;
         private readonly IDifficulty _difficulty;
-        private readonly ISnake _snake;
-        private readonly IWorldBounds _worldBounds;
 
-        private bool _isRunning;
+        public bool IsRunning { get; private set; }
 
-        public LevelManager(
-            GameConfig gameConfig,
-            CoinsManager coinsManager,
-            IDifficulty difficulty,
-            ISnake snake,
-            IWorldBounds worldBounds
-        )
+        public LevelManager(IDifficulty difficulty)
         {
-            _gameConfig = gameConfig;
-            _coinsManager = coinsManager;
             _difficulty = difficulty;
-            _snake = snake;
-            _worldBounds = worldBounds;
         }
 
-        void IInitializable.Initialize()
+        public void StartGame()
         {
-            _coinsManager.OnAllCoinsCollected += LevelUp;
-            _snake.OnSelfCollided += LoseGame;
-
+            IsRunning = true;
             LevelUp();
-            _isRunning = true;
         }
 
-        void IDisposable.Dispose()
+        public void LevelUp()
         {
-            _coinsManager.OnAllCoinsCollected -= LevelUp;
-            _snake.OnSelfCollided -= LoseGame;
-        }
-
-        void ITickable.Tick()
-        {
-            if (_isRunning == false)
-            {
-                return;
-            }
-
-            CheckSnakeInBounds();
-        }
-
-        private void CheckSnakeInBounds()
-        {
-            if (_worldBounds.IsInBounds(_snake.HeadPosition) == false)
-            {
-                LoseGame();
-            }
-        }
-
-        private void LevelUp()
-        {
-            if (_difficulty.Next(out var nextDifficulty))
-            {
-                _coinsManager.SpawnCoins(nextDifficulty);
-                _snake.SetSpeed(_gameConfig.GetSpeedForLevel(nextDifficulty));
-            }
-            else
+            if (_difficulty.Next(out _) == false)
             {
                 WinGame();
             }
         }
 
-        private void WinGame()
+        public void WinGame()
         {
-            DisableGameplay();
+            IsRunning = false;
             OnGameOver?.Invoke(true);
         }
 
-        private void LoseGame()
+        public void LoseGame()
         {
-            DisableGameplay();
+            IsRunning = false;
             OnGameOver?.Invoke(false);
-        }
-
-        private void DisableGameplay()
-        {
-            _snake.SetActive(false);
-            _isRunning = false;
         }
     }
 }

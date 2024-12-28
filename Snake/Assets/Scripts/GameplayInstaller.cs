@@ -55,6 +55,21 @@ public sealed class GameplayInstaller : MonoInstaller
         
         Container.BindInterfacesTo<CoinCollectController>()
             .AsSingle();
+        
+        Container.BindInterfacesTo<SnakeSpeedUpController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<LoseGameController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<LevelUpController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<CoinsSpawnController>()
+            .AsSingle();
+        
+        Container.BindInterfacesTo<SnakeDisableController>()
+            .AsSingle();
     }
 
     private void BindNativeModules()
