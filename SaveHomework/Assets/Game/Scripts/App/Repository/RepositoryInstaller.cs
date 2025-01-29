@@ -18,7 +18,8 @@ namespace SampleGame.App
             var filePath = Path.Combine(Application.streamingAssetsPath, _fileName);
 
             Container.Bind<GameClient>().AsSingle().WithArguments(_uri);
-            Container.BindInterfacesTo<GameRepository>().AsSingle().WithArguments(filePath);
+            Container.Bind<FileRepository>().AsSingle().WithArguments(filePath);
+            Container.BindInterfacesTo<GameRepository>().AsSingle();
         }
     }
 }
