@@ -18,6 +18,9 @@ namespace SampleGame.App
             Container.BindInterfacesTo<DestinationPointSerializer>().AsSingle();
             Container.BindInterfacesTo<HealthSerializer>().AsSingle();
             Container.BindInterfacesTo<ProductionOrderSerializer>().AsSingle();
+            Container.BindInterfacesTo<ResourceBagSerializer>().AsSingle();
+            Container.BindInterfacesTo<TargetObjectSerializer>().AsSingle();
+            Container.BindInterfacesTo<TeamSerializer>().AsSingle();
         }
     }
 }
