@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace SampleGame.App
 {
@@ -14,6 +13,7 @@ namespace SampleGame.App
 
         private readonly GameClient _client;
         private readonly string _filePath;
+        private readonly int _version = 1;
 
         public GameRepository(GameClient client, string filePath)
         {
@@ -21,7 +21,7 @@ namespace SampleGame.App
             _filePath = filePath;
         }
 
-        public async UniTask SetState(Dictionary<string, string> gameState)
+        public async UniTask<IGameRepository.SaveResult> SetState(Dictionary<string, string> gameState)
         {
             var time = DateTime.Now.ToUniversalTime() - originTime;
             var saveTime = time.TotalSeconds.ToString("F0");
@@ -31,55 +31,23 @@ namespace SampleGame.App
 
             await UniTask.WhenAll(
                 File.WriteAllTextAsync(_filePath, json).AsUniTask(),
-                _client.Save(json)
+                _client.Save(json, _version.ToString())
             );
+
+            return new(true, _version.ToString());
         }
 
-        public async UniTask<Dictionary<string, string>> GetState()
+        public async UniTask<IGameRepository.LoadResult> GetState(string version)
         {
-            //Get local state:
-            long localSaveTime = -1;
-            Dictionary<string, string> localState;
-
-            if (File.Exists(_filePath))
-            {
-                string json = await File.ReadAllTextAsync(_filePath);
-                if (json == null)
-                {
-                    localState = new Dictionary<string, string>();
-                }
-                else
-                {
-                    localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                    if (localState == null)
-                    {
-                        localState = new Dictionary<string, string>();
-                    }
-                    else
-                    {
-                        string saveTimeString = localState[SAVE_TIME_KEY];
-                        localSaveTime = long.Parse(saveTimeString);
-                    }
-                }
-            }
-            else
-            {
-                localState = new Dictionary<string, string>();
-            }
-
-            //Get remote state:
-            long remoteSaveTime = -1;
             Dictionary<string, string> remoteState;
 
-            var (success, remoteJson) = await _client.Load();
+            var (success, remoteJson) = await _client.Load(version);
+
             if (success)
             {
                 remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
-                if (remoteState != null)
-                {
-                    remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);
-                }
-                else
+
+                if (remoteState == null)
                 {
                     remoteState = new Dictionary<string, string>();
                 }
@@ -89,18 +57,7 @@ namespace SampleGame.App
                 remoteState = new Dictionary<string, string>();
             }
 
-
-            //Compare:
-            if (localSaveTime >= remoteSaveTime)
-            {
-                Debug.Log("Select local state");
-                return localState;
-            }
-            else
-            {
-                Debug.Log("Select remote state");
-                return remoteState;
-            }
+            return new(success, version, remoteState);
         }
     }
 }

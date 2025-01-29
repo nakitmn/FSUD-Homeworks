@@ -25,14 +25,14 @@ namespace Game.Gameplay
 
         private async UniTaskVoid SaveAsync(Action<bool, int> callback)
         {
-            await _saveLoader.Save();
-            callback?.Invoke(false, -1);
+            var saveResult = await _saveLoader.Save();
+            callback?.Invoke(saveResult.Success, int.Parse(saveResult.Version));
         }
 
         private async UniTaskVoid LoadAsync(string versionText, Action<bool, int> callback)
         {
-            await _saveLoader.Load(versionText);
-            callback?.Invoke(false, -1);
+            var loadResult = await _saveLoader.Load(versionText);
+            callback?.Invoke(loadResult.Success, int.Parse(loadResult.Version));
         }
     }
 }

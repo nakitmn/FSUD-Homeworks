@@ -1,4 +1,3 @@
-using System.Text;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -14,9 +13,9 @@ namespace SampleGame.App
             _uri = uri;
         }
 
-        public async UniTask<bool> Save(string json)
+        public async UniTask<bool> Save(string json, string version)
         {
-            var request = UnityWebRequest.Put($"{_uri}/save?version=1", json);
+            var request = UnityWebRequest.Put($"{_uri}/save?version={version}", json);
             await request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -31,15 +30,18 @@ namespace SampleGame.App
             return request.result == UnityWebRequest.Result.Success;
         }
 
-        public async UniTask<(bool, string)> Load()
+        public async UniTask<(bool, string)> Load(string version)
         {
-            var request = UnityWebRequest.Get($"{_uri}/load");
+            var request = UnityWebRequest.Get($"{_uri}/load?version={version}");
             await request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
             {
+                Debug.LogError(request.error);
                 return (false, null);
             }
+            
+            Debug.Log(request.downloadHandler.text);
 
             var json = request.downloadHandler.text;
             return string.IsNullOrEmpty(json)
