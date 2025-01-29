@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using ModestTree;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -15,10 +17,10 @@ namespace SampleGame.App
 
         private readonly GameClient _client;
         private readonly string _filePath;
-        
+
         private int Version
         {
-            get => PlayerPrefs.GetInt(SAVE_VERSION_KEY, 1);
+            get => PlayerPrefs.GetInt(SAVE_VERSION_KEY, 0);
             set => PlayerPrefs.SetInt(SAVE_VERSION_KEY, value);
         }
 
@@ -33,41 +35,64 @@ namespace SampleGame.App
             var time = DateTime.Now.ToUniversalTime() - originTime;
             var saveTime = time.TotalSeconds.ToString("F0");
             gameState[SAVE_TIME_KEY] = saveTime;
+            gameState["DEBUG"] = "change";
 
             var json = JsonConvert.SerializeObject(gameState);
-            var saveVersion = Version.ToString();
+            
+            Version++;
 
             await UniTask.WhenAll(
                 File.WriteAllTextAsync(_filePath, json).AsUniTask(),
-                _client.Save(json, saveVersion)
+                _client.Save(json, Version.ToString())
             );
 
-            Version++;
-            
-            return new(true, saveVersion);
+            return new(true, Version.ToString());
         }
 
         public async UniTask<IGameRepository.LoadResult> GetState(string version)
         {
-            Dictionary<string, string> remoteState;
-
             var (success, remoteJson) = await _client.Load(version);
 
-            if (success)
-            {
-                remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
+            var remoteState = success
+                ? JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson) ?? new()
+                : null;
 
-                if (remoteState == null)
-                {
-                    remoteState = new Dictionary<string, string>();
-                }
-            }
-            else
+            if (int.Parse(version) == Version)
             {
-                remoteState = new Dictionary<string, string>();
+                var latestState = await GetLatestState(remoteState);
+                return new(success, version, latestState);
             }
 
             return new(success, version, remoteState);
+        }
+
+        private async UniTask<Dictionary<string, string>> GetLatestState(Dictionary<string, string> remoteState)
+        {
+            var localSaveJson = await File.ReadAllTextAsync(_filePath);
+
+            if (string.IsNullOrEmpty(localSaveJson))
+            {
+                return remoteState;
+            }
+
+            var localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localSaveJson);
+
+            if (localState == null)
+            {
+                return remoteState;
+            }
+
+            var remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);
+            var localSaveTime = long.Parse(localState[SAVE_TIME_KEY]);
+
+            if (remoteSaveTime >= localSaveTime)
+            {
+                Debug.Log("Select Remote State");
+                return remoteState;
+            }
+            
+            Debug.Log("Select Local State");
+            return  localState;
         }
     }
 }
