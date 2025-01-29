@@ -12,9 +12,9 @@ namespace SampleGame.App
         public override void InstallBindings()
         {
             Container.Bind<GameSaveLoader>().AsSingle();
-            
-            Container.BindInterfacesTo<EntitySerializer>()
-                .AsSingle();
+
+            Container.BindInterfacesTo<EntitySerializer>().AsSingle();
+            Container.BindInterfacesTo<CountdownSerializer>().AsSingle();
         }
     }
 }
