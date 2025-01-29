@@ -30,12 +30,6 @@ namespace SampleGame.App
         protected abstract void Deserialize(TService service, TData data);
     }
 
-    
-    
-    
-    
-    
-    
     public abstract class GameSerializer<TService1, TService2, TData> : IGameSerializer
     {
         protected virtual string Key => typeof(TData).Name;

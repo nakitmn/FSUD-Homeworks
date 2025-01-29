@@ -13,8 +13,8 @@ namespace SampleGame.App
         {
             Container.Bind<GameSaveLoader>().AsSingle();
             
-            // Bind Serializers here
-            // ...
+            Container.BindInterfacesTo<EntitySerializer>()
+                .AsSingle();
         }
     }
 }
