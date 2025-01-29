@@ -1,56 +1,17 @@
-using System.Collections.Generic;
-using Modules.Entities;
 using SampleGame.Gameplay;
 
 namespace SampleGame.App
 {
-    public sealed class DestinationPointSerializer : GameSerializer<EntityWorld, DestinationPointData[]>
+    public sealed class DestinationPointSerializer : EntityComponentSerializer<DestinationPointData, DestinationPoint>
     {
-        protected override DestinationPointData[] Serialize(EntityWorld world)
+        protected override DestinationPointData CreateData(DestinationPoint destinationPoint)
         {
-            var entities = world.GetAll();
-            var datas = new List<DestinationPointData>();
-
-            foreach (var entity in entities)
-            {
-                var destinationPoint = entity.GetComponent<DestinationPoint>();
-
-                if (destinationPoint == null)
-                {
-                    continue;
-                }
-
-                var data = new DestinationPointData()
-                {
-                    EntityId = entity.Id,
-                    Value = Vector3Data.FromVector3(destinationPoint.Value)
-                };
-
-                datas.Add(data);
-            }
-
-            return datas.ToArray();
+            return new() {Value = Vector3Data.FromVector3(destinationPoint.Value)};
         }
 
-        protected override void Deserialize(EntityWorld world, DestinationPointData[] datas)
+        protected override void ApplyData(DestinationPoint destinationPoint, DestinationPointData data)
         {
-            foreach (var data in datas)
-            {
-                if (world.Has(data.EntityId) == false)
-                {
-                    continue;
-                }
-
-                var entity = world.Get(data.EntityId);
-
-                var destinationPoint = entity.GetComponent<DestinationPoint>();
-                if (destinationPoint == null)
-                {
-                    continue;
-                }
-
-                destinationPoint.Value = Vector3Data.ToVector3(data.Value);
-            }
+            destinationPoint.Value = Vector3Data.ToVector3(data.Value);
         }
     }
 }
