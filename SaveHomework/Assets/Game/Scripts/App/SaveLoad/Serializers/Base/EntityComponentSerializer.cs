@@ -5,7 +5,7 @@ namespace SampleGame.App
 {
     public abstract class EntityComponentSerializer<TData, TComponent> : GameSerializer<EntityWorld, Dictionary<int, TData>>
     {
-        protected override string Key => typeof(TData).Name;
+        protected override string Key => $"{typeof(TComponent).Name}{typeof(TData).Name}";
 
         protected override Dictionary<int, TData> Serialize(EntityWorld world)
         {
@@ -35,7 +35,7 @@ namespace SampleGame.App
                 {
                     continue;
                 }
-                
+
                 var entity = world.Get(entityId);
 
                 var component = entity.GetComponent<TComponent>();

@@ -16,6 +16,7 @@ namespace SampleGame.App
             Container.BindInterfacesTo<EntitySerializer>().AsSingle();
             Container.BindInterfacesTo<CountdownSerializer>().AsSingle();
             Container.BindInterfacesTo<DestinationPointSerializer>().AsSingle();
+            Container.BindInterfacesTo<HealthSerializer>().AsSingle();
         }
     }
 }
