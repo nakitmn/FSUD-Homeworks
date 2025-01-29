@@ -61,3 +61,25 @@
 /Users/starkre/Desktop/Simple Server/Simple Server/obj/Debug/net7.0/Simple Server.pdb
 /Users/starkre/Desktop/Simple Server/Simple Server/obj/Debug/net7.0/Simple Server.genruntimeconfig.cache
 /Users/starkre/Desktop/Simple Server/Simple Server/obj/Debug/net7.0/ref/Simple Server.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Simple Server.exe
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Simple Server.deps.json
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Simple Server.runtimeconfig.json
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Simple Server.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Simple Server.pdb
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Zenject-Signals.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Zenject-usage.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Zenject.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Newtonsoft.Json.pdb
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\bin\Debug\net7.0\Newtonsoft.Json.xml
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.csproj.AssemblyReference.cache
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.AssemblyInfoInputs.cache
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.AssemblyInfo.cs
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.csproj.CoreCompileInputs.cache
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.csproj.CopyComplete
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\refint\Simple Server.dll
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.pdb
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\Simple Server.genruntimeconfig.cache
+D:\Unity\Workspace\Personal\FSUD-Homeworks\Simple Server\Simple Server\obj\Debug\net7.0\ref\Simple Server.dll

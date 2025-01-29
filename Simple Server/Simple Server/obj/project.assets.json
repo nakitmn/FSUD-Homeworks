@@ -8,19 +8,20 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/Users/starkre/.nuget/packages/": {}
+    "C:\\Users\\glemb\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/starkre/Desktop/Simple Server/Simple Server/Simple Server.csproj",
+      "projectUniqueName": "D:\\Unity\\Workspace\\Personal\\FSUD-Homeworks\\Simple Server\\Simple Server\\Simple Server.csproj",
       "projectName": "Simple Server",
-      "projectPath": "/Users/starkre/Desktop/Simple Server/Simple Server/Simple Server.csproj",
-      "packagesPath": "/Users/starkre/.nuget/packages/",
-      "outputPath": "/Users/starkre/Desktop/Simple Server/Simple Server/obj/",
+      "projectPath": "D:\\Unity\\Workspace\\Personal\\FSUD-Homeworks\\Simple Server\\Simple Server\\Simple Server.csproj",
+      "packagesPath": "C:\\Users\\glemb\\.nuget\\packages\\",
+      "outputPath": "D:\\Unity\\Workspace\\Personal\\FSUD-Homeworks\\Simple Server\\Simple Server\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "/Users/starkre/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\glemb\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/starkre/.dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\glemb\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

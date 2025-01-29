@@ -15,7 +15,7 @@ namespace SampleGame.App
             _serializers = serializers;
         }
 
-        public async UniTaskVoid Save()
+        public async UniTask Save()
         {
             var gameState = new Dictionary<string, string>();
             
@@ -27,7 +27,7 @@ namespace SampleGame.App
             await _repository.SetState(gameState);
         }
 
-        public async UniTaskVoid Load()
+        public async UniTask Load(string versionText)
         {
             var gameState = await _repository.GetState();
 
