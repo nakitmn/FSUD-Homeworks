@@ -1,10 +1,14 @@
 using System;
+using Modules.Entities;
 using SampleGame.Gameplay;
+using Zenject;
 
 namespace SampleGame.App
 {
     public sealed class TargetObjectSerializer : EntityComponentSerializer<TargetObjectSerializer.Data, TargetObject>
     {
+        [Inject] private EntityWorld _world;
+        
         protected override Data CreateData(TargetObject targetObject)
         {
             if (targetObject.Value == null)
@@ -19,9 +23,9 @@ namespace SampleGame.App
         {
             var entityId = data.EntityId;
             
-            if (Service.Has(entityId))
+            if (_world.Has(entityId))
             {
-                targetObject.Value = Service.Get(entityId);
+                targetObject.Value = _world.Get(entityId);
             }
         }
         

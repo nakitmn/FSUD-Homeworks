@@ -19,7 +19,9 @@ namespace SampleGame.App
 
             Container.Bind<GameClient>().AsSingle().WithArguments(_uri);
             Container.Bind<FileRepository>().AsSingle().WithArguments(filePath);
-            Container.BindInterfacesTo<GameRepository>().AsSingle();
+            
+            //Container.BindInterfacesTo<GameRepository>().AsSingle();
+            Container.BindInterfacesTo<DebugGameRepository>().AsSingle();
         }
     }
 }

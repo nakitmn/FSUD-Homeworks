@@ -9,11 +9,11 @@ namespace SampleGame.App
         protected virtual string Key => typeof(TData).Name;
 
         [Inject]
-        protected TService Service;
+        private TService _service;
 
         public void Serialize(IDictionary<string, string> saveState)
         {
-            TData data = this.Serialize(Service);
+            TData data = this.Serialize(_service);
             saveState[this.Key] = JsonConvert.SerializeObject(data);
         }
 
@@ -23,7 +23,7 @@ namespace SampleGame.App
                 return;
 
             TData data = JsonConvert.DeserializeObject<TData>(json);
-            this.Deserialize(Service, data);
+            this.Deserialize(_service, data);
         }
 
         protected abstract TData Serialize(TService service);
