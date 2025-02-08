@@ -5,7 +5,7 @@ namespace Game.Tests
 {
     public partial class GameBoardTests
     {
-        private static GameBoard CreateGameBoard()
+        public static GameBoard CreateGameBoard()
         {
             var matrix = new ItemType[,]
             {
