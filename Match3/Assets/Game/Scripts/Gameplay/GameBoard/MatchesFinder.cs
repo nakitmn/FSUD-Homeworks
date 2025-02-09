@@ -16,18 +16,30 @@ namespace Game.Gameplay
         public List<Match> Find()
         {
             var result = new List<Match>();
+            var ignorePositions = new List<Vector2Int>();
 
-            for (var col = 0; col < _board.Width; col++)
+            for (var row = 0; row < _board.Height; row++)
             {
-                for (var row = 0; row < _board.Height; row++)
+                for (var col = 0; col < _board.Width; col++)
                 {
                     var checkPosition = new Vector2Int(row, col);
+                    if (ignorePositions.Contains(checkPosition))
+                    {
+                        continue;
+                    }
+                    
                     var item = _board[row, col];
+                    if (item == ItemType.None)
+                    {
+                        continue;
+                    }
+                    
                     if (TryGetMatch(checkPosition, item, out var match))
                     {
                         if (IsUnique(match, result))
                         {
                             result.Add(match);
+                            ignorePositions.AddRange(match.Positions);
                         }
                     }
                 }
@@ -38,32 +50,49 @@ namespace Game.Gameplay
 
         private bool IsUnique(Match match, List<Match> matches)
         {
-            foreach (var compareMatch in matches)
-            {
-                if (compareMatch.Equals(match))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return matches.TrueForAll(it => it.Equals(match) == false);
         }
 
         private bool TryGetMatch(Vector2Int checkPosition, ItemType item, out Match match)
         {
             match = null;
-            List<Vector2Int> horizontal = GetHorizontalPositions(checkPosition, item);
-            List<Vector2Int> vertical = GetVerticalPositions(checkPosition, item);
+            List<Vector2Int> chainPositions = new();
 
-            if (horizontal.Count >= 2 || vertical.Count >= 2)
+            GetChain(checkPosition, item, chainPositions);
+
+            if (chainPositions.Count > 1)
             {
-                horizontal.AddRange(vertical);
-                horizontal.Add(checkPosition);
-                match = new Match(item, horizontal);
+                match = new Match(item, chainPositions);
                 return true;
             }
 
             return false;
+        }
+
+        private void GetChain(Vector2Int checkPosition, ItemType item, List<Vector2Int> result)
+        {
+            if (result.Contains(checkPosition))
+            {
+                return;
+            }
+
+            result.Add(checkPosition);
+
+            var horizontalPositions = GetHorizontalPositions(checkPosition, item);
+            var verticalPositions = GetVerticalPositions(checkPosition, item);
+
+            if (horizontalPositions.Count >= 2 || verticalPositions.Count >= 2)
+            {
+                foreach (var position in horizontalPositions)
+                {
+                    GetChain(position, item, result);
+                }
+
+                foreach (var position in verticalPositions)
+                {
+                    GetChain(position, item, result);
+                }
+            }
         }
 
         private List<Vector2Int> GetHorizontalPositions(Vector2Int checkPosition, ItemType item)
@@ -176,6 +205,11 @@ namespace Game.Gameplay
                 }
 
                 return false;
+            }
+
+            public override string ToString()
+            {
+                return $"{Item} [{string.Join(";", Positions)}]";
             }
         }
     }
