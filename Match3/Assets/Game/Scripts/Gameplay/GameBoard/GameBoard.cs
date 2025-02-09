@@ -12,6 +12,8 @@ namespace Game.Gameplay
 
         private readonly ItemType[,] _items;
 
+        public ItemType this[int row, int col] => _items[col, row];
+
         public GameBoard(int width, int height)
         {
             if (width <= 0 || height <= 0)
