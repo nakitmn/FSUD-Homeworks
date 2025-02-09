@@ -13,13 +13,6 @@ namespace Game.Tests
             Dictionary<Vector2Int, Vector2Int> targetResult)
         {
             //Arrange:
-            var matrix = new ItemType[,]
-            {
-                { ItemType.Red, ItemType.Orange, ItemType.None },
-                { ItemType.Purple, ItemType.None, ItemType.None },
-                { ItemType.None, ItemType.None, ItemType.Blue }
-            }.Transpose();
-
             var gameBoard = new GameBoard(boardMatrix);
             var itemArranger = new ItemArranger(gameBoard);
 
@@ -28,11 +21,7 @@ namespace Game.Tests
 
             //Assert:
             Assert.IsTrue(gameBoard.AreSame(targetMatrix));
-            Assert.AreEqual(targetResult.Count, result.Count);
-            foreach (var (origin, target) in targetResult)
-            {
-                Assert.AreEqual(target, result[origin]);
-            }
+            Assert.IsTrue(targetResult.AreSame(result));
         }
 
         private static IEnumerable<TestCaseData> ArrangeItemsCases()

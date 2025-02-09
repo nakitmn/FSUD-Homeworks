@@ -126,5 +126,39 @@ namespace Game.Gameplay
 
             return true;
         }
+
+        public bool HasItems(ItemType item)
+        {
+            for (var col = 0; col < Width; col++)
+            {
+                for (var row = 0; row < Height; row++)
+                {
+                    if (_items[col, row] == item)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public List<Vector2Int> GetPositionsOfItems(ItemType item)
+        {
+            List<Vector2Int> result = new List<Vector2Int>();
+
+            for (var col = 0; col < Width; col++)
+            {
+                for (var row = 0; row < Height; row++)
+                {
+                    if (_items[col, row] == item)
+                    {
+                        result.Add(new Vector2Int(row, col));
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
