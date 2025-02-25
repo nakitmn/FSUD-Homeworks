@@ -4,11 +4,11 @@ using UnityEngine.Networking;
 
 namespace SampleGame.App
 {
-    public sealed class GameClient
+    public sealed class GameServer
     {
         private readonly string _uri;
 
-        public GameClient(string uri)
+        public GameServer(string uri)
         {
             _uri = uri;
         }

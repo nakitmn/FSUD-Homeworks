@@ -17,11 +17,10 @@ namespace SampleGame.App
         {
             var filePath = Path.Combine(Application.streamingAssetsPath, _fileName);
 
-            Container.Bind<GameClient>().AsSingle().WithArguments(_uri);
+            Container.Bind<GameServer>().AsSingle().WithArguments(_uri);
             Container.Bind<FileRepository>().AsSingle().WithArguments(filePath);
             
-            //Container.BindInterfacesTo<GameRepository>().AsSingle();
-            Container.BindInterfacesTo<DebugGameRepository>().AsSingle();
+            Container.BindInterfacesTo<GameRepository>().AsSingle();
         }
     }
 }

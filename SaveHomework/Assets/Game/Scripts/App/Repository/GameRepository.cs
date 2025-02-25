@@ -12,7 +12,7 @@ namespace SampleGame.App
         private const string SAVE_TIME_KEY = "SaveTime";
         private const string SAVE_VERSION_KEY = "Version";
 
-        private readonly GameClient _client;
+        private readonly GameServer _server;
         private readonly FileRepository _fileRepository;
 
         private int Version
@@ -21,9 +21,9 @@ namespace SampleGame.App
             set => PlayerPrefs.SetInt(SAVE_VERSION_KEY, value);
         }
 
-        public GameRepository(GameClient client, FileRepository fileRepository)
+        public GameRepository(GameServer server, FileRepository fileRepository)
         {
-            _client = client;
+            _server = server;
             _fileRepository = fileRepository;
         }
 
@@ -32,21 +32,24 @@ namespace SampleGame.App
             var time = DateTime.Now.ToUniversalTime() - originTime;
             var saveTime = time.TotalSeconds.ToString("F0");
             gameState[SAVE_TIME_KEY] = saveTime;
-            gameState["DEBUG"] = "change";
 
             var json = JsonConvert.SerializeObject(gameState);
+            var encryptedJson = Encryptor.Encrypt(json);
+
             Version++;
 
-            _fileRepository.SetContent(Version, json);
-            await _client.Save(json, Version.ToString());
+            _fileRepository.SetContent(Version, encryptedJson);
+            
+            await _server.Save(encryptedJson, Version.ToString());
 
             return new(true, Version.ToString());
         }
 
         public async UniTask<IGameRepository.LoadResult> GetState(string version)
         {
-            var (success, remoteJson) = await _client.Load(version);
-
+            var (success, encryptedRemoteJson) = await _server.Load(version);
+            var remoteJson = Encryptor.Decrypt(encryptedRemoteJson);
+            
             var remoteState = success
                 ? JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson) ?? new()
                 : null;
@@ -58,17 +61,18 @@ namespace SampleGame.App
         private Dictionary<string, string> GetLatestState(int version,
             Dictionary<string, string> remoteState)
         {
-            if (_fileRepository.TryGetContent(version, out var localSaveJson) == false)
+            if (_fileRepository.TryGetContent(version, out var encryptedLocalJson) == false)
             {
                 return remoteState;
             }
 
-            if (string.IsNullOrEmpty(localSaveJson))
+            if (string.IsNullOrEmpty(encryptedLocalJson))
             {
                 return remoteState;
             }
 
-            var localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localSaveJson);
+            var localJson = Encryptor.Decrypt(encryptedLocalJson);
+            var localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
 
             if (Compare(remoteState, localState) >= 0)
             {
