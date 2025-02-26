@@ -345,6 +345,8 @@ MonoBehaviour:
   _maxHealth: 2
   _pushSideForce: 10
   _pushSideCooldown: 3
+  _pushUpForce: 20
+  _pushUpCooldown: 5
 --- !u!114 &3556995402340944546
 MonoBehaviour:
   m_ObjectHideFlags: 0
