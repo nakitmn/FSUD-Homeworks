@@ -1,4 +1,5 @@
 ﻿using Modules.Entity;
+using Modules.Health;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -9,6 +10,7 @@ namespace Game.Gameplay
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private float _jumpCooldown;
+        [SerializeField] private int _maxHealth;
         
         public override void InstallBindings()
         {
@@ -34,12 +36,21 @@ namespace Game.Gameplay
             Container.BindInterfacesAndSelfTo<GroundedCheckComponent>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<Health>()
+                .FromMethod(() => new Health(_maxHealth))
+                .AsSingle()
+                .NonLazy();
         }
 
         public override void Start()
         {
+            var healthComponent = Get<Health>();
+            healthComponent.OnDied += () => gameObject.SetActive(false);
+            
             var jumpComponent = Get<JumpComponent>();
             var reloadComponent = new ReloadComponent(_jumpCooldown);
+            jumpComponent.AddCondition(() => healthComponent.IsAlive);
             jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
             jumpComponent.AddCondition(reloadComponent.IsReady);
             jumpComponent.OnJump += reloadComponent.Reload;

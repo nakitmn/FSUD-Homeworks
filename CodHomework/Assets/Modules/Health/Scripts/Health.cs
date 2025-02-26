@@ -4,12 +4,14 @@ namespace Modules.Health
 {
     public class Health
     {
+        public event Action OnDied;
         public event Action<int> OnDamaged;
         public event Action<int> OnHealed;
         public event Action<int> OnMaxHealthChanged;
 
         public int MaxHealth { get; private set; }
         public int CurrentHealth { get; private set; }
+        public bool IsAlive => CurrentHealth > 0;
 
         public Health()
         {
@@ -56,6 +58,11 @@ namespace Modules.Health
 
             CurrentHealth -= damage;
             OnDamaged?.Invoke(damage);
+            
+            if (IsAlive == false)
+            {
+                OnDied?.Invoke();
+            }
         }
 
         public void HealAll()

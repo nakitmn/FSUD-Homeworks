@@ -93,8 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3075001735327464809}
+  - component: {fileID: 183609044743794119}
+  - component: {fileID: 7217668295345235359}
+  - component: {fileID: 8739191880343581575}
   - component: {fileID: 1650171991482105198}
   - component: {fileID: 8320438562223812922}
+  - component: {fileID: 8640565214951812081}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Untagged
@@ -118,6 +122,49 @@ Transform:
   - {fileID: 4256784266667006698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183609044743794119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 7217668295345235359}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 8640565214951812081}
+--- !u!114 &7217668295345235359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c9f278859a4e0f93d8fb5a3c20cc12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+--- !u!114 &8739191880343581575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa28c1da63c41999aad01d1544397b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1650171991482105198
 Rigidbody2D:
   serializedVersion: 4
@@ -193,3 +240,15 @@ PolygonCollider2D:
       - {x: -0.5644675, y: 0.0016976148}
       - {x: 0.5652342, y: 0.0005790591}
   m_UseDelaunayMesh: 0
+--- !u!114 &8640565214951812081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c47912ae4e51a84d92f1acf689997c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
