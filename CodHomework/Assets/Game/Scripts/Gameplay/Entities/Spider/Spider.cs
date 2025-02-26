@@ -10,6 +10,8 @@ namespace Game.Gameplay.Entities.Spider
         [SerializeField] private int _damage;
         [SerializeField] private float _pushCooldown;
         [SerializeField] private float _pushForce;
+        [SerializeField] private float _moveSpeed;
+        [SerializeField] private float _stoppingDistance = 0.1f;
 
         public override void InstallBindings()
         {
@@ -23,6 +25,11 @@ namespace Game.Gameplay.Entities.Spider
                 .AsSingle()
                 .NonLazy();
 
+            Container.Bind<PatrolPointsComponent>()
+                .FromComponentInHierarchy()
+                .AsSingle()
+                .NonLazy();
+
             Container.Bind<Health>()
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
@@ -31,6 +38,12 @@ namespace Game.Gameplay.Entities.Spider
             Container.BindInterfacesAndSelfTo<PushOutComponent>()
                 .AsSingle()
                 .WithArguments(_pushCooldown, _pushForce)
+                .NonLazy();
+
+
+            Container.BindInterfacesAndSelfTo<MoveComponent>()
+                .AsSingle()
+                .WithArguments(_moveSpeed)
                 .NonLazy();
         }
 
@@ -47,6 +60,24 @@ namespace Game.Gameplay.Entities.Spider
                     Get<PushOutComponent>().Push(entity);
                 }
             };
+        }
+
+        private void Update()
+        {
+            var patrolPointsComponent = Get<PatrolPointsComponent>();
+            var currentPoint = patrolPointsComponent.Current;
+            var distanceDirection = currentPoint.position - transform.position;
+            distanceDirection.y = 0;
+            
+            if (Mathf.Abs(distanceDirection.x) > _stoppingDistance)
+            {
+                distanceDirection.x = Mathf.Sign(distanceDirection.x);
+                Get<MoveComponent>().SetDirection(distanceDirection.normalized);
+            }
+            else
+            {
+                patrolPointsComponent.Next();
+            }
         }
     }
 }
