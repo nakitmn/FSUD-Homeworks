@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Gameplay
@@ -7,6 +8,7 @@ namespace Game.Gameplay
     {
         private readonly Rigidbody2D _rigidbody;
         private readonly float _speed;
+        private readonly AndCondition _canMoveCondition = new();
 
         private Vector2 _direction;
 
@@ -18,6 +20,11 @@ namespace Game.Gameplay
 
         void IFixedTickable.FixedTick()
         {
+            if (_canMoveCondition.IsTrue() == false)
+            {
+                return;
+            }
+            
             var velocity = _direction * _speed;
             _rigidbody.AddForce(velocity, ForceMode2D.Force);
         }
@@ -25,6 +32,11 @@ namespace Game.Gameplay
         public void SetDirection(Vector2 direction)
         {
             _direction = direction;
+        }
+
+        public void AddCondition(Func<bool> condition)
+        {
+            _canMoveCondition.AddCondition(condition);
         }
     }
 }

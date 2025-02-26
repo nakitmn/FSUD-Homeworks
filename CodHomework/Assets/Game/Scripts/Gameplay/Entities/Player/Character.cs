@@ -54,6 +54,12 @@ namespace Game.Gameplay
             jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
             jumpComponent.AddCondition(reloadComponent.IsReady);
             jumpComponent.OnJump += reloadComponent.Reload;
+            
+            var moveComponent = Get<MoveComponent>();
+            moveComponent.AddCondition(() => healthComponent.IsAlive);
+            
+            var faceComponent = Get<FaceComponent>();
+            faceComponent.AddCondition(() => healthComponent.IsAlive);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Gameplay
@@ -6,7 +7,8 @@ namespace Game.Gameplay
     public sealed class FaceComponent : ITickable
     {
         private readonly Transform _transform;
-        
+        private readonly AndCondition _canFaceCondition = new();
+
         private float _direction;
 
         public FaceComponent(Transform transform)
@@ -16,6 +18,11 @@ namespace Game.Gameplay
 
         void ITickable.Tick()
         {
+            if (_canFaceCondition.IsTrue() == false)
+            {
+                return;
+            }
+            
             if (Mathf.Approximately(0f , _direction))
             {
                 return;
@@ -32,6 +39,11 @@ namespace Game.Gameplay
         public void SetDirection(float direction)
         {
             _direction = direction;
+        }
+
+        public void AddCondition(Func<bool> condition)
+        {
+            _canFaceCondition.AddCondition(condition);
         }
     }
 }
