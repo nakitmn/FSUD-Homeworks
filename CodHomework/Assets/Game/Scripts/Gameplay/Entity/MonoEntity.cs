@@ -6,7 +6,7 @@ using Zenject;
 namespace Game.Gameplay
 {
     [RequireComponent(typeof(GameObjectContext))]
-    public abstract class MonoEntity : MonoBehaviour, IEntity
+    public abstract class MonoEntity : MonoInstaller, IEntity
     {
         private readonly Dictionary<Type, object> _cachedComponents = new();
         private GameObjectContext _context;
