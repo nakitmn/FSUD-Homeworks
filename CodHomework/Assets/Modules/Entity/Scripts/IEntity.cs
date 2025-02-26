@@ -1,4 +1,4 @@
-﻿namespace Game.Gameplay
+﻿namespace Modules.Entity
 {
     public interface IEntity
     {

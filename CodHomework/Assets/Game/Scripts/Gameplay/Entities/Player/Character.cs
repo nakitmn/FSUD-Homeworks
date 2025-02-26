@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Modules.Entity;
+using UnityEngine;
 
 namespace Game.Gameplay
 {

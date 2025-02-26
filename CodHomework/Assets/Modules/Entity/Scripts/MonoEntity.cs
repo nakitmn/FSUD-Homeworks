@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Gameplay
+namespace Modules.Entity
 {
     [RequireComponent(typeof(GameObjectContext))]
     public abstract class MonoEntity : MonoInstaller, IEntity
