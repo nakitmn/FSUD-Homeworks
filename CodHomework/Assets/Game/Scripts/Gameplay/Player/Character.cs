@@ -4,6 +4,7 @@ namespace Game.Gameplay
 {
     public sealed class Character : MonoEntity
     {
+        [SerializeField] private Transform _flipTransform;
         [SerializeField] private float _moveSpeed;
         
         public override void InstallBindings()
@@ -15,6 +16,11 @@ namespace Game.Gameplay
             Container.BindInterfacesAndSelfTo<MoveComponent>()
                 .AsSingle()
                 .WithArguments(_moveSpeed)
+                .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<FaceComponent>()
+                .AsSingle()
+                .WithArguments(_flipTransform)
                 .NonLazy();
         }
     }

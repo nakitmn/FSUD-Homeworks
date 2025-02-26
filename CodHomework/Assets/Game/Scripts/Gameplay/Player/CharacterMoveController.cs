@@ -16,7 +16,10 @@ namespace Game.Gameplay
         void ITickable.Tick()
         {
             var moveComponent = _character.Get<MoveComponent>();
+            var faceComponent = _character.Get<FaceComponent>();
+            
             moveComponent.SetDirection(_playerInput.MoveDirection);
+            faceComponent.SetDirection(_playerInput.HorizontalDirection);
         }
     }
 }
