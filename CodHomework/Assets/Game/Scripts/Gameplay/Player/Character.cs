@@ -28,6 +28,15 @@ namespace Game.Gameplay
                 .AsSingle()
                 .WithArguments(_jumpForce)
                 .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<GroundedCheckComponent>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        public override void Start()
+        {
+            Get<JumpComponent>().AddCondition(Get<GroundedCheckComponent>().IsGrounded);
         }
     }
 }

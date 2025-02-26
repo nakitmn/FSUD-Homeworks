@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
@@ -6,7 +7,9 @@ namespace Game.Gameplay
     {
         private readonly Rigidbody2D _rigidbody;
         private readonly float _jumpForce;
-
+        
+        private readonly AndCondition _canJumpCondition = new();
+        
         public JumpComponent(Rigidbody2D rigidbody, float jumpForce)
         {
             _rigidbody = rigidbody;
@@ -15,8 +18,18 @@ namespace Game.Gameplay
         
         public void Jump()
         {
+            if (_canJumpCondition.IsTrue() == false)
+            {
+                return;
+            }
+            
             var force = Vector2.up * _jumpForce;
             _rigidbody.AddForce(force, ForceMode2D.Impulse);
+        }
+        
+        public void AddCondition(Func<bool> condition)
+        {
+            _canJumpCondition.AddCondition(condition);
         }
     }
 }
