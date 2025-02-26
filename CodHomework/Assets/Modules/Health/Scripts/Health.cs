@@ -65,6 +65,17 @@ namespace Modules.Health
             }
         }
 
+        public void InstantDie()
+        {
+            if (IsAlive == false)
+            {
+                return;
+            }
+            
+            CurrentHealth = 0;
+            OnDied?.Invoke();
+        }
+
         public void HealAll()
         {
             Heal(MaxHealth);

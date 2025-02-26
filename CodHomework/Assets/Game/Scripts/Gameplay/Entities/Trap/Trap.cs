@@ -2,7 +2,7 @@
 using Modules.Health;
 using UnityEngine;
 
-namespace Game.Gameplay.Entities.Trap
+namespace Game.Gameplay
 {
     public sealed class Trap : MonoEntity
     {
