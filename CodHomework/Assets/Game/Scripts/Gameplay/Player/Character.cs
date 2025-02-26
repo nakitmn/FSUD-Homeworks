@@ -7,6 +7,7 @@ namespace Game.Gameplay
         [SerializeField] private Transform _flipTransform;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpForce;
+        [SerializeField] private float _jumpCooldown;
         
         public override void InstallBindings()
         {
@@ -36,7 +37,11 @@ namespace Game.Gameplay
 
         public override void Start()
         {
-            Get<JumpComponent>().AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            var jumpComponent = Get<JumpComponent>();
+            var reloadComponent = new ReloadComponent(_jumpCooldown);
+            jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            jumpComponent.AddCondition(reloadComponent.IsReady);
+            jumpComponent.OnJump += reloadComponent.Reload;
         }
     }
 }

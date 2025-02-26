@@ -13,6 +13,7 @@ namespace Game.Gameplay
         public ReloadComponent(float duration)
         {
             _duration = duration;
+            _startTime = -_duration;
         }
 
         public bool IsReady()
