@@ -8,19 +8,14 @@ namespace Game.Gameplay
     {
         [SerializeField] private Transform _flipTransform;
         [SerializeField] private float _moveSpeed;
-        [Header("Jump")]
-        [SerializeField] private float _jumpForce;
+        [Header("Jump")] [SerializeField] private float _jumpForce;
         [SerializeField] private float _jumpCooldown;
-        [Header("Health")]
-        [SerializeField] private int _maxHealth;
-        [Header("Push Side")]
-        [SerializeField] private float _pushSideForce;
+        [Header("Health")] [SerializeField] private int _maxHealth;
+        [Header("Push Side")] [SerializeField] private float _pushSideForce;
         [SerializeField] private float _pushSideCooldown;
-        [Header("Push Up")]
-        [SerializeField] private float _pushUpForce;
+        [Header("Push Up")] [SerializeField] private float _pushUpForce;
         [SerializeField] private float _pushUpCooldown;
-        
-        private JumpMediator _jumpMediator;
+
         private PushSideMediator _pushSideMediator;
         private PushUpMediator _pushUpMediator;
 
@@ -29,25 +24,30 @@ namespace Game.Gameplay
             Container.Bind<Rigidbody2D>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
             Container.Bind<EntityScannerComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<MoveComponent>()
                 .AsSingle()
                 .WithArguments(_moveSpeed)
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<FaceComponent>()
                 .AsSingle()
                 .WithArguments(_flipTransform)
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<GroundedCheckComponent>()
                 .AsSingle()
                 .NonLazy();
-            
+
+            Container.BindInterfacesAndSelfTo<JumpComponent>()
+                .AsSingle()
+                .WithArguments(_jumpCooldown, _jumpForce)
+                .NonLazy();
+
             Container.Bind<Health>()
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
@@ -61,23 +61,24 @@ namespace Game.Gameplay
 
             var moveComponent = Get<MoveComponent>();
             moveComponent.AddCondition(() => healthComponent.IsAlive);
-            
+
             var faceComponent = Get<FaceComponent>();
             faceComponent.AddCondition(() => healthComponent.IsAlive);
-            
-            _jumpMediator = new JumpMediator(this, _jumpCooldown, _jumpForce);
-            _jumpMediator.Install();
-            
+
+            var jumpComponent = Get<JumpComponent>();
+            jumpComponent.AddCondition(() => Get<Health>().IsAlive);
+            jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+
             _pushSideMediator = new PushSideMediator(this, _pushSideCooldown, _pushSideForce);
             _pushSideMediator.Install();
-            
+
             _pushUpMediator = new PushUpMediator(this, _pushUpCooldown, _pushUpForce);
             _pushUpMediator.Install();
         }
 
         public void Jump()
         {
-            _jumpMediator.Jump();
+            Get<JumpComponent>().Jump();
         }
 
         public void PushUp()
@@ -90,40 +91,6 @@ namespace Game.Gameplay
             _pushSideMediator.Push();
         }
 
-        private sealed class JumpMediator
-        {
-            private readonly IEntity _entity;
-            private readonly float _cooldown;
-            private readonly float _force;
-
-            private PushComponent _pushComponent;
-            private ReloadComponent _reloadComponent;
-            private Rigidbody2D _rigidbody;
-
-            public JumpMediator(IEntity entity, float cooldown, float force)
-            {
-                _entity = entity;
-                _cooldown = cooldown;
-                _force = force;
-            }
-
-            public void Install()
-            {
-                _rigidbody = _entity.Get<Rigidbody2D>();
-                _pushComponent = new PushComponent();
-                _reloadComponent = new ReloadComponent(_cooldown);
-                _pushComponent.AddCondition(() => _entity.Get<Health>().IsAlive);
-                _pushComponent.AddCondition(_entity.Get<GroundedCheckComponent>().IsGrounded);
-                _pushComponent.AddCondition(_reloadComponent.IsReady);
-                _pushComponent.OnPushed += _reloadComponent.Reload;
-            }
-
-            public void Jump()
-            {
-                _pushComponent.Push(_rigidbody, Vector2.up, _force);
-            }
-        }
-        
         private sealed class PushSideMediator
         {
             private readonly IEntity _entity;
@@ -156,7 +123,7 @@ namespace Game.Gameplay
             {
                 var entities = _entityScannerComponent.ScanMultiple();
                 entities.Remove(_entity);
-                
+
                 foreach (var entity in entities)
                 {
                     if (entity.TryGet<Rigidbody2D>(out var rigidbody))
@@ -165,11 +132,11 @@ namespace Game.Gameplay
                         _pushComponent.Push(rigidbody, direction.normalized, _force);
                     }
                 }
-                
+
                 _reloadComponent.Reload();
             }
         }
-        
+
         private sealed class PushUpMediator
         {
             private readonly IEntity _entity;
@@ -203,7 +170,7 @@ namespace Game.Gameplay
             {
                 var entities = _entityScannerComponent.ScanMultiple();
                 entities.Remove(_entity);
-                
+
                 foreach (var entity in entities)
                 {
                     if (entity.TryGet<Rigidbody2D>(out var rigidbody))
@@ -211,7 +178,7 @@ namespace Game.Gameplay
                         _pushComponent.Push(rigidbody, Vector2.up, _force);
                     }
                 }
-                
+
                 _reloadComponent.Reload();
             }
         }
