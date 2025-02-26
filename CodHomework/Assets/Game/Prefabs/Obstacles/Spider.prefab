@@ -444,9 +444,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3105770917179402914}
+  - component: {fileID: 2875228589853120977}
+  - component: {fileID: 426612544340443567}
+  - component: {fileID: 5379915362710371072}
   - component: {fileID: 4015829716640782646}
   - component: {fileID: 7422560000825944449}
   - component: {fileID: 7073503754261842485}
+  - component: {fileID: 4458690696871446290}
   m_Layer: 8
   m_Name: <Spider>
   m_TagString: Untagged
@@ -470,6 +474,52 @@ Transform:
   - {fileID: 797735510629636468}
   m_Father: {fileID: 1114773270552738056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2875228589853120977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 426612544340443567}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 4458690696871446290}
+--- !u!114 &426612544340443567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1446f90919fc482ba32fb68a673d5f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 3
+  _damage: 1
+  _pushCooldown: 0
+  _pushForce: 15
+--- !u!114 &5379915362710371072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fcddfa4c8354a5ab4304478ddcc8304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &4015829716640782646
 Rigidbody2D:
   serializedVersion: 4
@@ -587,3 +637,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &4458690696871446290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c47912ae4e51a84d92f1acf689997c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

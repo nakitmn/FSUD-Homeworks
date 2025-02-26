@@ -35,7 +35,7 @@ namespace Game.Gameplay
             _conditions.AddCondition(condition);
         }
 
-        public void Push(List<IEntity> entities)
+        public void Push(IEnumerable<IEntity> entities)
         {
             if (_conditions.IsTrue() == false)
             {
@@ -44,14 +44,34 @@ namespace Game.Gameplay
 
             foreach (var entity in entities)
             {
-                if (entity.TryGet<Rigidbody2D>(out var rigidbody))
-                {
-                    var direction = rigidbody.position - _rigidbody.position;
-                    _pushComponent.Push(rigidbody, direction.normalized, _force);
-                }
+                PushInternal(entity);
             }
 
             _reloadComponent.Reload();
+        }
+
+        public void Push(IEntity entity)
+        {
+            if (_conditions.IsTrue() == false)
+            {
+                return;
+            }
+
+            PushInternal(entity);
+            _reloadComponent.Reload();
+        }
+
+        private void PushInternal(IEntity entity)
+        {
+            if (entity.TryGet<Rigidbody2D>(out var rigidbody) == false)
+            {
+                return;
+            }
+            
+            var direction = rigidbody.position - _rigidbody.position;
+            direction.x = Mathf.Sign(direction.x);
+            direction.y = 0f;
+            _pushComponent.Push(rigidbody, direction, _force);
         }
     }
 }
