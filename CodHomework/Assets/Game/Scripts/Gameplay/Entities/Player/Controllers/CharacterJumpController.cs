@@ -17,7 +17,7 @@ namespace Game.Gameplay
         {
             if (_playerInput.IsJump)
             {
-                _character.Get<JumpComponent>().Jump();
+                _character.Jump();
             }
         }
     }
