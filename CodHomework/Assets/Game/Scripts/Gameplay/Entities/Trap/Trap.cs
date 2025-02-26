@@ -13,14 +13,22 @@ namespace Game.Gameplay.Entities.Trap
             Container.Bind<DamagableEntityDetectorComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+            
+            Container.Bind<Health>()
+                .FromMethod(() => new Health())
+                .AsSingle()
+                .NonLazy();
         }
 
         public override void Start()
         {
+            var healthComponent = Get<Health>();
+            healthComponent.OnDied += () => gameObject.SetActive(false);
+            
             Get<DamagableEntityDetectorComponent>().OnDetected += entity =>
             {
                 entity.Get<Health>().Damage(_damage);
-                gameObject.SetActive(false);
+                healthComponent.Damage(1);
             };
         }
     }
