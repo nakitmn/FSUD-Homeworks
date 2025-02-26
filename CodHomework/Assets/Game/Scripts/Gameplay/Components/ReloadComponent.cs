@@ -23,7 +23,7 @@ namespace Game.Gameplay
 
         public void Reload()
         {
-            _startTime = Time.time;
+            _startTime = CurrentTime;
         }
     }
 }
