@@ -10,9 +10,15 @@ namespace Game.Gameplay
 
         public override void InstallBindings()
         {
+            Container.Bind<Rigidbody2D>()
+                .FromComponentInHierarchy()
+                .AsSingle()
+                .NonLazy();
+            
             Container.Bind<DamagableEntityDetectorComponent>()
                 .FromComponentInHierarchy()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
             
             Container.Bind<Health>()
                 .FromMethod(() => new Health())

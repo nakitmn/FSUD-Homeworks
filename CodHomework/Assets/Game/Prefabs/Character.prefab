@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 4102650447071868940}
   - component: {fileID: 2212354629848875419}
   - component: {fileID: 4975668570020785416}
+  - component: {fileID: 3556995402340944546}
   - component: {fileID: 8342082945872629457}
   - component: {fileID: 4859882623022117604}
   - component: {fileID: 7533625333521889301}
@@ -337,6 +338,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6892226d5f1349bc809c17e6df9b3407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _flipTransform: {fileID: 4102650447071868940}
+  _moveSpeed: 20
+  _jumpForce: 15
+  _jumpCooldown: 2
+  _maxHealth: 2
+  _pushSideForce: 10
+  _pushSideCooldown: 3
+--- !u!114 &3556995402340944546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490323295220271620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2d131add5e4e3d8a57bb6d16d6a93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scanOrigin: {fileID: 7060901894015801087}
+  _radius: 1
 --- !u!50 &8342082945872629457
 Rigidbody2D:
   serializedVersion: 4

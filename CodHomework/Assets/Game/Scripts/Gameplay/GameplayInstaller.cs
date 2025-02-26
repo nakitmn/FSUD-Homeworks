@@ -18,6 +18,10 @@ namespace Game.Gameplay
                 .AsSingle()
                 .NonLazy();
             
+            Container.BindInterfacesTo<CharacterPushController>()
+                .AsSingle()
+                .NonLazy();
+            
             Container.Bind<PlayerInput>()
                 .AsSingle();
         }

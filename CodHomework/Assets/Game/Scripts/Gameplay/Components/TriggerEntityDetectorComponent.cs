@@ -15,7 +15,7 @@ namespace Game.Gameplay
             {
                 return;
             }
-            
+
             OnDetected?.Invoke(entity);
         }
     }
