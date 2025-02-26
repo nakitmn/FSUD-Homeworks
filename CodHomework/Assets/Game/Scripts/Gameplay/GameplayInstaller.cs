@@ -14,6 +14,10 @@ namespace Game.Gameplay
                 .AsSingle()
                 .NonLazy();
             
+            Container.BindInterfacesTo<CharacterJumpController>()
+                .AsSingle()
+                .NonLazy();
+            
             Container.Bind<PlayerInput>()
                 .AsSingle();
         }

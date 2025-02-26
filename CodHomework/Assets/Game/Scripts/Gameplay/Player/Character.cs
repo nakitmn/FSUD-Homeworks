@@ -6,6 +6,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private Transform _flipTransform;
         [SerializeField] private float _moveSpeed;
+        [SerializeField] private float _jumpForce;
         
         public override void InstallBindings()
         {
@@ -21,6 +22,11 @@ namespace Game.Gameplay
             Container.BindInterfacesAndSelfTo<FaceComponent>()
                 .AsSingle()
                 .WithArguments(_flipTransform)
+                .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<JumpComponent>()
+                .AsSingle()
+                .WithArguments(_jumpForce)
                 .NonLazy();
         }
     }
