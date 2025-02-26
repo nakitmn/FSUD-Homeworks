@@ -42,13 +42,29 @@ namespace Game.Gameplay
 
             foreach (var entity in entities)
             {
-                if (entity.TryGet<Rigidbody2D>(out var rigidbody))
-                {
-                    _pushComponent.Push(rigidbody, Vector2.up, _force);
-                }
+                PushInternal(entity);
             }
 
             _reloadComponent.Reload();
+        }
+
+        public void Push(IEntity entity)
+        {
+            if (_conditions.IsTrue() == false)
+            {
+                return;
+            }
+
+            PushInternal(entity);
+            _reloadComponent.Reload();
+        }
+
+        private void PushInternal(IEntity entity)
+        {
+            if (entity.TryGet<Rigidbody2D>(out var rigidbody))
+            {
+                _pushComponent.Push(rigidbody, Vector2.up, _force);
+            }
         }
     }
 }

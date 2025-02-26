@@ -239,7 +239,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979841302588641904}
+  - component: {fileID: 3614724840413042416}
+  - component: {fileID: 1345320233880379638}
+  - component: {fileID: 3617261339959795206}
   - component: {fileID: 2682617834291874480}
+  - component: {fileID: 8953684379139073392}
   m_Layer: 6
   m_Name: Trampoline
   m_TagString: Untagged
@@ -264,6 +268,50 @@ Transform:
   - {fileID: 7195593461678769857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3614724840413042416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1345320233880379638}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 8953684379139073392}
+--- !u!114 &1345320233880379638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db00388c7372483ab659db01cb01f9d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _force: 30
+  _cooldown: 0
+--- !u!114 &3617261339959795206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fcddfa4c8354a5ab4304478ddcc8304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2682617834291874480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -309,3 +357,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &8953684379139073392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c47912ae4e51a84d92f1acf689997c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
