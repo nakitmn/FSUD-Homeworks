@@ -13,7 +13,11 @@ namespace Game.Gameplay
         [SerializeField] private float _pushForce;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _stoppingDistance = 0.1f;
-
+        [Space(10)]
+        [Header("Visual")]  [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Color _damagedColor;
+        [SerializeField] private float _damagedEffectDuration;
+        
         public override void InstallBindings()
         {
             Container.Bind<Rigidbody2D>()
@@ -51,13 +55,18 @@ namespace Game.Gameplay
                 .WithArguments(_flipTransform)
                 .NonLazy();
 
+            Container.BindInterfacesAndSelfTo<DamageEffectComponent>()
+                .AsSingle()
+                .WithArguments(_spriteRenderer, _damagedColor, _damagedEffectDuration)
+                .NonLazy();
         }
 
         public override void Start()
         {
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
-
+            healthComponent.OnDamaged += _ => Get<DamageEffectComponent>().Play();
+            
             Get<TriggerEntityDetectorComponent>().OnDetected += entity =>
             {
                 if (entity.TryGet<Health>(out var health))

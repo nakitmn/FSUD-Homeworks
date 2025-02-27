@@ -15,6 +15,10 @@ namespace Game.Gameplay
         [SerializeField] private float _pushSideCooldown;
         [Header("Push Up")] [SerializeField] private float _pushUpForce;
         [SerializeField] private float _pushUpCooldown;
+        [Space(10)]
+        [Header("Visual")]  [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Color _damagedColor;
+        [SerializeField] private float _damagedEffectDuration;
 
         public override void InstallBindings()
         {
@@ -59,12 +63,18 @@ namespace Game.Gameplay
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
                 .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<DamageEffectComponent>()
+                .AsSingle()
+                .WithArguments(_spriteRenderer, _damagedColor, _damagedEffectDuration)
+                .NonLazy();
         }
 
         public override void Start()
         {
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
+            healthComponent.OnDamaged += _ => Get<DamageEffectComponent>().Play();
 
             var moveComponent = Get<MoveComponent>();
             moveComponent.AddCondition(() => healthComponent.IsAlive);

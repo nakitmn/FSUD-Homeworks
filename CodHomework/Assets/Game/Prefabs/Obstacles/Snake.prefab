@@ -513,6 +513,9 @@ MonoBehaviour:
   _pushForce: 15
   _moveSpeed: 10
   _stoppingDistance: 0.1
+  _spriteRenderer: {fileID: 7937140358218983994}
+  _damagedColor: {r: 0.8207547, g: 0.73481184, b: 0, a: 1}
+  _damagedEffectDuration: 1
 --- !u!114 &3443325690765716033
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -347,6 +347,9 @@ MonoBehaviour:
   _pushSideCooldown: 3
   _pushUpForce: 20
   _pushUpCooldown: 5
+  _spriteRenderer: {fileID: 5973739499012079652}
+  _damagedColor: {r: 0.6226415, g: 0.014684939, b: 0.014684939, a: 1}
+  _damagedEffectDuration: 0.75
 --- !u!114 &3556995402340944546
 MonoBehaviour:
   m_ObjectHideFlags: 0
