@@ -444,9 +444,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819249752555060710}
+  - component: {fileID: 6516101461987075008}
+  - component: {fileID: 4074486480264111528}
+  - component: {fileID: 3443325690765716033}
+  - component: {fileID: 3515065161003110518}
   - component: {fileID: 1745589832700849}
   - component: {fileID: 519640766865834813}
   - component: {fileID: 464711613102087323}
+  - component: {fileID: 4983074667080805991}
   m_Layer: 8
   m_Name: <Snake>
   m_TagString: Untagged
@@ -471,6 +476,70 @@ Transform:
   - {fileID: 2315917673189246781}
   m_Father: {fileID: 7302201298826456237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6516101461987075008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 4074486480264111528}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 4983074667080805991}
+--- !u!114 &4074486480264111528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2420ba7596940c4914ad0fef8b91e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flipTransform: {fileID: 1819249752555060710}
+  _maxHealth: 5
+  _damage: 1
+  _pushCooldown: 0
+  _pushForce: 15
+  _moveSpeed: 10
+  _stoppingDistance: 0.1
+--- !u!114 &3443325690765716033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31324d33c6d7489fbda6be55b90f3331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points:
+  - {fileID: 7836685165928915669}
+  - {fileID: 3188779134163127405}
+--- !u!114 &3515065161003110518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fcddfa4c8354a5ab4304478ddcc8304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1745589832700849
 Rigidbody2D:
   serializedVersion: 4
@@ -588,6 +657,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &4983074667080805991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c47912ae4e51a84d92f1acf689997c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9168432786817898581
 GameObject:
   m_ObjectHideFlags: 0

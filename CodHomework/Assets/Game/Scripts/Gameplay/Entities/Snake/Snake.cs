@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public sealed class Spider : MonoEntity
+    public sealed class Snake : MonoEntity
     {
+        [SerializeField] private Transform _flipTransform;
         [SerializeField] private int _maxHealth = 3;
         [SerializeField] private int _damage;
         [SerializeField] private float _pushCooldown;
@@ -35,16 +36,21 @@ namespace Game.Gameplay
                 .AsSingle()
                 .NonLazy();
 
-            Container.BindInterfacesAndSelfTo<PushOutComponent>()
+            Container.BindInterfacesAndSelfTo<PushUpComponent>()
                 .AsSingle()
                 .WithArguments(_pushCooldown, _pushForce)
                 .NonLazy();
-
-
+            
             Container.BindInterfacesAndSelfTo<MoveComponent>()
                 .AsSingle()
                 .WithArguments(_moveSpeed)
                 .NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<FaceComponent>()
+                .AsSingle()
+                .WithArguments(_flipTransform)
+                .NonLazy();
+
         }
 
         public override void Start()
@@ -57,7 +63,7 @@ namespace Game.Gameplay
                 if (entity.TryGet<Health>(out var health))
                 {
                     health.Damage(_damage);
-                    Get<PushOutComponent>().Push(entity);
+                    Get<PushUpComponent>().Push(entity);
                 }
             };
         }
@@ -68,11 +74,12 @@ namespace Game.Gameplay
             var currentPoint = patrolPointsComponent.Current;
             var distanceDirection = currentPoint.position - transform.position;
             distanceDirection.y = 0;
-            
+
             if (Mathf.Abs(distanceDirection.x) > _stoppingDistance)
             {
                 distanceDirection.x = Mathf.Sign(distanceDirection.x);
                 Get<MoveComponent>().SetDirection(distanceDirection.normalized);
+                Get<FaceComponent>().SetDirection(Mathf.Sign(distanceDirection.x));
             }
             else
             {

@@ -1,7 +1,7 @@
 ﻿using Modules.Entity;
 using UnityEngine;
 
-namespace Game.Gameplay.Entities.Trampoline
+namespace Game.Gameplay
 {
     public sealed class Trampoline : MonoEntity
     {
