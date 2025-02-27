@@ -6,22 +6,20 @@ namespace Game.Gameplay
     public sealed class Trampoline : MonoEntity
     {
         [SerializeField] private float _force;
-        [SerializeField] private float _cooldown;
-        
+
         public override void InstallBindings()
         {
             Container.Bind<TriggerEntityDetectorComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
-            
+
             Container.Bind<AudioSource>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<PushUpComponent>()
+
+            Container.Bind<PushComponent>()
                 .AsSingle()
-                .WithArguments(_cooldown, _force)
                 .NonLazy();
         }
 
@@ -29,8 +27,11 @@ namespace Game.Gameplay
         {
             Get<TriggerEntityDetectorComponent>().OnDetected += entity =>
             {
-                Get<PushUpComponent>().Push(entity);
-                Get<AudioSource>().Play();
+                if (entity.TryGet<Rigidbody2D>(out var rigidbody))
+                {
+                    Get<PushComponent>().Push(rigidbody, transform.up, _force);
+                    Get<AudioSource>().Play();
+                }
             };
         }
     }
