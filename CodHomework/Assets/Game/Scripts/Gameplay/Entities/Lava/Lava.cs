@@ -1,5 +1,6 @@
 ﻿using Modules.Entity;
 using Modules.Health;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
@@ -10,6 +11,10 @@ namespace Game.Gameplay
             Container.Bind<TriggerEntityDetectorComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+                   
+            Container.Bind<AudioSource>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
 
         public override void Start()
@@ -18,6 +23,7 @@ namespace Game.Gameplay
             {
                 if (entity.TryGet<Health>(out var health))
                 {
+                    Get<AudioSource>().Play();
                     health.InstantDie();
                 }
             };

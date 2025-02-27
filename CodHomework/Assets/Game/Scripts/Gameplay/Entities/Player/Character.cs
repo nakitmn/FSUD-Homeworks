@@ -15,14 +15,24 @@ namespace Game.Gameplay
         [SerializeField] private float _pushSideCooldown;
         [Header("Push Up")] [SerializeField] private float _pushUpForce;
         [SerializeField] private float _pushUpCooldown;
-        [Space(10)]
-        [Header("Visual")]  [SerializeField] private SpriteRenderer _spriteRenderer;
+
+        [Space(10)] [Header("Visual")] [SerializeField]
+        private SpriteRenderer _spriteRenderer;
+
         [SerializeField] private Color _damagedColor;
         [SerializeField] private float _damagedEffectDuration;
+        [Header("Sfx")] [SerializeField] private AudioClip _jumpClip;
+        [SerializeField] private AudioClip _damagedClip;
+        [SerializeField] private AudioClip _pushUpClip;
+        [SerializeField] private AudioClip _pushOutClip;
 
         public override void InstallBindings()
         {
             Container.Bind<Rigidbody2D>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container.Bind<AudioSource>()
                 .FromComponentInHierarchy()
                 .AsSingle();
 
@@ -48,12 +58,12 @@ namespace Game.Gameplay
                 .AsSingle()
                 .WithArguments(_jumpCooldown, _jumpForce)
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<PushUpComponent>()
                 .AsSingle()
                 .WithArguments(_pushUpCooldown, _pushUpForce)
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<PushOutComponent>()
                 .AsSingle()
                 .WithArguments(_pushSideCooldown, _pushSideForce)
@@ -63,7 +73,7 @@ namespace Game.Gameplay
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
                 .NonLazy();
-            
+
             Container.BindInterfacesAndSelfTo<DamageEffectComponent>()
                 .AsSingle()
                 .WithArguments(_spriteRenderer, _damagedColor, _damagedEffectDuration)
@@ -74,7 +84,11 @@ namespace Game.Gameplay
         {
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
-            healthComponent.OnDamaged += _ => Get<DamageEffectComponent>().Play();
+            healthComponent.OnDamaged += _ =>
+            {
+                Get<DamageEffectComponent>().Play();
+                Get<AudioSource>().PlayOneShot(_damagedClip);
+            };
 
             var moveComponent = Get<MoveComponent>();
             moveComponent.AddCondition(() => healthComponent.IsAlive);
@@ -85,13 +99,16 @@ namespace Game.Gameplay
             var jumpComponent = Get<JumpComponent>();
             jumpComponent.AddCondition(() => healthComponent.IsAlive);
             jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            jumpComponent.OnJumped += () => Get<AudioSource>().PlayOneShot(_jumpClip);
 
             var pushOutComponent = Get<PushOutComponent>();
             pushOutComponent.AddCondition(() => healthComponent.IsAlive);
+            pushOutComponent.OnPushed += () => Get<AudioSource>().PlayOneShot(_pushOutClip);
 
             var pushUpComponent = Get<PushUpComponent>();
             pushUpComponent.AddCondition(() => healthComponent.IsAlive);
             pushUpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            pushUpComponent.OnPushed += () => Get<AudioSource>().PlayOneShot(_pushUpClip);
         }
 
         public void Jump()

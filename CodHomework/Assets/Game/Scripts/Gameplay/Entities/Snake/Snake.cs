@@ -24,6 +24,10 @@ namespace Game.Gameplay
                 .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<AudioSource>()
+                .FromComponentInHierarchy()
+                .AsSingle();
 
             Container.Bind<TriggerEntityDetectorComponent>()
                 .FromComponentInHierarchy()
@@ -65,7 +69,11 @@ namespace Game.Gameplay
         {
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
-            healthComponent.OnDamaged += _ => Get<DamageEffectComponent>().Play();
+            healthComponent.OnDamaged += _ =>
+            {
+                Get<DamageEffectComponent>().Play();
+                Get<AudioSource>().Play();
+            };
             
             Get<TriggerEntityDetectorComponent>().OnDetected += entity =>
             {

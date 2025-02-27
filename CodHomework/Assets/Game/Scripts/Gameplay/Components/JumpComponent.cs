@@ -6,6 +6,12 @@ namespace Game.Gameplay
 {
     public sealed class JumpComponent : IInitializable
     {
+        public event Action OnJumped
+        {
+            add => _pushComponent.OnPushed += value;
+            remove => _pushComponent.OnPushed -= value;
+        }
+        
         private readonly Rigidbody2D _rigidbody;
         private readonly float _cooldown;
         private readonly float _force;

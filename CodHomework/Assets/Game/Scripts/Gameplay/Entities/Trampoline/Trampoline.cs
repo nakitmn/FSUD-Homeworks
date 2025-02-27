@@ -15,6 +15,10 @@ namespace Game.Gameplay
                 .AsSingle()
                 .NonLazy();
             
+            Container.Bind<AudioSource>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
             Container.BindInterfacesAndSelfTo<PushUpComponent>()
                 .AsSingle()
                 .WithArguments(_cooldown, _force)
@@ -26,6 +30,7 @@ namespace Game.Gameplay
             Get<TriggerEntityDetectorComponent>().OnDetected += entity =>
             {
                 Get<PushUpComponent>().Push(entity);
+                Get<AudioSource>().Play();
             };
         }
     }

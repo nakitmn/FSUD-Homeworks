@@ -342,7 +342,7 @@ MonoBehaviour:
   _moveSpeed: 20
   _jumpForce: 15
   _jumpCooldown: 2
-  _maxHealth: 2
+  _maxHealth: 20
   _pushSideForce: 10
   _pushSideCooldown: 3
   _pushUpForce: 20
@@ -350,6 +350,10 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5973739499012079652}
   _damagedColor: {r: 0.6226415, g: 0.014684939, b: 0.014684939, a: 1}
   _damagedEffectDuration: 0.75
+  _jumpClip: {fileID: 8300000, guid: 4a3d24c7a7d02497a9aa7b0018822e35, type: 3}
+  _damagedClip: {fileID: 8300000, guid: 32f565ba94f200f49adb407cce64e873, type: 3}
+  _pushUpClip: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}
+  _pushOutClip: {fileID: 8300000, guid: a2fb8d4706a16468592a6e50aa24de65, type: 3}
 --- !u!114 &3556995402340944546
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ namespace Game.Gameplay
 {
     public sealed class PushUpComponent : IInitializable
     {
+        public event Action OnPushed;
+        
         private readonly float _cooldown;
         private readonly float _force;
 
@@ -46,6 +48,8 @@ namespace Game.Gameplay
             }
 
             _reloadComponent.Reload();
+            
+            OnPushed?.Invoke();
         }
 
         public void Push(IEntity entity)
@@ -57,6 +61,8 @@ namespace Game.Gameplay
 
             PushInternal(entity);
             _reloadComponent.Reload();
+            
+            OnPushed?.Invoke();
         }
 
         private void PushInternal(IEntity entity)
