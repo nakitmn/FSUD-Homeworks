@@ -508,7 +508,7 @@ MonoBehaviour:
   _maxHealth: 5
   _damage: 1
   _pushCooldown: 0
-  _pushForce: 15
+  _pushForce: 10
   _moveSpeed: 10
   _stoppingDistance: 0.5
   _spriteRenderer: {fileID: 3123733364965956949}

@@ -298,9 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db00388c7372483ab659db01cb01f9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 30
-  _cooldown: 0
-  _sfx: {fileID: 8300000, guid: 08ef3735b9527d54ab97d0e9fc9d505d, type: 3}
+  _force: 20
 --- !u!114 &3617261339959795206
 MonoBehaviour:
   m_ObjectHideFlags: 0

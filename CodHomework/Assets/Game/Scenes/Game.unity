@@ -3573,7 +3573,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1345320233880379638, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: _force
-      value: 60
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 2682617834291874480, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_Size.x
@@ -4350,7 +4350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointsComponent: {fileID: 1886539876}
-  _speed: 2
+  _speed: 1.85
 --- !u!1001 &1887610911
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -362,13 +362,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flipTransform: {fileID: 4102650447071868940}
   _moveSpeed: 20
-  _jumpForce: 15
-  _jumpCooldown: 2
-  _maxHealth: 20
-  _pushSideForce: 10
-  _pushSideCooldown: 3
-  _pushUpForce: 20
-  _pushUpCooldown: 5
+  _jumpForce: 7
+  _jumpCooldown: 1
+  _maxHealth: 10
+  _pushSideForce: 15
+  _pushSideCooldown: 1
+  _pushUpForce: 7
+  _pushUpCooldown: 1
   _spriteRenderer: {fileID: 5973739499012079652}
   _damagedColor: {r: 0.6226415, g: 0.014684939, b: 0.014684939, a: 1}
   _damagedEffectDuration: 0.75
