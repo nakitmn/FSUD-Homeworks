@@ -50,6 +50,10 @@ namespace Game.Gameplay
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<TakeDamageComponent>()
+                .AsSingle()
+                .NonLazy();
 
             Container.BindInterfacesAndSelfTo<PushUpComponent>()
                 .AsSingle()
@@ -84,9 +88,9 @@ namespace Game.Gameplay
             
             Get<TriggerEntityDetectorComponent>().OnDetected += entity =>
             {
-                if (entity.TryGet<Health>(out var health))
+                if (entity.TryGet<TakeDamageComponent>(out var takeDamageComponent))
                 {
-                    health.Damage(_damage);
+                    takeDamageComponent.Damage(_damage);
                     Get<PushUpComponent>().Push(entity);
                 }
             };

@@ -94,6 +94,10 @@ namespace Game.Gameplay
                 .FromMethod(() => new Health(_maxHealth))
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<TakeDamageComponent>()
+                .AsSingle()
+                .NonLazy();
 
             Container.BindInterfacesAndSelfTo<DamageEffectComponent>()
                 .AsSingle()

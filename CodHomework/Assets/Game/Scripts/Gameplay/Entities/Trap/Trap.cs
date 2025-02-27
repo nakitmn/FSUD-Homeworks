@@ -14,7 +14,12 @@ namespace Game.Gameplay
                 .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
-            
+
+            Container.Bind<Health>()
+                .FromMethod(() => new Health())
+                .AsSingle()
+                .NonLazy();
+
             Container.Bind<DamagableEntityDetectorComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle()
@@ -23,10 +28,13 @@ namespace Game.Gameplay
 
         public override void Start()
         {
+            var healthComponent = Get<Health>();
+            healthComponent.OnDied += () => gameObject.SetActive(false);
+
             Get<DamagableEntityDetectorComponent>().OnDetected += entity =>
             {
                 entity.Get<Health>().Damage(_damage);
-                gameObject.SetActive(false);
+                healthComponent.InstantDie();
             };
         }
     }
