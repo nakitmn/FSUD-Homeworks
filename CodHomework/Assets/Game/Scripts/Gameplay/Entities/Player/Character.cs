@@ -6,25 +6,42 @@ namespace Game.Gameplay
 {
     public sealed class Character : MonoEntity
     {
+        private static readonly int JumpKey = Animator.StringToHash("Jump");
+        
+        [Header("Movement")] 
         [SerializeField] private Transform _flipTransform;
         [SerializeField] private float _moveSpeed;
-        [Header("Jump")] [SerializeField] private float _jumpForce;
+        
+        [Header("Jump")] 
+        [SerializeField] private float _jumpForce;
         [SerializeField] private float _jumpCooldown;
-        [Header("Health")] [SerializeField] private int _maxHealth;
-        [Header("Push Side")] [SerializeField] private float _pushSideForce;
+        
+        [Header("Health")] 
+        [SerializeField] private int _maxHealth;
+        
+        [Header("Push Side")] 
+        [SerializeField] private float _pushSideForce;
         [SerializeField] private float _pushSideCooldown;
-        [Header("Push Up")] [SerializeField] private float _pushUpForce;
+        
+        [Header("Push Up")] 
+        [SerializeField] private float _pushUpForce;
         [SerializeField] private float _pushUpCooldown;
 
-        [Space(10)] [Header("Visual")] [SerializeField]
-        private SpriteRenderer _spriteRenderer;
-
+        [Space(10)] 
+        [Header("Visual")] 
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Color _damagedColor;
         [SerializeField] private float _damagedEffectDuration;
-        [Header("Sfx")] [SerializeField] private AudioClip _jumpClip;
+        
+        [Header("SFX")] 
+        [SerializeField] private AudioClip _jumpClip;
         [SerializeField] private AudioClip _damagedClip;
         [SerializeField] private AudioClip _pushUpClip;
         [SerializeField] private AudioClip _pushOutClip;
+        
+        [Header("VFX")] 
+        [SerializeField] private ParticleSystem _pushUpParticle;
+        [SerializeField] private ParticleSystem _pushOutParticle;
 
         public override void InstallBindings()
         {
@@ -33,6 +50,10 @@ namespace Game.Gameplay
                 .AsSingle();
 
             Container.Bind<AudioSource>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<Animator>()
                 .FromComponentInHierarchy()
                 .AsSingle();
 
@@ -99,16 +120,28 @@ namespace Game.Gameplay
             var jumpComponent = Get<JumpComponent>();
             jumpComponent.AddCondition(() => healthComponent.IsAlive);
             jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
-            jumpComponent.OnJumped += () => Get<AudioSource>().PlayOneShot(_jumpClip);
+            jumpComponent.OnJumped += () =>
+            {
+                Get<AudioSource>().PlayOneShot(_jumpClip);
+                Get<Animator>().SetTrigger(JumpKey);
+            };
 
             var pushOutComponent = Get<PushOutComponent>();
             pushOutComponent.AddCondition(() => healthComponent.IsAlive);
-            pushOutComponent.OnPushed += () => Get<AudioSource>().PlayOneShot(_pushOutClip);
+            pushOutComponent.OnPushed += () =>
+            {
+                Get<AudioSource>().PlayOneShot(_pushOutClip);
+                _pushOutParticle.Play();
+            };
 
             var pushUpComponent = Get<PushUpComponent>();
             pushUpComponent.AddCondition(() => healthComponent.IsAlive);
             pushUpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
-            pushUpComponent.OnPushed += () => Get<AudioSource>().PlayOneShot(_pushUpClip);
+            pushUpComponent.OnPushed += () =>
+            {
+                Get<AudioSource>().PlayOneShot(_pushUpClip);
+                _pushUpParticle.Play();
+            };
         }
 
         public void Jump()
