@@ -20,7 +20,7 @@ namespace Game.Gameplay
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<DamagableEntityDetectorComponent>()
+            Container.Bind<CollisionEntityDetectorComponent>()
                 .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
@@ -31,10 +31,13 @@ namespace Game.Gameplay
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
 
-            Get<DamagableEntityDetectorComponent>().OnDetected += entity =>
+            Get<CollisionEntityDetectorComponent>().OnDetected += entity =>
             {
-                entity.Get<Health>().Damage(_damage);
-                healthComponent.InstantDie();
+                if (entity.TryGet<TakeDamageComponent>(out var takeDamageComponent))
+                {
+                    takeDamageComponent.Damage(_damage);
+                    healthComponent.InstantDie();
+                }
             };
         }
     }

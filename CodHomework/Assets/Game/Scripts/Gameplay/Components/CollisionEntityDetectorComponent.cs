@@ -1,11 +1,10 @@
 ﻿using System;
 using Modules.Entity;
-using Modules.Health;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public sealed class DamagableEntityDetectorComponent : MonoBehaviour
+    public sealed class CollisionEntityDetectorComponent : MonoBehaviour
     {
         public event Action<IEntity> OnDetected;
 
@@ -17,10 +16,7 @@ namespace Game.Gameplay
                 return;
             }
             
-            if (entity.TryGet<Health>(out _))
-            {
-                OnDetected?.Invoke(entity);
-            }
+            OnDetected?.Invoke(entity);
         }
     }
 }
