@@ -103,26 +103,27 @@ namespace Game.Gameplay
 
         public override void Start()
         {
+            var audioSource = Get<AudioSource>();
+            var groundedCheckComponent = Get<GroundedCheckComponent>();
+
             var healthComponent = Get<Health>();
             healthComponent.OnDied += () => gameObject.SetActive(false);
             healthComponent.OnDamaged += _ =>
             {
                 Get<DamageEffectComponent>().Play();
-                Get<AudioSource>().PlayOneShot(_damagedClip);
+                audioSource.PlayOneShot(_damagedClip);
             };
 
-            var moveComponent = Get<MoveComponent>();
-            moveComponent.AddCondition(() => healthComponent.IsAlive);
+            Get<MoveComponent>().AddCondition(() => healthComponent.IsAlive);
 
-            var faceComponent = Get<FaceComponent>();
-            faceComponent.AddCondition(() => healthComponent.IsAlive);
+            Get<FaceComponent>().AddCondition(() => healthComponent.IsAlive);
 
             var jumpComponent = Get<JumpComponent>();
             jumpComponent.AddCondition(() => healthComponent.IsAlive);
-            jumpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            jumpComponent.AddCondition(groundedCheckComponent.IsGrounded);
             jumpComponent.OnJumped += () =>
             {
-                Get<AudioSource>().PlayOneShot(_jumpClip);
+                audioSource.PlayOneShot(_jumpClip);
                 Get<Animator>().SetTrigger(JumpKey);
             };
 
@@ -130,16 +131,16 @@ namespace Game.Gameplay
             pushOutComponent.AddCondition(() => healthComponent.IsAlive);
             pushOutComponent.OnPushed += () =>
             {
-                Get<AudioSource>().PlayOneShot(_pushOutClip);
+                audioSource.PlayOneShot(_pushOutClip);
                 _pushOutParticle.Play();
             };
 
             var pushUpComponent = Get<PushUpComponent>();
             pushUpComponent.AddCondition(() => healthComponent.IsAlive);
-            pushUpComponent.AddCondition(Get<GroundedCheckComponent>().IsGrounded);
+            pushUpComponent.AddCondition(groundedCheckComponent.IsGrounded);
             pushUpComponent.OnPushed += () =>
             {
-                Get<AudioSource>().PlayOneShot(_pushUpClip);
+                audioSource.PlayOneShot(_pushUpClip);
                 _pushUpParticle.Play();
             };
         }

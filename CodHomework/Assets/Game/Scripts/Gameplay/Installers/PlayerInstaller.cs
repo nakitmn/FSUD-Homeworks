@@ -1,8 +1,10 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
-    public sealed class GameplayInstaller : MonoInstaller
+    [CreateAssetMenu(menuName = "Game/Installers/Player Installer", order = 0)]
+    public sealed class PlayerInstaller : ScriptableObjectInstaller
     {
         public override void InstallBindings()
         {

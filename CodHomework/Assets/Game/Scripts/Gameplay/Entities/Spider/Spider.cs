@@ -6,14 +6,21 @@ namespace Game.Gameplay
 {
     public sealed class Spider : MonoEntity
     {
+        [Header("Health")]  
         [SerializeField] private int _maxHealth = 3;
+        
+        [Header("Attack")]  
         [SerializeField] private int _damage;
         [SerializeField] private float _pushCooldown;
         [SerializeField] private float _pushForce;
+        
+        [Header("Movement")]  
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _stoppingDistance = 0.1f;
+        
         [Space(10)]
-        [Header("Visual")]  [SerializeField] private SpriteRenderer _spriteRenderer;
+        [Header("Visual")]  
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Color _damagedColor;
         [SerializeField] private float _damagedEffectDuration;
         
