@@ -1,21 +1,20 @@
-using Leopotam.EcsLite;
+﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
 namespace SampleGame
 {
-    public sealed class CharacterFireSystem : IEcsRunSystem
+    public sealed class ArcherFireSystem : IEcsRunSystem
     {
         private readonly EcsPrototype _projectile;
 
-        private readonly EcsFilterInject<Inc<CharacterTag>> _characters;
+        private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
         private readonly EcsPoolInject<UnitFireRequired> _firesRequired;
         private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
         private readonly EcsUseCaseInject<FireUseCase> _fireUseCase;
-        private readonly EcsUseCaseInject<AmmoUseCases> _ammoUseCase;
         private readonly EcsEventInject<FireEvent> _fireEvents;
         private readonly EcsWorldInject _world;
 
-        public CharacterFireSystem(EcsPrototype projectile)
+        public ArcherFireSystem(EcsPrototype projectile)
         {
             _projectile = projectile;
         }
@@ -38,11 +37,7 @@ namespace SampleGame
             if (!_healthUseCase.Value.Exists(entity))
                 return;
 
-            if (!_ammoUseCase.Value.Exists(entity))
-                return;
-
             //act
-            _ammoUseCase.Value.Spend(entity);
             _fireUseCase.Value.FireProjectile(entity, _projectile);
             _fireUseCase.Value.ResetCooldown(entity);
 

@@ -11,6 +11,7 @@ namespace SampleGame
         private readonly EcsPoolInject<TeamType> _teams;
         private readonly EcsPoolInject<FireOffset> _fireOffsets;
         private readonly EcsPoolInject<FireCooldown> _fireCooldown;
+        private readonly EcsPoolInject<FireDelay> _fireDelay;
 
         private readonly EcsEventInject<SpawnRequest> _spawnRequest;
 
@@ -38,11 +39,23 @@ namespace SampleGame
             ref FireCooldown cooldown = ref _fireCooldown.Value.Get(entity);
             return cooldown.current <= 0;
         }
+        
+        public bool IsDelayExpired(in int entity)
+        {
+            ref var delay = ref _fireDelay.Value.Get(entity);
+            return delay.current <= 0;
+        }
 
         public void ResetCooldown(int entity)
         {
             ref FireCooldown cooldown = ref _fireCooldown.Value.Get(entity);
             cooldown.current = cooldown.duration;
+        }
+        
+        public void ResetDelay(int entity)
+        {
+            ref var delay = ref _fireDelay.Value.Get(entity);
+            delay.current = delay.duration;
         }
     }
 }

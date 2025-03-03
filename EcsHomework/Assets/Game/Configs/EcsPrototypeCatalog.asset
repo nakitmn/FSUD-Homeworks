@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: EcsPrototypeCatalog
   m_EditorClassIdentifier: 
   _prefabs:
+  - {fileID: 11400000, guid: 76bec78bccd27c242af4932769ff8ba3, type: 2}
   - {fileID: 11400000, guid: 58302540a04e20649bdef52a5d1db176, type: 2}

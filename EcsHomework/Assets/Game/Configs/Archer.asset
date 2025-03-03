@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c09c409edc4f85baf1a396393a7f5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5894bf8d8ad047eaa98a76bbcfb51fdb, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _rotationSpeed: 0.2
   _health: 10
-  _fireCooldown: 0
+  _fireCooldown: 2
+  _attackDistance: 10
   _ammo: 5

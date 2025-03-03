@@ -1,11 +1,12 @@
 ﻿using Leopotam.EcsLite;
+using SampleGame.Entities.Core.Target;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace SampleGame
 {
     [CreateAssetMenu(
-        fileName = "Character",
+        fileName = "Archer",
         menuName = "SampleGame/Entities/New Archer"
     )]
     public sealed class ArcherPrototype : EcsPrototype
@@ -23,13 +24,17 @@ namespace SampleGame
         private float _fireCooldown;
 
         [SerializeField]
+        private float _attackDistance;
+        
+        [SerializeField]
         private int _ammo = 5;
 
         protected override void Install(in EcsWorld world, in int entity)
         {
-            world.GetPool<CharacterTag>().Add(entity);
+            world.GetPool<ArcherTag>().Add(entity);
             world.GetPool<UnitDirection>().Add(entity);
             world.GetPool<UnitFireRequired>().Add(entity);
+            world.GetPool<UnitAttackDistance>().Add(entity).value = _attackDistance;
 
             // world.GetPool<DeathTag>().Add(entity);
             world.GetPool<Health>().Add(entity) = new Health

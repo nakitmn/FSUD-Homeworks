@@ -38,9 +38,12 @@ namespace SampleGame
                 .Add(new RotationSystem())
                 .Add(new IncomeSystem())
 
-                .Add(new CharacterFireSystem(_projectilePrefab))
-                .Add(new CharacterMoveSystem())
-                .Add(new CharacterRotateSystem())
+                .Add(new ArcherSelectTargetSystem())
+                .Add(new ArcherMoveToTargetSystem())
+                .Add(new ArcherFireTargetSystem())
+                .Add(new ArcherFireSystem(_projectilePrefab))
+                .Add(new ArcherMoveSystem())
+                .Add(new ArcherRotateSystem())
 
                 .Add(new ProjectileIniitalizer())
                 .Add(new ProjectileCollisionSystem())
@@ -53,8 +56,8 @@ namespace SampleGame
                 .Add(new FireAnimSystem())
 
                 //Clear:
-                //.ClearEvents<TakeDamageEvent>()
-                //.ClearEvents<FireEvent>()
+                .ClearEvents<TakeDamageEvent>()
+                .ClearEvents<FireEvent>()
 
                 //Debug:
 #if UNITY_EDITOR
