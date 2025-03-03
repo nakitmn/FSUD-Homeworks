@@ -11,9 +11,6 @@ namespace SampleGame
     public sealed class EcsSystemsFactory : ScriptableObject
     {
         [SerializeField]
-        private InputMap _inputMap;
-        
-        [SerializeField]
         private TeamViewConfig _teamViewConfig;
 
         [SerializeField]
@@ -25,19 +22,12 @@ namespace SampleGame
         public IEcsSystems Create()
         {
             EcsWorld world = new EcsWorld();
-            world.AddSingleton(new InputData());
             world.AddSingleton(new PlayerData{money = _initialMoney});
             
             EcsSystems systems = new EcsSystems(world);
             
             systems.AddWorld(new EcsWorld(), EcsConsts.EventWorld);
             systems
-
-                //Input:
-                .Add(new InputSystem(_inputMap))
-                .Add(new PlayerMoveController())
-                .Add(new PlayerFireController())
-
                 //Game Logic
                 .Add(new SpawnSystem())
                 .Add(new LifetimeSystem())
@@ -52,7 +42,6 @@ namespace SampleGame
                 .Add(new CharacterMoveSystem())
                 .Add(new CharacterRotateSystem())
 
-                .Add(new UfoMoveSystem())
                 .Add(new ProjectileIniitalizer())
                 .Add(new ProjectileCollisionSystem())
 

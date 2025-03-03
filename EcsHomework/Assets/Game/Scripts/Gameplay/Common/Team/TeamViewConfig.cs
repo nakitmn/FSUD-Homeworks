@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SampleGame
 {
@@ -29,7 +28,6 @@ namespace SampleGame
         [Serializable]
         public sealed class TeamInfo
         {
-            [FormerlySerializedAs("_team")]
             [SerializeField]
             private TeamType type;
 
@@ -44,11 +42,6 @@ namespace SampleGame
             public TeamType Type
             {
                 get { return type; }
-            }
-
-            public int CameraDisplay
-            {
-                get { return (int) this.type - 1; }
             }
         }
     }

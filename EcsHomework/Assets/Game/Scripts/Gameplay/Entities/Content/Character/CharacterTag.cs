@@ -1,9 +1,7 @@
-using System;
+﻿using System;
 
-namespace SampleGame
+[Serializable]
+public struct CharacterTag
 {
-    [Serializable]
-    public struct CharacterTag
-    {
-    }
+    
 }
