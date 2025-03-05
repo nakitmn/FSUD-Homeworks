@@ -6,8 +6,7 @@ namespace SampleGame
 {
     public sealed class ArcherFireTargetSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<ArcherTag, Target>> _characters;
-        private readonly EcsPoolInject<UnitAttackDistance> _attackDistances;
+        private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
         private readonly EcsPoolInject<UnitFireRequired> _fireRequired;
         private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
 
@@ -15,10 +14,10 @@ namespace SampleGame
         {
             foreach (int entity in _characters.Value)
             {
-                ref var attackDistance = ref _attackDistances.Value.Get(entity);
                 ref var fireRequired = ref _fireRequired.Value.Get(entity);
 
-                fireRequired.value = _targetUseCase.Value.GetDistance(entity) <= attackDistance.value;
+                fireRequired.value = _targetUseCase.Value.HasTarget(entity) 
+                                     && _targetUseCase.Value.IsTargetInAttackDistance(entity);
             }
         }
     }

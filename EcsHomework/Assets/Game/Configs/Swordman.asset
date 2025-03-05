@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5894bf8d8ad047eaa98a76bbcfb51fdb, type: 3}
-  m_Name: Archer
+  m_Script: {fileID: 11500000, guid: f1dd6174387a4213817d9f8102b5ae7d, type: 3}
+  m_Name: Swordman
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _rotationSpeed: 10
-  _health: 3
-  _fireCooldown: 2
-  _attackDistance: 10
-  _ammo: 5
+  _health: 5
+  _fireCooldown: 1
+  _attackDistance: 3

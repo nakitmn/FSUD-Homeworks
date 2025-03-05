@@ -1,10 +1,11 @@
 ﻿using System;
+using Leopotam.EcsLite;
 
 namespace SampleGame.Entities.Core.Target
 {
     [Serializable]
     public struct Target
     {
-        public int entity;
+        public EcsPackedEntity entity;
     }
 }

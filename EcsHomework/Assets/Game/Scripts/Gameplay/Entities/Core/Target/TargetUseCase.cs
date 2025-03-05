@@ -8,19 +8,32 @@ namespace SampleGame.Entities.Core.Target
     {
         private readonly EcsPoolInject<Target> _targets;
         private readonly EcsPoolInject<Position> _positions;
+        private readonly EcsPoolInject<UnitAttackDistance> _attackDistances;
         private readonly EcsUseCaseInject<TeamUseCase> _teamUseCase;
         private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
+        private readonly EcsWorldInject _world;
+
+        public bool IsTargetExist(in int entity, out int unpackedTarget)
+        {
+            return _targets.Value.Get(entity).entity.Unpack(_world.Value, out unpackedTarget);
+        }
 
         public bool IsTargetAlive(in int entity)
         {
-            return _healthUseCase.Value.Exists(_targets.Value.Get(entity).entity);
+            return IsTargetExist(entity, out var target) && _healthUseCase.Value.Exists(target);
+        }
+
+        public bool IsTargetInAttackDistance(in int entity)
+        {
+            return GetDistance(entity) <= _attackDistances.Value.Get(entity).value;
         }
 
         public float GetDistance(in int entity)
         {
             ref var target = ref _targets.Value.Get(entity);
+            target.entity.Unpack(_world.Value, out int targetEntity);
             ref var selfPosition = ref _positions.Value.Get(entity);
-            ref var targetPosition = ref _positions.Value.Get(target.entity);
+            ref var targetPosition = ref _positions.Value.Get(targetEntity);
 
             return math.distance(selfPosition.value, targetPosition.value);
         }
@@ -28,8 +41,9 @@ namespace SampleGame.Entities.Core.Target
         public float3 GetDirection(in int entity)
         {
             ref var target = ref _targets.Value.Get(entity);
+            target.entity.Unpack(_world.Value, out int targetEntity);
             ref var selfPosition = ref _positions.Value.Get(entity);
-            ref var targetPosition = ref _positions.Value.Get(target.entity);
+            ref var targetPosition = ref _positions.Value.Get(targetEntity);
 
             return math.normalize(targetPosition.value - selfPosition.value);
         }
@@ -68,6 +82,11 @@ namespace SampleGame.Entities.Core.Target
             }
 
             return targetEntity > -1;
+        }
+
+        public bool HasTarget(int entity)
+        {
+            return _targets.Value.Has(entity);
         }
     }
 }

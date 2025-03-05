@@ -5,26 +5,26 @@ using Unity.Mathematics;
 
 namespace SampleGame
 {
-    public sealed class ArcherMoveToTargetSystem : IEcsRunSystem
+    public sealed class ArcherMoveDirectionSetSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<ArcherTag, Target>> _characters;
-        private readonly EcsPoolInject<UnitDirection> _directions;
-        private readonly EcsPoolInject<UnitAttackDistance> _attackDistances;
+        private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
+        private readonly EcsPoolInject<UnitMoveDirection> _directions;
         private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
 
         public void Run(IEcsSystems systems)
         {
             foreach (int entity in _characters.Value)
             {
-                ref var attackDistance = ref _attackDistances.Value.Get(entity);
                 ref var direction = ref _directions.Value.Get(entity);
 
-                if (_targetUseCase.Value.GetDistance(entity) <= attackDistance.value)
+                if (_targetUseCase.Value.HasTarget(entity) == false
+                    || _targetUseCase.Value.IsTargetInAttackDistance(entity)
+                   )
                 {
                     direction.value = float3.zero;
                     continue;
                 }
-                
+
                 direction.value = _targetUseCase.Value.GetDirection(entity);
             }
         }

@@ -38,12 +38,14 @@ namespace SampleGame
                 .Add(new RotationSystem())
                 .Add(new IncomeSystem())
 
-                .Add(new ArcherSelectTargetSystem())
-                .Add(new ArcherMoveToTargetSystem())
+                .Add(new UnitSelectTargetSystem())
+                .Add(new UnitMoveSystem())
+                .Add(new UnitRotateSystem())
+                
+                .Add(new ArcherMoveDirectionSetSystem())
+                .Add(new ArcherRotateDirectionSetSystem())
                 .Add(new ArcherFireTargetSystem())
                 .Add(new ArcherFireSystem(_projectilePrefab))
-                .Add(new ArcherMoveSystem())
-                .Add(new ArcherRotateSystem())
 
                 .Add(new ProjectileIniitalizer())
                 .Add(new ProjectileCollisionSystem())

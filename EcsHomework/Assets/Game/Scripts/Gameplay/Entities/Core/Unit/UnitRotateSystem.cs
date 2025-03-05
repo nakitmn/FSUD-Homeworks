@@ -3,22 +3,22 @@ using Leopotam.EcsLite.Di;
 
 namespace SampleGame
 {
-    public sealed class ArcherRotateSystem : IEcsRunSystem
+    public sealed class UnitRotateSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
-        private readonly EcsPoolInject<UnitDirection> _unitDirections;
+        private readonly EcsFilterInject<Inc<ArcherTag>> _units;
+        private readonly EcsPoolInject<UnitRotateDirection> _unitRotateDirections;
         private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
         private readonly EcsUseCaseInject<RotateUseCase> _rotateUseCase;
 
         public void Run(IEcsSystems systems)
         {
-            foreach (int entity in _characters.Value)
+            foreach (int entity in _units.Value)
             {
                 bool healthExists = _healthUseCase.Value.Exists(entity);
                 _rotateUseCase.Value.SetEnabled(entity, healthExists);
                 
-                ref UnitDirection unitDirection = ref _unitDirections.Value.Get(entity);
-                _rotateUseCase.Value.SetDirection(entity, unitDirection.value);
+                ref UnitRotateDirection rotateDirection = ref _unitRotateDirections.Value.Get(entity);
+                _rotateUseCase.Value.SetDirection(entity, rotateDirection.value);
             }
         }
     }

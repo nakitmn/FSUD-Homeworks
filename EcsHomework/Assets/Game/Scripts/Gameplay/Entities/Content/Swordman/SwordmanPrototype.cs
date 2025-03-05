@@ -5,10 +5,10 @@ using UnityEngine;
 namespace SampleGame
 {
     [CreateAssetMenu(
-        fileName = "Archer",
-        menuName = "SampleGame/Entities/New Archer"
+        fileName = "Swordman",
+        menuName = "SampleGame/Entities/New Swordman"
     )]
-    public sealed class ArcherPrototype : EcsPrototype
+    public sealed class SwordmanPrototype : EcsPrototype
     {
         [SerializeField]
         private float _moveSpeed = 3;
@@ -24,13 +24,10 @@ namespace SampleGame
 
         [SerializeField]
         private float _attackDistance;
-        
-        [SerializeField]
-        private int _ammo = 5;
 
         protected override void Install(in EcsWorld world, in int entity)
         {
-            world.GetPool<ArcherTag>().Add(entity);
+            world.GetPool<SwordmanTag>().Add(entity);
 
             //Unit
             world.GetPool<UnitTag>().Add(entity);
@@ -39,7 +36,7 @@ namespace SampleGame
             world.GetPool<UnitFireRequired>().Add(entity);
             world.GetPool<UnitAttackDistance>().Add(entity).value = _attackDistance;
             
-             world.GetPool<DeathTag>().Add(entity);
+            world.GetPool<DeathTag>().Add(entity);
             world.GetPool<Health>().Add(entity) = new Health
             {
                 current = _health,
@@ -49,20 +46,14 @@ namespace SampleGame
             //Move
             world.GetPool<MoveableTag>().Add(entity);
             world.GetPool<MoveSpeed>().Add(entity).value = _moveSpeed;
-            world.GetPool<MoveDirection>().Add(entity).value = new float3(0, 0, 1);
+            world.GetPool<MoveDirection>().Add(entity);
 
             //Rotate
             world.GetPool<RotatableTag>().Add(entity);
-            world.GetPool<RotateDirection>().Add(entity).value = new float3(0, 0, -1);
+            world.GetPool<RotateDirection>().Add(entity);
             world.GetPool<RotationSpeed>().Add(entity).value = _rotationSpeed;
             
             //Fire:
-            world.GetPool<Ammo>().Add(entity) = new Ammo
-            {
-                current = _ammo,
-                max = _ammo
-            };
-            world.GetPool<FireOffset>().Add(entity).value = new float3(0, 1, 1);
             world.GetPool<FireCooldown>().Add(entity) = new FireCooldown
             {
                 current = 0,
