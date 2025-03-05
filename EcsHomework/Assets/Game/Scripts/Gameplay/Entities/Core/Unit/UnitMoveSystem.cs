@@ -5,7 +5,7 @@ namespace SampleGame
 {
     public sealed class UnitMoveSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<UnitTag>> _units;
+        private readonly EcsFilterInject<Inc<UnitTag, MoveableTag>> _units;
         private readonly EcsPoolInject<UnitMoveDirection> _unitDirections;
         private readonly EcsUseCaseInject<MoveUseCase> _moveUseCase;
         private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
