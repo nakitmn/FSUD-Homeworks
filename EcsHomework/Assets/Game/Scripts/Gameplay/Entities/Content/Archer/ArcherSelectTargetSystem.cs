@@ -9,42 +9,25 @@ namespace SampleGame
     {
         private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
         private readonly EcsPoolInject<Target> _targets;
-        private readonly EcsPoolInject<Position> _positions;
-        private readonly EcsFilterInject<Inc<TeamType>> _teams;
+        private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
 
         public void Run(IEcsSystems systems)
         {
             foreach (int entity in _characters.Value)
             {
-                ref var entityPosition = ref _positions.Value.Get(entity);
-                ref var entityTeam = ref _teams.Pools.Inc1.Get(entity);
-
-                var closest = float.MaxValue;
-
-                foreach (var targetEntity in _teams.Value)
+                if (_targets.Value.Has(entity))
                 {
-                    ref var targetEntityPosition = ref _positions.Value.Get(targetEntity);
-                    ref var targetEntityTeam = ref _teams.Pools.Inc1.Get(targetEntity);
-
-                    if (targetEntityTeam == entityTeam)
+                    if (_targetUseCase.Value.IsTargetAlive(entity))
                     {
                         continue;
                     }
 
-                    var distance = math.distance(targetEntityPosition.value, entityPosition.value);
-                    if (distance < closest)
-                    {
-                        if (_targets.Value.Has(entity))
-                        {
-                            _targets.Value.Get(entity).entity = targetEntity;
-                        }
-                        else
-                        {
-                            _targets.Value.Add(entity).entity = targetEntity;
-                        }
-                        
-                        closest = distance;
-                    }
+                    _targets.Value.Del(entity);
+                }
+
+                if (_targetUseCase.Value.GetClosest(entity, _characters.Value, out var targetEntity))
+                {
+                    _targets.Value.Add(entity).entity = targetEntity;
                 }
             }
         }

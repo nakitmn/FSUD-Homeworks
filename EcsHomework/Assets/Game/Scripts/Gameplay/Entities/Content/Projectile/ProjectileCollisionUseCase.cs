@@ -8,6 +8,7 @@ namespace SampleGame
         private readonly EcsWorldInject _world;
         private readonly EcsPoolInject<Damage> _damages;
         private readonly EcsUseCaseInject<TakeDamageUseCase> _takeDamageUseCase;
+        private readonly EcsUseCaseInject<TeamUseCase> _teamUseCase;
         private readonly EcsEventInject<DespawnRequest> _despawnRequests;
 
         public bool Collide(in EcsPackedEntity projectile, in EcsPackedEntity target)
@@ -21,6 +22,9 @@ namespace SampleGame
         
         public bool Collide(in int projectile, in int target)
         {
+            if (_teamUseCase.Value.AreEnemies(projectile, target) == false)
+                return false;
+            
             ref Damage damage = ref _damages.Value.Get(projectile);
             EcsPackedEntity source = _world.Value.PackEntity(projectile);
 
