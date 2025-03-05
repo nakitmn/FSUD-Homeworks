@@ -15,5 +15,6 @@ MonoBehaviour:
   _moveSpeed: 3
   _rotationSpeed: 10
   _health: 5
-  _fireCooldown: 1
+  _fireCooldown: 2
   _attackDistance: 3
+  _damage: 1

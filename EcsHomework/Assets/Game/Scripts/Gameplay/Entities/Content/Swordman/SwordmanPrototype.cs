@@ -25,9 +25,13 @@ namespace SampleGame
         [SerializeField]
         private float _attackDistance;
 
+        [SerializeField]
+        private int _damage = 1;
+        
         protected override void Install(in EcsWorld world, in int entity)
         {
             world.GetPool<SwordmanTag>().Add(entity);
+            world.GetPool<MeleeCombatTag>().Add(entity);
 
             //Unit
             world.GetPool<UnitTag>().Add(entity);
@@ -42,6 +46,9 @@ namespace SampleGame
                 current = _health,
                 max = _health
             };
+            
+            //Damage
+            world.GetPool<Damage>().Add(entity).value = _damage;
             
             //Move
             world.GetPool<MoveableTag>().Add(entity);

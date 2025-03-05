@@ -5,7 +5,7 @@ namespace SampleGame
 {
     public sealed class UnitRotateSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<ArcherTag>> _units;
+        private readonly EcsFilterInject<Inc<UnitTag>> _units;
         private readonly EcsPoolInject<UnitRotateDirection> _unitRotateDirections;
         private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
         private readonly EcsUseCaseInject<RotateUseCase> _rotateUseCase;

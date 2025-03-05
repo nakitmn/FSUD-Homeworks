@@ -4,9 +4,9 @@ using SampleGame.Entities.Core.Target;
 
 namespace SampleGame
 {
-    public sealed class ArcherFireTargetSystem : IEcsRunSystem
+    public sealed class SwordmanFireSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
+        private readonly EcsFilterInject<Inc<SwordmanTag>> _characters;
         private readonly EcsPoolInject<UnitFireRequired> _fireRequired;
         private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
 

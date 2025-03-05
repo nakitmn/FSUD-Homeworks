@@ -9,7 +9,7 @@ namespace SampleGame
         private readonly EcsFilterInject<Inc<UnitTag>> _units;
         private readonly EcsPoolInject<Target> _targets;
         private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
-        private EcsWorldInject _world;
+        private readonly EcsWorldInject _world;
 
         public void Run(IEcsSystems systems)
         {

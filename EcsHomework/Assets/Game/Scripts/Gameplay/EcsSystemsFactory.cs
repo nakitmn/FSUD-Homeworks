@@ -41,11 +41,16 @@ namespace SampleGame
                 .Add(new UnitSelectTargetSystem())
                 .Add(new UnitMoveSystem())
                 .Add(new UnitRotateSystem())
+                .Add(new RangerUnitFireSystem(_projectilePrefab))
+                .Add(new MeleeUnitFireSystem())
                 
                 .Add(new ArcherMoveDirectionSetSystem())
                 .Add(new ArcherRotateDirectionSetSystem())
-                .Add(new ArcherFireTargetSystem())
-                .Add(new ArcherFireSystem(_projectilePrefab))
+                .Add(new ArcherFireSystem())
+                
+                .Add(new SwordmanMoveDirectionSetSystem())
+                .Add(new SwordmanRotateDirectionSetSystem())
+                .Add(new SwordmanFireSystem())
 
                 .Add(new ProjectileIniitalizer())
                 .Add(new ProjectileCollisionSystem())

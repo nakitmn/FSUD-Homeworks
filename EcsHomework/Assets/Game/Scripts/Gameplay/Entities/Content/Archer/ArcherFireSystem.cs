@@ -1,48 +1,24 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using SampleGame.Entities.Core.Target;
 
 namespace SampleGame
 {
     public sealed class ArcherFireSystem : IEcsRunSystem
     {
-        private readonly EcsPrototype _projectile;
-
         private readonly EcsFilterInject<Inc<ArcherTag>> _characters;
-        private readonly EcsPoolInject<UnitFireRequired> _firesRequired;
-        private readonly EcsUseCaseInject<HealthUseCase> _healthUseCase;
-        private readonly EcsUseCaseInject<FireUseCase> _fireUseCase;
-        private readonly EcsEventInject<FireEvent> _fireEvents;
-        private readonly EcsWorldInject _world;
-
-        public ArcherFireSystem(EcsPrototype projectile)
-        {
-            _projectile = projectile;
-        }
+        private readonly EcsPoolInject<UnitFireRequired> _fireRequired;
+        private readonly EcsUseCaseInject<TargetUseCase> _targetUseCase;
 
         public void Run(IEcsSystems systems)
         {
             foreach (int entity in _characters.Value)
-                this.Fire(entity);
-        }
+            {
+                ref var fireRequired = ref _fireRequired.Value.Get(entity);
 
-        private void Fire(int entity)
-        {
-            //cond
-            if (!_firesRequired.Value.Get(entity).value)
-                return;
-
-            if (!_fireUseCase.Value.IsCooldownExpired(entity))
-                return;
-
-            if (!_healthUseCase.Value.Exists(entity))
-                return;
-
-            //act
-            _fireUseCase.Value.FireProjectile(entity, _projectile);
-            _fireUseCase.Value.ResetCooldown(entity);
-
-            //event
-            _fireEvents.Value.Fire(new FireEvent {entity = _world.Value.PackEntity(entity)});
+                fireRequired.value = _targetUseCase.Value.HasTarget(entity) 
+                                     && _targetUseCase.Value.IsTargetInAttackDistance(entity);
+            }
         }
     }
 }

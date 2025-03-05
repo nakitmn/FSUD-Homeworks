@@ -31,6 +31,7 @@ namespace SampleGame
         protected override void Install(in EcsWorld world, in int entity)
         {
             world.GetPool<ArcherTag>().Add(entity);
+            world.GetPool<RangerCombatTag>().Add(entity);
 
             //Unit
             world.GetPool<UnitTag>().Add(entity);
