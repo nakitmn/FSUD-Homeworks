@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61590a85752480588800ee07bf20550, type: 3}
+  m_Name: RedTeamSpawner
+  m_EditorClassIdentifier: 
+  _unitsToSpawn:
+  - {fileID: 11400000, guid: 58302540a04e20649bdef52a5d1db176, type: 2}
+  - {fileID: 11400000, guid: ac3df2541d317634b848abf4a8f2f137, type: 2}
+  _spawnCooldown: 5
+  _team: 1

@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class FireCooldownSystem : IEcsRunSystem
+    public sealed class CooldownSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<FireCooldown>> _fireCooldowns;
+        private readonly EcsFilterInject<Inc<Cooldown>> _cooldowns;
 
         public void Run(IEcsSystems systems)
         {
-            foreach (int entity in _fireCooldowns.Value)
+            foreach (int entity in _cooldowns.Value)
             {
                 float deltaTime = Time.deltaTime;
-                ref FireCooldown cooldown = ref _fireCooldowns.Pools.Inc1.Get(entity);
+                ref Cooldown cooldown = ref _cooldowns.Pools.Inc1.Get(entity);
                 if (cooldown.current > 0)
                     cooldown.current -= deltaTime;
             }

@@ -10,7 +10,7 @@ namespace SampleGame
         private readonly EcsPoolInject<Rotation> _rotations;
         private readonly EcsPoolInject<TeamType> _teams;
         private readonly EcsPoolInject<FireOffset> _fireOffsets;
-        private readonly EcsPoolInject<FireCooldown> _fireCooldown;
+        private readonly EcsPoolInject<Cooldown> _fireCooldown;
         private readonly EcsPoolInject<FireDelay> _fireDelay;
 
         private readonly EcsEventInject<SpawnRequest> _spawnRequest;
@@ -36,7 +36,7 @@ namespace SampleGame
 
         public bool IsCooldownExpired(in int entity)
         {
-            ref FireCooldown cooldown = ref _fireCooldown.Value.Get(entity);
+            ref Cooldown cooldown = ref _fireCooldown.Value.Get(entity);
             return cooldown.current <= 0;
         }
         
@@ -48,7 +48,7 @@ namespace SampleGame
 
         public void ResetCooldown(int entity)
         {
-            ref FireCooldown cooldown = ref _fireCooldown.Value.Get(entity);
+            ref Cooldown cooldown = ref _fireCooldown.Value.Get(entity);
             cooldown.current = cooldown.duration;
         }
         

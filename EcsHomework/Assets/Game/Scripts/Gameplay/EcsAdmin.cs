@@ -17,13 +17,24 @@ namespace SampleGame
         [SerializeField]
         private EcsWorldView _worldView;
 
+        [SerializeField] 
+        private SceneData _sceneData;
+
+        [SerializeField] 
+        private EcsPrototype[] _createOnStart;
+        
         private void Awake()
         {
             IEcsSystems systems = _systemsFactory.Create();
             _baker.BakeScene(systems.GetWorld());
+            
+            foreach (var prefab in _createOnStart)
+            {
+                prefab.Create(systems.GetWorld());
+            }
 
             systems
-                .Inject()
+                .Inject(_sceneData)
                 .Init();
 
             Systems = systems;

@@ -61,7 +61,7 @@ namespace SampleGame
             world.GetPool<RotationSpeed>().Add(entity).value = _rotationSpeed;
             
             //Fire:
-            world.GetPool<FireCooldown>().Add(entity) = new FireCooldown
+            world.GetPool<Cooldown>().Add(entity) = new Cooldown
             {
                 current = 0,
                 duration = _fireCooldown

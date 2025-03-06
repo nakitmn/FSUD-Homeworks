@@ -6,7 +6,6 @@ namespace SampleGame
 {
     public sealed class GameDebug : MonoBehaviour
     {
-
         private IEcsSystems _ecsSystems;
 
         private void Start()

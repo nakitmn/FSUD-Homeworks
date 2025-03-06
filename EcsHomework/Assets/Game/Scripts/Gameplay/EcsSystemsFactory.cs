@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
+using SampleGame.TeamSpawner;
 using UnityEngine;
 
 namespace SampleGame
@@ -31,7 +32,7 @@ namespace SampleGame
                 //Game Logic
                 .Add(new SpawnSystem())
                 .Add(new LifetimeSystem())
-                .Add(new FireCooldownSystem())
+                .Add(new CooldownSystem())
                 .Add(new DeathSystem())
                 .Add(new DespawnSystem())
                 .Add(new MoveSystem())
@@ -55,6 +56,8 @@ namespace SampleGame
                 .Add(new ProjectileIniitalizer())
                 .Add(new ProjectileCollisionSystem())
 
+                .Add(new TeamSpawnerSystem())
+                
                 //Rendering:
                 .Add(new TransformViewSystem())
                 .Add(new TeamViewSystem(_teamViewConfig))

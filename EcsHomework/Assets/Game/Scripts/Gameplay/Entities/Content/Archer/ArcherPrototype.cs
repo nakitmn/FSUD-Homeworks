@@ -64,7 +64,7 @@ namespace SampleGame
                 max = _ammo
             };
             world.GetPool<FireOffset>().Add(entity).value = new float3(0, 1, 1);
-            world.GetPool<FireCooldown>().Add(entity) = new FireCooldown
+            world.GetPool<Cooldown>().Add(entity) = new Cooldown
             {
                 current = 0,
                 duration = _fireCooldown

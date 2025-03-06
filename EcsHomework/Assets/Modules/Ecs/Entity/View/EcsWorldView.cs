@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SampleGame.TeamSpawner;
 using UnityEngine;
 
 namespace Leopotam.EcsLite
@@ -91,6 +92,11 @@ namespace Leopotam.EcsLite
 
         private void SpawnView(int entity)
         {
+            if (_world.GetPool<NonViewTag>().Has(entity))
+            {
+                return;
+            }
+            
             string name = this.GetEntityName(entity);
             EcsView view = _viewPool.Rent(name);
             view.transform.parent = _viewport;
