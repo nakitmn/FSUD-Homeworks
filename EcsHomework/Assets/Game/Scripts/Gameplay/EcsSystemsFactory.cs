@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
+using SampleGame.PurchaseUnit;
 using SampleGame.TeamSpawner;
 using UnityEngine;
 
@@ -58,6 +59,8 @@ namespace SampleGame
 
                 .Add(new TeamSpawnerSystem())
                 .Add(new DisableSpawnerSystem())
+                
+                .Add(new PurchaseUnitSystem())
                 
                 //Rendering:
                 .Add(new TransformViewSystem())

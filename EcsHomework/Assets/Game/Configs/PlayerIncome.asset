@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4095a1fd4e4142fbb8b341ef4d38bfb5, type: 3}
-  m_Name: EcsSystems
+  m_Script: {fileID: 11500000, guid: 920a8ce39cee4835ae8b4c12036dfcb8, type: 3}
+  m_Name: PlayerIncome
   m_EditorClassIdentifier: 
-  _teamViewConfig: {fileID: 11400000, guid: 1d84769b4e2226e438437a7c2a370623, type: 2}
-  _projectilePrefab: {fileID: 11400000, guid: 76bec78bccd27c242af4932769ff8ba3, type: 2}
-  _initialMoney: 0
+  _cooldown: 1
+  _amountPerStep: 1
