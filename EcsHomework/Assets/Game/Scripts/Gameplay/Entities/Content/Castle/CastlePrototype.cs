@@ -14,8 +14,11 @@ namespace SampleGame
 
         protected override void Install(in EcsWorld world, in int entity)
         {
+            world.GetPool<CastleTag>().Add(entity);
             world.GetPool<UnitTag>().Add(entity);
-
+            
+            world.GetPool<TeamType>().Add(entity);
+            
             world.GetPool<DeathTag>().Add(entity);
             world.GetPool<Health>().Add(entity) = new Health
             {

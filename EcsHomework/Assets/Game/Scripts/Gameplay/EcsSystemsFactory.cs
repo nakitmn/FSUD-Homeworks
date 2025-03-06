@@ -33,8 +33,8 @@ namespace SampleGame
                 .Add(new SpawnSystem())
                 .Add(new LifetimeSystem())
                 .Add(new CooldownSystem())
-                .Add(new DeathSystem())
                 .Add(new DespawnSystem())
+                .Add(new DeathSystem())
                 .Add(new MoveSystem())
                 .Add(new RotationSystem())
                 .Add(new IncomeSystem())
@@ -57,6 +57,7 @@ namespace SampleGame
                 .Add(new ProjectileCollisionSystem())
 
                 .Add(new TeamSpawnerSystem())
+                .Add(new DisableSpawnerSystem())
                 
                 //Rendering:
                 .Add(new TransformViewSystem())
@@ -67,6 +68,7 @@ namespace SampleGame
 
                 //Clear:
                 .ClearEvents<TakeDamageEvent>()
+                .ClearEvents<DeadEvent>()
                 .ClearEvents<FireEvent>()
 
                 //Debug:
