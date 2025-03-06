@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
+using SampleGame.GameOver;
 using SampleGame.PurchaseUnit;
 using SampleGame.TeamSpawner;
 using UnityEngine;
@@ -38,7 +39,9 @@ namespace SampleGame
                 .Add(new DeathSystem())
                 .Add(new MoveSystem())
                 .Add(new RotationSystem())
+                .Add(new GameOverSystem())
                 .Add(new IncomeSystem())
+                .Add(new DisableIncomeSystem())
 
                 .Add(new UnitSelectTargetSystem())
                 .Add(new UnitMoveSystem())

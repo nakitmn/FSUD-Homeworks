@@ -6,7 +6,7 @@ namespace SampleGame
 {
     public sealed class IncomeSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<IncomeTag>> _entities;
+        private readonly EcsFilterInject<Inc<IncomeTag, IncomeEnabled>> _entities;
         private readonly EcsPoolInject<IncomePeriod> _incomePeriods;
         private readonly EcsPoolInject<IncomeAmount> _incomeAmounts;
         private readonly EcsSingletonInject<PlayerData> _playerData;

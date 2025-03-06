@@ -1,24 +1,23 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SampleGame.TeamSpawner;
 
 namespace SampleGame
 {
-    public sealed class DisableSpawnerSystem : IEcsRunSystem
+    public sealed class DisableIncomeSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<TeamSpawnerTag, SpawningEnabled>> _teamSpawners;
+        private readonly EcsFilterInject<Inc<IncomeTag, IncomeEnabled>> _income;
         private readonly EcsSingletonInject<PlayerData> _playerData;
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var spawnerEntity in _teamSpawners.Value)
+            foreach (var spawnerEntity in _income.Value)
             {
                 if (_playerData.Value.isGameOver == false)
                 {
                     continue;
                 }
 
-                _teamSpawners.Pools.Inc2.Del(spawnerEntity);
+                _income.Pools.Inc2.Del(spawnerEntity);
             }
         }
     }

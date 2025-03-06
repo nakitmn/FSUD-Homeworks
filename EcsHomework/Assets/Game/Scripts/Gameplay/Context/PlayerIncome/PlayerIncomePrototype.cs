@@ -17,6 +17,7 @@ namespace SampleGame
         {
             world.GetPool<NonViewTag>().Add(entity);
             world.GetPool<IncomeTag>().Add(entity);
+            world.GetPool<IncomeEnabled>().Add(entity);
             world.GetPool<IncomeAmount>().Add(entity).value = _amountPerStep;
             world.GetPool<IncomePeriod>().Add(entity) = new IncomePeriod()
             {

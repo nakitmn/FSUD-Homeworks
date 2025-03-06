@@ -6,5 +6,6 @@ namespace SampleGame
     public sealed class PlayerData
     {
         public int money;
+        public bool isGameOver;
     }
 }
