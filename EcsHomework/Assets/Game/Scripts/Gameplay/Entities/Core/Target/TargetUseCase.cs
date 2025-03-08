@@ -15,7 +15,9 @@ namespace SampleGame.Entities.Core.Target
 
         public bool IsTargetExist(in int entity, out int unpackedTarget)
         {
-            return _targets.Value.Get(entity).entity.Unpack(_world.Value, out unpackedTarget);
+            unpackedTarget = -1;
+            return _targets.Value.Has(entity) 
+                   && _targets.Value.Get(entity).entity.Unpack(_world.Value, out unpackedTarget);
         }
 
         public bool IsTargetAlive(in int entity)

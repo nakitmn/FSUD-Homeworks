@@ -24,6 +24,9 @@ namespace SampleGame
 
         [SerializeField]
         private float _attackDistance;
+
+        [SerializeField] private float _attackDelay;
+        
         
         [SerializeField]
         private int _ammo = 5;
@@ -68,6 +71,11 @@ namespace SampleGame
             {
                 current = 0,
                 duration = _fireCooldown
+            };
+            world.GetPool<FireDelay>().Add(entity) = new FireDelay()
+            {
+                current = _attackDelay,
+                duration = _attackDelay
             };
         }
     }

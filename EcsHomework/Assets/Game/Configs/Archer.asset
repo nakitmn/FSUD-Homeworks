@@ -17,4 +17,5 @@ MonoBehaviour:
   _health: 3
   _fireCooldown: 2
   _attackDistance: 10
+  _attackDelay: 0.315
   _ammo: 5

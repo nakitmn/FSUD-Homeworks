@@ -40,6 +40,12 @@ namespace SampleGame
             return cooldown.current <= 0;
         }
         
+        public bool IsDelayEnabled(in int entity)
+        {
+            ref var delay = ref _fireDelay.Value.Get(entity);
+            return delay.enabled;
+        }
+        
         public bool IsDelayExpired(in int entity)
         {
             ref var delay = ref _fireDelay.Value.Get(entity);
@@ -56,6 +62,13 @@ namespace SampleGame
         {
             ref var delay = ref _fireDelay.Value.Get(entity);
             delay.current = delay.duration;
+            delay.enabled = true;
+        }
+
+        public void DisableFireDelay(int entity)
+        {
+            ref var delay = ref _fireDelay.Value.Get(entity);
+            delay.enabled = false;
         }
     }
 }

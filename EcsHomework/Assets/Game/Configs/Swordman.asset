@@ -18,3 +18,4 @@ MonoBehaviour:
   _fireCooldown: 2
   _attackDistance: 3
   _damage: 1
+  _attackDelay: 0.495

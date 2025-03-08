@@ -35,6 +35,7 @@ namespace SampleGame
                 .Add(new SpawnSystem())
                 .Add(new LifetimeSystem())
                 .Add(new CooldownSystem())
+                .Add(new FireDelaySystem())
                 .Add(new DespawnSystem())
                 .Add(new DeathSystem())
                 .Add(new MoveSystem())

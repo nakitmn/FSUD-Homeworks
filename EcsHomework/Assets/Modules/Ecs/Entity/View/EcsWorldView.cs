@@ -102,6 +102,10 @@ namespace Leopotam.EcsLite
             view.transform.parent = _viewport;
             view.Show(_world, entity);
             
+            if (_activeViews.ContainsKey(entity))
+            {
+                DespawnView(entity);
+            }
             _activeViews.Add(entity, view);
         }
 

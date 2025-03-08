@@ -30,19 +30,28 @@ namespace SampleGame
             //cond
             if (!_firesRequired.Value.Get(entity).value)
                 return;
-
-            if (!_fireUseCase.Value.IsCooldownExpired(entity))
-                return;
-
+            
             if (!_healthUseCase.Value.Exists(entity))
                 return;
 
-            //act
+            if (!_fireUseCase.Value.IsCooldownExpired(entity))
+                return;
+            
+            if (_fireUseCase.Value.IsDelayEnabled(entity) == false)
+            {
+                _fireUseCase.Value.ResetDelay(entity);
+                _fireEvents.Value.Fire(new FireEvent {entity = _world.Value.PackEntity(entity)});
+                return;
+            }
+            
+            if (_fireUseCase.Value.IsDelayExpired(entity) == false)
+            {
+                return;
+            }
+            
+            _fireUseCase.Value.DisableFireDelay(entity);
             _fireUseCase.Value.FireProjectile(entity, _projectile);
             _fireUseCase.Value.ResetCooldown(entity);
-
-            //event
-            _fireEvents.Value.Fire(new FireEvent {entity = _world.Value.PackEntity(entity)});
         }
     }
 }

@@ -27,7 +27,9 @@ namespace SampleGame
 
         [SerializeField]
         private int _damage = 1;
-        
+
+        [SerializeField] private float _attackDelay;
+
         protected override void Install(in EcsWorld world, in int entity)
         {
             world.GetPool<SwordmanTag>().Add(entity);
@@ -65,6 +67,11 @@ namespace SampleGame
             {
                 current = 0,
                 duration = _fireCooldown
+            };
+            world.GetPool<FireDelay>().Add(entity) = new FireDelay()
+            {
+                current = _attackDelay,
+                duration = _attackDelay
             };
         }
     }
