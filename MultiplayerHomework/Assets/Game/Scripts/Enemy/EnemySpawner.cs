@@ -1,12 +1,11 @@
 ﻿using Fusion;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace Game
 {
     public sealed class EnemySpawner : NetworkBehaviour
     {
+        [SerializeField] private SpawnPointService _spawnPointService;
         [SerializeField] private GameObject _portal;
         [SerializeField] private EnemyConfig _enemyConfig;
         [SerializeField] private int _count;
@@ -16,13 +15,6 @@ namespace Game
         [Networked] private TickTimer _spawnTimer { get; set; }
         [Networked] private int _spawnedCount { get; set; }
 
-        private SpawnPointService _spawnPointService;
-
-        [Inject]
-        public void Construct(SpawnPointService spawnPointService)
-        {
-            _spawnPointService = spawnPointService;
-        }
         
         public void StartSpawn()
         {

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8636445ca06b464589a5948220ca29f6, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
+  _prefab:
+    RawGuidValue: b5e3677b4a8dab949bfca93b64572662
   _damage: 1
   _playerDamageCooldown: 1
   _reward: {x: 1, y: 5}

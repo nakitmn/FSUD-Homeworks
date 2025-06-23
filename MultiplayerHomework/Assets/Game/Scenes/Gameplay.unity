@@ -1747,6 +1747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a35887ad2845568e18071a3a898a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnPointService: {fileID: 382391469}
   _portal: {fileID: 718222004}
   _enemyConfig: {fileID: 11400000, guid: 59764f096cccf124b8b56eeeb5dc6bf7, type: 2}
   _count: 50

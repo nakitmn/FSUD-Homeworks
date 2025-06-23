@@ -86,6 +86,7 @@ MonoBehaviour:
   - {fileID: 4654866590974936408}
   - {fileID: 2183687853650733536}
   - {fileID: 5490078560474182900}
+  - {fileID: 2040950469465251964}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &-2177232689888172745
 MonoBehaviour:
@@ -984,13 +985,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3118294153675456976, guid: 4ee150fee7825a148b7ceb77408044b5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2040950469465251964}
   m_SourcePrefab: {fileID: 100100000, guid: 4ee150fee7825a148b7ceb77408044b5, type: 3}
 --- !u!4 &4406589717359022089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3118294153675890160, guid: 4ee150fee7825a148b7ceb77408044b5, type: 3}
   m_PrefabInstance: {fileID: 1612625129254522361}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4406589717359184937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3118294153675456976, guid: 4ee150fee7825a148b7ceb77408044b5, type: 3}
+  m_PrefabInstance: {fileID: 1612625129254522361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2040950469465251964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406589717359184937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 4406589717366456297}
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 00000000a9bbb6f72489c9d92b1a167c79406955
+  TriggerHashes: 00000000
+  TotalWords: 1
 --- !u!95 &4406589717366456297 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3118294153684955664, guid: 4ee150fee7825a148b7ceb77408044b5, type: 3}
