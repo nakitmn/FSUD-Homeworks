@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 254181578945910077}
   - component: {fileID: 6762536615667122291}
   - component: {fileID: 6454124842800503880}
-  - component: {fileID: 9175490173425277673}
   - component: {fileID: 455376876007287143}
+  - component: {fileID: 6379812132422087225}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 254181578945910077}
   - {fileID: 6762536615667122291}
   - {fileID: 6454124842800503880}
-  - {fileID: 9175490173425277673}
+  - {fileID: 6379812132422087225}
   - {fileID: 3521918406837112494}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &5156073421925569159
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationComponent: {fileID: 455376876007287143}
-  _fireComponent: {fileID: 9175490173425277673}
+  _fireComponent: {fileID: 6379812132422087225}
   _center: {fileID: 3619561492003249435}
   _radius: 5
   _layerMask:
@@ -144,24 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _world: {fileID: 6762536615667122291}
   _container: {fileID: 2462073563590946765}
---- !u!114 &9175490173425277673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2642741965293177958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ba4ef1a5039421fbae07e85b1372a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fireAnimator: {fileID: 3276778850530657848}
-  _projectileType: 0
-  _projectileWorld: {fileID: 6762536615667122291}
-  _firePoint: {fileID: 177299969250516970}
-  _delay: 0.31
-  _cooldown: 1
 --- !u!114 &455376876007287143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +157,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedRate: 400
+--- !u!114 &6379812132422087225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642741965293177958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996c0eedb05b49528218f5ccc047232c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireAnimator: {fileID: 3276778850530657848}
+  _projectileType: 0
+  _projectileWorld: {fileID: 6762536615667122291}
+  _firePoint: {fileID: 177299969250516970}
+  _delay: 0.31
+  _cooldown: 1
 --- !u!1 &8238304049770696048
 GameObject:
   m_ObjectHideFlags: 0

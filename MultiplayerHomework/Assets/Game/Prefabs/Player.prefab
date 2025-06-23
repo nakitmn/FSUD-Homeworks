@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: -5393022288211836662}
   - component: {fileID: 3074623992901999147}
   - component: {fileID: 3283512430654443387}
-  - component: {fileID: 3721434442973979208}
   - component: {fileID: 1346820558521634614}
   - component: {fileID: 5932684208853125754}
+  - component: {fileID: 2431767902299780010}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,9 +99,9 @@ MonoBehaviour:
   - {fileID: -5393022288211836662}
   - {fileID: 3074623992901999147}
   - {fileID: 3283512430654443387}
-  - {fileID: 3721434442973979208}
   - {fileID: 1346820558521634614}
   - {fileID: 5932684208853125754}
+  - {fileID: 2431767902299780010}
   - {fileID: 1238887403820516750}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &9026610974695352198
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveComponent: {fileID: 7798115774018667820}
   _rotationComponent: {fileID: 810281296544577981}
-  _shootComponent: {fileID: -5393022288211836662}
+  _shootBehaviour: {fileID: -5393022288211836662}
   _healthComponent: {fileID: 2460649674247097925}
   _deathComponent: {fileID: 5932684208853125754}
   _inputReceiver: {fileID: 7329449073432201224}
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationComponent: {fileID: 810281296544577981}
-  _fireComponent: {fileID: 3721434442973979208}
+  _fireComponent: {fileID: 2431767902299780010}
   _center: {fileID: 1231370781976454233}
   _radius: 5
   _layerMask:
@@ -265,24 +265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _world: {fileID: 3074623992901999147}
   _container: {fileID: 130307307871171222}
---- !u!114 &3721434442973979208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404067246571692652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ba4ef1a5039421fbae07e85b1372a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fireAnimator: {fileID: 8978852945433527701}
-  _projectileType: 0
-  _projectileWorld: {fileID: 3074623992901999147}
-  _firePoint: {fileID: 3862621573658044525}
-  _delay: 0.31
-  _cooldown: 1
 --- !u!114 &1346820558521634614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +300,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDead: 0
+--- !u!114 &2431767902299780010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404067246571692652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996c0eedb05b49528218f5ccc047232c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireAnimator: {fileID: 8978852945433527701}
+  _projectileType: 0
+  _projectileWorld: {fileID: 3074623992901999147}
+  _firePoint: {fileID: 3862621573658044525}
+  _delay: 0.31
+  _cooldown: 1
 --- !u!1 &2051941622203599037
 GameObject:
   m_ObjectHideFlags: 0

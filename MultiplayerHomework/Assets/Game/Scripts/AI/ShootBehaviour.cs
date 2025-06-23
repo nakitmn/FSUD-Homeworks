@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class ShootComponent : NetworkBehaviour
+    public sealed class ShootBehaviour : NetworkBehaviour
     {
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private FireComponent _fireComponent;

@@ -1,5 +1,6 @@
 ﻿using Fusion;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Game
@@ -8,7 +9,7 @@ namespace Game
     {
         [SerializeField] private MoveComponent _moveComponent;
         [SerializeField] private RotationComponent _rotationComponent;
-        [SerializeField] private ShootComponent _shootComponent;
+        [SerializeField] private ShootBehaviour _shootBehaviour;
         [SerializeField] private HealthComponent _healthComponent;
         [SerializeField] private DeathComponent _deathComponent;
         [SerializeField] private InputReceiver _inputReceiver;
@@ -27,7 +28,7 @@ namespace Game
                                               && _gameCycle.CurrentState == GameCycle.State.Running);
             _rotationComponent.SetCondition(() => _deathComponent.IsDead == false
                                                   && _gameCycle.CurrentState == GameCycle.State.Running);
-            _shootComponent.SetCondition(() => _deathComponent.IsDead == false
+            _shootBehaviour.SetCondition(() => _deathComponent.IsDead == false
                                                && _gameCycle.CurrentState == GameCycle.State.Running
                                                && _inputReceiver.InputData.moveDirection == Vector3.zero);
         }
