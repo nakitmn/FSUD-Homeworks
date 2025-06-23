@@ -2,13 +2,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Game
 {
-    public sealed class LosePopup : MonoBehaviour
+    public sealed class LosePopupPresenter : MonoBehaviour
     {
         [SerializeField] private Button _menuButton;
-        [SerializeField] private NetworkRunner _networkRunner;
+        
+        private NetworkRunner _networkRunner;
+
+        [Inject]
+        public void Construct(NetworkRunner networkRunner)
+        {
+            _networkRunner = networkRunner;
+        }
 
         private void OnEnable()
         {
@@ -18,6 +26,11 @@ namespace Game
         private void OnDisable()
         {
             _menuButton.onClick.RemoveListener(EnterMenu);
+        }
+
+        public void Enable()
+        {
+            gameObject.SetActive(true);
         }
 
         private void EnterMenu()

@@ -1,27 +1,25 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-    public sealed class LosePopupShowController : MonoBehaviour
+    public sealed class LosePopupShowController : IInitializable, IDisposable
     {
-        [SerializeField] private GameObject _losePopup;
-        
-        private GameCycle _gameCycle;
+        private readonly GameCycle _gameCycle;
+        private readonly LosePopupPresenter _losePopupPresenter;
 
-        [Inject]
-        public void Construct( GameCycle gameCycle )
+        public LosePopupShowController(GameCycle gameCycle, LosePopupPresenter losePopupPresenter)
         {
+            _losePopupPresenter = losePopupPresenter;
             _gameCycle = gameCycle;
         }
         
-        private void OnEnable()
+        public void Initialize()
         {
             _gameCycle.OnStateChanged += OnStateChanged;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _gameCycle.OnStateChanged -= OnStateChanged;
         }
@@ -30,7 +28,7 @@ namespace Game
         {
             if (state == GameCycle.State.Lose)
             {
-                _losePopup.SetActive(true);
+                _losePopupPresenter.Enable();
             }
         }
     }

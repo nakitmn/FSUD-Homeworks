@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -21,6 +22,17 @@ namespace Game
             
             Container.Bind<Portal>()
                 .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<NetworkRunner>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.Bind<LosePopupPresenter>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
+            Container.BindInterfacesTo<LosePopupShowController>()
                 .AsSingle();
         }
     }
