@@ -1,13 +1,20 @@
 ﻿using Fusion;
-using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public sealed class LoseController : NetworkBehaviour
     {
-        [SerializeField] private GameCycle _gameCycle;
-        [SerializeField] private HealthComponent _portal;
-        
+        private GameCycle _gameCycle;
+        private Portal _portal;
+
+        [Inject]
+        public void Construct(GameCycle gameCycle, Portal portal)
+        {
+            _portal = portal;
+            _gameCycle = gameCycle;
+        }
+
         public override void FixedUpdateNetwork()
         {
             if (_gameCycle.CurrentState != GameCycle.State.Running)
@@ -15,7 +22,7 @@ namespace Game
                 return;
             }
 
-            if (HasDiedPlayer() || _portal.Exists() == false)
+            if (HasDiedPlayer() || _portal.IsDead)
             {
                 _gameCycle.CurrentState = GameCycle.State.Lose;
             }
