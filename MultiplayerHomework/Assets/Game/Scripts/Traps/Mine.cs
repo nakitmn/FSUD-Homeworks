@@ -5,13 +5,10 @@ namespace Game
 {
     public sealed class Mine : NetworkBehaviour
     {
+        [SerializeField] private DeathComponent _deathComponent;
         [SerializeField] private CollisionComponent _collisionComponent;
         [SerializeField] private float _explodeRadius = 1f;
         [SerializeField] private int _damage = 1;
-        [SerializeField] private ParticleSpawner _explosionEffect;
-
-        [Networked, OnChangedRender(nameof(OnExploded))]
-        private bool IsExploded { get; set; }
 
         private readonly Collider[] _buffer = new Collider[8];
 
@@ -27,7 +24,7 @@ namespace Game
 
         private void OnCollided(Collider[] colliders, int count)
         {
-            if (IsExploded)
+            if (_deathComponent.IsDead)
             {
                 return;
             }
@@ -57,13 +54,7 @@ namespace Game
                 }
             }
 
-            IsExploded = true;
-        }
-
-        private void OnExploded()
-        {
-            _explosionEffect.Play();
-            gameObject.SetActive(false);
+            _deathComponent.IsDead = true;
         }
 
         private void OnDrawGizmos()

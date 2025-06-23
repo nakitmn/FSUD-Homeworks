@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -3863524724513887476}
   - component: {fileID: -3185506303198460377}
   - component: {fileID: 2760453043708589699}
+  - component: {fileID: 1802752322230391242}
   - component: {fileID: 3508588281841281506}
   m_Layer: 0
   m_Name: Mine
@@ -56,6 +57,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: -3185506303198460377}
   - {fileID: 2760453043708589699}
+  - {fileID: 1802752322230391242}
   - {fileID: 3508588281841281506}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &-3185506303198460377
@@ -87,10 +89,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68af2b2a8aa440a6abdee20c29820e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deathComponent: {fileID: 1802752322230391242}
   _collisionComponent: {fileID: 3508588281841281506}
   _explodeRadius: 2
   _damage: 5
-  _explosionEffect: {fileID: 4045130943203886644}
+--- !u!114 &1802752322230391242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643883716822658005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46633393053422ab5065ad77c0eb913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsDead: 0
 --- !u!114 &3508588281841281506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +189,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1075958083537264518}
   - component: {fileID: 7888801951579955390}
+  - component: {fileID: 3037860994558943025}
+  - component: {fileID: 5459099822614084045}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -218,6 +235,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3037860994558943025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6741106735321080187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7e6e78ec204be5a31493e91236f350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathComponent: {fileID: 1802752322230391242}
+  _vfx: {fileID: 4045130943203886644}
+--- !u!114 &5459099822614084045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6741106735321080187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80aea5f0e8f04931b5b6d58afe0f64e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathComponent: {fileID: 1802752322230391242}
+  _gameObject: {fileID: 643883716822658005}
 --- !u!1001 &4473241536175105767
 PrefabInstance:
   m_ObjectHideFlags: 0
