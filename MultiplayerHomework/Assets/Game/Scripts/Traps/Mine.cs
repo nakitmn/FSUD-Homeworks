@@ -27,6 +27,11 @@ namespace Game
 
         private void OnCollided(Collider[] colliders, int count)
         {
+            if (IsExploded)
+            {
+                return;
+            }
+
             for (var i = 0; i < count; i++)
             {
                 var collider = colliders[i];
