@@ -1,11 +1,13 @@
-﻿using Fusion;
+﻿using System;
+using Fusion;
 using UnityEngine;
 
 namespace Game
 {
     public sealed class FireComponent : NetworkBehaviour
     {
-        [SerializeField] private FireAnimator _fireAnimator;
+        public event Action OnFireStarted;
+        
         [SerializeField] private ProjectileType _projectileType;
         [SerializeField] private ProjectileWorld _projectileWorld;
         [SerializeField] private Transform _firePoint;
@@ -53,7 +55,7 @@ namespace Game
         {
             if (IsFire)
             {
-                _fireAnimator.PlayFire();
+                OnFireStarted?.Invoke();
             }
         }
     }

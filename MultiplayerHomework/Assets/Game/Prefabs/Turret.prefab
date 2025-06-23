@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996c0eedb05b49528218f5ccc047232c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireAnimator: {fileID: 3276778850530657848}
   _projectileType: 0
   _projectileWorld: {fileID: 6762536615667122291}
   _firePoint: {fileID: 177299969250516970}
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6225347916180879293}
+  _fireComponent: {fileID: 6379812132422087225}
 --- !u!1 &8797532627708878894
 GameObject:
   m_ObjectHideFlags: 0
