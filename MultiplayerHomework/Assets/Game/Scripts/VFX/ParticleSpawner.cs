@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public sealed class InstantiateParticlePlayer : MonoBehaviour
+    public sealed class ParticleSpawner : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _effectPrefab;
         [SerializeField] private Transform _playPoint;

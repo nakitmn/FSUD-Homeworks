@@ -8,7 +8,7 @@ namespace Game
         [SerializeField] private CollisionComponent _collisionComponent;
         [SerializeField] private float _explodeRadius = 1f;
         [SerializeField] private int _damage = 1;
-        [SerializeField] private InstantiateParticlePlayer _explosionEffect;
+        [SerializeField] private ParticleSpawner _explosionEffect;
 
         [Networked, OnChangedRender(nameof(OnExploded))]
         private bool IsExploded { get; set; }

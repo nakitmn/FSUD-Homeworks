@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private int _damage = 1;
         [SerializeField] private float _playerDamageCooldown = 1f;
         [SerializeField] private Vector2Int _reward;
-        [SerializeField] private InstantiateParticlePlayer _deathParticle;
+        [SerializeField] private ParticleSpawner _deathParticle;
 
         [Networked] private TickTimer PlayerDamageTimer { get; set; }
 
