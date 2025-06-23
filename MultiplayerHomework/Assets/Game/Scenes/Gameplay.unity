@@ -1748,9 +1748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 718222004}
-  _spawnPointService: {fileID: 382391469}
-  _enemyPrefab:
-    RawGuidValue: b5e3677b4a8dab949bfca93b64572662
+  _enemyConfig: {fileID: 11400000, guid: 59764f096cccf124b8b56eeeb5dc6bf7, type: 2}
   _count: 50
   _spawnCooldown: 2
   _CanSpawn: 0

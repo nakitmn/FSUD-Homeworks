@@ -12,6 +12,10 @@ namespace Game
                 .FromComponentInHierarchy()
                 .AsSingle();
             
+             Container.Bind<SpawnPointService>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            
             Container.Bind<MoneyStorage>()
                 .FromComponentInHierarchy()
                 .AsSingle();

@@ -1,13 +1,14 @@
 ﻿using Fusion;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Zenject;
 
 namespace Game
 {
     public sealed class EnemySpawner : NetworkBehaviour
     {
         [SerializeField] private GameObject _portal;
-        [SerializeField] private SpawnPointService _spawnPointService;
-        [SerializeField] private NetworkPrefabRef _enemyPrefab;
+        [SerializeField] private EnemyConfig _enemyConfig;
         [SerializeField] private int _count;
         [SerializeField] private float _spawnCooldown;
 
@@ -15,6 +16,14 @@ namespace Game
         [Networked] private TickTimer _spawnTimer { get; set; }
         [Networked] private int _spawnedCount { get; set; }
 
+        private SpawnPointService _spawnPointService;
+
+        [Inject]
+        public void Construct(SpawnPointService spawnPointService)
+        {
+            _spawnPointService = spawnPointService;
+        }
+        
         public void StartSpawn()
         {
             CanSpawn = true;
@@ -47,7 +56,7 @@ namespace Game
         private void Spawn()
         {
             var spawnPoint = _spawnPointService.GetRandomSpawnPoint();
-            Runner.Spawn(_enemyPrefab, spawnPoint.position, spawnPoint.rotation, onBeforeSpawned: OnEnemySpawned);
+            Runner.Spawn(_enemyConfig.Prefab, spawnPoint.position, spawnPoint.rotation, onBeforeSpawned: OnEnemySpawned);
         }
 
         private void OnEnemySpawned(NetworkRunner runner, NetworkObject networkObject)
