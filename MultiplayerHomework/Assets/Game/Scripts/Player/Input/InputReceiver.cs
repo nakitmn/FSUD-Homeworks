@@ -9,6 +9,7 @@ namespace Game
         public event Action<Vector3, float> OnMove;
         public event Action OnMine;
         public event Action OnTurret;
+        public event Action<PlayerKeys> OnKeyPressed;
 
         [Networked] private NetworkButtons PreviousButtons { get; set; }
 
@@ -35,12 +36,14 @@ namespace Game
         {
             if (input.buttons.WasPressed(PreviousButtons, PlayerKeys.Mine))
             {
-                OnMine?.Invoke();
+                //OnMine?.Invoke();
+                OnKeyPressed?.Invoke(PlayerKeys.Mine);
             }
             
             if (input.buttons.WasPressed(PreviousButtons, PlayerKeys.Turret))
             {
-                OnTurret?.Invoke();
+                //OnTurret?.Invoke();
+                OnKeyPressed?.Invoke(PlayerKeys.Turret);
             }
         }
     }
