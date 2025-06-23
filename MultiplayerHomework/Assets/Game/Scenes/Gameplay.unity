@@ -21511,7 +21511,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -21593,20 +21592,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1428945950}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 021aec08b6a345c89f8f8c0b2ac5c8f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _follower: {fileID: 1428945950}
-  _speed: 5
 --- !u!1 &964662448
 GameObject:
   m_ObjectHideFlags: 0
@@ -24879,6 +24864,7 @@ GameObject:
   - component: {fileID: 1095622117}
   - component: {fileID: 1095622116}
   - component: {fileID: 1095622120}
+  - component: {fileID: 1095622121}
   m_Layer: 0
   m_Name: '[Network]'
   m_TagString: Untagged
@@ -25012,6 +24998,20 @@ MonoBehaviour:
   DelayIfSceneManagerIsBusy: 1
   _catalog: {fileID: 11400000, guid: b0a3aa2d7e057c744a25ca0347bd9ed9, type: 2}
   _container: {fileID: 969725633}
+--- !u!114 &1095622121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095622115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021aec08b6a345c89f8f8c0b2ac5c8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _follower: {fileID: 1428945950}
+  _speed: 5
 --- !u!1 &1096855063
 GameObject:
   m_ObjectHideFlags: 0
