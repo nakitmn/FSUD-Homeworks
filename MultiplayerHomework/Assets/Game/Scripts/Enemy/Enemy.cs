@@ -52,6 +52,7 @@ namespace Game
             if (_healthComponent.Exists() == false)
             {
                 _deathComponent.IsDead = true;
+                _moveComponent.IsMoving = false;
                 CollectReward();
                 return;
             }
@@ -76,6 +77,7 @@ namespace Game
             var direction = _target.transform.position - transform.position;
             var directionNormalized = direction.normalized;
 
+            _moveComponent.IsMoving = true;
             _moveComponent.MoveStep(directionNormalized, Runner.DeltaTime);
             _rotationComponent.RotateStep(directionNormalized, Runner.DeltaTime);
         }

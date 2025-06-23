@@ -7,11 +7,11 @@ namespace Game
     {
         private static readonly int Fire = Animator.StringToHash("Fire");
 
-        [SerializeField] private NetworkMecanimAnimator _animator;
+        [SerializeField] private Animator _animator;
 
         public void PlayFire()
         {
-            _animator.Animator.SetTrigger(Fire);
+            _animator.SetTrigger(Fire);
         }
     }
 }

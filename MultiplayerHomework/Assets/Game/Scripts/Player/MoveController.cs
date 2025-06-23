@@ -20,6 +20,7 @@ namespace Game
 
         private void OnMove(Vector3 moveDirection, float deltaTime)
         {
+            _moveComponent.IsMoving = moveDirection != Vector3.zero;
             _moveComponent.MoveStep(moveDirection, deltaTime);
             _rotationComponent.RotateStep(moveDirection, deltaTime);
         }

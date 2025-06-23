@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371a35c0a41342818279dd91861f0611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3521918406837112494}
+  _animator: {fileID: 6225347916180879293}
 --- !u!1 &8797532627708878894
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 000000005a51641619ff57153e725c3b6c282312335c534470f26047890d5addcaa369de1f3d5daa5c936ea920e23b685928a8cec78ae5c743a933287ddbec5ef9f83ab1ebebeb296fc83dc6307e46536224397aedb25a4f5292d01e57e353d6e8c3d987958341e2a8a7ceb9e509549c37b9350166c5f800
   TriggerHashes: 00000000f1a6ecf8
-  TotalWords: 4
+  TotalWords: 3
 --- !u!4 &6286560523619345109 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4128641884219582, guid: c48b4eb55b673a3409e5b6fbf626fd75, type: 3}
