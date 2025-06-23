@@ -61,6 +61,11 @@ namespace Game
                 {
                     continue;
                 }
+                
+                if (enemy.IsDead)
+                {
+                    continue;
+                }
 
                 Target = enemy.Object;
                 return;

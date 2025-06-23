@@ -1,26 +1,23 @@
 ﻿using Fusion;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
     public sealed class Enemy : NetworkBehaviour
     {
         [SerializeField] private HealthComponent _healthComponent;
+        [SerializeField] private DeathComponent _deathComponent;
         [SerializeField] private MoveComponent _moveComponent;
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private CollisionComponent _collisionComponent;
-        [SerializeField] private int _damage = 1;
-        [SerializeField] private float _playerDamageCooldown = 1f;
-        [SerializeField] private Vector2Int _reward;
-        [SerializeField] private ParticleSpawner _deathParticle;
+        [SerializeField] private EnemyConfig _config;
 
         [Networked] private TickTimer PlayerDamageTimer { get; set; }
 
-        [Networked, OnChangedRender(nameof(OnDeadChanged))]
-        private bool IsDead { get; set; }
-
+        public bool IsDead => _deathComponent.IsDead;
+        
         private GameObject _target;
         private MoneyStorage _moneyStorage;
 
@@ -47,14 +44,14 @@ namespace Game
 
         public override void FixedUpdateNetwork()
         {
-            if (IsDead)
+            if (_deathComponent.IsDead)
             {
                 return;
             }
 
             if (_healthComponent.Exists() == false)
             {
-                IsDead = true;
+                _deathComponent.IsDead = true;
                 CollectReward();
                 return;
             }
@@ -69,7 +66,8 @@ namespace Game
 
         private void CollectReward()
         {
-            var reward = Random.Range(_reward.x, _reward.y);
+            var rewardRange = _config.Reward;
+            var reward = Random.Range(rewardRange.x, rewardRange.y);
             _moneyStorage.Earn(reward);
         }
 
@@ -82,19 +80,13 @@ namespace Game
             _rotationComponent.RotateStep(directionNormalized, Runner.DeltaTime);
         }
 
-        private void OnDeadChanged()
-        {
-            _deathParticle.Play();
-            gameObject.SetActive(false);
-        }
-
         private void OnCollided(Collider[] colliders, int count)
         {
-            if (IsDead)
+            if (_deathComponent.IsDead)
             {
                 return;
             }
-            
+
             for (var i = 0; i < count; i++)
             {
                 var collider = colliders[i];
@@ -104,16 +96,16 @@ namespace Game
                     var player = collider.GetComponent<Player>();
                     if (player != null)
                     {
-                        player.TakeDamage(_damage);
-                        PlayerDamageTimer = TickTimer.CreateFromSeconds(Runner, _playerDamageCooldown);
+                        player.TakeDamage(_config.Damage);
+                        PlayerDamageTimer = TickTimer.CreateFromSeconds(Runner, _config.PlayerDamageCooldown);
                     }
                 }
 
                 var portal = collider.GetComponent<Portal>();
                 if (portal != null)
                 {
-                    portal.TakeDamage(_damage);
-                    IsDead = true;
+                    portal.TakeDamage(_config.Damage);
+                    _deathComponent.IsDead = true;
                     return;
                 }
             }
