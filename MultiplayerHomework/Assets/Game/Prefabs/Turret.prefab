@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6762536615667122291}
   - component: {fileID: 6454124842800503880}
   - component: {fileID: 455376876007287143}
-  - component: {fileID: 6379812132422087225}
+  - component: {fileID: 5941310488462602278}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 254181578945910077}
   - {fileID: 6762536615667122291}
   - {fileID: 6454124842800503880}
-  - {fileID: 6379812132422087225}
+  - {fileID: 5941310488462602278}
   - {fileID: 3521918406837112494}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &5156073421925569159
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationComponent: {fileID: 455376876007287143}
-  _fireComponent: {fileID: 6379812132422087225}
+  _fireComponent: {fileID: 5941310488462602278}
   _center: {fileID: 3619561492003249435}
   _radius: 5
   _layerMask:
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedRate: 400
---- !u!114 &6379812132422087225
+--- !u!114 &5941310488462602278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2642741965293177958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 996c0eedb05b49528218f5ccc047232c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba4ef1a5039421fbae07e85b1372a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileType: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6225347916180879293}
-  _fireComponent: {fileID: 6379812132422087225}
+  _fireComponent: {fileID: 5941310488462602278}
 --- !u!1 &8797532627708878894
 GameObject:
   m_ObjectHideFlags: 0

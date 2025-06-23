@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 3283512430654443387}
   - component: {fileID: 1346820558521634614}
   - component: {fileID: 5932684208853125754}
-  - component: {fileID: 2431767902299780010}
+  - component: {fileID: 729806043464059676}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -101,7 +101,7 @@ MonoBehaviour:
   - {fileID: 3283512430654443387}
   - {fileID: 1346820558521634614}
   - {fileID: 5932684208853125754}
-  - {fileID: 2431767902299780010}
+  - {fileID: 729806043464059676}
   - {fileID: 1238887403820516750}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &9026610974695352198
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationComponent: {fileID: 810281296544577981}
-  _fireComponent: {fileID: 2431767902299780010}
+  _fireComponent: {fileID: 729806043464059676}
   _center: {fileID: 1231370781976454233}
   _radius: 5
   _layerMask:
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDead: 0
---- !u!114 &2431767902299780010
+--- !u!114 &729806043464059676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404067246571692652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 996c0eedb05b49528218f5ccc047232c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba4ef1a5039421fbae07e85b1372a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileType: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7705296155306509989}
-  _fireComponent: {fileID: 2431767902299780010}
+  _fireComponent: {fileID: 729806043464059676}
 --- !u!114 &7668223601122423533
 MonoBehaviour:
   m_ObjectHideFlags: 0
