@@ -12,12 +12,15 @@ namespace Game
 
         public override void FixedUpdateNetwork()
         {
-            _deathComponent.IsDead = _healthComponent.Exists() == false;
-        }
+            if (_deathComponent.IsDead)
+            {
+                return;
+            }
 
-        public void TakeDamage(int damage)
-        {
-            _healthComponent.TakeDamage(damage);
+            if (_healthComponent.Exists() == false)
+            {
+                _deathComponent.IsDead = true;
+            }
         }
     }
 }

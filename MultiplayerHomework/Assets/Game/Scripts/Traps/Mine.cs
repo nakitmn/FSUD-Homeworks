@@ -32,8 +32,7 @@ namespace Game
             for (var i = 0; i < count; i++)
             {
                 var collider = colliders[i];
-                var enemy = collider.GetComponent<Enemy>();
-                if (enemy != null)
+                if (collider.CompareTag(Tags.Enemy))
                 {
                     Explode();
                     return;
@@ -47,10 +46,10 @@ namespace Game
             for (var i = 0; i < count; i++)
             {
                 var collider = _buffer[i];
-                var enemy = collider.GetComponent<Enemy>();
-                if (enemy != null)
+                if (collider.CompareTag(Tags.Enemy))
                 {
-                    enemy.TakeDamage(_damage);
+                    var healthComponent = collider.GetComponent<HealthComponent>();
+                    healthComponent.TakeDamage(_damage);
                 }
             }
 

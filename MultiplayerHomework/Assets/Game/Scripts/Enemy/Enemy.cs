@@ -60,11 +60,6 @@ namespace Game
             MoveToPortal();
         }
 
-        public void TakeDamage(int damage)
-        {
-            _healthComponent.TakeDamage(damage);
-        }
-
         private void CollectReward()
         {
             var rewardRange = _config.Reward;
@@ -95,18 +90,18 @@ namespace Game
 
                 if (PlayerDamageTimer.ExpiredOrNotRunning(Runner))
                 {
-                    var player = collider.GetComponent<Player>();
-                    if (player != null)
+                    if (collider.CompareTag(Tags.Player))
                     {
-                        player.TakeDamage(_config.Damage);
+                        var healthComponent = collider.GetComponent<HealthComponent>();
+                        healthComponent.TakeDamage(_config.Damage);
                         PlayerDamageTimer = TickTimer.CreateFromSeconds(Runner, _config.PlayerDamageCooldown);
                     }
                 }
 
-                var portal = collider.GetComponent<Portal>();
-                if (portal != null)
+                if (collider.CompareTag(Tags.Portal))
                 {
-                    portal.TakeDamage(_config.Damage);
+                    var healthComponent = collider.GetComponent<HealthComponent>();
+                    healthComponent.TakeDamage(_config.Damage);
                     _deathComponent.IsDead = true;
                     return;
                 }
