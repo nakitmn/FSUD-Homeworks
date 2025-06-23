@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 3283512430654443387}
   - component: {fileID: 3721434442973979208}
   - component: {fileID: 1346820558521634614}
+  - component: {fileID: 5932684208853125754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,8 +101,7 @@ MonoBehaviour:
   - {fileID: 3283512430654443387}
   - {fileID: 3721434442973979208}
   - {fileID: 1346820558521634614}
-  - {fileID: 3197277327105382891}
-  - {fileID: 7668223601122423533}
+  - {fileID: 5932684208853125754}
   - {fileID: 1238887403820516750}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &9026610974695352198
@@ -137,6 +137,7 @@ MonoBehaviour:
   _rotationComponent: {fileID: 810281296544577981}
   _shootComponent: {fileID: -5393022288211836662}
   _healthComponent: {fileID: 2460649674247097925}
+  _deathComponent: {fileID: 5932684208853125754}
   _inputReceiver: {fileID: 7329449073432201224}
 --- !u!114 &1446235192356287181
 MonoBehaviour:
@@ -304,6 +305,19 @@ MonoBehaviour:
       RawGuidValue: cd9a4372cefbf3747b263b423d5a0a17
     key: 1
     price: 200
+--- !u!114 &5932684208853125754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404067246571692652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46633393053422ab5065ad77c0eb913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsDead: 0
 --- !u!1 &2051941622203599037
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7705296155306509989}
-  _healthComponent: {fileID: 2460649674247097925}
+  _deathComponent: {fileID: 5932684208853125754}
 --- !u!1001 &7763271436874195781
 PrefabInstance:
   m_ObjectHideFlags: 0

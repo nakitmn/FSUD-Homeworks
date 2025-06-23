@@ -1,18 +1,27 @@
-﻿using Fusion;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public sealed class DeathAnimComponent : NetworkBehaviour
+    public sealed class DeathAnimComponent : MonoBehaviour
     {
         private static readonly int IsDead = Animator.StringToHash("IsDead");
 
         [SerializeField] private Animator _animator;
-        [SerializeField] private HealthComponent _healthComponent;
+        [SerializeField] private DeathComponent _deathComponent;
 
-        public override void Render()
+        private void OnEnable()
         {
-            _animator.SetBool(IsDead, _healthComponent.Exists() == false);
+            _deathComponent.OnDeadChanged += OnDeadChanged;
+        }
+
+        private void OnDisable()
+        {
+            _deathComponent.OnDeadChanged -= OnDeadChanged;
+        }
+
+        private void OnDeadChanged(bool isDead)
+        {
+            _animator.SetBool(IsDead, isDead);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Game
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private ShootComponent _shootComponent;
         [SerializeField] private HealthComponent _healthComponent;
+        [SerializeField] private DeathComponent _deathComponent;
         [SerializeField] private InputReceiver _inputReceiver;
 
         private GameCycle _gameCycle;
@@ -22,13 +23,18 @@ namespace Game
 
         public override void Spawned()
         {
-            _moveComponent.SetCondition(() => _healthComponent.Exists()
+            _moveComponent.SetCondition(() => _deathComponent.IsDead == false
                                               && _gameCycle.CurrentState == GameCycle.State.Running);
-            _rotationComponent.SetCondition(() => _healthComponent.Exists()
+            _rotationComponent.SetCondition(() => _deathComponent.IsDead == false
                                                   && _gameCycle.CurrentState == GameCycle.State.Running);
-            _shootComponent.SetCondition(() => _healthComponent.Exists()
+            _shootComponent.SetCondition(() => _deathComponent.IsDead == false
                                                && _gameCycle.CurrentState == GameCycle.State.Running
                                                && _inputReceiver.InputData.moveDirection == Vector3.zero);
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            _deathComponent.IsDead = _healthComponent.Exists() == false;
         }
 
         public void TakeDamage(int damage)
