@@ -19184,6 +19184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 852186368}
+  - component: {fileID: 852186369}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -19213,6 +19214,19 @@ RectTransform:
   m_AnchoredPosition: {x: 47, y: -29}
   m_SizeDelta: {x: 333.8, y: 80.3}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &852186369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852186367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4460230cac4bbaa7003aa02207cb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amount: {fileID: 1767864885}
 --- !u!1 &857873511
 GameObject:
   m_ObjectHideFlags: 0
@@ -32440,7 +32454,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1366138908}
   - component: {fileID: 1366138906}
-  - component: {fileID: 1366138907}
   m_Layer: 0
   m_Name: Money
   m_TagString: Untagged
@@ -32461,20 +32474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Money: 1000
---- !u!114 &1366138907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366138905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4460230cac4bbaa7003aa02207cb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moneyStorage: {fileID: 1366138906}
-  _amount: {fileID: 1767864885}
 --- !u!4 &1366138908
 Transform:
   m_ObjectHideFlags: 0
