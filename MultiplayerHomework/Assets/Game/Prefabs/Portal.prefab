@@ -210,11 +210,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7687135409742009684}
-  - component: {fileID: 2128126820625438276}
-  - component: {fileID: 7912636706052339639}
-  - component: {fileID: 8641891439586317478}
-  - component: {fileID: 1215721154310427792}
   - component: {fileID: 1883574040571837546}
+  - component: {fileID: 2128126820625438276}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Portal
@@ -238,67 +235,6 @@ Transform:
   - {fileID: 1442122064758237538}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2128126820625438276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2755872164277444644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 900453534
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 7912636706052339639}
-  - {fileID: 8641891439586317478}
-  - {fileID: 1215721154310427792}
-  ForceRemoteRenderTimeframe: 0
---- !u!114 &7912636706052339639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2755872164277444644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977e269b72b489a94c732f26ea07491, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthComponent: {fileID: 8641891439586317478}
-  _deathComponent: {fileID: 1215721154310427792}
---- !u!114 &8641891439586317478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2755872164277444644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6469de8dbf847468cb668014e8485d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MaxHealth: 10
---- !u!114 &1215721154310427792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2755872164277444644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e46633393053422ab5065ad77c0eb913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _IsDead: 0
 --- !u!136 &1883574040571837546
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -322,3 +258,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2128126820625438276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755872164277444644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 900453534
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0
