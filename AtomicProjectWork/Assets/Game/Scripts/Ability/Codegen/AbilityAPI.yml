@@ -1,0 +1,42 @@
+header: EntityAPI
+entityType: Ability
+aggressiveInlining: true
+
+namespace: SampleGame
+className: AbilityAPI
+directory: Assets/Game/Scripts/Ability/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Elements
+
+tags:
+  - Base
+  - Point
+  - Target
+  
+values:
+
+#Base:    
+  - BaseAction: IAction
+  - BaseCondition: IFunction<bool>
+  - BaseEvent: IEvent
+  
+#Point:    
+  - PointAction: IAction<Vector3>
+  - PointCondition: IFunction<Vector3, bool>
+  - PointEvent: IEvent<Vector3> 
+  
+#Target:
+  - TargetAction: IAction<IEntity>
+  - TargetCondition: IFunction<IEntity, bool>
+  - TargetEvent: IEvent<IEntity>
+  
+#Properties:
+  - Charges: IReactiveVariable<int> 
+  - ManaCost: IValue<int>
+  - Radius: IValue<float>
+  - Cooldown: Cooldown
+    
+#View:
+  - Icon: Sprite

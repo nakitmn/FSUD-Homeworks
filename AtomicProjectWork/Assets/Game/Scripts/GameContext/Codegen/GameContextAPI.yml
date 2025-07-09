@@ -1,0 +1,32 @@
+header: EntityAPI
+entityType: IGameContext
+aggressiveInlining: true
+
+namespace: SampleGame
+className: GameContextAPI
+directory: Assets/Game/Scripts/GameContext/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Contexts
+- Atomic.Entities
+- Atomic.Elements
+- System.Collections.Generic
+
+values:
+- BulletPool: IEntityPool
+- WorldTransform: Transform
+- EntityPool: GenericSceneEntityPool
+- PrefabPool: GenericPrefabPool
+- GroundPlane: Plane
+- Character: IEntity
+  
+#Camera
+- CameraOffset: IValue<Vector3>
+- Camera: Camera
+  
+#Input
+- InputMap: InputMap
+  
+#Abbility
+- AbilitiesPresenter: PlayerAbilitiesPresenter

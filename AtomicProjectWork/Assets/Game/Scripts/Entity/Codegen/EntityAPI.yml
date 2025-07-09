@@ -1,0 +1,81 @@
+header: EntityAPI
+entityType: IEntity
+aggressiveInlining: true
+
+namespace: SampleGame
+className: EntityAPI
+directory: Assets/Game/Scripts/Entity/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Elements
+- UnityEngine.AI
+
+tags:
+- Damageable
+- Moveable
+- Interactible
+- Lootable
+
+values:
+
+# Main
+- GameObject: GameObject
+- Transform: Transform
+- Rigidbody: Rigidbody
+- NavAgent: NavMeshAgent
+- Animator: Animator
+  
+#Movement  
+- MoveSpeed: IReactiveVariable<float>
+- MoveCondition: IExpression<bool>
+- IsMoving: IValue<bool>
+- MoveDirection: IReactiveVariable<Vector3>
+- MovePointAction: IAction<Vector3>
+- TeleportAction: IAction<Vector3>
+- ForwardDirection: IReactiveVariable<float>
+
+#Rotation
+- AngularSpeed: IValue<float>
+- AngularDirection: IReactiveVariable<Vector3>
+- TurnDirection: IReactiveVariable<float>
+  
+#Life
+- MaxHealth: IReactiveVariable<int>
+- Health: IReactiveVariable<int>
+- Lifetime: Cooldown
+- DestroyAction: IAction
+- DamagedEvent: IEvent
+- DeathEvent: IEvent
+
+#Mana
+- MaxMana: IValue<int>
+- CurrentMana: IReactiveVariable<int>
+    
+#Abbility
+- Abilities: IReactiveDictionary<string, Ability>
+- SelectedAbility: IReactiveVariable<Ability>
+    
+#Combat
+- CurrentWeapon: IReactiveVariable<IEntity>
+- Damage: IReactiveVariable<int>
+- ExtraDamage: IExpression<int>
+- Target: IReactiveVariable<IEntity>
+- DamageRadius: IValue<float>
+- FireAction: IAction
+- FirePoint: Transform
+  
+#Interact
+- InteractAction: IAction<IEntity> #IEntity — Character
+- TargetInteractible: IReactiveVariable<IEntity> #Entity — current interactible item
+
+#Other
+- Owner: IReactiveVariable<IEntity>
+- Effects: IReactiveDictionary<string, EffectInstance>
+- ProjectileEffects : EffectConfig[]
+
+#Loot
+- Loot: SceneEntity[]
+
+#Physics
+- Trigger: TriggerEventReceiver
