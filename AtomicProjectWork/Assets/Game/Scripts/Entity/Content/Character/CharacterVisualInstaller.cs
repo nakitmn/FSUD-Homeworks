@@ -8,7 +8,7 @@ namespace SampleGame
     public sealed class CharacterVisualInstaller : SceneEntityInstaller
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private string _isMovingKey = "IsMoving";
+        [SerializeField] private string _moveSpeedKey = "NormalizedSpeed";
         [SerializeField] private string _takeDamageKey = "TakeDamage";
         [SerializeField] private string _deathKey = "Death";
         [SerializeField] private ParticleSystem _damagedVfx;
@@ -23,7 +23,7 @@ namespace SampleGame
             
             entity.AddBehaviour(new EventVfxBehaviour(entity.GetDamagedEvent(), _damagedVfx));
             
-            entity.AddBehaviour(new MoveAnimBehaviour(_isMovingKey));
+            entity.AddBehaviour(new MoveSpeedAnimBehaviour(_moveSpeedKey));
             entity.AddBehaviour(new TakeDamageAnimBehaviour(_takeDamageKey));
             entity.AddBehaviour(new EffectVfxBehaviour(_effects.ToDictionary(it => it.config.Name, it => it.vfx)));
             

@@ -26,6 +26,7 @@ namespace SampleGame
 		public const int NavAgent = -1998069057; // NavMeshAgent
 		public const int Animator = -1714818978; // Animator
 		public const int MoveSpeed = 526065662; // IReactiveVariable<float>
+		public const int NormalizedCurrentSpeed = 1307496334; // IValue<float>
 		public const int MoveCondition = 1466174948; // IExpression<bool>
 		public const int IsMoving = 120489994; // IValue<bool>
 		public const int MoveDirection = -721923052; // IReactiveVariable<Vector3>
@@ -221,6 +222,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetMoveSpeed(this IEntity obj, IReactiveVariable<float> value) => obj.SetValue(MoveSpeed, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<float> GetNormalizedCurrentSpeed(this IEntity obj) => obj.GetValueUnsafe<IValue<float>>(NormalizedCurrentSpeed);
+
+		public static ref IValue<float> RefNormalizedCurrentSpeed(this IEntity obj) => ref obj.GetValueUnsafe<IValue<float>>(NormalizedCurrentSpeed);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetNormalizedCurrentSpeed(this IEntity obj, out IValue<float> value) => obj.TryGetValueUnsafe(NormalizedCurrentSpeed, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddNormalizedCurrentSpeed(this IEntity obj, IValue<float> value) => obj.AddValue(NormalizedCurrentSpeed, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasNormalizedCurrentSpeed(this IEntity obj) => obj.HasValue(NormalizedCurrentSpeed);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelNormalizedCurrentSpeed(this IEntity obj) => obj.DelValue(NormalizedCurrentSpeed);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetNormalizedCurrentSpeed(this IEntity obj, IValue<float> value) => obj.SetValue(NormalizedCurrentSpeed, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IExpression<bool> GetMoveCondition(this IEntity obj) => obj.GetValueUnsafe<IExpression<bool>>(MoveCondition);

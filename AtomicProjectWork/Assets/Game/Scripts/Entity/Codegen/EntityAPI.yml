@@ -28,6 +28,7 @@ values:
   
 #Movement  
 - MoveSpeed: IReactiveVariable<float>
+- NormalizedCurrentSpeed: IValue<float>
 - MoveCondition: IExpression<bool>
 - IsMoving: IValue<bool>
 - MoveDirection: IReactiveVariable<Vector3>

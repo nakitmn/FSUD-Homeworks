@@ -51,6 +51,8 @@ namespace SampleGame
             entity.AddMoveSpeed(new ReactiveFloat(_moveSpeed));
             entity.AddMoveCondition(new AndExpression(() => HealthUseCase.IsAlive(entity)));
             entity.AddMoveDirection(new ReactiveVector3());
+            entity.AddNormalizedCurrentSpeed(new BaseFunction<float>(() => _agent.velocity.magnitude / _agent.speed));
+            
             entity.AddMovePointAction(new BaseAction<Vector3>(point =>
             {
                 entity.GetNavAgent().SetDestination(point);
