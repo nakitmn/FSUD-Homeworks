@@ -46,7 +46,7 @@ namespace SampleGame
             }));
 
             ability.AddIsRunning(new ReactiveBool(false));
-            ability.AddCooldown(new Cooldown(_cooldown, 0));
+            ability.AddCooldown(new Cooldown(_cooldown + _throwDelay, 0));
             ability.AddTargetPoint(new ReactiveVector3());
             ability.AddDelay(new Cooldown(_throwDelay, 0));
             ability.AddCharges(new ReactiveInt(_initialCharges));

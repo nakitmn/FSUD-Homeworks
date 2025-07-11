@@ -17,6 +17,9 @@ namespace SampleGame
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _count;
         [SerializeField] private GameObject _selectedMarker;
+        [SerializeField] private GameObject _cooldownContainer;
+        [SerializeField] private ProgressBarFiller _cooldownProgressFiller;
+        [SerializeField] private TMP_Text _remainCooldownValue;
         [SerializeField] private Button _selectButton;
 
         public void SetSelected(bool state)
@@ -24,6 +27,21 @@ namespace SampleGame
             _selectedMarker.SetActive(state);
         }
 
+        public void SetCooldownActive(bool state)
+        {
+            _cooldownContainer.SetActive(state);
+        }
+
+        public void SetCooldownProgress(float value)
+        {
+            _cooldownProgressFiller.FillAmount = value;
+        }
+
+        public void SetRemainCooldownValue(string value)
+        {
+            _remainCooldownValue.text = value;
+        }
+        
         public void SetIcon(Sprite icon)
         {
             _icon.sprite = icon;

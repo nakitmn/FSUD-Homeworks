@@ -11,6 +11,7 @@ namespace SampleGame
         private readonly IGameEntity _entity;
         private IReactiveVariable<Ability> _selectedAbility;
         private IReactiveVariable<int> _charges;
+        private Cooldown _cooldown;
 
         public bool IsVisible => _view.gameObject.activeInHierarchy;
 
@@ -30,6 +31,12 @@ namespace SampleGame
             _view.SetName(_ability.Name);
             _view.gameObject.SetActive(true);
             
+            if (_ability.HasCooldown())
+            {
+                _cooldown = _ability.GetCooldown();
+                _cooldown.OnTick += OnCooldownTick;
+            }
+
             _view.OnSelectClicked += Select;
             _selectedAbility.Observe(OnSelectedChanged);
             _charges.Observe(OnCountChanged);
@@ -41,6 +48,18 @@ namespace SampleGame
             _view.OnSelectClicked -= Select;
             _selectedAbility.Unsubscribe(OnSelectedChanged);
             _charges.Unsubscribe(OnCountChanged);
+            
+            if (_cooldown != null)
+            {
+                _cooldown.OnTick -= OnCooldownTick;
+            }
+        }
+
+        private void OnCooldownTick()
+        {
+            _view.SetCooldownActive(_cooldown.IsExpired() == false);
+            _view.SetCooldownProgress(_cooldown.GetProgress());
+            _view.SetRemainCooldownValue($"{_cooldown.Current:N1}");
         }
 
         private void OnCountChanged(int count)
