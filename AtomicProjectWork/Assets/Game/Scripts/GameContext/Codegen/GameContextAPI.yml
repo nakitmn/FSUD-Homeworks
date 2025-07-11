@@ -12,12 +12,12 @@ imports:
 - System.Collections.Generic
 
 values:
-- BulletPool: IEntityPool
 - WorldTransform: Transform
 - EntityPool: GenericSceneEntityPool
 - PrefabPool: GenericPrefabPool
 - GroundPlane: Plane
 - Character: IGameEntity
+- PlayClickAction: IAction<Vector3>
   
 #Camera
 - CameraOffset: IValue<Vector3>

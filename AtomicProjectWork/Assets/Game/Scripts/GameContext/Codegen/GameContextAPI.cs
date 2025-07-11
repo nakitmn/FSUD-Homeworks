@@ -15,38 +15,18 @@ namespace SampleGame
 
 
 		///Values
-		public const int BulletPool = 1915726678; // IEntityPool
 		public const int WorldTransform = -486031409; // Transform
 		public const int EntityPool = 1931115573; // GenericSceneEntityPool
 		public const int PrefabPool = -98831589; // GenericPrefabPool
 		public const int GroundPlane = -1885423927; // Plane
 		public const int Character = 294335127; // IGameEntity
+		public const int PlayClickAction = -954041664; // IAction<Vector3>
 		public const int CameraOffset = -1286660539; // IValue<Vector3>
 		public const int Camera = 1018227507; // Camera
 		public const int InputMap = 43340267; // InputMap
 
 
 		///Value Extensions
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IEntityPool GetBulletPool(this IGameContext obj) => obj.GetValueUnsafe<IEntityPool>(BulletPool);
-
-		public static ref IEntityPool RefBulletPool(this IGameContext obj) => ref obj.GetValueUnsafe<IEntityPool>(BulletPool);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetBulletPool(this IGameContext obj, out IEntityPool value) => obj.TryGetValueUnsafe(BulletPool, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddBulletPool(this IGameContext obj, IEntityPool value) => obj.AddValue(BulletPool, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasBulletPool(this IGameContext obj) => obj.HasValue(BulletPool);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelBulletPool(this IGameContext obj) => obj.DelValue(BulletPool);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetBulletPool(this IGameContext obj, IEntityPool value) => obj.SetValue(BulletPool, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Transform GetWorldTransform(this IGameContext obj) => obj.GetValueUnsafe<Transform>(WorldTransform);
@@ -147,6 +127,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCharacter(this IGameContext obj, IGameEntity value) => obj.SetValue(Character, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IAction<Vector3> GetPlayClickAction(this IGameContext obj) => obj.GetValueUnsafe<IAction<Vector3>>(PlayClickAction);
+
+		public static ref IAction<Vector3> RefPlayClickAction(this IGameContext obj) => ref obj.GetValueUnsafe<IAction<Vector3>>(PlayClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetPlayClickAction(this IGameContext obj, out IAction<Vector3> value) => obj.TryGetValueUnsafe(PlayClickAction, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddPlayClickAction(this IGameContext obj, IAction<Vector3> value) => obj.AddValue(PlayClickAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasPlayClickAction(this IGameContext obj) => obj.HasValue(PlayClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelPlayClickAction(this IGameContext obj) => obj.DelValue(PlayClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetPlayClickAction(this IGameContext obj, IAction<Vector3> value) => obj.SetValue(PlayClickAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IValue<Vector3> GetCameraOffset(this IGameContext obj) => obj.GetValueUnsafe<IValue<Vector3>>(CameraOffset);

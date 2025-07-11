@@ -4112,6 +4112,7 @@ MonoBehaviour:
   _cameraInstaller:
     _cameraOffset: {x: 0, y: 12, z: -8}
     _camera: {fileID: 622752856}
+  _clickEffectPrefab: {fileID: 1745249769378136, guid: fdaf400090f630641812a1695938939e, type: 3}
 --- !u!114 &1944378933
 MonoBehaviour:
   m_ObjectHideFlags: 0

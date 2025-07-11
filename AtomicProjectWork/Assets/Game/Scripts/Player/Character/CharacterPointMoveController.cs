@@ -19,10 +19,11 @@ namespace SampleGame
             {
                 return;
             }
-            
+
             if (RaycastUseCase.RaycastPlaneGround(context, Input.mousePosition, out Vector3 point))
             {
                 _character.GetMovePointAction().Invoke(point);
+                context.GetPlayClickAction().Invoke(point);
             }
         }
     }

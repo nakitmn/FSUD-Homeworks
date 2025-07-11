@@ -1,6 +1,6 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace SampleGame
 {
@@ -11,6 +11,7 @@ namespace SampleGame
         [SerializeField] private InputMap _inputMap;
         [SerializeField] private CharacterSystemInstaller _characterInstaller;
         [SerializeField] private CameraSystemInstaller _cameraInstaller;
+        [SerializeField] private GameObject _clickEffectPrefab;
 
         protected override void Install(IGameContext context)
         {
@@ -19,6 +20,8 @@ namespace SampleGame
             context.AddPrefabPool(new GenericPrefabPool(_poolContainer));
             context.AddGroundPlane(new Plane(Vector3.up, Vector3.zero));
             context.AddInputMap(_inputMap);
+            context.AddPlayClickAction(new BaseAction<Vector3>(point =>
+                context.GetPrefabPool().Rent(_clickEffectPrefab, point, _clickEffectPrefab.transform.rotation)));
 
             _characterInstaller.Install(context);
             _cameraInstaller.Install(context);
