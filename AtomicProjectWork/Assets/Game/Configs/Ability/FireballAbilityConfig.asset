@@ -19,4 +19,4 @@ MonoBehaviour:
   _initialCharges: 5
   _cooldown: 1
   _animationKey: Fireball
-  _throwDelay: 1
+  _throwDelay: 0.975
