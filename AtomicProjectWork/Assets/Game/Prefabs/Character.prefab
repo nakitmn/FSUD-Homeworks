@@ -5208,6 +5208,14 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137824202129548396, guid: e0331453113676149a9c0b2bc03e60de, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d7b4bf2e399fd24ba4b3ee21a919897, type: 2}
+    - target: {fileID: 137965730785486462, guid: e0331453113676149a9c0b2bc03e60de, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d7b4bf2e399fd24ba4b3ee21a919897, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

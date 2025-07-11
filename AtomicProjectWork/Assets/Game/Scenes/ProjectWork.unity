@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1177076512471620, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4267121905847668, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -185,6 +189,14 @@ PrefabInstance:
     - target: {fileID: 4267121905847668, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 33.659
+      objectReference: {fileID: 0}
+    - target: {fileID: 23894326847561224, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23894326847561224, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23894326847561224, guid: 9d7e31be85092294f96c92b8c1d47110, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2573,15 +2585,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8174622145972017226, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.72
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 8174622145972017226, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8174622145972017226, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.29
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 8174622145972017226, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4113,7 +4125,6 @@ MonoBehaviour:
     _cameraOffset: {x: 0, y: 12, z: -8}
     _camera: {fileID: 622752856}
   _moveClickEffectPrefab: {fileID: 1745249769378136, guid: fdaf400090f630641812a1695938939e, type: 3}
-  _abilityClickEffectPrefab: {fileID: 1710183954910706, guid: ac49741cc478e914287e501422a5545f, type: 3}
 --- !u!114 &1944378933
 MonoBehaviour:
   m_ObjectHideFlags: 0
