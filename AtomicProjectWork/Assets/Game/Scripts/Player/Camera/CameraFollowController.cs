@@ -7,20 +7,20 @@ namespace SampleGame
 {
     public sealed class CameraFollowController : IInit<IGameContext>, ILateUpdate
     {
-        private IEntity _character;
+        private Transform _character;
         private Transform _camera;
         private IValue<Vector3> _offset;
         
         public void Init(IGameContext context)
         {
-            _character = context.GetCharacter();
+            _character = context.GetCharacter().GetTransform();
             _camera = context.GetCamera().transform;
             _offset = context.GetCameraOffset();
         }
 
         public void OnLateUpdate(in IEntity entity, in float deltaTime)
         {
-            _camera.position = _character.GetTransform().position + _offset.Value;
+            _camera.position = _character.position + _offset.Value;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace SampleGame
@@ -8,7 +7,7 @@ namespace SampleGame
     {
         [SerializeField] private GameObject _container;
         [SerializeField] private SmoothHealthBar _healthBar;
-        [SerializeField] private SceneEntity _entity;
+        [SerializeField] private GameEntity _entity;
 
         private IReactiveVariable<int> _maxHealth;
         private IReactiveVariable<int> _health;

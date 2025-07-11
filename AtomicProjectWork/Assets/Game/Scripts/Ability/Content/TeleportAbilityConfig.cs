@@ -14,7 +14,7 @@ namespace SampleGame
         [SerializeField] private Const<int> _manaCost;
         [SerializeField] private int _initialCharges;
 
-        protected override void Install(Ability ability, IEntity entity)
+        protected override void Install(Ability ability, IGameEntity entity)
         {
             ability.AddPointTag();
 

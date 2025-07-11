@@ -19,7 +19,7 @@ values:
 - EntityPool: GenericSceneEntityPool
 - PrefabPool: GenericPrefabPool
 - GroundPlane: Plane
-- Character: IEntity
+- Character: IGameEntity
   
 #Camera
 - CameraOffset: IValue<Vector3>

@@ -22,7 +22,7 @@ namespace SampleGame
 		public const int EntityPool = 1931115573; // GenericSceneEntityPool
 		public const int PrefabPool = -98831589; // GenericPrefabPool
 		public const int GroundPlane = -1885423927; // Plane
-		public const int Character = 294335127; // IEntity
+		public const int Character = 294335127; // IGameEntity
 		public const int CameraOffset = -1286660539; // IValue<Vector3>
 		public const int Camera = 1018227507; // Camera
 		public const int InputMap = 43340267; // InputMap
@@ -131,15 +131,15 @@ namespace SampleGame
 		public static void SetGroundPlane(this IGameContext obj, Plane value) => obj.SetValue(GroundPlane, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IEntity GetCharacter(this IGameContext obj) => obj.GetValueUnsafe<IEntity>(Character);
+		public static IGameEntity GetCharacter(this IGameContext obj) => obj.GetValueUnsafe<IGameEntity>(Character);
 
-		public static ref IEntity RefCharacter(this IGameContext obj) => ref obj.GetValueUnsafe<IEntity>(Character);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetCharacter(this IGameContext obj, out IEntity value) => obj.TryGetValueUnsafe(Character, out value);
+		public static ref IGameEntity RefCharacter(this IGameContext obj) => ref obj.GetValueUnsafe<IGameEntity>(Character);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddCharacter(this IGameContext obj, IEntity value) => obj.AddValue(Character, value);
+		public static bool TryGetCharacter(this IGameContext obj, out IGameEntity value) => obj.TryGetValueUnsafe(Character, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCharacter(this IGameContext obj, IGameEntity value) => obj.AddValue(Character, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasCharacter(this IGameContext obj) => obj.HasValue(Character);
@@ -148,7 +148,7 @@ namespace SampleGame
 		public static bool DelCharacter(this IGameContext obj) => obj.DelValue(Character);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetCharacter(this IGameContext obj, IEntity value) => obj.SetValue(Character, value);
+		public static void SetCharacter(this IGameContext obj, IGameEntity value) => obj.SetValue(Character, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IValue<Vector3> GetCameraOffset(this IGameContext obj) => obj.GetValueUnsafe<IValue<Vector3>>(CameraOffset);

@@ -16,7 +16,7 @@ namespace SampleGame
         [SerializeField] private string _animationKey;
         [SerializeField] private float _throwDelay;
 
-        protected override void Install(Ability ability, IEntity entity)
+        protected override void Install(Ability ability, IGameEntity entity)
         {
             var animationHash = Animator.StringToHash(_animationKey);
             var gameContext = GameContext.Instance;

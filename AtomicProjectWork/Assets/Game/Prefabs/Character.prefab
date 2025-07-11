@@ -4784,7 +4784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5565037075285526082}
-  - component: {fileID: 3787911180072974880}
+  - component: {fileID: 6892912220003950671}
   - component: {fileID: 2124158910435659489}
   - component: {fileID: 7510193785715645864}
   - component: {fileID: 6837775560690019615}
@@ -4816,7 +4816,7 @@ Transform:
   - {fileID: 4153585360910371194}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3787911180072974880
+--- !u!114 &6892912220003950671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4825,7 +4825,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3484102116441980732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   installOnAwake: 1
@@ -4855,7 +4855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities:
-  - {fileID: 3787911180072974880}
+  - {fileID: 6892912220003950671}
 --- !u!114 &7510193785715645864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4913,7 +4913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6572264033595400707}
-  _isMovingKey: IsMoving
+  _moveSpeedKey: NormalizedSpeed
   _takeDamageKey: TakeDamage
   _deathKey: Death
   _damagedVfx: {fileID: 6422145997845035216}
@@ -5023,7 +5023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632472758213968251}
   - component: {fileID: 110983510858403591}
-  - component: {fileID: 8910709458927163997}
+  - component: {fileID: 1074337462264336691}
   m_Layer: 0
   m_Name: <Collider>
   m_TagString: Untagged
@@ -5067,7 +5067,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 1.6, z: 0.75}
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &8910709458927163997
+--- !u!114 &1074337462264336691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5076,10 +5076,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5604161443379850850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82752fed00d948f7a053c09fe615802c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18672bb0c07c4420948befd9d3564e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 3787911180072974880}
+  _source: {fileID: 6892912220003950671}
 --- !u!1 &8007340965895810300
 GameObject:
   m_ObjectHideFlags: 0

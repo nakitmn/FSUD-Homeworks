@@ -2461,6 +2461,7 @@ MonoBehaviour:
   - {fileID: 142291600}
   - {fileID: 951155183}
   _border: {fileID: 1087348262}
+  _smoothDuration: 0.5
 --- !u!114 &1217718850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2861,6 +2862,7 @@ MonoBehaviour:
   - {fileID: 1214987628}
   - {fileID: 1652776164}
   _border: {fileID: 2086619295}
+  _smoothDuration: 0.5
 --- !u!114 &1341816683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4021,9 +4023,8 @@ MonoBehaviour:
   _worldTransform: {fileID: 1382362499}
   _poolContainer: {fileID: 1704671400}
   _inputMap: {fileID: 11400000, guid: 6972e9378858b401583b76a32f0c7711, type: 2}
-  _abilitiesPresenter: {fileID: 5520603084864097294}
   _characterInstaller:
-    _character: {fileID: 5996577621108267685}
+    _character: {fileID: 5996577621108267692}
   _cameraInstaller:
     _cameraOffset: {x: 0, y: 12, z: -8}
     _camera: {fileID: 622752856}
@@ -4066,7 +4067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entities:
   - {fileID: 1944378933}
-  - {fileID: 0}
 --- !u!1001 &2000519559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4964,15 +4964,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5565037075285526082, guid: 4f52b7de488544d4d8b90dab0c90161e, type: 3}
   m_PrefabInstance: {fileID: 5200205567433596013}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5996577621108267685 stripped
+--- !u!114 &5996577621108267692 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3787911180072974880, guid: 4f52b7de488544d4d8b90dab0c90161e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6892912220003950671, guid: 4f52b7de488544d4d8b90dab0c90161e, type: 3}
   m_PrefabInstance: {fileID: 5200205567433596013}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &6372455536449186270

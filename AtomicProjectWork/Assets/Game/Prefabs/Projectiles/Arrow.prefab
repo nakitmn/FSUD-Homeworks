@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5183288764521105519}
-  - component: {fileID: 4717945833576895198}
+  - component: {fileID: 6880497145033595137}
   - component: {fileID: 5189356000417365276}
   - component: {fileID: 4036090455162883531}
   - component: {fileID: 7861567466835629394}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 8766119246299789349}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4717945833576895198
+--- !u!114 &6880497145033595137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502055911141855080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   installOnAwake: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities:
-  - {fileID: 4717945833576895198}
+  - {fileID: 6880497145033595137}
 --- !u!114 &4036090455162883531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   _lifetime: 5
   _effects:
   - {fileID: 11400000, guid: cba1b45caa41a4da985f3edbcfcfc983, type: 2}
+  _destroyVfx: {fileID: 0}
 --- !u!114 &7861567466835629394
 MonoBehaviour:
   m_ObjectHideFlags: 0

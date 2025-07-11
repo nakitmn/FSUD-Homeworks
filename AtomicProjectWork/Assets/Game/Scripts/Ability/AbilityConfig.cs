@@ -14,7 +14,7 @@ namespace SampleGame
         [field: SerializeField]
         public Sprite Icon { get; private set; }
 
-        public Ability Create(IEntity entity)
+        public Ability Create(IGameEntity entity)
         {
             var ability = new Ability(Name);
             ability.SetIcon(Icon);
@@ -22,6 +22,6 @@ namespace SampleGame
             return ability;
         }
 
-        protected abstract void Install(Ability ability, IEntity entity);
+        protected abstract void Install(Ability ability, IGameEntity entity);
     }
 }

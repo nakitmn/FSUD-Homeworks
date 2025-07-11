@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4357519503792066770}
-  - component: {fileID: 7541495925428663198}
+  - component: {fileID: 4343050100365031626}
   - component: {fileID: 1878375476404211035}
   - component: {fileID: 2256903229793257008}
   - component: {fileID: 4064475295050789629}
@@ -69,7 +69,7 @@ Transform:
   - {fileID: 2334984285629679324}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7541495925428663198
+--- !u!114 &4343050100365031626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 280585136561384816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   installOnAwake: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities:
-  - {fileID: 7541495925428663198}
+  - {fileID: 4343050100365031626}
 --- !u!114 &2256903229793257008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
     _health: 5
   _lootInstaller:
     loot:
-    - {fileID: 3682049982066793908, guid: 6f0386feba84820409c571c340d816a8, type: 3}
+    - {fileID: 4865571314924565721, guid: 6f0386feba84820409c571c340d816a8, type: 3}
     dropLootRadius: 1
 --- !u!65 &4064475295050789629
 BoxCollider:
@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: 9197607817503790182, guid: 8603041c621265c4c95fade8425deb12, type: 3}
       propertyPath: _entity
       value: 
-      objectReference: {fileID: 7541495925428663198}
+      objectReference: {fileID: 4343050100365031626}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

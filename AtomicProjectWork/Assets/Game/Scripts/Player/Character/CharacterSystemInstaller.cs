@@ -8,7 +8,7 @@ namespace SampleGame
     public sealed class CharacterSystemInstaller : IEntityInstaller<IGameContext>
     {
         [SerializeField]
-        private SceneEntity _character;
+        private GameEntity _character;
 
         public void Install(IGameContext context)
         {

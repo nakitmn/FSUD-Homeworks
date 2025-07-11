@@ -1,5 +1,4 @@
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace SampleGame
@@ -8,7 +7,7 @@ namespace SampleGame
     {
         [SerializeField] private HealthView _view;
 
-        private IEntity _character;
+        private IGameEntity _character;
         private IReactiveVariable<int> _maxHealth;
 
         private void Awake()

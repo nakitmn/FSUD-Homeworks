@@ -16,7 +16,7 @@ namespace SampleGame
         [SerializeField]
         private MoveSpeedEffectConfig _effect;
 
-        protected override void Install(Ability ability, IEntity entity)
+        protected override void Install(Ability ability, IGameEntity entity)
         {
             ability.AddBaseTag();
             

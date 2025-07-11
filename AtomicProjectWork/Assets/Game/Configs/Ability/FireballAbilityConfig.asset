@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Fireball
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 99730a0bf76061f44a8419f9fc80a226, type: 3}
-  _prefab: {fileID: 4717945833576895198, guid: f3d4a87b6a486d646961f2e855fae103, type: 3}
+  _prefab: {fileID: 2098135424450585057, guid: f3d4a87b6a486d646961f2e855fae103, type: 3}
   _initialCharges: 5
   _cooldown: 1
   _animationKey: Fireball

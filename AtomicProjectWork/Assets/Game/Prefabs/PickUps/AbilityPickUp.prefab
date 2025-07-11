@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960097748126185269}
-  - component: {fileID: 6114024023062275834}
+  - component: {fileID: 2613741256893747095}
   - component: {fileID: 2032557945032648450}
   m_Layer: 0
   m_Name: AbilityPickUp
@@ -90,7 +90,7 @@ Transform:
   - {fileID: 1370421392466673785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6114024023062275834
+--- !u!114 &2613741256893747095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2919959947451670362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   installOnAwake: 1
@@ -274,9 +274,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1370421392466673785}
   - component: {fileID: 1803695581170501866}
-  - component: {fileID: 2889620467532833459}
+  - component: {fileID: 2321336134252988595}
   m_Layer: 10
-  m_Name: Collider
+  m_Name: <Collider>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2889620467532833459
+--- !u!114 &2321336134252988595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,10 +327,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4726332949673907027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82752fed00d948f7a053c09fe615802c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18672bb0c07c4420948befd9d3564e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 6114024023062275834}
+  _source: {fileID: 2613741256893747095}
 --- !u!1 &8600539509725564041
 GameObject:
   m_ObjectHideFlags: 0

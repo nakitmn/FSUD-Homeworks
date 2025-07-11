@@ -5,7 +5,7 @@ namespace SampleGame
 {
     public sealed class CharacterInteractController : IInit<IGameContext>, IUpdate
     {
-        private IEntity _character;
+        private IGameEntity _character;
         
         public void Init(IGameContext context)
         {

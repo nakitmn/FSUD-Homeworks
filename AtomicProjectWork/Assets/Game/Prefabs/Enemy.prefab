@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7547816922119987754}
   - component: {fileID: 1617458659872645228}
-  - component: {fileID: 5576832125205671281}
+  - component: {fileID: 6015499360197811451}
   m_Layer: 0
   m_Name: <Collider>
   m_TagString: Untagged
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 1.6, z: 0.75}
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &5576832125205671281
+--- !u!114 &6015499360197811451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,10 +63,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 443334064204276468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82752fed00d948f7a053c09fe615802c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18672bb0c07c4420948befd9d3564e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 2428139696136103826}
+  _source: {fileID: 1079180719574987931}
 --- !u!1 &2254546966429212383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4979,7 +4979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7764346451907374634}
-  - component: {fileID: 2428139696136103826}
+  - component: {fileID: 1079180719574987931}
   - component: {fileID: 5977648199024583760}
   - component: {fileID: 395364037927350645}
   - component: {fileID: 1866044595595648356}
@@ -5011,7 +5011,7 @@ Transform:
   - {fileID: 5021642081092807807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2428139696136103826
+--- !u!114 &1079180719574987931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5020,7 +5020,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6008420789137356345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9123048b7c0b48a1abf80ac43d5b5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   installOnAwake: 1
@@ -5050,7 +5050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities:
-  - {fileID: 2428139696136103826}
+  - {fileID: 1079180719574987931}
 --- !u!114 &395364037927350645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,9 +5086,9 @@ MonoBehaviour:
     _health: 5
   _lootInstaller:
     loot:
-    - {fileID: 3682049982066793908, guid: 6f0386feba84820409c571c340d816a8, type: 3}
-    - {fileID: 4510598530376288645, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
-    - {fileID: 8434257982494974447, guid: d36e86a314d07cf4b92b218f37f0306a, type: 3}
+    - {fileID: 4865571314924565721, guid: 6f0386feba84820409c571c340d816a8, type: 3}
+    - {fileID: 5621726883080167656, guid: 5656914e7666b82418e06bb65d4d80ea, type: 3}
+    - {fileID: 400890003215222914, guid: d36e86a314d07cf4b92b218f37f0306a, type: 3}
     dropLootRadius: 2
   _manaInstaller:
     _maxMana:
@@ -5109,7 +5109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6772267739419690103}
-  _isMovingKey: IsMoving
+  _moveSpeedKey: NormalizedSpeed
   _takeDamageKey: TakeDamage
   _deathKey: Death
   _damagedVfx: {fileID: 7415612001306448388}
@@ -5436,7 +5436,7 @@ PrefabInstance:
     - target: {fileID: 9197607817503790182, guid: 8603041c621265c4c95fade8425deb12, type: 3}
       propertyPath: _entity
       value: 
-      objectReference: {fileID: 2428139696136103826}
+      objectReference: {fileID: 1079180719574987931}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

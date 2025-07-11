@@ -5,7 +5,7 @@ namespace SampleGame
 {
     public sealed class CharacterUseAbilityController : IInit<IGameContext>, IUpdate<IGameContext>
     {
-        private IEntity _character;
+        private IGameEntity _character;
 
         public void Init(IGameContext context)
         {

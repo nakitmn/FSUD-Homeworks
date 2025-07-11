@@ -8,13 +8,13 @@ namespace SampleGame
     {
         private readonly AbilityView _view;
         private readonly Ability _ability;
-        private readonly IEntity _entity;
+        private readonly IGameEntity _entity;
         private IReactiveVariable<Ability> _selectedAbility;
         private IReactiveVariable<int> _charges;
 
         public bool IsVisible => _view.gameObject.activeInHierarchy;
 
-        public AbilityPresenter(AbilityView view, Ability ability, IEntity entity)
+        public AbilityPresenter(AbilityView view, Ability ability, IGameEntity entity)
         {
             _view = view;
             _ability = ability;

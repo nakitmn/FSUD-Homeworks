@@ -44,7 +44,7 @@ namespace SampleGame
             return true;
         }
 
-        public static bool IsSelectedAbilityRunning(in IEntity entity)
+        public static bool IsSelectedAbilityRunning(in IGameEntity entity)
         {
             var ability = entity.GetSelectedAbility().Value;
             if (ability == null)

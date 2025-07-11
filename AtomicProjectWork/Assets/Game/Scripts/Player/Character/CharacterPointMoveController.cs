@@ -5,7 +5,7 @@ namespace SampleGame
 {
     public class CharacterPointMoveController : IInit<IGameContext>, IUpdate<IGameContext>
     {
-        private IEntity _character;
+        private IGameEntity _character;
 
         public void Init(IGameContext context)
         {
