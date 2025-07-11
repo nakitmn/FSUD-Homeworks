@@ -34,7 +34,10 @@ namespace SampleGame
             {
                 if (RaycastUseCase.RaycastPlaneGround(context, Input.mousePosition, out var point))
                 {
-                    AbilityUseCase.Use(selectedAbility, point);
+                    if (AbilityUseCase.Use(selectedAbility, point))
+                    {
+                        context.GetPlayAbilityClickAction().Invoke(selectedAbility.GetClickEffectPrefab().Value, point);
+                    }
                 }
             }
             else if (selectedAbility.HasTargetTag())

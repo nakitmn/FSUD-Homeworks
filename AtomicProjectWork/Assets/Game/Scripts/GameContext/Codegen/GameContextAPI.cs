@@ -20,7 +20,8 @@ namespace SampleGame
 		public const int PrefabPool = -98831589; // GenericPrefabPool
 		public const int GroundPlane = -1885423927; // Plane
 		public const int Character = 294335127; // IGameEntity
-		public const int PlayClickAction = -954041664; // IAction<Vector3>
+		public const int PlayMoveClickAction = -1649131555; // IAction<Vector3>
+		public const int PlayAbilityClickAction = -783760747; // IAction<GameObject, Vector3>
 		public const int CameraOffset = -1286660539; // IValue<Vector3>
 		public const int Camera = 1018227507; // Camera
 		public const int InputMap = 43340267; // InputMap
@@ -129,24 +130,44 @@ namespace SampleGame
 		public static void SetCharacter(this IGameContext obj, IGameEntity value) => obj.SetValue(Character, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IAction<Vector3> GetPlayClickAction(this IGameContext obj) => obj.GetValueUnsafe<IAction<Vector3>>(PlayClickAction);
+		public static IAction<Vector3> GetPlayMoveClickAction(this IGameContext obj) => obj.GetValueUnsafe<IAction<Vector3>>(PlayMoveClickAction);
 
-		public static ref IAction<Vector3> RefPlayClickAction(this IGameContext obj) => ref obj.GetValueUnsafe<IAction<Vector3>>(PlayClickAction);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetPlayClickAction(this IGameContext obj, out IAction<Vector3> value) => obj.TryGetValueUnsafe(PlayClickAction, out value);
+		public static ref IAction<Vector3> RefPlayMoveClickAction(this IGameContext obj) => ref obj.GetValueUnsafe<IAction<Vector3>>(PlayMoveClickAction);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddPlayClickAction(this IGameContext obj, IAction<Vector3> value) => obj.AddValue(PlayClickAction, value);
+		public static bool TryGetPlayMoveClickAction(this IGameContext obj, out IAction<Vector3> value) => obj.TryGetValueUnsafe(PlayMoveClickAction, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasPlayClickAction(this IGameContext obj) => obj.HasValue(PlayClickAction);
+		public static void AddPlayMoveClickAction(this IGameContext obj, IAction<Vector3> value) => obj.AddValue(PlayMoveClickAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelPlayClickAction(this IGameContext obj) => obj.DelValue(PlayClickAction);
+		public static bool HasPlayMoveClickAction(this IGameContext obj) => obj.HasValue(PlayMoveClickAction);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetPlayClickAction(this IGameContext obj, IAction<Vector3> value) => obj.SetValue(PlayClickAction, value);
+		public static bool DelPlayMoveClickAction(this IGameContext obj) => obj.DelValue(PlayMoveClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetPlayMoveClickAction(this IGameContext obj, IAction<Vector3> value) => obj.SetValue(PlayMoveClickAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IAction<GameObject, Vector3> GetPlayAbilityClickAction(this IGameContext obj) => obj.GetValueUnsafe<IAction<GameObject, Vector3>>(PlayAbilityClickAction);
+
+		public static ref IAction<GameObject, Vector3> RefPlayAbilityClickAction(this IGameContext obj) => ref obj.GetValueUnsafe<IAction<GameObject, Vector3>>(PlayAbilityClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetPlayAbilityClickAction(this IGameContext obj, out IAction<GameObject, Vector3> value) => obj.TryGetValueUnsafe(PlayAbilityClickAction, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddPlayAbilityClickAction(this IGameContext obj, IAction<GameObject, Vector3> value) => obj.AddValue(PlayAbilityClickAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasPlayAbilityClickAction(this IGameContext obj) => obj.HasValue(PlayAbilityClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelPlayAbilityClickAction(this IGameContext obj) => obj.DelValue(PlayAbilityClickAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetPlayAbilityClickAction(this IGameContext obj, IAction<GameObject, Vector3> value) => obj.SetValue(PlayAbilityClickAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IValue<Vector3> GetCameraOffset(this IGameContext obj) => obj.GetValueUnsafe<IValue<Vector3>>(CameraOffset);

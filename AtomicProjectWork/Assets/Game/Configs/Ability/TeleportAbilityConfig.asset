@@ -15,6 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Teleport
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 99256c0d51fe9044580ebed81dcc9841, type: 3}
+  <ClickEffectPrefab>k__BackingField: {fileID: 1703752627927950, guid: 1161814799680a54e9b4758384f039cb, type: 3}
   _radius:
     value: 10
   _manaCost:

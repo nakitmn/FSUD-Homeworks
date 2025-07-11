@@ -40,6 +40,7 @@ values:
   - Cooldown: Cooldown
   - Delay: Cooldown
   - IsRunning: IReactiveVariable<bool>
+  - ClickEffectPrefab: IValue<GameObject>
   
   #View:
   - Icon: Sprite

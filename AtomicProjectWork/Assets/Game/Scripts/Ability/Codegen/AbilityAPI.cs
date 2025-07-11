@@ -34,6 +34,7 @@ namespace SampleGame
 		public const int Cooldown = 655707791; // Cooldown
 		public const int Delay = 1935388575; // Cooldown
 		public const int IsRunning = -887662580; // IReactiveVariable<bool>
+		public const int ClickEffectPrefab = -133094833; // IValue<GameObject>
 		public const int Icon = -978942235; // Sprite
 
 
@@ -388,6 +389,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetIsRunning(this Ability obj, IReactiveVariable<bool> value) => obj.SetValue(IsRunning, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<GameObject> GetClickEffectPrefab(this Ability obj) => obj.GetValueUnsafe<IValue<GameObject>>(ClickEffectPrefab);
+
+		public static ref IValue<GameObject> RefClickEffectPrefab(this Ability obj) => ref obj.GetValueUnsafe<IValue<GameObject>>(ClickEffectPrefab);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetClickEffectPrefab(this Ability obj, out IValue<GameObject> value) => obj.TryGetValueUnsafe(ClickEffectPrefab, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddClickEffectPrefab(this Ability obj, IValue<GameObject> value) => obj.AddValue(ClickEffectPrefab, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasClickEffectPrefab(this Ability obj) => obj.HasValue(ClickEffectPrefab);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelClickEffectPrefab(this Ability obj) => obj.DelValue(ClickEffectPrefab);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetClickEffectPrefab(this Ability obj, IValue<GameObject> value) => obj.SetValue(ClickEffectPrefab, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Sprite GetIcon(this Ability obj) => obj.GetValueUnsafe<Sprite>(Icon);

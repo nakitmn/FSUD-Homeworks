@@ -17,7 +17,8 @@ values:
 - PrefabPool: GenericPrefabPool
 - GroundPlane: Plane
 - Character: IGameEntity
-- PlayClickAction: IAction<Vector3>
+- PlayMoveClickAction: IAction<Vector3>
+- PlayAbilityClickAction: IAction<GameObject, Vector3>
   
 #Camera
 - CameraOffset: IValue<Vector3>

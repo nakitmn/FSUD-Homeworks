@@ -15,6 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: FrostArrow
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 148313e718cf5d149b3426266e755a0d, type: 3}
+  <ClickEffectPrefab>k__BackingField: {fileID: 1710183954910706, guid: ac49741cc478e914287e501422a5545f, type: 3}
   _prefab: {fileID: 6880497145033595137, guid: 9f4d989ca24684808b60797943d7cd1b, type: 3}
   _initialCharges: 5
   _cooldown: 1
