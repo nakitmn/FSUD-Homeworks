@@ -21,7 +21,6 @@ namespace SampleGame
         protected override void Install(Ability ability, IGameEntity entity)
         {
             var gameContext = GameContext.Instance;
-
             var animationHash = Animator.StringToHash(_animationKey);
 
             ability.AddPointTag();
@@ -54,16 +53,15 @@ namespace SampleGame
             ability.AddCharges(new ReactiveInt(_initialCharges));
             ability.AddRadius(_radius);
             ability.AddManaCost(_manaCost);
-            ability.WhenFixedUpdate(deltaTime =>
+            
+            ability.WhenFixedUpdate(ability.GetDelay().Tick);
+            ability.AddBehaviour<DelayRunningBehaviour>();
+            ability.AddBehaviour(new RotateToTargetPointBehaviour(entity));
+            
+            ability.GetIsRunning().Subscribe(isRunning =>
             {
-                var delay = ability.GetDelay();
-                var isRunning = ability.GetIsRunning();
-
-                delay.Tick(deltaTime);
-
-                if (isRunning.Value && delay.IsExpired())
+                if (isRunning == false)
                 {
-                    isRunning.Value = false;
                     var point = ability.GetTargetPoint().Value;
                     entity.GetTeleportAction().Invoke(point);
                     gameContext.GetPrefabPool().Rent(_endVfx, point + Vector3.up * 0.4f, _endVfx.transform.rotation);

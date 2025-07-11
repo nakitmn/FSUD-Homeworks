@@ -50,22 +50,20 @@ namespace SampleGame
 
             ability.WhenFixedUpdate(deltaTime =>
             {
-                var delay = ability.GetDelay();
-
                 ability.GetCooldown().Tick(deltaTime);
-                delay.Tick(deltaTime);
-
-                if (ability.GetIsRunning().Value)
+                ability.GetDelay().Tick(deltaTime);
+            });
+            
+            ability.AddBehaviour(new RotateToTargetPointBehaviour(entity));
+            ability.AddBehaviour<DelayRunningBehaviour>();
+            
+            ability.GetIsRunning().Subscribe(isRunning =>
+            {
+                if (isRunning == false)
                 {
-                    RotateUseCase.RotateTowardsPosition(entity, ability.GetTargetPoint().Value, deltaTime);
-                    
-                    if (delay.IsExpired())
-                    {
-                        var firePoint = entity.GetFirePoint();
-                        SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
-                            firePoint.rotation, entity);
-                        ability.GetIsRunning().Value = false;
-                    }
+                    var firePoint = entity.GetFirePoint();
+                    SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
+                        firePoint.rotation, entity);
                 }
             });
         }
