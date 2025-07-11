@@ -4920,7 +4920,6 @@ GameObject:
   - component: {fileID: 4029891918228826}
   - component: {fileID: 198079567006702292}
   - component: {fileID: 199984059110894194}
-  - component: {fileID: 5553150026272201535}
   - component: {fileID: 1145919770882408653}
   m_Layer: 0
   m_Name: FireballExplosionYellow
@@ -9814,18 +9813,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &5553150026272201535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298315647077242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 496f0f4528e640beaa934f5d73d3c98c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1145919770882408653
 MonoBehaviour:
   m_ObjectHideFlags: 0
