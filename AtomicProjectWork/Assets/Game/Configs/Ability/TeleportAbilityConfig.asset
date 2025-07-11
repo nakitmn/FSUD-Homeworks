@@ -20,3 +20,7 @@ MonoBehaviour:
   _manaCost:
     value: 5
   _initialCharges: 5
+  _delay: 0.75
+  _animationKey: Teleport
+  _pointChargeVfx: {fileID: 147226, guid: 15828ec533473df439f6544b61b7d25c, type: 3}
+  _endVfx: {fileID: 195608, guid: fd3befb55dde22b45b100f6c6b347c4f, type: 3}

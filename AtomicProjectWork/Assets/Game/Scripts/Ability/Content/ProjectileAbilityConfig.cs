@@ -62,10 +62,8 @@ namespace SampleGame
                 if (ability.GetIsRunning().Value && delay.IsExpired())
                 {
                     var firePoint = entity.GetFirePoint();
-                    var projectile = SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
+                    SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
                         firePoint.rotation, entity);
-                    projectile.GetFireAction().Invoke();
-
                     ability.GetIsRunning().Value = false;
                 }
             });

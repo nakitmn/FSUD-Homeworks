@@ -21,6 +21,7 @@ namespace SampleGame
 
             projectile.GetLifetime().Reset();
             projectile.GetMoveDirection().Value = bulletTransform.forward;
+            projectile.GetFireAction().Invoke();
             
             return projectile;
         }
