@@ -5,6 +5,13 @@ namespace SampleGame
 {
     public static class VectorUseCase
     {
+        public static Vector3 GetDirectionXZ(in Vector3 originalPosition, in Vector3 targetPosition)
+        {
+            var direction = targetPosition - originalPosition;
+            direction.y = 0f;
+            return direction.normalized;
+        }
+        
         public static bool LessOrEqualsDistance(in IGameEntity entity, in Vector3 point, float distance) =>
             GetDistance(entity, point) <= distance;
 

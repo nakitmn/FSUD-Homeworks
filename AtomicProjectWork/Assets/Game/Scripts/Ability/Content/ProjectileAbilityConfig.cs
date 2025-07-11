@@ -33,10 +33,6 @@ namespace SampleGame
             {
                 entity.GetAnimator().SetTrigger(animationHash);
                 entity.GetStopAction().Invoke();
-                var characterTransform = entity.GetTransform();
-                var direction = point - characterTransform.position;
-                direction.y = 0f;
-                characterTransform.rotation = Quaternion.LookRotation(direction.normalized);
 
                 ability.GetCharges().Value--;
                 ability.GetCooldown().Reset();
@@ -59,12 +55,17 @@ namespace SampleGame
                 ability.GetCooldown().Tick(deltaTime);
                 delay.Tick(deltaTime);
 
-                if (ability.GetIsRunning().Value && delay.IsExpired())
+                if (ability.GetIsRunning().Value)
                 {
-                    var firePoint = entity.GetFirePoint();
-                    SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
-                        firePoint.rotation, entity);
-                    ability.GetIsRunning().Value = false;
+                    RotateUseCase.RotateTowardsPosition(entity, ability.GetTargetPoint().Value, deltaTime);
+                    
+                    if (delay.IsExpired())
+                    {
+                        var firePoint = entity.GetFirePoint();
+                        SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
+                            firePoint.rotation, entity);
+                        ability.GetIsRunning().Value = false;
+                    }
                 }
             });
         }
