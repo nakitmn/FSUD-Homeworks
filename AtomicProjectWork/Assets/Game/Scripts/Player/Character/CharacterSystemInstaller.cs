@@ -14,7 +14,6 @@ namespace SampleGame
         {
             context.AddCharacter(_character);
             context.AddBehaviour<CharacterPointMoveController>();
-            context.AddBehaviour<CharacterInteractController>();
             context.AddBehaviour<CharacterUseAbilityController>();
         }
     }
