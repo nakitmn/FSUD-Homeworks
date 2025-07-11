@@ -24,7 +24,7 @@ namespace SampleGame
         public override void Install(IEntity entity)
         {
             entity.AddFirePoint(_firePoint);
-            entity.AddEffects(new ReactiveDictionary<string, EffectInstance>());
+            entity.AddEffects(new ReactiveDictionary<string, Effect>());
 
             InstallMain(entity);
             InstallMove(entity);

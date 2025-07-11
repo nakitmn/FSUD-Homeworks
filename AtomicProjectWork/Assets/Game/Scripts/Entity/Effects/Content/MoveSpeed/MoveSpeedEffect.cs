@@ -3,15 +3,13 @@ using Atomic.Entities;
 
 namespace SampleGame
 {
-    
-    
-    public sealed class MoveSpeedEffectInstance : 
-        TemporaryEffectInstance
+    public sealed class MoveSpeedEffect :
+        TemporaryEffect
     {
         private readonly IValue<float> _multiplier;
 
-        public MoveSpeedEffectInstance
-            (MoveSpeedEffectConfig config, IEntity target) 
+        public MoveSpeedEffect
+            (MoveSpeedEffectConfig config, IEntity target)
             : base(config, target)
         {
             _multiplier = config.Multiplier;

@@ -8,7 +8,7 @@ namespace SampleGame
     {
         public static bool CanApply(in IEntity character, in EffectConfig effect)
         {
-            IReactiveDictionary<string, EffectInstance> effects = character.GetEffects();
+            IReactiveDictionary<string, Effect> effects = character.GetEffects();
             return effect.CanApply(character) && !effects.ContainsKey(effect.Name);
         }
 
@@ -21,8 +21,8 @@ namespace SampleGame
             
             string effectName = effect.Name;
             
-            IReactiveDictionary<string, EffectInstance> effects = character.GetEffects();
-            if (effects.ContainsKey(effectName) || !effect.Apply(character, out EffectInstance instance))
+            IReactiveDictionary<string, Effect> effects = character.GetEffects();
+            if (effects.ContainsKey(effectName) || !effect.Apply(character, out Effect instance))
                 return false;
             
             effects.Add(effectName, instance);
@@ -31,8 +31,8 @@ namespace SampleGame
 
         public static bool Discard(in IEntity character, in string effectName)
         {
-            IReactiveDictionary<string, EffectInstance> effects = character.GetEffects();
-            if (!effects.Remove(effectName, out EffectInstance instance))
+            IReactiveDictionary<string, Effect> effects = character.GetEffects();
+            if (!effects.Remove(effectName, out Effect instance))
                 return false;
 
             instance.Dispose();

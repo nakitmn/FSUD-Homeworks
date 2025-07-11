@@ -8,17 +8,14 @@ namespace SampleGame
         fileName = "MoveSpeedEffect",
         menuName = "SampleGame/Effects/New MoveSpeedEffect"
     )]
-    
-    
     public sealed class MoveSpeedEffectConfig : TemporaryEffectConfig
     {
-        [field: SerializeField]
-        public Const<float> Multiplier { get; private set; }
+        [field: SerializeField] public Const<float> Multiplier { get; private set; }
 
-        public override bool CanApply(in IEntity target) => 
+        public override bool CanApply(in IEntity target) =>
             target.HasMoveSpeed();
 
-        protected override EffectInstance Create(in IEntity target) =>
-            new MoveSpeedEffectInstance(this, target);
+        protected override Effect Create(in IEntity target) =>
+            new MoveSpeedEffect(this, target);
     }
 }

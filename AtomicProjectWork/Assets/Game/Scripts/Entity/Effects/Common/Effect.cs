@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public abstract class EffectInstance : IBehaviour, IDisposable
+    public abstract class Effect : IBehaviour, IDisposable
     {
         public string Name => _config.Name;
         public string Description => _config.Description;
@@ -13,7 +13,7 @@ namespace SampleGame
         private readonly EffectConfig _config;
         protected readonly IEntity _target;
 
-        protected EffectInstance(in EffectConfig config, in IEntity target)
+        protected Effect(in EffectConfig config, in IEntity target)
         {
             _config = config;
             _target = target;

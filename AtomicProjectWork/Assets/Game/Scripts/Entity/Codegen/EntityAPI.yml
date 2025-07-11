@@ -73,7 +73,7 @@ values:
 
 #Other
 - Owner: IReactiveVariable<IEntity>
-- Effects: IReactiveDictionary<string, EffectInstance>
+- Effects: IReactiveDictionary<string, Effect>
 - ProjectileEffects : EffectConfig[]
 
 #Loot

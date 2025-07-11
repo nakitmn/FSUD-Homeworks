@@ -16,7 +16,7 @@ namespace SampleGame
         public Sprite Icon { get; private set; }
 
         [Button]
-        public bool Apply(in IEntity target, out EffectInstance instance)
+        public bool Apply(in IEntity target, out Effect instance)
         {
             instance = this.CanApply(target) ? this.Create(target) : null;
             return instance != null;
@@ -25,6 +25,6 @@ namespace SampleGame
         [Button]
         public abstract bool CanApply(in IEntity target);
 
-        protected abstract EffectInstance Create(in IEntity target);
+        protected abstract Effect Create(in IEntity target);
     }
 }

@@ -57,7 +57,7 @@ namespace SampleGame
 		public const int InteractAction = -1026843572; // IAction<IEntity>
 		public const int TargetInteractible = 21081601; // IReactiveVariable<IEntity>
 		public const int Owner = 245483896; // IReactiveVariable<IEntity>
-		public const int Effects = -2018114250; // IReactiveDictionary<string, EffectInstance>
+		public const int Effects = -2018114250; // IReactiveDictionary<string, Effect>
 		public const int ProjectileEffects = -2063755301; // EffectConfig[]
 		public const int Loot = 100693705; // SceneEntity[]
 		public const int Trigger = -707381567; // TriggerEventReceiver
@@ -845,15 +845,15 @@ namespace SampleGame
 		public static void SetOwner(this IEntity obj, IReactiveVariable<IEntity> value) => obj.SetValue(Owner, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveDictionary<string, EffectInstance> GetEffects(this IEntity obj) => obj.GetValueUnsafe<IReactiveDictionary<string, EffectInstance>>(Effects);
+		public static IReactiveDictionary<string, Effect> GetEffects(this IEntity obj) => obj.GetValueUnsafe<IReactiveDictionary<string, Effect>>(Effects);
 
-		public static ref IReactiveDictionary<string, EffectInstance> RefEffects(this IEntity obj) => ref obj.GetValueUnsafe<IReactiveDictionary<string, EffectInstance>>(Effects);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetEffects(this IEntity obj, out IReactiveDictionary<string, EffectInstance> value) => obj.TryGetValueUnsafe(Effects, out value);
+		public static ref IReactiveDictionary<string, Effect> RefEffects(this IEntity obj) => ref obj.GetValueUnsafe<IReactiveDictionary<string, Effect>>(Effects);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddEffects(this IEntity obj, IReactiveDictionary<string, EffectInstance> value) => obj.AddValue(Effects, value);
+		public static bool TryGetEffects(this IEntity obj, out IReactiveDictionary<string, Effect> value) => obj.TryGetValueUnsafe(Effects, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddEffects(this IEntity obj, IReactiveDictionary<string, Effect> value) => obj.AddValue(Effects, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasEffects(this IEntity obj) => obj.HasValue(Effects);
@@ -862,7 +862,7 @@ namespace SampleGame
 		public static bool DelEffects(this IEntity obj) => obj.DelValue(Effects);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetEffects(this IEntity obj, IReactiveDictionary<string, EffectInstance> value) => obj.SetValue(Effects, value);
+		public static void SetEffects(this IEntity obj, IReactiveDictionary<string, Effect> value) => obj.SetValue(Effects, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static EffectConfig[] GetProjectileEffects(this IEntity obj) => obj.GetValueUnsafe<EffectConfig[]>(ProjectileEffects);

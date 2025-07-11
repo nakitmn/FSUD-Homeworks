@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 
 namespace SampleGame
 {
-    public abstract class TemporaryEffectInstance : EffectInstance,
+    public abstract class TemporaryEffect : Effect,
         IFixedUpdate
     {
         private readonly IValue<float> _duration;
@@ -12,7 +12,7 @@ namespace SampleGame
         [ShowInInspector, ReadOnly]
         private float _currentTime;
 
-        protected TemporaryEffectInstance(
+        protected TemporaryEffect(
             TemporaryEffectConfig config, IEntity entity
         ) : base(config, entity)
         {

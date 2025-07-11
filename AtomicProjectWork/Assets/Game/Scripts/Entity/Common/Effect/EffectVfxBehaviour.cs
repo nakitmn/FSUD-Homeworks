@@ -8,7 +8,7 @@ namespace SampleGame
     public sealed class EffectVfxBehaviour : IInit, IDispose
     {
         private readonly Dictionary<string, ParticleSystem> _vfxs;
-        private IReactiveDictionary<string, EffectInstance> _effects;
+        private IReactiveDictionary<string, Effect> _effects;
 
         public EffectVfxBehaviour(Dictionary<string, ParticleSystem> vfxs)
         {
@@ -32,9 +32,9 @@ namespace SampleGame
             this.StopVfx();
         }
 
-        private void OnEffectAdded(string key, EffectInstance value) => _vfxs[key].Play();
+        private void OnEffectAdded(string key, Effect value) => _vfxs[key].Play();
 
-        private void OnEffectRemoved(string key, EffectInstance value) => _vfxs[key].Stop();
+        private void OnEffectRemoved(string key, Effect value) => _vfxs[key].Stop();
 
         private void StartVfx()
         {
