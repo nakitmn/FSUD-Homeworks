@@ -4,7 +4,7 @@ aggressiveInlining: true
 
 namespace: SampleGame
 className: GameEntityAPI
-directory: Assets/Game/Scripts/Entity/Codegen
+directory: Assets/Game/Scripts/GameEntity/Codegen
  
 imports:
 - UnityEngine
@@ -57,6 +57,8 @@ values:
 #Abbility
 - Abilities: IReactiveDictionary<string, Ability>
 - SelectedAbility: IReactiveVariable<Ability>
+- SelectAbilityCondition: IValue<bool>
+- SelectAbilityAction: IAction<Ability>
     
 #Combat
 - Damage: IReactiveVariable<int>

@@ -47,6 +47,8 @@ namespace SampleGame
 		public const int CurrentMana = 49250327; // IReactiveVariable<int>
 		public const int Abilities = 986255111; // IReactiveDictionary<string, Ability>
 		public const int SelectedAbility = 1999545338; // IReactiveVariable<Ability>
+		public const int SelectAbilityCondition = 1530526709; // IValue<bool>
+		public const int SelectAbilityAction = 905490121; // IAction<Ability>
 		public const int Damage = 375673178; // IReactiveVariable<int>
 		public const int ExtraDamage = -530877775; // IExpression<int>
 		public const int Target = 1103309514; // IReactiveVariable<IGameEntity>
@@ -642,6 +644,46 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetSelectedAbility(this IGameEntity obj, IReactiveVariable<Ability> value) => obj.SetValue(SelectedAbility, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<bool> GetSelectAbilityCondition(this IGameEntity obj) => obj.GetValueUnsafe<IValue<bool>>(SelectAbilityCondition);
+
+		public static ref IValue<bool> RefSelectAbilityCondition(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<bool>>(SelectAbilityCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSelectAbilityCondition(this IGameEntity obj, out IValue<bool> value) => obj.TryGetValueUnsafe(SelectAbilityCondition, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddSelectAbilityCondition(this IGameEntity obj, IValue<bool> value) => obj.AddValue(SelectAbilityCondition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSelectAbilityCondition(this IGameEntity obj) => obj.HasValue(SelectAbilityCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSelectAbilityCondition(this IGameEntity obj) => obj.DelValue(SelectAbilityCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSelectAbilityCondition(this IGameEntity obj, IValue<bool> value) => obj.SetValue(SelectAbilityCondition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IAction<Ability> GetSelectAbilityAction(this IGameEntity obj) => obj.GetValueUnsafe<IAction<Ability>>(SelectAbilityAction);
+
+		public static ref IAction<Ability> RefSelectAbilityAction(this IGameEntity obj) => ref obj.GetValueUnsafe<IAction<Ability>>(SelectAbilityAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSelectAbilityAction(this IGameEntity obj, out IAction<Ability> value) => obj.TryGetValueUnsafe(SelectAbilityAction, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddSelectAbilityAction(this IGameEntity obj, IAction<Ability> value) => obj.AddValue(SelectAbilityAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSelectAbilityAction(this IGameEntity obj) => obj.HasValue(SelectAbilityAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSelectAbilityAction(this IGameEntity obj) => obj.DelValue(SelectAbilityAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSelectAbilityAction(this IGameEntity obj, IAction<Ability> value) => obj.SetValue(SelectAbilityAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<int> GetDamage(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(Damage);

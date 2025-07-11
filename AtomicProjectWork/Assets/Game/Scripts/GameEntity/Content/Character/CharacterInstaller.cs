@@ -33,7 +33,29 @@ namespace SampleGame
             _interactInstaller.Install(entity);
             _lootInstaller.Install(entity);
             _manaInstaller.Install(entity);
+            
+            InstallAbilities(entity);
+        }
+
+        private void InstallAbilities(IGameEntity entity)
+        {
             _abilitySystemInstaller.Install(entity);
+
+            entity.AddSelectAbilityCondition(
+                new AndExpression(
+                    () => AbilityUseCase.IsSelectedAbilityRunning(entity) == false
+                )
+            );
+
+            entity.AddSelectAbilityAction(new BaseAction<Ability>(ability =>
+            {
+                if (entity.GetSelectAbilityCondition().Value == false)
+                {
+                    return;
+                }
+
+                entity.GetSelectedAbility().Value = ability;
+            }));
         }
 
         private void InstallMain(IGameEntity entity)
@@ -59,7 +81,7 @@ namespace SampleGame
             entity.AddNormalizedCurrentSpeed(new BaseFunction<float>(() => _agent.velocity.magnitude / _agent.speed));
 
             entity.AddStopAction(new BaseAction(() => _agent.SetDestination(_transform.position)));
-            
+
             entity.AddMovePointAction(new BaseAction<Vector3>(point =>
             {
                 if (entity.GetMoveCondition().Value == false)

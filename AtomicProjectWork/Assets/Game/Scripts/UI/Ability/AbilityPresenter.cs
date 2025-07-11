@@ -74,7 +74,7 @@ namespace SampleGame
 
         public void Select()
         {
-            _selectedAbility.Value = _ability;
+            _entity.GetSelectAbilityAction().Invoke(_ability);
         }
     }
 }
