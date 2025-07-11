@@ -39,7 +39,7 @@ values:
 
 #Rotation
 - AngularSpeed: IValue<float>
-- AngularDirection: IReactiveVariable<Vector3>
+- AngularDirection: IValue<Vector3>
 - TurnDirection: IReactiveVariable<float>
   
 #Life

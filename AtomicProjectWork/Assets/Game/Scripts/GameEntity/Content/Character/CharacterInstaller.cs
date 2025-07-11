@@ -33,7 +33,7 @@ namespace SampleGame
             _interactInstaller.Install(entity);
             _lootInstaller.Install(entity);
             _manaInstaller.Install(entity);
-            
+
             InstallAbilities(entity);
         }
 
@@ -65,6 +65,7 @@ namespace SampleGame
             entity.AddRigidbody(_rigidbody);
             entity.AddTrigger(_triggerEventReceiver);
             entity.AddNavAgent(_agent);
+            _agent.updateRotation = false;
         }
 
         private void InstallMove(IGameEntity entity)
@@ -77,9 +78,9 @@ namespace SampleGame
                     () => AbilityUseCase.IsSelectedAbilityRunning(entity) == false
                 )
             );
-            entity.AddMoveDirection(new ReactiveVector3());
             entity.AddNormalizedCurrentSpeed(new BaseFunction<float>(() => _agent.velocity.magnitude / _agent.speed));
-
+            entity.AddAngularDirection(new BaseFunction<Vector3>(() => _agent.velocity));
+            entity.AddAngularSpeed(new Const<float>(_angularSpeed));
             entity.AddStopAction(new BaseAction(() => _agent.SetDestination(_transform.position)));
 
             entity.AddMovePointAction(new BaseAction<Vector3>(point =>
@@ -101,7 +102,9 @@ namespace SampleGame
             }));
 
             entity.AddIsMoving(new BaseFunction<bool>(() => _agent.velocity != Vector3.zero));
-            entity.AddBehaviour<MoveTowardsBehaviour>();
+            entity.AddBehaviour<RotateTowardsBehaviour>();
+
+            entity.GetMoveSpeed().Observe(speed => entity.GetNavAgent().speed = speed);
         }
     }
 }

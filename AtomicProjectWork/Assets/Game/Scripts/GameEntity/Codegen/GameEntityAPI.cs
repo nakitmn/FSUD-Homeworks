@@ -35,7 +35,7 @@ namespace SampleGame
 		public const int StopAction = 149392863; // IAction
 		public const int ForwardDirection = -597461024; // IReactiveVariable<float>
 		public const int AngularSpeed = -1089183267; // IValue<float>
-		public const int AngularDirection = -1725439556; // IReactiveVariable<Vector3>
+		public const int AngularDirection = -1725439556; // IValue<Vector3>
 		public const int TurnDirection = 1232893390; // IReactiveVariable<float>
 		public const int MaxHealth = 1923500305; // IReactiveVariable<int>
 		public const int Health = -915003867; // IReactiveVariable<int>
@@ -406,15 +406,15 @@ namespace SampleGame
 		public static void SetAngularSpeed(this IGameEntity obj, IValue<float> value) => obj.SetValue(AngularSpeed, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveVariable<Vector3> GetAngularDirection(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Vector3>>(AngularDirection);
+		public static IValue<Vector3> GetAngularDirection(this IGameEntity obj) => obj.GetValueUnsafe<IValue<Vector3>>(AngularDirection);
 
-		public static ref IReactiveVariable<Vector3> RefAngularDirection(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Vector3>>(AngularDirection);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetAngularDirection(this IGameEntity obj, out IReactiveVariable<Vector3> value) => obj.TryGetValueUnsafe(AngularDirection, out value);
+		public static ref IValue<Vector3> RefAngularDirection(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<Vector3>>(AngularDirection);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddAngularDirection(this IGameEntity obj, IReactiveVariable<Vector3> value) => obj.AddValue(AngularDirection, value);
+		public static bool TryGetAngularDirection(this IGameEntity obj, out IValue<Vector3> value) => obj.TryGetValueUnsafe(AngularDirection, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddAngularDirection(this IGameEntity obj, IValue<Vector3> value) => obj.AddValue(AngularDirection, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasAngularDirection(this IGameEntity obj) => obj.HasValue(AngularDirection);
@@ -423,7 +423,7 @@ namespace SampleGame
 		public static bool DelAngularDirection(this IGameEntity obj) => obj.DelValue(AngularDirection);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetAngularDirection(this IGameEntity obj, IReactiveVariable<Vector3> value) => obj.SetValue(AngularDirection, value);
+		public static void SetAngularDirection(this IGameEntity obj, IValue<Vector3> value) => obj.SetValue(AngularDirection, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<float> GetTurnDirection(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<float>>(TurnDirection);
