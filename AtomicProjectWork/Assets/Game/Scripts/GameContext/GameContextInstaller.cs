@@ -8,7 +8,6 @@ namespace SampleGame
         [SerializeField] private Transform _worldTransform;
         [SerializeField] private Transform _poolContainer;
         [SerializeField] private InputMap _inputMap;
-        [SerializeField] private PlayerAbilitiesPresenter _abilitiesPresenter;
         [SerializeField] private CharacterSystemInstaller _characterInstaller;
         [SerializeField] private CameraSystemInstaller _cameraInstaller;
 
@@ -19,12 +18,9 @@ namespace SampleGame
             context.AddPrefabPool(new GenericPrefabPool(_poolContainer));
             context.AddGroundPlane(new Plane(Vector3.up, Vector3.zero));
             context.AddInputMap(_inputMap);
-            context.AddAbilitiesPresenter(_abilitiesPresenter);
 
             _characterInstaller.Install(context);
             _cameraInstaller.Install(context);
-
-            context.AddBehaviour<AbilitySelectBehaviour>();
         }
     }
 }

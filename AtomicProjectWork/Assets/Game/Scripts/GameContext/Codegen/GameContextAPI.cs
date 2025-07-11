@@ -26,7 +26,6 @@ namespace SampleGame
 		public const int CameraOffset = -1286660539; // IValue<Vector3>
 		public const int Camera = 1018227507; // Camera
 		public const int InputMap = 43340267; // InputMap
-		public const int AbilitiesPresenter = 274819485; // PlayerAbilitiesPresenter
 
 
 		///Value Extensions
@@ -210,25 +209,5 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetInputMap(this IGameContext obj, InputMap value) => obj.SetValue(InputMap, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static PlayerAbilitiesPresenter GetAbilitiesPresenter(this IGameContext obj) => obj.GetValueUnsafe<PlayerAbilitiesPresenter>(AbilitiesPresenter);
-
-		public static ref PlayerAbilitiesPresenter RefAbilitiesPresenter(this IGameContext obj) => ref obj.GetValueUnsafe<PlayerAbilitiesPresenter>(AbilitiesPresenter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetAbilitiesPresenter(this IGameContext obj, out PlayerAbilitiesPresenter value) => obj.TryGetValueUnsafe(AbilitiesPresenter, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddAbilitiesPresenter(this IGameContext obj, PlayerAbilitiesPresenter value) => obj.AddValue(AbilitiesPresenter, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasAbilitiesPresenter(this IGameContext obj) => obj.HasValue(AbilitiesPresenter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelAbilitiesPresenter(this IGameContext obj) => obj.DelValue(AbilitiesPresenter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetAbilitiesPresenter(this IGameContext obj, PlayerAbilitiesPresenter value) => obj.SetValue(AbilitiesPresenter, value);
     }
 }

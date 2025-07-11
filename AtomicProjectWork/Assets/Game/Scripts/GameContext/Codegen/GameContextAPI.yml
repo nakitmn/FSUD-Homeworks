@@ -27,6 +27,3 @@ values:
   
 #Input
 - InputMap: InputMap
-  
-#Abbility
-- AbilitiesPresenter: PlayerAbilitiesPresenter

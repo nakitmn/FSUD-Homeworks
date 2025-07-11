@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Atomic.Elements;
-using Atomic.Entities;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +38,14 @@ namespace SampleGame
             {
                 var view = _views[i];
                 view.gameObject.SetActive(false);
+            }
+        }
+
+        private void Update()
+        {
+            if (InputUseCase.TryGetAbilitySelectButtonIndex(_context, out var index))
+            {
+                SelectActivePresenter(index);
             }
         }
 
