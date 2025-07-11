@@ -8,8 +8,6 @@ directory: Assets/Game/Scripts/GameContext/Codegen
  
 imports:
 - UnityEngine
-- Atomic.Contexts
-- Atomic.Entities
 - Atomic.Elements
 - System.Collections.Generic
 

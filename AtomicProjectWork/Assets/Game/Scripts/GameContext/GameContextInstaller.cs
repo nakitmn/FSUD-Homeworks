@@ -1,5 +1,6 @@
 using Atomic.Entities;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SampleGame
 {

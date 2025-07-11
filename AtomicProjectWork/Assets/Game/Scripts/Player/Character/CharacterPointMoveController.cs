@@ -1,5 +1,6 @@
 ﻿using Atomic.Entities;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SampleGame
 {
@@ -14,7 +15,7 @@ namespace SampleGame
 
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (InputUseCase.IsMove(context) == false)
+            if (InputUseCase.IsMove(context, EventSystem.current) == false)
             {
                 return;
             }
