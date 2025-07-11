@@ -21,6 +21,7 @@ namespace SampleGame
 		public const int BaseAction = 942602042; // IAction
 		public const int BaseCondition = -395139187; // IFunction<bool>
 		public const int BaseEvent = -1277683221; // IEvent
+		public const int TargetPoint = 1623536989; // IReactiveVariable<Vector3>
 		public const int PointAction = -269391236; // IAction<Vector3>
 		public const int PointCondition = 1323724090; // IFunction<Vector3, bool>
 		public const int PointEvent = 1637331210; // IEvent<Vector3>
@@ -31,6 +32,8 @@ namespace SampleGame
 		public const int ManaCost = -175662323; // IValue<int>
 		public const int Radius = 1020291948; // IValue<float>
 		public const int Cooldown = 655707791; // Cooldown
+		public const int Delay = 1935388575; // Cooldown
+		public const int IsRunning = -887662580; // IReactiveVariable<bool>
 		public const int Icon = -978942235; // Sprite
 
 
@@ -125,6 +128,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetBaseEvent(this Ability obj, IEvent value) => obj.SetValue(BaseEvent, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<Vector3> GetTargetPoint(this Ability obj) => obj.GetValueUnsafe<IReactiveVariable<Vector3>>(TargetPoint);
+
+		public static ref IReactiveVariable<Vector3> RefTargetPoint(this Ability obj) => ref obj.GetValueUnsafe<IReactiveVariable<Vector3>>(TargetPoint);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTargetPoint(this Ability obj, out IReactiveVariable<Vector3> value) => obj.TryGetValueUnsafe(TargetPoint, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddTargetPoint(this Ability obj, IReactiveVariable<Vector3> value) => obj.AddValue(TargetPoint, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTargetPoint(this Ability obj) => obj.HasValue(TargetPoint);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTargetPoint(this Ability obj) => obj.DelValue(TargetPoint);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTargetPoint(this Ability obj, IReactiveVariable<Vector3> value) => obj.SetValue(TargetPoint, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IAction<Vector3> GetPointAction(this Ability obj) => obj.GetValueUnsafe<IAction<Vector3>>(PointAction);
@@ -325,6 +348,46 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCooldown(this Ability obj, Cooldown value) => obj.SetValue(Cooldown, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Cooldown GetDelay(this Ability obj) => obj.GetValueUnsafe<Cooldown>(Delay);
+
+		public static ref Cooldown RefDelay(this Ability obj) => ref obj.GetValueUnsafe<Cooldown>(Delay);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetDelay(this Ability obj, out Cooldown value) => obj.TryGetValueUnsafe(Delay, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddDelay(this Ability obj, Cooldown value) => obj.AddValue(Delay, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasDelay(this Ability obj) => obj.HasValue(Delay);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelDelay(this Ability obj) => obj.DelValue(Delay);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetDelay(this Ability obj, Cooldown value) => obj.SetValue(Delay, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<bool> GetIsRunning(this Ability obj) => obj.GetValueUnsafe<IReactiveVariable<bool>>(IsRunning);
+
+		public static ref IReactiveVariable<bool> RefIsRunning(this Ability obj) => ref obj.GetValueUnsafe<IReactiveVariable<bool>>(IsRunning);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetIsRunning(this Ability obj, out IReactiveVariable<bool> value) => obj.TryGetValueUnsafe(IsRunning, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddIsRunning(this Ability obj, IReactiveVariable<bool> value) => obj.AddValue(IsRunning, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasIsRunning(this Ability obj) => obj.HasValue(IsRunning);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelIsRunning(this Ability obj) => obj.DelValue(IsRunning);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetIsRunning(this Ability obj, IReactiveVariable<bool> value) => obj.SetValue(IsRunning, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Sprite GetIcon(this Ability obj) => obj.GetValueUnsafe<Sprite>(Icon);

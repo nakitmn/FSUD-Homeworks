@@ -18,3 +18,5 @@ MonoBehaviour:
   _prefab: {fileID: 4717945833576895198, guid: 9f4d989ca24684808b60797943d7cd1b, type: 3}
   _initialCharges: 5
   _cooldown: 1
+  _animationKey: Arrow
+  _throwDelay: 1.05

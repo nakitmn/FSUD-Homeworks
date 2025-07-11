@@ -23,6 +23,7 @@ values:
   - BaseEvent: IEvent
   
 #Point:    
+  - TargetPoint: IReactiveVariable<Vector3>
   - PointAction: IAction<Vector3>
   - PointCondition: IFunction<Vector3, bool>
   - PointEvent: IEvent<Vector3> 
@@ -37,6 +38,8 @@ values:
   - ManaCost: IValue<int>
   - Radius: IValue<float>
   - Cooldown: Cooldown
-    
-#View:
+  - Delay: Cooldown
+  - IsRunning: IReactiveVariable<bool>
+  
+  #View:
   - Icon: Sprite

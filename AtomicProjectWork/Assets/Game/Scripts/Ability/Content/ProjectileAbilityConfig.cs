@@ -13,39 +13,62 @@ namespace SampleGame
         [SerializeField] private SceneEntity _prefab;
         [SerializeField] private int _initialCharges;
         [SerializeField] private float _cooldown;
+        [SerializeField] private string _animationKey;
+        [SerializeField] private float _throwDelay;
 
         protected override void Install(Ability ability, IEntity entity)
         {
+            var animationHash = Animator.StringToHash(_animationKey);
             var gameContext = GameContext.Instance;
 
             ability.AddPointTag();
 
             ability.AddPointCondition(new BaseFunction<Vector3, bool>(point =>
                 ability.GetCooldown().IsExpired() &&
+                ability.GetIsRunning().Value == false &&
                 ability.GetCharges().Value > 0
             ));
 
             ability.AddPointAction(new BaseAction<Vector3>(point =>
             {
-                var characterPosition = entity.GetTransform().position;
-                var direction = point - characterPosition;
+                entity.GetAnimator().SetTrigger(animationHash);
+                entity.GetStopAction().Invoke();
+                var characterTransform = entity.GetTransform();
+                var direction = point - characterTransform.position;
                 direction.y = 0f;
-                direction.Normalize();
-
-                var position = entity.GetFirePoint().position;
-
-                var projectile = SpawnBulletUseCase.SpawnBullet(_prefab, gameContext, position,
-                    Quaternion.LookRotation(direction), entity);
-                projectile.GetFireAction().Invoke();
+                characterTransform.rotation = Quaternion.LookRotation(direction.normalized);
 
                 ability.GetCharges().Value--;
                 ability.GetCooldown().Reset();
+                ability.GetDelay().Reset();
+                ability.GetIsRunning().Value = true;
+                ability.GetTargetPoint().Value = point;
             }));
 
+            ability.AddIsRunning(new ReactiveBool(false));
             ability.AddCooldown(new Cooldown(_cooldown, 0));
+            ability.AddTargetPoint(new ReactiveVector3());
+            ability.AddDelay(new Cooldown(_throwDelay, 0));
             ability.AddCharges(new ReactiveInt(_initialCharges));
             ability.AddPointEvent(new BaseEvent<Vector3>());
-            ability.WhenFixedUpdate(ability.GetCooldown().Tick);
+
+            ability.WhenFixedUpdate(deltaTime =>
+            {
+                var delay = ability.GetDelay();
+
+                ability.GetCooldown().Tick(deltaTime);
+                delay.Tick(deltaTime);
+
+                if (ability.GetIsRunning().Value && delay.IsExpired())
+                {
+                    var firePoint = entity.GetFirePoint();
+                    var projectile = SpawnBulletUseCase.SpawnBullet(_prefab, gameContext, firePoint.position,
+                        firePoint.rotation, entity);
+                    projectile.GetFireAction().Invoke();
+
+                    ability.GetIsRunning().Value = false;
+                }
+            });
         }
     }
 }

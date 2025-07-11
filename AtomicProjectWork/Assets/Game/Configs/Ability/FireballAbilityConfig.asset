@@ -18,3 +18,5 @@ MonoBehaviour:
   _prefab: {fileID: 4717945833576895198, guid: f3d4a87b6a486d646961f2e855fae103, type: 3}
   _initialCharges: 5
   _cooldown: 1
+  _animationKey: Fireball
+  _throwDelay: 1.05

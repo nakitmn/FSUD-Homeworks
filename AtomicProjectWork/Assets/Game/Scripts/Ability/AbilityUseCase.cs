@@ -12,12 +12,12 @@ namespace SampleGame
 
             if (!ability.GetBaseCondition().Invoke())
                 return false;
-            
+
             ability.GetBaseAction().Invoke();
             ability.GetBaseEvent().Invoke();
             return true;
         }
-        
+
         public static bool Use(in Ability ability, in Vector3 point)
         {
             if (!ability.HasPointTag())
@@ -25,12 +25,12 @@ namespace SampleGame
 
             if (!ability.GetPointCondition().Invoke(point))
                 return false;
-            
+
             ability.GetPointAction().Invoke(point);
             ability.GetPointEvent().Invoke(point);
             return true;
         }
-        
+
         public static bool Use(in Ability ability, in IEntity target)
         {
             if (!ability.HasTargetTag())
@@ -38,10 +38,26 @@ namespace SampleGame
 
             if (!ability.GetTargetCondition().Invoke(target))
                 return false;
-            
+
             ability.GetTargetAction().Invoke(target);
             ability.GetTargetEvent().Invoke(target);
             return true;
+        }
+
+        public static bool IsSelectedAbilityRunning(in IEntity entity)
+        {
+            var ability = entity.GetSelectedAbility().Value;
+            if (ability == null)
+            {
+                return false;
+            }
+
+            if (ability.HasIsRunning() == false)
+            {
+                return false;
+            }
+
+            return ability.GetIsRunning().Value;
         }
     }
 }

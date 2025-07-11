@@ -20,15 +20,15 @@ namespace SampleGame
         [SerializeField] private LifeInstaller _lifeInstaller;
         [SerializeField] private LootInstaller _lootInstaller;
         [SerializeField] private ManaSystemInstaller _manaInstaller;
-        
+
         public override void Install(IEntity entity)
         {
             entity.AddFirePoint(_firePoint);
             entity.AddEffects(new ReactiveDictionary<string, EffectInstance>());
-            
+
             InstallMain(entity);
             InstallMove(entity);
-            
+
             _lifeInstaller.Install(entity);
             _interactInstaller.Install(entity);
             _lootInstaller.Install(entity);
@@ -49,15 +49,27 @@ namespace SampleGame
         {
             entity.AddMoveableTag();
             entity.AddMoveSpeed(new ReactiveFloat(_moveSpeed));
-            entity.AddMoveCondition(new AndExpression(() => HealthUseCase.IsAlive(entity)));
+            entity.AddMoveCondition(
+                new AndExpression(
+                    () => HealthUseCase.IsAlive(entity),
+                    () => AbilityUseCase.IsSelectedAbilityRunning(entity) == false
+                )
+            );
             entity.AddMoveDirection(new ReactiveVector3());
             entity.AddNormalizedCurrentSpeed(new BaseFunction<float>(() => _agent.velocity.magnitude / _agent.speed));
+
+            entity.AddStopAction(new BaseAction(() => _agent.SetDestination(_transform.position)));
             
             entity.AddMovePointAction(new BaseAction<Vector3>(point =>
             {
+                if (entity.GetMoveCondition().Value == false)
+                {
+                    return;
+                }
+
                 entity.GetNavAgent().SetDestination(point);
             }));
-            
+
             entity.AddTeleportAction(new BaseAction<Vector3>(point =>
             {
                 var navAgent = entity.GetNavAgent();
@@ -65,7 +77,7 @@ namespace SampleGame
                 navAgent.Warp(point);
                 navAgent.SetDestination(point);
             }));
-            
+
             entity.AddIsMoving(new BaseFunction<bool>(() => _agent.velocity != Vector3.zero));
             entity.AddBehaviour<MoveTowardsBehaviour>();
         }

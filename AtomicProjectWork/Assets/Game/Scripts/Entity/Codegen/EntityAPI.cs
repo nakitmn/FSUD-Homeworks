@@ -32,6 +32,7 @@ namespace SampleGame
 		public const int MoveDirection = -721923052; // IReactiveVariable<Vector3>
 		public const int MovePointAction = 368661144; // IAction<Vector3>
 		public const int TeleportAction = -2106011968; // IAction<Vector3>
+		public const int StopAction = 149392863; // IAction
 		public const int ForwardDirection = -597461024; // IReactiveVariable<float>
 		public const int AngularSpeed = -1089183267; // IValue<float>
 		public const int AngularDirection = -1725439556; // IReactiveVariable<Vector3>
@@ -342,6 +343,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetTeleportAction(this IEntity obj, IAction<Vector3> value) => obj.SetValue(TeleportAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IAction GetStopAction(this IEntity obj) => obj.GetValueUnsafe<IAction>(StopAction);
+
+		public static ref IAction RefStopAction(this IEntity obj) => ref obj.GetValueUnsafe<IAction>(StopAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetStopAction(this IEntity obj, out IAction value) => obj.TryGetValueUnsafe(StopAction, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddStopAction(this IEntity obj, IAction value) => obj.AddValue(StopAction, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasStopAction(this IEntity obj) => obj.HasValue(StopAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelStopAction(this IEntity obj) => obj.DelValue(StopAction);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetStopAction(this IEntity obj, IAction value) => obj.SetValue(StopAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<float> GetForwardDirection(this IEntity obj) => obj.GetValueUnsafe<IReactiveVariable<float>>(ForwardDirection);

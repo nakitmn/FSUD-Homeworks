@@ -34,6 +34,7 @@ values:
 - MoveDirection: IReactiveVariable<Vector3>
 - MovePointAction: IAction<Vector3>
 - TeleportAction: IAction<Vector3>
+- StopAction: IAction
 - ForwardDirection: IReactiveVariable<float>
 
 #Rotation
