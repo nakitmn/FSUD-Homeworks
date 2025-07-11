@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class BulletCollisionBehaviour : IInit<IGameEntity>, IDispose
+    public sealed class FrostArrowCollisionBehaviour : IInit<IGameEntity>, IDispose
     {
         private IAction _destroyAction;
         private TriggerEventReceiver _trigger;
@@ -21,12 +21,12 @@ namespace SampleGame
             _projectileEffects = entity.GetProjectileEffects();
 
             _trigger = entity.GetTrigger();
-            _trigger.OnEntered += this.OnTriggerEntered;
+            _trigger.OnEntered += OnTriggerEntered;
         }
 
         public void Dispose(in IEntity entity)
         {
-            _trigger.OnEntered -= this.OnTriggerEntered;
+            _trigger.OnEntered -= OnTriggerEntered;
         }
 
         private void OnTriggerEntered(Collider collider)

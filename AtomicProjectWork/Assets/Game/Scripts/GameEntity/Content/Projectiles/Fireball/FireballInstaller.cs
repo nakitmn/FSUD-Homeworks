@@ -20,9 +20,9 @@ namespace SampleGame
         {
             GameContext gameContext = GameContext.Instance;
 
-            entity.AddRigidbody(this._rigidbody);
-            entity.AddTransform(this.transform);
-            entity.AddGameObject(this.gameObject);
+            entity.AddRigidbody(_rigidbody);
+            entity.AddTransform(transform);
+            entity.AddGameObject(gameObject);
             entity.AddDamage(new ReactiveInt(_damage));
             entity.AddDamageRadius(new Const<float>(_radius));
             entity.AddLifetime(new Cooldown(_lifetime, _lifetime));
@@ -43,7 +43,7 @@ namespace SampleGame
                     gameContext.GetPrefabPool().Rent(_destroyVfx, transform.position, Quaternion.identity);
                 }
                 
-                SpawnBulletUseCase.UnspawnBullet(gameContext, entity);
+                SpawnProjectileUseCase.Unspawn(gameContext, entity);
             }));
 
             entity.AddMoveDirection(new ReactiveVariable<Vector3>());

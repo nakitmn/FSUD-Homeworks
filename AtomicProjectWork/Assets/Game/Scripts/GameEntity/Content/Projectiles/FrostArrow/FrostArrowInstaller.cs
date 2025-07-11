@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class BulletInstaller : SceneEntityInstaller<IGameEntity>
+    public sealed class FrostArrowInstaller : SceneEntityInstaller<IGameEntity>
     {
         [SerializeField] private float _moveSpeed = 3;
         [SerializeField] private int _damage;
@@ -17,8 +17,8 @@ namespace SampleGame
         {
             GameContext gameContext = GameContext.Instance;
 
-            entity.AddTransform(this.transform);
-            entity.AddGameObject(this.gameObject);
+            entity.AddTransform(transform);
+            entity.AddGameObject(gameObject);
             entity.AddDamage(new ReactiveInt(_damage));
 
             entity.AddOwner(new ReactiveVariable<IGameEntity>());
@@ -32,7 +32,7 @@ namespace SampleGame
                     gameContext.GetPrefabPool().Rent(_destroyVfx, transform.position, Quaternion.identity);
                 }
 
-                SpawnBulletUseCase.UnspawnBullet(gameContext, entity);
+                SpawnProjectileUseCase.Unspawn(gameContext, entity);
             }));
 
             entity.AddMoveSpeed(new ReactiveFloat(_moveSpeed));
@@ -41,9 +41,9 @@ namespace SampleGame
 
             entity.AddProjectileEffects(_effects);
 
-            entity.AddBehaviour<BulletLifetimeBehaviour>();
+            entity.AddBehaviour(new LifetimeBehaviour(entity.GetLifetime(), entity.GetDestroyAction()));
             entity.AddBehaviour<MoveTowardsBehaviour>();
-            entity.AddBehaviour<BulletCollisionBehaviour>();
+            entity.AddBehaviour<FrostArrowCollisionBehaviour>();
         }
     }
 }

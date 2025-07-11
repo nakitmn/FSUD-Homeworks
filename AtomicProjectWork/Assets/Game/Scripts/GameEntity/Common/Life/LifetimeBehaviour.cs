@@ -3,15 +3,15 @@ using Atomic.Entities;
 
 namespace SampleGame
 {
-    public sealed class BulletLifetimeBehaviour : IInit<IGameEntity>, IFixedUpdate
+    public sealed class LifetimeBehaviour : IFixedUpdate
     {
-        private Cooldown _lifetime;
-        private IAction _destroyAction;
+        private readonly Cooldown _lifetime;
+        private readonly IAction _destroyAction;
 
-        public void Init(IGameEntity entity)
+        public LifetimeBehaviour(Cooldown lifetime, IAction destroyAction)
         {
-            _destroyAction = entity.GetDestroyAction();
-            _lifetime = entity.GetLifetime();
+            _lifetime = lifetime;
+            _destroyAction = destroyAction;
         }
 
         public void OnFixedUpdate(in IEntity entity, in float deltaTime)

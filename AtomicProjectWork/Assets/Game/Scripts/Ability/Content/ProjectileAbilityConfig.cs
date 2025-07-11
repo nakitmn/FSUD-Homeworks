@@ -10,7 +10,7 @@ namespace SampleGame
     )]
     public sealed class ProjectileAbilityConfig : AbilityConfig
     {
-        [SerializeField] private SceneEntity _prefab;
+        [SerializeField] private GameEntity _prefab;
         [SerializeField] private int _initialCharges;
         [SerializeField] private float _cooldown;
         [SerializeField] private string _animationKey;
@@ -62,7 +62,7 @@ namespace SampleGame
                 if (ability.GetIsRunning().Value && delay.IsExpired())
                 {
                     var firePoint = entity.GetFirePoint();
-                    var projectile = SpawnBulletUseCase.SpawnBullet(_prefab, gameContext, firePoint.position,
+                    var projectile = SpawnProjectileUseCase.Spawn(_prefab, gameContext, firePoint.position,
                         firePoint.rotation, entity);
                     projectile.GetFireAction().Invoke();
 

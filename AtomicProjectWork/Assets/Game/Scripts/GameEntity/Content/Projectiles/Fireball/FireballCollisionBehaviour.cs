@@ -22,12 +22,12 @@ namespace SampleGame
             _damageRadius = entity.GetDamageRadius();
 
             _trigger = entity.GetTrigger();
-            _trigger.OnEntered += this.OnTriggerEntered;
+            _trigger.OnEntered += OnTriggerEntered;
         }
 
         public void Dispose(in IEntity entity)
         {
-            _trigger.OnEntered -= this.OnTriggerEntered;
+            _trigger.OnEntered -= OnTriggerEntered;
         }
 
         private void OnTriggerEntered(Collider collider)
