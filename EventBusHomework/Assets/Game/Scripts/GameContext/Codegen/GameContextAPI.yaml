@@ -10,13 +10,10 @@ directory: Assets/Game/Scripts/GameContext/Codegen
 imports:
 - UnityEngine
 - Atomic.Entities
+- Atomic.Events
 
 tags:
-- Player
-- Enemy
-- Resource
 
 values:
-- Health: int
-- Speed: float
-- Transform: Transform
+- GameBoard: GameBoard
+- EventBus: IEventBus

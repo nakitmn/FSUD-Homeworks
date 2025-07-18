@@ -6,113 +6,59 @@ using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using Atomic.Entities;
+using Atomic.Events;
 
 namespace SampleGame
 {
 	public static class GameContextAPI
 	{
-		///Tags
-		public const int Player = -1615495341;
-		public const int Enemy = 979269037;
-		public const int Resource = 1172805184;
 
 
 		///Values
-		public const int Health = -915003867; // int
-		public const int Speed = -823668238; // float
-		public const int Transform = -180157682; // Transform
-
-
-		///Tag Extensions
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasPlayerTag(this IGameContext obj) => obj.HasTag(Player);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool AddPlayerTag(this IGameContext obj) => obj.AddTag(Player);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelPlayerTag(this IGameContext obj) => obj.DelTag(Player);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasEnemyTag(this IGameContext obj) => obj.HasTag(Enemy);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool AddEnemyTag(this IGameContext obj) => obj.AddTag(Enemy);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelEnemyTag(this IGameContext obj) => obj.DelTag(Enemy);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasResourceTag(this IGameContext obj) => obj.HasTag(Resource);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool AddResourceTag(this IGameContext obj) => obj.AddTag(Resource);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelResourceTag(this IGameContext obj) => obj.DelTag(Resource);
+		public const int GameBoard = -1386833193; // GameBoard
+		public const int EventBus = -103062940; // IEventBus
 
 
 		///Value Extensions
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int GetHealth(this IGameContext obj) => obj.GetValueUnsafe<int>(Health);
+		public static GameBoard GetGameBoard(this IGameContext obj) => obj.GetValueUnsafe<GameBoard>(GameBoard);
 
-		public static ref int RefHealth(this IGameContext obj) => ref obj.GetValueUnsafe<int>(Health);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetHealth(this IGameContext obj, out int value) => obj.TryGetValueUnsafe(Health, out value);
+		public static ref GameBoard RefGameBoard(this IGameContext obj) => ref obj.GetValueUnsafe<GameBoard>(GameBoard);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddHealth(this IGameContext obj, int value) => obj.AddValue(Health, value);
+		public static bool TryGetGameBoard(this IGameContext obj, out GameBoard value) => obj.TryGetValueUnsafe(GameBoard, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasHealth(this IGameContext obj) => obj.HasValue(Health);
+		public static void AddGameBoard(this IGameContext obj, GameBoard value) => obj.AddValue(GameBoard, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelHealth(this IGameContext obj) => obj.DelValue(Health);
+		public static bool HasGameBoard(this IGameContext obj) => obj.HasValue(GameBoard);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetHealth(this IGameContext obj, int value) => obj.SetValue(Health, value);
+		public static bool DelGameBoard(this IGameContext obj) => obj.DelValue(GameBoard);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float GetSpeed(this IGameContext obj) => obj.GetValueUnsafe<float>(Speed);
-
-		public static ref float RefSpeed(this IGameContext obj) => ref obj.GetValueUnsafe<float>(Speed);
+		public static void SetGameBoard(this IGameContext obj, GameBoard value) => obj.SetValue(GameBoard, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetSpeed(this IGameContext obj, out float value) => obj.TryGetValueUnsafe(Speed, out value);
+		public static IEventBus GetEventBus(this IGameContext obj) => obj.GetValueUnsafe<IEventBus>(EventBus);
+
+		public static ref IEventBus RefEventBus(this IGameContext obj) => ref obj.GetValueUnsafe<IEventBus>(EventBus);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddSpeed(this IGameContext obj, float value) => obj.AddValue(Speed, value);
+		public static bool TryGetEventBus(this IGameContext obj, out IEventBus value) => obj.TryGetValueUnsafe(EventBus, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasSpeed(this IGameContext obj) => obj.HasValue(Speed);
+		public static void AddEventBus(this IGameContext obj, IEventBus value) => obj.AddValue(EventBus, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelSpeed(this IGameContext obj) => obj.DelValue(Speed);
+		public static bool HasEventBus(this IGameContext obj) => obj.HasValue(EventBus);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetSpeed(this IGameContext obj, float value) => obj.SetValue(Speed, value);
+		public static bool DelEventBus(this IGameContext obj) => obj.DelValue(EventBus);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Transform GetTransform(this IGameContext obj) => obj.GetValueUnsafe<Transform>(Transform);
-
-		public static ref Transform RefTransform(this IGameContext obj) => ref obj.GetValueUnsafe<Transform>(Transform);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetTransform(this IGameContext obj, out Transform value) => obj.TryGetValueUnsafe(Transform, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddTransform(this IGameContext obj, Transform value) => obj.AddValue(Transform, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasTransform(this IGameContext obj) => obj.HasValue(Transform);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelTransform(this IGameContext obj) => obj.DelValue(Transform);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetTransform(this IGameContext obj, Transform value) => obj.SetValue(Transform, value);
+		public static void SetEventBus(this IGameContext obj, IEventBus value) => obj.SetValue(EventBus, value);
     }
 }
