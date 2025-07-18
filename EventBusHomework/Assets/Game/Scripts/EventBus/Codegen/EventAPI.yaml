@@ -1,0 +1,18 @@
+header: EventBusAPI
+entityType: IEventBus
+aggressiveInlining: true
+
+namespace: SampleGame
+className: EventAPI
+directory: Assets/Game/Scripts/EventBus/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Events
+- System
+- Atomic.Entities
+
+events:
+- Hello()
+- Attack(IEntity source, IEntity target)
+- PostAttack(IEntity source, IEntity target)

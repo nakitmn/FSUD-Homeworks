@@ -1,0 +1,19 @@
+header: EntityAPI
+entityType: IGameEntity
+aggressiveInlining: true
+unsafeAccess: true
+
+namespace: SampleGame
+className: GameEntityAPI
+directory: Assets/Game/Scripts/GameEntity/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Entities
+
+tags:
+- Pushable
+
+values:
+- Health: int
+- Damage: int

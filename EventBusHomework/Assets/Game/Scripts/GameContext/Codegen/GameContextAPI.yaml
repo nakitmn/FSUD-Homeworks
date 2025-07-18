@@ -1,0 +1,22 @@
+header: EntityAPI
+entityType: IGameContext
+aggressiveInlining: true
+unsafeAccess: true
+
+namespace: SampleGame
+className: GameContextAPI
+directory: Assets/Game/Scripts/GameContext/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Entities
+
+tags:
+- Player
+- Enemy
+- Resource
+
+values:
+- Health: int
+- Speed: float
+- Transform: Transform
