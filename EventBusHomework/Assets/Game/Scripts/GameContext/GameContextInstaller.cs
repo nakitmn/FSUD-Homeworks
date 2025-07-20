@@ -20,6 +20,7 @@ namespace SampleGame
             entity.AddGameBoardView(_gameBoardView);
             entity.AddCamera(_camera);
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
+            entity.AddAnimationQueue(new AnimationQueue());
             
             entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();

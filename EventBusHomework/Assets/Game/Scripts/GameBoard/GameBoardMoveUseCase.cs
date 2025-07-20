@@ -23,7 +23,7 @@ namespace SampleGame
                 y = Mathf.Clamp(direction.y, -moveRange, moveRange)
             };
             targetBoardPosition = entityBoardPosition + clampedDirection;
-            return GameBoardSetUseCase.Set(gameContext, entity, targetBoardPosition.x, targetBoardPosition.y);
+            return gameBoard.Move(entity, targetBoardPosition.x, targetBoardPosition.y);
         }
     }
 }

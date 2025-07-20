@@ -17,6 +17,7 @@ namespace SampleGame
 
 		///Values
 		public const int EventBus = -103062940; // IEventBus
+		public const int AnimationQueue = -1133279405; // AnimationQueue
 		public const int Camera = 1018227507; // Camera
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int GameBoard = -1386833193; // GameBoard
@@ -44,6 +45,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetEventBus(this IGameContext obj, IEventBus value) => obj.SetValue(EventBus, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static AnimationQueue GetAnimationQueue(this IGameContext obj) => obj.GetValueUnsafe<AnimationQueue>(AnimationQueue);
+
+		public static ref AnimationQueue RefAnimationQueue(this IGameContext obj) => ref obj.GetValueUnsafe<AnimationQueue>(AnimationQueue);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetAnimationQueue(this IGameContext obj, out AnimationQueue value) => obj.TryGetValueUnsafe(AnimationQueue, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddAnimationQueue(this IGameContext obj, AnimationQueue value) => obj.AddValue(AnimationQueue, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasAnimationQueue(this IGameContext obj) => obj.HasValue(AnimationQueue);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelAnimationQueue(this IGameContext obj) => obj.DelValue(AnimationQueue);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetAnimationQueue(this IGameContext obj, AnimationQueue value) => obj.SetValue(AnimationQueue, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Camera GetCamera(this IGameContext obj) => obj.GetValueUnsafe<Camera>(Camera);

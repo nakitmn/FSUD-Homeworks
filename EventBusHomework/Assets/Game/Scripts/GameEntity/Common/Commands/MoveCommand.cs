@@ -12,10 +12,21 @@
             _x = x;
             _y = y;
         }
-        
+
         public bool Execute(IGameContext gameContext)
         {
-            return GameBoardMoveUseCase.Move(gameContext, _source, _x, _y);
+            if (GameBoardMoveUseCase.Move(gameContext, _source, _x, _y))
+            {
+                var gameBoardView = gameContext.GetGameBoardView();
+                var gameBoard = gameContext.GetGameBoard();
+                gameBoard.TryGetPosition(_source, out var entityX, out var entityY);
+                var worldPosition = gameBoardView.ToWorldPosition(entityX, entityY);
+                var moveAnimationCommand = new MoveAnimationCommand(_source.GetTransform(), worldPosition);
+                moveAnimationCommand.Execute();
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -17,6 +17,7 @@ tags:
 
 values:
 - EventBus: IEventBus
+- AnimationQueue: AnimationQueue
 - Camera: Camera
 - SelectedCharacter: IReactiveVariable<IGameEntity>
     
