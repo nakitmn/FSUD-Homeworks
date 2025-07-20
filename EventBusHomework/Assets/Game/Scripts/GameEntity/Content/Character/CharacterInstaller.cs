@@ -6,7 +6,10 @@ namespace SampleGame
     {
         protected override void Install(IGameEntity entity)
         {
+            entity.AddCharacterTag();
+            
             entity.AddTransform(transform);   
+            entity.AddGameObject(gameObject);
         }
     }
 }

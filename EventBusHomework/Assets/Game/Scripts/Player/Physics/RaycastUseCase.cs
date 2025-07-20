@@ -34,7 +34,7 @@ namespace SampleGame
             return false;
         }
 
-        public static bool RaycastTarget(in IGameContext context, Vector2 screenPosition, out IGameEntity target)
+        public static bool RaycastTarget<T>(in IGameContext context, Vector2 screenPosition, out T target)
         {
             Ray ray = context.GetCamera().ScreenPointToRay(screenPosition);
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform.TryGetComponent(out target))
@@ -46,7 +46,7 @@ namespace SampleGame
 
         public static Collider[] ScanTargets(Vector3 position, float radius)
         {
-            return Physics.OverlapSphere(position, radius,Physics.AllLayers, QueryTriggerInteraction.UseGlobal);
+            return Physics.OverlapSphere(position, radius, Physics.AllLayers, QueryTriggerInteraction.UseGlobal);
         }
     }
 }

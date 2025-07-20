@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Atomic.Entities;
+using UnityEngine;
 
 namespace SampleGame
 {
     public sealed class GameBoardView : MonoBehaviour
     {
-        [SerializeField] private GameBoardCellView _cellPrefab;
+        [SerializeField] private GameEntity _cellPrefab;
         [SerializeField] private Transform _container;
         [SerializeField] private float _cellOffset;
         [SerializeField] private Material[] _cellMaterials;
@@ -24,13 +25,15 @@ namespace SampleGame
             for (var y = 0; y < gameBoard.Height; y++)
             {
                 var spawnPosition = ToWorldPosition(x, y);
-                var cellView = Instantiate(_cellPrefab, spawnPosition, Quaternion.identity, _container);
+                var cell = (GameEntity) GameEntity.Create(_cellPrefab, spawnPosition, Quaternion.identity, _container);
                 var index = gameBoard.Width * x + y;
-                cellView.gameObject.name = $"Cell[{index}]";
+                cell.GetGameObject().name = $"Cell[{index}]";
                 var materialOffset = (int) Mathf.Repeat(x, 2);
                 var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
                 var material = _cellMaterials[materialIndex];
-                cellView.SetMaterial(material);
+                cell.GetMaterial().Value = material;
+                cell.GetX().Value = x;
+                cell.GetY().Value = y;
             }
         }
 

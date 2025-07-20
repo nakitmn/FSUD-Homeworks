@@ -9,9 +9,12 @@ namespace SampleGame
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (RaycastUseCase.RaycastTarget(context,Input.mousePosition, out var target))
+                if (RaycastUseCase.RaycastTarget(context,Input.mousePosition, out IGameEntity target))
                 {
-                    context.GetSelectedCharacter().Value = target;
+                    if (target.HasCharacterTag())
+                    {
+                        context.GetSelectedCharacter().Value = target;
+                    }
                 }
             }
         }

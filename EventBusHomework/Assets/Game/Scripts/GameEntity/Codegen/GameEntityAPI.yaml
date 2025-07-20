@@ -10,11 +10,20 @@ directory: Assets/Game/Scripts/GameEntity/Codegen
 imports:
 - UnityEngine
 - Atomic.Entities
+- Atomic.Elements
 
 tags:
+- Character
+- Cell
 - Pushable
 
 values:
+- GameObject: GameObject
 - Transform: Transform
 - Health: int
 - Damage: int
+  
+#GameBoard
+- X: IReactiveVariable<int>
+- Y: IReactiveVariable<int>
+- Material: IReactiveVariable<Material>

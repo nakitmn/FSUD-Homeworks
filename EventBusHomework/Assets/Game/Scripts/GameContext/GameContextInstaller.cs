@@ -21,6 +21,7 @@ namespace SampleGame
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             
             entity.AddBehaviour<CharacterSelectController>();
+            entity.AddBehaviour<CharacterMoveController>();
         }
     }
 }
