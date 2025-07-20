@@ -5,6 +5,8 @@ namespace SampleGame
 {
     public sealed class GameBoardTest : MonoBehaviour
     {
+        [SerializeField] private GameBoard _gameBoard;
+        
         private GameContext _gameContext;
 
         private void Awake()

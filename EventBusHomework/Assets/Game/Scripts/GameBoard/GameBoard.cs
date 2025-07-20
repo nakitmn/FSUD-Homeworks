@@ -1,10 +1,12 @@
-﻿using Atomic.Entities;
+﻿using System;
+using Sirenix.OdinInspector;
 
 namespace SampleGame
 {
+    [Serializable]
     public sealed class GameBoard
     {
-        private readonly IGameEntity[,] _board;
+        [ShowInInspector] private readonly IGameEntity[,] _board;
 
         public int Width => _board.GetLength(0);
         public int Height => _board.GetLength(1);
@@ -50,7 +52,13 @@ namespace SampleGame
             for (x = 0; x < _board.GetLength(0); x++)
             for (y = 0; y < _board.GetLength(1); y++)
             {
-                if (_board[x, y] == entity)
+                var boardEntity = _board[x, y];
+                if (boardEntity == null)
+                {
+                    continue;
+                }
+                
+                if (boardEntity.Equals(entity))
                 {
                     return true;
                 }

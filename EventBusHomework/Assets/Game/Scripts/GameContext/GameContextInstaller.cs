@@ -11,6 +11,7 @@ namespace SampleGame
         [SerializeField] private SceneEventBus _eventBus;
         [SerializeField] private Vector2Int _gameBoardSize;
         [SerializeField] private GameBoardView _gameBoardView;
+        [SerializeField] private CharacterSetController.CharacterInstaller[] _characterInstallers;
         
         protected override void Install(IGameContext entity)
         {
@@ -20,6 +21,7 @@ namespace SampleGame
             entity.AddCamera(_camera);
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             
+            entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();
             entity.AddBehaviour<CharacterMoveController>();
         }
