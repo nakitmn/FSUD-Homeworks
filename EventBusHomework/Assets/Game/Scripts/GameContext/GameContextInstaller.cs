@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using Atomic.Events;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace SampleGame
 {
     public sealed class GameContextInstaller : SceneEntityInstaller<IGameContext>
     {
+        [SerializeField] private Camera _camera;
         [SerializeField] private SceneEventBus _eventBus;
         [SerializeField] private Vector2Int _gameBoardSize;
         [SerializeField] private GameBoardView _gameBoardView;
@@ -15,6 +17,10 @@ namespace SampleGame
             entity.AddEventBus(_eventBus);
             entity.AddGameBoard(new GameBoard(_gameBoardSize.x,_gameBoardSize.y));
             entity.AddGameBoardView(_gameBoardView);
+            entity.AddCamera(_camera);
+            entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
+            
+            entity.AddBehaviour<CharacterSelectController>();
         }
     }
 }

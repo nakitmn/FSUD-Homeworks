@@ -11,11 +11,14 @@ imports:
 - UnityEngine
 - Atomic.Entities
 - Atomic.Events
+- Atomic.Elements
 
 tags:
 
 values:
 - EventBus: IEventBus
+- Camera: Camera
+- SelectedCharacter: IReactiveVariable<IGameEntity>
     
   #GameBoard
 - GameBoard: GameBoard

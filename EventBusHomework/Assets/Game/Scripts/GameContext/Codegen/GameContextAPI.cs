@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Atomic.Entities;
 using Atomic.Events;
+using Atomic.Elements;
 
 namespace SampleGame
 {
@@ -16,6 +17,8 @@ namespace SampleGame
 
 		///Values
 		public const int EventBus = -103062940; // IEventBus
+		public const int Camera = 1018227507; // Camera
+		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
 
@@ -41,6 +44,46 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetEventBus(this IGameContext obj, IEventBus value) => obj.SetValue(EventBus, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Camera GetCamera(this IGameContext obj) => obj.GetValueUnsafe<Camera>(Camera);
+
+		public static ref Camera RefCamera(this IGameContext obj) => ref obj.GetValueUnsafe<Camera>(Camera);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCamera(this IGameContext obj, out Camera value) => obj.TryGetValueUnsafe(Camera, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCamera(this IGameContext obj, Camera value) => obj.AddValue(Camera, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCamera(this IGameContext obj) => obj.HasValue(Camera);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCamera(this IGameContext obj) => obj.DelValue(Camera);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCamera(this IGameContext obj, Camera value) => obj.SetValue(Camera, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<IGameEntity> GetSelectedCharacter(this IGameContext obj) => obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
+
+		public static ref IReactiveVariable<IGameEntity> RefSelectedCharacter(this IGameContext obj) => ref obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSelectedCharacter(this IGameContext obj, out IReactiveVariable<IGameEntity> value) => obj.TryGetValueUnsafe(SelectedCharacter, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddSelectedCharacter(this IGameContext obj, IReactiveVariable<IGameEntity> value) => obj.AddValue(SelectedCharacter, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSelectedCharacter(this IGameContext obj) => obj.HasValue(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSelectedCharacter(this IGameContext obj) => obj.DelValue(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSelectedCharacter(this IGameContext obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(SelectedCharacter, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static GameBoard GetGameBoard(this IGameContext obj) => obj.GetValueUnsafe<GameBoard>(GameBoard);
