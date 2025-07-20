@@ -16,6 +16,7 @@ namespace SampleGame
 
 
 		///Values
+		public const int Transform = -180157682; // Transform
 		public const int Health = -915003867; // int
 		public const int Damage = 375673178; // int
 
@@ -33,6 +34,26 @@ namespace SampleGame
 
 
 		///Value Extensions
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Transform GetTransform(this IGameEntity obj) => obj.GetValueUnsafe<Transform>(Transform);
+
+		public static ref Transform RefTransform(this IGameEntity obj) => ref obj.GetValueUnsafe<Transform>(Transform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTransform(this IGameEntity obj, out Transform value) => obj.TryGetValueUnsafe(Transform, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddTransform(this IGameEntity obj, Transform value) => obj.AddValue(Transform, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTransform(this IGameEntity obj) => obj.HasValue(Transform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTransform(this IGameEntity obj) => obj.DelValue(Transform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTransform(this IGameEntity obj, Transform value) => obj.SetValue(Transform, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetHealth(this IGameEntity obj) => obj.GetValueUnsafe<int>(Health);

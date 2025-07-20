@@ -15,5 +15,9 @@ imports:
 tags:
 
 values:
-- GameBoard: GameBoard
 - EventBus: IEventBus
+    
+  #GameBoard
+- GameBoard: GameBoard
+- GameBoardView: GameBoardView
+

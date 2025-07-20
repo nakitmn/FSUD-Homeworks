@@ -15,5 +15,6 @@ tags:
 - Pushable
 
 values:
+- Transform: Transform
 - Health: int
 - Damage: int
