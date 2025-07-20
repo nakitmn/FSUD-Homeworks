@@ -25,5 +25,13 @@ namespace SampleGame
             targetBoardPosition = entityBoardPosition + clampedDirection;
             return gameBoard.Move(entity, targetBoardPosition.x, targetBoardPosition.y);
         }
+
+        public static Vector3 GetWorldPosition(in IGameContext gameContext, in IGameEntity entity)
+        {
+            var gameBoardView = gameContext.GetGameBoardView();
+            var gameBoard = gameContext.GetGameBoard();
+            gameBoard.TryGetPosition(entity, out var entityX, out var entityY);
+            return gameBoardView.ToWorldPosition(entityX, entityY);
+        }
     }
 }

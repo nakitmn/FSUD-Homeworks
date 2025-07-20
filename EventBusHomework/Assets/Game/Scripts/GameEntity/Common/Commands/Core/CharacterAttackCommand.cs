@@ -39,15 +39,10 @@ namespace SampleGame
 
             var target = gameBoard.Get(_x, _y);
 
-            var dealDamageCommand = new DealDamageCommand(_source, target);
-            if (dealDamageCommand.Execute(gameContext))
-            {
-                var dealDamageAnimationCommand = new DealDamageAnimationCommand(target.GetTransform());
-                dealDamageAnimationCommand.Execute();
-                return true;
-            }
-            
-            return false;
+            var attackCommand = new AttackCommand(_source, target);
+            attackCommand.Execute(gameContext);
+            gameContext.GetAnimationQueue().Execute();
+            return true;
         }
     }
 }

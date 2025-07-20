@@ -67,5 +67,10 @@ namespace SampleGame
             x = y = -1;
             return false;
         }
+
+        public bool IsInBounds(int x, int y)
+        {
+            return x >= 0 && x < Width && y >= 0 && y < Height;
+        }
     }
 }

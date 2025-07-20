@@ -1,22 +1,27 @@
-﻿using SampleGame;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SampleGame
 {
     public struct DealDamageCommand : ICommand
     {
-        private readonly IGameEntity _source;
         private readonly IGameEntity _target;
+        private readonly int _damage;
 
-        public DealDamageCommand(IGameEntity source, IGameEntity target)
+        public DealDamageCommand(IGameEntity target, int damage)
         {
-            _source = source;
             _target = target;
+            _damage = damage;
         }
 
         public bool Execute(IGameContext gameContext)
         {
-            return DealDamage();
+            if (DealDamage())
+            {
+                gameContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(_target.GetTransform()));
+                return true;
+            }
+
+            return false;
         }
 
         private bool DealDamage()
@@ -26,9 +31,8 @@ namespace SampleGame
                 return false;
             }
 
-            var damage = _source.GetDamage();
             var health = _target.GetHealth();
-            _target.SetHealth(Mathf.Max(0, health - damage));
+            _target.SetHealth(Mathf.Max(0, health - _damage));
             return true;
         }
     }
