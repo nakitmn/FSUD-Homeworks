@@ -29,11 +29,11 @@ namespace SampleGame
             return _board[x, y] == null;
         }
 
-        public void Move(IGameEntity entity, int x, int y)
+        public bool Move(IGameEntity entity, int x, int y)
         {
             if (IsFree(x, y) == false)
             {
-                return;
+                return false;
             }
 
             if (TryGetPosition(entity, out var entityX, out var entityY))
@@ -42,6 +42,7 @@ namespace SampleGame
             }
 
             _board[x, y] = entity;
+            return true;
         }
 
         public bool TryGetPosition(IGameEntity entity, out int x, out int y)

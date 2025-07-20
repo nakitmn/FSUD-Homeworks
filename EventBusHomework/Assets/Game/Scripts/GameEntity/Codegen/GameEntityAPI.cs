@@ -26,6 +26,7 @@ namespace SampleGame
 		public const int X = -1213057461; // IReactiveVariable<int>
 		public const int Y = -1061878051; // IReactiveVariable<int>
 		public const int Material = -2050484285; // IReactiveVariable<Material>
+		public const int MoveRange = -2080720063; // IValue<int>
 
 
 		///Tag Extensions
@@ -199,5 +200,25 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(Material, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<int> GetMoveRange(this IGameEntity obj) => obj.GetValueUnsafe<IValue<int>>(MoveRange);
+
+		public static ref IValue<int> RefMoveRange(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<int>>(MoveRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetMoveRange(this IGameEntity obj, out IValue<int> value) => obj.TryGetValueUnsafe(MoveRange, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddMoveRange(this IGameEntity obj, IValue<int> value) => obj.AddValue(MoveRange, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasMoveRange(this IGameEntity obj) => obj.HasValue(MoveRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelMoveRange(this IGameEntity obj) => obj.DelValue(MoveRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetMoveRange(this IGameEntity obj, IValue<int> value) => obj.SetValue(MoveRange, value);
     }
 }

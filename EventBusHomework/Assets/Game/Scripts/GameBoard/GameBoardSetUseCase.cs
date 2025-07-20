@@ -7,10 +7,14 @@
             var gameBoard = gameContext.GetGameBoard();
             var gameBoardView = gameContext.GetGameBoardView();
 
-            gameBoard.Move(entity, x, y);
-            var worldPosition = gameBoardView.ToWorldPosition(x,y);
-            entity.GetTransform().position = worldPosition;
-            return true;
+            if (gameBoard.Move(entity, x, y))
+            {
+                var worldPosition = gameBoardView.ToWorldPosition(x,y);
+                entity.GetTransform().position = worldPosition;
+                return true;
+            }
+
+            return false;
         }
     }
 }

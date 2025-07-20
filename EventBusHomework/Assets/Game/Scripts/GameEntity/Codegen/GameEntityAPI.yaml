@@ -27,3 +27,4 @@ values:
 - X: IReactiveVariable<int>
 - Y: IReactiveVariable<int>
 - Material: IReactiveVariable<Material>
+- MoveRange: IValue<int>
