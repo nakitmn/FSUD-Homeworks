@@ -23,6 +23,7 @@ namespace SampleGame
 		public const int Transform = -180157682; // Transform
 		public const int Health = -915003867; // int
 		public const int Damage = 375673178; // int
+		public const int AttackRange = 2128890732; // IValue<int>
 		public const int X = -1213057461; // IReactiveVariable<int>
 		public const int Y = -1061878051; // IReactiveVariable<int>
 		public const int Material = -2050484285; // IReactiveVariable<Material>
@@ -140,6 +141,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetDamage(this IGameEntity obj, int value) => obj.SetValue(Damage, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<int> GetAttackRange(this IGameEntity obj) => obj.GetValueUnsafe<IValue<int>>(AttackRange);
+
+		public static ref IValue<int> RefAttackRange(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<int>>(AttackRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetAttackRange(this IGameEntity obj, out IValue<int> value) => obj.TryGetValueUnsafe(AttackRange, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddAttackRange(this IGameEntity obj, IValue<int> value) => obj.AddValue(AttackRange, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasAttackRange(this IGameEntity obj) => obj.HasValue(AttackRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelAttackRange(this IGameEntity obj) => obj.DelValue(AttackRange);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetAttackRange(this IGameEntity obj, IValue<int> value) => obj.SetValue(AttackRange, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<int> GetX(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(X);

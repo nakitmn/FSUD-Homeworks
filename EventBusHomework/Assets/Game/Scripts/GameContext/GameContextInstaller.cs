@@ -25,6 +25,7 @@ namespace SampleGame
             entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();
             entity.AddBehaviour<CharacterMoveController>();
+            entity.AddBehaviour<CharacterAttackController>();
         }
     }
 }

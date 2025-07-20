@@ -1,4 +1,5 @@
 ﻿using SampleGame;
+using UnityEngine;
 
 namespace SampleGame
 {
@@ -6,7 +7,7 @@ namespace SampleGame
     {
         private readonly IGameEntity _source;
         private readonly IGameEntity _target;
-        
+
         public DealDamageCommand(IGameEntity source, IGameEntity target)
         {
             _source = source;
@@ -15,14 +16,7 @@ namespace SampleGame
 
         public bool Execute(IGameContext gameContext)
         {
-            if (DealDamage() == false)
-            {
-                return false;
-            }
-
-            //gameContext.GetAnimationQueue().Enqueue(new DealDamageAnimation(source, target));
-            //gameContext.GetEventBus().InvokeDealDamage();
-            return true;
+            return DealDamage();
         }
 
         private bool DealDamage()
@@ -34,7 +28,7 @@ namespace SampleGame
 
             var damage = _source.GetDamage();
             var health = _target.GetHealth();
-            _target.SetHealth(health - damage);
+            _target.SetHealth(Mathf.Max(0, health - damage));
             return true;
         }
     }
