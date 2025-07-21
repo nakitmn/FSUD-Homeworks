@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Atomic.Entities;
 using Atomic.Elements;
+using DG.Tweening;
 
 namespace SampleGame
 {
@@ -22,12 +23,14 @@ namespace SampleGame
 		///Values
 		public const int GameObject = 1482111001; // GameObject
 		public const int Transform = -180157682; // Transform
+		public const int VisualTransform = -1423499450; // Transform
 		public const int Health = -915003867; // int
 		public const int Damage = 375673178; // int
 		public const int AttackRange = 2128890732; // IValue<int>
 		public const int DefaultMaterial = -1950312091; // IReactiveVariable<Material>
 		public const int HighlightedMaterial = 2021817643; // IReactiveVariable<Material>
 		public const int CurrentMaterial = -750236251; // IReactiveVariable<Material>
+		public const int SelectedAnimation = 413109208; // IReactiveVariable<Tween>
 		public const int BoardPosition = 812778532; // IReactiveVariable<GameBoardPosition>
 		public const int MoveRange = -2080720063; // IValue<int>
 		public const int MaxMovesPerTurn = -348710637; // IValue<int>
@@ -117,6 +120,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetTransform(this IGameEntity obj, Transform value) => obj.SetValue(Transform, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Transform GetVisualTransform(this IGameEntity obj) => obj.GetValueUnsafe<Transform>(VisualTransform);
+
+		public static ref Transform RefVisualTransform(this IGameEntity obj) => ref obj.GetValueUnsafe<Transform>(VisualTransform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetVisualTransform(this IGameEntity obj, out Transform value) => obj.TryGetValueUnsafe(VisualTransform, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddVisualTransform(this IGameEntity obj, Transform value) => obj.AddValue(VisualTransform, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasVisualTransform(this IGameEntity obj) => obj.HasValue(VisualTransform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelVisualTransform(this IGameEntity obj) => obj.DelValue(VisualTransform);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetVisualTransform(this IGameEntity obj, Transform value) => obj.SetValue(VisualTransform, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetHealth(this IGameEntity obj) => obj.GetValueUnsafe<int>(Health);
@@ -237,6 +260,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCurrentMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(CurrentMaterial, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<Tween> GetSelectedAnimation(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Tween>>(SelectedAnimation);
+
+		public static ref IReactiveVariable<Tween> RefSelectedAnimation(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Tween>>(SelectedAnimation);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSelectedAnimation(this IGameEntity obj, out IReactiveVariable<Tween> value) => obj.TryGetValueUnsafe(SelectedAnimation, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddSelectedAnimation(this IGameEntity obj, IReactiveVariable<Tween> value) => obj.AddValue(SelectedAnimation, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSelectedAnimation(this IGameEntity obj) => obj.HasValue(SelectedAnimation);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSelectedAnimation(this IGameEntity obj) => obj.DelValue(SelectedAnimation);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSelectedAnimation(this IGameEntity obj, IReactiveVariable<Tween> value) => obj.SetValue(SelectedAnimation, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<GameBoardPosition> GetBoardPosition(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<GameBoardPosition>>(BoardPosition);

@@ -23,7 +23,7 @@ namespace SampleGame
             entity.AddDamage(_damage);
             entity.AddMoveRange(new Const<int>(_moveRange));
             entity.AddAttackRange(new Const<int>(_attackRange));
-            
+
             entity.AddMaxMovesPerTurn(new Const<int>(_movesPerTurn));
             entity.AddMaxAttacksPerTurn(new Const<int>(_attacksPerTurn));
             entity.AddCurrentMovesCount(new ReactiveInt());

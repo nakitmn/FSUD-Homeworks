@@ -11,6 +11,7 @@ imports:
 - UnityEngine
 - Atomic.Entities
 - Atomic.Elements
+- DG.Tweening
 
 tags:
 - Character
@@ -21,12 +22,14 @@ tags:
 values:
 - GameObject: GameObject
 - Transform: Transform
+- VisualTransform: Transform
 - Health: int
 - Damage: int
 - AttackRange: IValue<int>
 - DefaultMaterial: IReactiveVariable<Material>
 - HighlightedMaterial: IReactiveVariable<Material>
 - CurrentMaterial: IReactiveVariable<Material>
+- SelectedAnimation : IReactiveVariable<Tween>
   
 #GameBoard
 - BoardPosition: IReactiveVariable<GameBoardPosition>
