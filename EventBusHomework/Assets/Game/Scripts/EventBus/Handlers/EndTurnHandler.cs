@@ -30,7 +30,6 @@ namespace SampleGame
 
         private void OnTurnEnd()
         {
-            //TODO: AI logic
             HandleAsync();
         }
 
@@ -38,6 +37,7 @@ namespace SampleGame
         {
             await HandleEnemies(_context);
             SpawnEnemies(_context);
+            _context.GetTurn().Value++;
             _eventBus.InvokeStartTurn();
         }
 
@@ -48,6 +48,11 @@ namespace SampleGame
 
             foreach (IGameEntity enemy in enemies)
             {
+                if (HealthUseCase.Exists(enemy) == false)
+                {
+                    continue;
+                }
+                
                 SelectTarget(context, enemy);
                 var target = enemy.GetTarget().Value;
                 if (target == null)
@@ -72,18 +77,15 @@ namespace SampleGame
 
         private void SpawnEnemies(IGameContext context)
         {
-            var currentTurn = context.GetTurn().Value;
-            var rate = context.GetSpawnTurnRate().Value;
-
-            if (currentTurn % rate != 0)
+            if (TryGetCurrentWave(context, out var wave) == false)
             {
                 return;
             }
 
             var gameBoard = context.GetGameBoard();
-            var spawnPoints = context.GetSpawnPoints();
+            var spawnPoints = wave.points;
+            var prefab = wave.prefab;
             var enemies = context.GetEnemies();
-            var prefab = context.GetEnemyPrefab().Value;
 
             foreach (var position in spawnPoints)
             {
@@ -103,6 +105,24 @@ namespace SampleGame
                     enemies.Add(enemyEntity);
                 }
             }
+        }
+
+        private bool TryGetCurrentWave(IGameContext context, out SpawnWave currentWave)
+        {
+            var currentTurn = context.GetTurn().Value;
+            var waves = context.GetWaves();
+
+            foreach (var wave in waves)
+            {
+                if (wave.turn == currentTurn)
+                {
+                    currentWave = wave;
+                    return true;
+                }
+            }
+
+            currentWave = default;
+            return false;
         }
 
         private static void SelectTarget(IGameContext context, IGameEntity entity)

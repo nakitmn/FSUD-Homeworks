@@ -25,11 +25,8 @@ namespace SampleGame
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int Turn = -2146256263; // IReactiveVariable<int>
+		public const int Waves = 1316085542; // List<SpawnWave>
 		public const int Enemies = -1212189790; // List<IGameEntity>
-		public const int SpawnPoints = -616390853; // List<GameBoardPosition>
-		public const int SpawnCount = -1002427847; // IValue<int>
-		public const int SpawnTurnRate = -547472981; // IValue<int>
-		public const int EnemyPrefab = 926451090; // IValue<GameEntity>
 
 
 		///Value Extensions
@@ -195,6 +192,26 @@ namespace SampleGame
 		public static void SetTurn(this IGameContext obj, IReactiveVariable<int> value) => obj.SetValue(Turn, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static List<SpawnWave> GetWaves(this IGameContext obj) => obj.GetValueUnsafe<List<SpawnWave>>(Waves);
+
+		public static ref List<SpawnWave> RefWaves(this IGameContext obj) => ref obj.GetValueUnsafe<List<SpawnWave>>(Waves);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetWaves(this IGameContext obj, out List<SpawnWave> value) => obj.TryGetValueUnsafe(Waves, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddWaves(this IGameContext obj, List<SpawnWave> value) => obj.AddValue(Waves, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasWaves(this IGameContext obj) => obj.HasValue(Waves);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelWaves(this IGameContext obj) => obj.DelValue(Waves);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetWaves(this IGameContext obj, List<SpawnWave> value) => obj.SetValue(Waves, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static List<IGameEntity> GetEnemies(this IGameContext obj) => obj.GetValueUnsafe<List<IGameEntity>>(Enemies);
 
 		public static ref List<IGameEntity> RefEnemies(this IGameContext obj) => ref obj.GetValueUnsafe<List<IGameEntity>>(Enemies);
@@ -213,85 +230,5 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetEnemies(this IGameContext obj, List<IGameEntity> value) => obj.SetValue(Enemies, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static List<GameBoardPosition> GetSpawnPoints(this IGameContext obj) => obj.GetValueUnsafe<List<GameBoardPosition>>(SpawnPoints);
-
-		public static ref List<GameBoardPosition> RefSpawnPoints(this IGameContext obj) => ref obj.GetValueUnsafe<List<GameBoardPosition>>(SpawnPoints);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetSpawnPoints(this IGameContext obj, out List<GameBoardPosition> value) => obj.TryGetValueUnsafe(SpawnPoints, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddSpawnPoints(this IGameContext obj, List<GameBoardPosition> value) => obj.AddValue(SpawnPoints, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasSpawnPoints(this IGameContext obj) => obj.HasValue(SpawnPoints);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelSpawnPoints(this IGameContext obj) => obj.DelValue(SpawnPoints);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetSpawnPoints(this IGameContext obj, List<GameBoardPosition> value) => obj.SetValue(SpawnPoints, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IValue<int> GetSpawnCount(this IGameContext obj) => obj.GetValueUnsafe<IValue<int>>(SpawnCount);
-
-		public static ref IValue<int> RefSpawnCount(this IGameContext obj) => ref obj.GetValueUnsafe<IValue<int>>(SpawnCount);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetSpawnCount(this IGameContext obj, out IValue<int> value) => obj.TryGetValueUnsafe(SpawnCount, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddSpawnCount(this IGameContext obj, IValue<int> value) => obj.AddValue(SpawnCount, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasSpawnCount(this IGameContext obj) => obj.HasValue(SpawnCount);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelSpawnCount(this IGameContext obj) => obj.DelValue(SpawnCount);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetSpawnCount(this IGameContext obj, IValue<int> value) => obj.SetValue(SpawnCount, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IValue<int> GetSpawnTurnRate(this IGameContext obj) => obj.GetValueUnsafe<IValue<int>>(SpawnTurnRate);
-
-		public static ref IValue<int> RefSpawnTurnRate(this IGameContext obj) => ref obj.GetValueUnsafe<IValue<int>>(SpawnTurnRate);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetSpawnTurnRate(this IGameContext obj, out IValue<int> value) => obj.TryGetValueUnsafe(SpawnTurnRate, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddSpawnTurnRate(this IGameContext obj, IValue<int> value) => obj.AddValue(SpawnTurnRate, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasSpawnTurnRate(this IGameContext obj) => obj.HasValue(SpawnTurnRate);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelSpawnTurnRate(this IGameContext obj) => obj.DelValue(SpawnTurnRate);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetSpawnTurnRate(this IGameContext obj, IValue<int> value) => obj.SetValue(SpawnTurnRate, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IValue<GameEntity> GetEnemyPrefab(this IGameContext obj) => obj.GetValueUnsafe<IValue<GameEntity>>(EnemyPrefab);
-
-		public static ref IValue<GameEntity> RefEnemyPrefab(this IGameContext obj) => ref obj.GetValueUnsafe<IValue<GameEntity>>(EnemyPrefab);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetEnemyPrefab(this IGameContext obj, out IValue<GameEntity> value) => obj.TryGetValueUnsafe(EnemyPrefab, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddEnemyPrefab(this IGameContext obj, IValue<GameEntity> value) => obj.AddValue(EnemyPrefab, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasEnemyPrefab(this IGameContext obj) => obj.HasValue(EnemyPrefab);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelEnemyPrefab(this IGameContext obj) => obj.DelValue(EnemyPrefab);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetEnemyPrefab(this IGameContext obj, IValue<GameEntity> value) => obj.SetValue(EnemyPrefab, value);
     }
 }

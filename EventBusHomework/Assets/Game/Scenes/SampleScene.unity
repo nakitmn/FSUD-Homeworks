@@ -992,8 +992,23 @@ MonoBehaviour:
     position:
       x: 5
       y: 5
-  _enemyPrefab: {fileID: 2466268858443728016, guid: 2405ecb14ee07504a837cda6868e19a3, type: 3}
-  _enemyCountPerTurn: 3
+  _waves:
+  - turn: 1
+    prefab: {fileID: 2466268858443728016, guid: 2405ecb14ee07504a837cda6868e19a3, type: 3}
+    points:
+    - x: 1
+      y: 0
+    - x: 0
+      y: 1
+  - turn: 3
+    prefab: {fileID: 2466268858443728016, guid: 2405ecb14ee07504a837cda6868e19a3, type: 3}
+    points:
+    - x: 3
+      y: 3
+    - x: 5
+      y: 5
+    - x: 0
+      y: 0
 --- !u!114 &893987350
 MonoBehaviour:
   m_ObjectHideFlags: 0

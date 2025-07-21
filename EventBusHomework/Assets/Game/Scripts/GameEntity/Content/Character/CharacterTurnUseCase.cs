@@ -21,6 +21,15 @@
             }
         }
         
+        public static void ResetEnemies(in IGameContext context)
+        {
+            var enemies = context.GetEnemies();
+            foreach (var character in enemies)
+            {
+                Reset(character);
+            }
+        }
+        
         public static void Reset(in IGameEntity entity)
         {
             entity.GetCurrentMovesCount().Value = 0;

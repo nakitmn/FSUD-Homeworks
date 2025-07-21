@@ -33,6 +33,7 @@ namespace SampleGame
                 gameBoard[position] = null;
                 var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext, newPosition);
                 worldPosition.y -= 2f;
+                _target.SetHealth(0);
                 var dieAnimationCommand = new DieFromBoundsAnimationCommand(_target.GetTransform(), worldPosition);
                 animationQueue.Enqueue(dieAnimationCommand);
                 return false;

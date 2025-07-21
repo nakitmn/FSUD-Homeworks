@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Events;
@@ -13,9 +14,7 @@ namespace SampleGame
         [SerializeField] private Vector2Int _gameBoardSize;
         [SerializeField] private GameBoardView _gameBoardView;
         [SerializeField] private CharacterSetController.CharacterInstaller[] _characterInstallers;
-        [SerializeField] private GameEntity _enemyPrefab;
-        [SerializeField] private int _enemyCountPerTurn = 3;
-        [SerializeField] private int _spawnTurnRate = 3;
+        [SerializeField] private SpawnWave[] _waves;
         
         protected override void Install(IGameContext entity)
         {
@@ -29,10 +28,7 @@ namespace SampleGame
             entity.AddCharacters(_characterInstallers.Select(x=>x.character).ToArray());
             
             entity.AddEnemies(new());
-            entity.AddSpawnCount(new Const<int>(_enemyCountPerTurn));
-            entity.AddEnemyPrefab(new Const<GameEntity>(_enemyPrefab));
-            entity.AddSpawnPoints(new());
-            entity.AddSpawnTurnRate(new Const<int>(_spawnTurnRate));
+            entity.AddWaves(new List<SpawnWave>(_waves));
             
             entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();
