@@ -30,14 +30,16 @@ namespace SampleGame
             entity.AddEnemies(new());
             entity.AddWaves(new List<SpawnWave>(_waves));
             
+            entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));
+
+            entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));
+            
             entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();
             entity.AddBehaviour<CharacterMoveController>();
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<StartTurnHandler>();
             entity.AddBehaviour<EndTurnHandler>();
-            
-            entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));
         }
     }
 }

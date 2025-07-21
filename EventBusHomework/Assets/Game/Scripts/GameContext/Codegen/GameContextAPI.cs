@@ -23,6 +23,7 @@ namespace SampleGame
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int Characters = 1970553566; // IGameEntity[]
 		public const int CurrentState = -386580614; // IReactiveVariable<GameState>
+		public const int InputCondition = 1207100273; // IValue<bool>
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int Turn = -2146256263; // IReactiveVariable<int>
@@ -151,6 +152,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCurrentState(this IGameContext obj, IReactiveVariable<GameState> value) => obj.SetValue(CurrentState, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<bool> GetInputCondition(this IGameContext obj) => obj.GetValueUnsafe<IValue<bool>>(InputCondition);
+
+		public static ref IValue<bool> RefInputCondition(this IGameContext obj) => ref obj.GetValueUnsafe<IValue<bool>>(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetInputCondition(this IGameContext obj, out IValue<bool> value) => obj.TryGetValueUnsafe(InputCondition, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddInputCondition(this IGameContext obj, IValue<bool> value) => obj.AddValue(InputCondition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasInputCondition(this IGameContext obj) => obj.HasValue(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelInputCondition(this IGameContext obj) => obj.DelValue(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetInputCondition(this IGameContext obj, IValue<bool> value) => obj.SetValue(InputCondition, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static GameBoard GetGameBoard(this IGameContext obj) => obj.GetValueUnsafe<GameBoard>(GameBoard);

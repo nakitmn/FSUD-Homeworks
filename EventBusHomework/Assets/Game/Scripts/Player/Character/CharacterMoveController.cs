@@ -7,7 +7,7 @@ namespace SampleGame
     {
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (Input.GetMouseButtonDown(0) == false)
+            if (InputUseCase.IsMove(context) == false)
             {
                 return;
             }

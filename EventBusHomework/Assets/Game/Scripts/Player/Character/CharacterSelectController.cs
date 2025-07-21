@@ -7,15 +7,11 @@ namespace SampleGame
     {
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (InputUseCase.IsSelect(context) &&
+                RaycastUseCase.RaycastTarget(context, Input.mousePosition, out IGameEntity target) &&
+                target.HasCharacterTag())
             {
-                if (RaycastUseCase.RaycastTarget(context,Input.mousePosition, out IGameEntity target))
-                {
-                    if (target.HasCharacterTag())
-                    {
-                        context.GetSelectedCharacter().Value = target;
-                    }
-                }
+                context.GetSelectedCharacter().Value = target;
             }
         }
     }

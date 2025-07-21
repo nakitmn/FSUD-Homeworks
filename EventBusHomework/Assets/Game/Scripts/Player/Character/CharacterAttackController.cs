@@ -7,7 +7,7 @@ namespace SampleGame
     {
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (Input.GetMouseButtonDown(1) == false)
+            if (InputUseCase.IsAttack(context) == false)
             {
                 return;
             }

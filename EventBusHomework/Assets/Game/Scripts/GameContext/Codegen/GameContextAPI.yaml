@@ -23,6 +23,9 @@ values:
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - Characters: IGameEntity[]
 - CurrentState: IReactiveVariable<GameState>
+  
+#Input
+- InputCondition: IValue<bool>
     
   #GameBoard
 - GameBoard: GameBoard
