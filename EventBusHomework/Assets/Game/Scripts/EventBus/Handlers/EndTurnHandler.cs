@@ -60,8 +60,11 @@ namespace SampleGame
                     continue;
                 }
 
+                var path = EnemyUseCase.FindPathToTarget(context,enemy);
                 var targetPosition = GameBoardMoveUseCase.GetBoardPosition(context, target);
-                var characterMoveCommand = new CharacterMoveCommand(enemy, targetPosition);
+                var movePosition = path[0];
+                
+                var characterMoveCommand = new CharacterMoveCommand(enemy, movePosition);
                 if (characterMoveCommand.Execute(context))
                 {
                     await UniTask.WaitWhile(() => animationQueue.IsActive);
