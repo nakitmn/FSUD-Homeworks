@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4288088584853339995}
   - component: {fileID: 6148622486483108675}
   - component: {fileID: 6445224281066994512}
+  - component: {fileID: 7080694735917563088}
   m_Layer: 0
   m_Name: GameBoardCell
   m_TagString: Untagged
@@ -87,6 +88,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 5669447783137371090}
+  _highlightedMaterial: {fileID: 2100000, guid: 1b2683d0feb82b24eba55188bd23a4d5, type: 2}
+--- !u!114 &7080694735917563088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676626528148674080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603a745f80e14d1d8cd57cf70a50187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entities:
+  - {fileID: 4288088584853339995}
 --- !u!1 &7735431778265624748
 GameObject:
   m_ObjectHideFlags: 0

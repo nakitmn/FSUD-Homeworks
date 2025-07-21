@@ -30,7 +30,8 @@ namespace SampleGame
                 var materialOffset = (int) Mathf.Repeat(x, 2);
                 var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
                 var material = _cellMaterials[materialIndex];
-                cell.GetMaterial().Value = material;
+                cell.GetDefaultMaterial().Value = material;
+                cell.GetCurrentMaterial().Value = material;
                 cell.GetBoardPosition().Value = new(x, y);
             }
         }

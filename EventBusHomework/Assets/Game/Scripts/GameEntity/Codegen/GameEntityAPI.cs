@@ -25,7 +25,9 @@ namespace SampleGame
 		public const int Health = -915003867; // int
 		public const int Damage = 375673178; // int
 		public const int AttackRange = 2128890732; // IValue<int>
-		public const int Material = -2050484285; // IReactiveVariable<Material>
+		public const int DefaultMaterial = -1950312091; // IReactiveVariable<Material>
+		public const int HighlightedMaterial = 2021817643; // IReactiveVariable<Material>
+		public const int CurrentMaterial = -750236251; // IReactiveVariable<Material>
 		public const int BoardPosition = 812778532; // IReactiveVariable<GameBoardPosition>
 		public const int MoveRange = -2080720063; // IValue<int>
 		public const int MaxMovesPerTurn = -348710637; // IValue<int>
@@ -177,24 +179,64 @@ namespace SampleGame
 		public static void SetAttackRange(this IGameEntity obj, IValue<int> value) => obj.SetValue(AttackRange, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveVariable<Material> GetMaterial(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Material>>(Material);
+		public static IReactiveVariable<Material> GetDefaultMaterial(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Material>>(DefaultMaterial);
 
-		public static ref IReactiveVariable<Material> RefMaterial(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Material>>(Material);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetMaterial(this IGameEntity obj, out IReactiveVariable<Material> value) => obj.TryGetValueUnsafe(Material, out value);
+		public static ref IReactiveVariable<Material> RefDefaultMaterial(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Material>>(DefaultMaterial);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.AddValue(Material, value);
+		public static bool TryGetDefaultMaterial(this IGameEntity obj, out IReactiveVariable<Material> value) => obj.TryGetValueUnsafe(DefaultMaterial, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasMaterial(this IGameEntity obj) => obj.HasValue(Material);
+		public static void AddDefaultMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.AddValue(DefaultMaterial, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelMaterial(this IGameEntity obj) => obj.DelValue(Material);
+		public static bool HasDefaultMaterial(this IGameEntity obj) => obj.HasValue(DefaultMaterial);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(Material, value);
+		public static bool DelDefaultMaterial(this IGameEntity obj) => obj.DelValue(DefaultMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetDefaultMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(DefaultMaterial, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<Material> GetHighlightedMaterial(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Material>>(HighlightedMaterial);
+
+		public static ref IReactiveVariable<Material> RefHighlightedMaterial(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Material>>(HighlightedMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetHighlightedMaterial(this IGameEntity obj, out IReactiveVariable<Material> value) => obj.TryGetValueUnsafe(HighlightedMaterial, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddHighlightedMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.AddValue(HighlightedMaterial, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasHighlightedMaterial(this IGameEntity obj) => obj.HasValue(HighlightedMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelHighlightedMaterial(this IGameEntity obj) => obj.DelValue(HighlightedMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetHighlightedMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(HighlightedMaterial, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<Material> GetCurrentMaterial(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Material>>(CurrentMaterial);
+
+		public static ref IReactiveVariable<Material> RefCurrentMaterial(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Material>>(CurrentMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCurrentMaterial(this IGameEntity obj, out IReactiveVariable<Material> value) => obj.TryGetValueUnsafe(CurrentMaterial, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCurrentMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.AddValue(CurrentMaterial, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCurrentMaterial(this IGameEntity obj) => obj.HasValue(CurrentMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCurrentMaterial(this IGameEntity obj) => obj.DelValue(CurrentMaterial);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCurrentMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(CurrentMaterial, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<GameBoardPosition> GetBoardPosition(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<GameBoardPosition>>(BoardPosition);

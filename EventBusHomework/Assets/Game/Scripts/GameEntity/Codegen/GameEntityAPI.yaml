@@ -24,7 +24,9 @@ values:
 - Health: int
 - Damage: int
 - AttackRange: IValue<int>
-- Material: IReactiveVariable<Material>
+- DefaultMaterial: IReactiveVariable<Material>
+- HighlightedMaterial: IReactiveVariable<Material>
+- CurrentMaterial: IReactiveVariable<Material>
   
 #GameBoard
 - BoardPosition: IReactiveVariable<GameBoardPosition>
