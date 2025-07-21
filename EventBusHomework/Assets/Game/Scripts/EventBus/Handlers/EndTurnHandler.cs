@@ -60,14 +60,14 @@ namespace SampleGame
                     continue;
                 }
 
-                var position = GameBoardMoveUseCase.GetBoardPosition(context, target);
-                var characterMoveCommand = new CharacterMoveCommand(enemy, position);
+                var targetPosition = GameBoardMoveUseCase.GetBoardPosition(context, target);
+                var characterMoveCommand = new CharacterMoveCommand(enemy, targetPosition);
                 if (characterMoveCommand.Execute(context))
                 {
                     await UniTask.WaitWhile(() => animationQueue.IsActive);
                 }
 
-                var attackCommand = new CharacterAttackCommand(enemy, position);
+                var attackCommand = new CharacterAttackCommand(enemy, targetPosition);
                 if (attackCommand.Execute(context))
                 {
                     await UniTask.WaitWhile(() => animationQueue.IsActive);
