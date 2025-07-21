@@ -38,5 +38,17 @@ namespace SampleGame
             var gameBoardView = gameContext.GetGameBoardView();
             return gameBoardView.ToWorldPosition(x, y);
         }
+        
+        public static void GetDistance(in int originX, in int originY, in int targetX, in int targetY, out int distanceX, out int distanceY)
+        {
+            distanceX = Mathf.Abs(originX) - Mathf.Abs(targetX);
+            distanceY = Mathf.Abs(originY) - Mathf.Abs(targetY);
+        }
+        
+        public static bool IsPositionInRange(in int originX, in int originY, in int targetX, in int targetY, in int range)
+        {
+            GetDistance(originX, originY, targetX, targetY, out var distanceX, out var distanceY);
+            return Mathf.Abs(distanceX) <= range && Mathf.Abs(distanceY) <= range;
+        }
     }
 }

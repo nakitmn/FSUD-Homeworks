@@ -21,7 +21,7 @@ namespace SampleGame
             {
                 return false;
             }
-            
+
             var gameBoard = gameContext.GetGameBoard();
             if (gameBoard.IsFree(_x, _y))
             {
@@ -37,12 +37,9 @@ namespace SampleGame
             {
                 return false;
             }
-            
-            var attackRange = _source.GetAttackRange().Value;
 
-            var distanceX = Mathf.Abs(entityX) - Mathf.Abs(_x);
-            var distanceY = Mathf.Abs(entityY) - Mathf.Abs(_y);
-            if (Mathf.Abs(distanceX) > attackRange || Mathf.Abs(distanceY) > attackRange)
+            var attackRange = _source.GetAttackRange().Value;
+            if (GameBoardMoveUseCase.IsPositionInRange(entityX, entityY, _x, _y, attackRange) == false)
             {
                 return false;
             }
