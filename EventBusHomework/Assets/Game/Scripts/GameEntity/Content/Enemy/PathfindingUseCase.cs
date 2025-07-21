@@ -18,23 +18,23 @@ namespace SampleGame
             new Vector2Int(1, -1),
         };
 
-        public static List<Vector2Int> FindPath(in IGameContext gameContext, Vector2Int start, Vector2Int end)
+        public static List<GameBoardPosition> FindPath(in IGameContext gameContext, GameBoardPosition start, GameBoardPosition end)
         {
             var gameBoard = gameContext.GetGameBoard();
 
             int width = gameBoard.Width;
             int height = gameBoard.Height;
 
-            var visited = new HashSet<Vector2Int>();
-            var distance = new Dictionary<Vector2Int, int>();
-            var previous = new Dictionary<Vector2Int, Vector2Int>();
-            var priorityQueue = new PriorityQueue<Vector2Int>();
+            var visited = new HashSet<GameBoardPosition>();
+            var distance = new Dictionary<GameBoardPosition, int>();
+            var previous = new Dictionary<GameBoardPosition, GameBoardPosition>();
+            var priorityQueue = new PriorityQueue<GameBoardPosition>();
 
             // Инициализация
             for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
-                Vector2Int pos = new Vector2Int(x, y);
+                var pos = new GameBoardPosition(x, y);
                 distance[pos] = int.MaxValue;
             }
 
@@ -55,13 +55,13 @@ namespace SampleGame
 
                 foreach (var dir in Directions)
                 {
-                    Vector2Int neighbor = current + dir;
+                    var neighbor = current + dir;
 
                     if (neighbor.x < 0 || neighbor.x >= width || neighbor.y < 0 || neighbor.y >= height)
                         continue;
 
                     // Пропустить, если клетка занята, НО разрешить старт и финиш
-                    if (gameBoard.IsFree(GameBoardPosition.FromVector2Int(neighbor)) == false && neighbor != end)
+                    if (gameBoard.IsFree(neighbor) == false && neighbor != end)
                         continue;
 
                     int newDist = distance[current] + 1;
@@ -76,8 +76,8 @@ namespace SampleGame
             }
 
             // Восстановление пути
-            var path = new List<Vector2Int>();
-            Vector2Int? step = end;
+            var path = new List<GameBoardPosition>();
+            GameBoardPosition? step = end;
 
             while (step != null && previous.ContainsKey(step.Value))
             {

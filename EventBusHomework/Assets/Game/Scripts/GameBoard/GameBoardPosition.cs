@@ -60,5 +60,10 @@ namespace SampleGame
         {
             return new Vector2Int(x, y);
         }
+
+        public override string ToString()
+        {
+            return $"[{x};{y}]";
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace SampleGame
             var startPosition = GameBoardMoveUseCase.GetBoardPosition(gameContext, _source);
             var endPosition = GameBoardMoveUseCase.GetBoardPosition(gameContext, target);
             var result =
-                PathfindingUseCase.FindPath(gameContext, startPosition.ToVector2Int(), endPosition.ToVector2Int());
+                PathfindingUseCase.FindPath(gameContext, startPosition, endPosition);
             Debug.Log($"Pathfinding:\n{string.Join("\n", result)}");
         }
     }
