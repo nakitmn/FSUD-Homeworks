@@ -5,11 +5,9 @@
         public static bool Set(in IGameContext gameContext, in IGameEntity entity, in GameBoardPosition position)
         {
             var gameBoard = gameContext.GetGameBoard();
-            var gameBoardView = gameContext.GetGameBoardView();
-
             if (gameBoard.Move(entity, position))
             {
-                var worldPosition = gameBoardView.ToWorldPosition(position);
+                var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext,position);
                 entity.GetTransform().position = worldPosition;
                 return true;
             }

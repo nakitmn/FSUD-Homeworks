@@ -12,6 +12,7 @@ imports:
 - Atomic.Entities
 - Atomic.Events
 - Atomic.Elements
+- System.Collections.Generic
 
 tags:
 
@@ -28,4 +29,10 @@ values:
  
   #Turn 
 - Turn: IReactiveVariable<int>
+  
+#Enemy
+- SpawnPoints: List<GameBoardPosition>
+- SpawnCount: IValue<int>
+- SpawnTurnRate: IValue<int>
+- EnemyPrefab: IValue<GameEntity>
 

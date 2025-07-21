@@ -5,14 +5,14 @@ namespace SampleGame
 {
     public sealed class CellInstaller : SceneEntityInstaller<IGameEntity>
     {
-        protected override void Install(IGameEntity entity)
+        protected override void Install(IGameEntity context)
         {
-            entity.AddCellTag();
+            context.AddCellTag();
             
-            entity.AddTransform(transform);
-            entity.AddGameObject(gameObject);
+            context.AddTransform(transform);
+            context.AddGameObject(gameObject);
             
-            entity.AddBoardPosition(new ReactiveVariable<GameBoardPosition>());
+            context.AddBoardPosition(new ReactiveVariable<GameBoardPosition>());
         }
     }
 }

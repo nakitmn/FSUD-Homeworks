@@ -8,11 +8,11 @@ namespace SampleGame
     {
         [SerializeField] private Renderer _renderer;
         
-        protected override void Install(IGameEntity entity)
+        protected override void Install(IGameEntity context)
         {
-            entity.AddMaterial(new ReactiveVariable<Material>());
+            context.AddMaterial(new ReactiveVariable<Material>());
             
-            entity.GetMaterial().Subscribe(material => _renderer.material = material);
+            context.GetMaterial().Subscribe(material => _renderer.material = material);
         }
     }
 }

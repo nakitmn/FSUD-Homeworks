@@ -13,21 +13,21 @@ namespace SampleGame
         [SerializeField] private int _moveRange;
         [SerializeField] private int _attackRange;
 
-        protected override void Install(IGameEntity entity)
+        protected override void Install(IGameEntity context)
         {
-            entity.AddCharacterTag();
+            context.AddCharacterTag();
 
-            entity.AddTransform(transform);
-            entity.AddGameObject(gameObject);
-            entity.AddHealth(_health);
-            entity.AddDamage(_damage);
-            entity.AddMoveRange(new Const<int>(_moveRange));
-            entity.AddAttackRange(new Const<int>(_attackRange));
+            context.AddTransform(transform);
+            context.AddGameObject(gameObject);
+            context.AddHealth(_health);
+            context.AddDamage(_damage);
+            context.AddMoveRange(new Const<int>(_moveRange));
+            context.AddAttackRange(new Const<int>(_attackRange));
             
-            entity.AddMaxMovesPerTurn(new Const<int>(_movesPerTurn));
-            entity.AddMaxAttacksPerTurn(new Const<int>(_attacksPerTurn));
-            entity.AddCurrentMovesCount(new ReactiveInt());
-            entity.AddCurrentAttacksCount(new ReactiveInt());
+            context.AddMaxMovesPerTurn(new Const<int>(_movesPerTurn));
+            context.AddMaxAttacksPerTurn(new Const<int>(_attacksPerTurn));
+            context.AddCurrentMovesCount(new ReactiveInt());
+            context.AddCurrentAttacksCount(new ReactiveInt());
 
             //entity.WhenUpdate(_ => entity.GetGameObject().SetActive(entity.GetHealth() > 0));
         }
