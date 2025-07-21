@@ -36,6 +36,8 @@ namespace SampleGame
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<StartTurnHandler>();
             entity.AddBehaviour<EndTurnHandler>();
+            
+            entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));
         }
     }
 }

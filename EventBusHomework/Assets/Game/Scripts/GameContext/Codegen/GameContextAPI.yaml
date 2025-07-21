@@ -22,6 +22,7 @@ values:
 - Camera: Camera
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - Characters: IGameEntity[]
+- CurrentState: IReactiveVariable<GameState>
     
   #GameBoard
 - GameBoard: GameBoard

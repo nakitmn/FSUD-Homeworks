@@ -22,6 +22,7 @@ namespace SampleGame
 		public const int Camera = 1018227507; // Camera
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int Characters = 1970553566; // IGameEntity[]
+		public const int CurrentState = -386580614; // IReactiveVariable<GameState>
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int Turn = -2146256263; // IReactiveVariable<int>
@@ -130,6 +131,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCharacters(this IGameContext obj, IGameEntity[] value) => obj.SetValue(Characters, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<GameState> GetCurrentState(this IGameContext obj) => obj.GetValueUnsafe<IReactiveVariable<GameState>>(CurrentState);
+
+		public static ref IReactiveVariable<GameState> RefCurrentState(this IGameContext obj) => ref obj.GetValueUnsafe<IReactiveVariable<GameState>>(CurrentState);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCurrentState(this IGameContext obj, out IReactiveVariable<GameState> value) => obj.TryGetValueUnsafe(CurrentState, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCurrentState(this IGameContext obj, IReactiveVariable<GameState> value) => obj.AddValue(CurrentState, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCurrentState(this IGameContext obj) => obj.HasValue(CurrentState);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCurrentState(this IGameContext obj) => obj.DelValue(CurrentState);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCurrentState(this IGameContext obj, IReactiveVariable<GameState> value) => obj.SetValue(CurrentState, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static GameBoard GetGameBoard(this IGameContext obj) => obj.GetValueUnsafe<GameBoard>(GameBoard);

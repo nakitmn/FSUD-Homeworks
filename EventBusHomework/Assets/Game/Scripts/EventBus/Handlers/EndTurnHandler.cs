@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Atomic.Entities;
 using Atomic.Events;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.XR;
+using Random = UnityEngine.Random;
 
 namespace SampleGame
 {
@@ -38,7 +39,50 @@ namespace SampleGame
             await HandleEnemies(_context);
             SpawnEnemies(_context);
             _context.GetTurn().Value++;
+            
+            if (IsLose(_context))
+            {
+                _context.GetCurrentState().Value = GameState.Lose;
+                return;
+            }
+            
+            if (IsWin(_context))
+            {
+                _context.GetCurrentState().Value = GameState.Win;
+                return;
+            }
+            
             _eventBus.InvokeStartTurn();
+        }
+
+        private bool IsWin(IGameContext context)
+        {
+            return IsLastWaveSpawned(context) && HasAliveEnemies(context) == false;
+        }
+
+        private bool HasAliveEnemies(IGameContext context)
+        {
+            var enemies = context.GetEnemies();
+            return enemies.Exists(enemy => HealthUseCase.Exists(enemy));
+        }
+
+        private bool IsLastWaveSpawned(IGameContext context)
+        {
+            var currentTurn = context.GetTurn().Value;
+            var waves = context.GetWaves();
+            var lastWave = waves[^1];
+            return currentTurn > lastWave.turn;
+        }
+
+        private bool IsLose(IGameContext context)
+        {
+            return HasAliveCharacters(context) == false;
+        }
+
+        private bool HasAliveCharacters(IGameContext context)
+        {
+            var characters = context.GetCharacters();
+            return Array.Exists(characters, character => HealthUseCase.Exists(character));
         }
 
         private async UniTask HandleEnemies(IGameContext context)
