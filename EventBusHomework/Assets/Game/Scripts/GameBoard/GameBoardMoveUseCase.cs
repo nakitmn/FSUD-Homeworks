@@ -28,10 +28,15 @@ namespace SampleGame
 
         public static Vector3 GetWorldPosition(in IGameContext gameContext, in IGameEntity entity)
         {
-            var gameBoardView = gameContext.GetGameBoardView();
             var gameBoard = gameContext.GetGameBoard();
             gameBoard.TryGetPosition(entity, out var entityX, out var entityY);
-            return gameBoardView.ToWorldPosition(entityX, entityY);
+            return GetWorldPosition(gameContext, entityX, entityY);
+        }
+        
+        public static Vector3 GetWorldPosition(in IGameContext gameContext, in int x, in int y)
+        {
+            var gameBoardView = gameContext.GetGameBoardView();
+            return gameBoardView.ToWorldPosition(x, y);
         }
     }
 }

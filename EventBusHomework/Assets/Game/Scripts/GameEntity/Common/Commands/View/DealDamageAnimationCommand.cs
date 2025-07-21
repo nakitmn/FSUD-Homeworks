@@ -15,7 +15,10 @@ namespace SampleGame
 
         public async UniTask Execute()
         {
-            await _target.DOPunchScale(Vector3.one * 0.1f, 0.5f).AsyncWaitForCompletion();
+            _target.DOKill();
+            _target.localScale = Vector3.one;
+            await _target.DOPunchScale(Vector3.one * 0.1f, 0.25f)
+                .AsyncWaitForCompletion();
         }
     }
 }

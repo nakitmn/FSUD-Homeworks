@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public struct MoveAnimationCommand : IAnimationCommand
+    public struct DieFromBoundsAnimationCommand : IAnimationCommand
     {
         private readonly Transform _target;
         private readonly Vector3 _position;
 
-        public MoveAnimationCommand(Transform target, Vector3 position)
+        public DieFromBoundsAnimationCommand(Transform target, Vector3 position)
         {
             _target = target;
             _position = position;
@@ -18,7 +18,10 @@ namespace SampleGame
         public async UniTask Execute()
         {
             _target.DOKill();
-            await _target.DOMove(_position, 0.25f).AsyncWaitForCompletion();
+            await DOTween.Sequence()
+                .Append(_target.DOJump(_position, 1f,1,0.25f))
+                .Append(_target.DOScale(Vector3.zero, 0.25f))
+                .AsyncWaitForCompletion();
         }
     }
 }

@@ -19,10 +19,11 @@
             {
                 var gameBoardView = gameContext.GetGameBoardView();
                 var gameBoard = gameContext.GetGameBoard();
+                var animationQueue = gameContext.GetAnimationQueue();
                 gameBoard.TryGetPosition(_source, out var entityX, out var entityY);
                 var worldPosition = gameBoardView.ToWorldPosition(entityX, entityY);
                 var moveAnimationCommand = new MoveAnimationCommand(_source.GetTransform(), worldPosition);
-                moveAnimationCommand.Execute();
+                animationQueue.Enqueue(moveAnimationCommand);
                 return true;
             }
 

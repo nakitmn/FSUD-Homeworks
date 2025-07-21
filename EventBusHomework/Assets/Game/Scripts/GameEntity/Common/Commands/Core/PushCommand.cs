@@ -29,6 +29,12 @@ namespace SampleGame
 
             if (gameBoard.IsInBounds(newPosition.x, newPosition.y) == false)
             {
+                var animationQueue = gameContext.GetAnimationQueue();
+                gameBoard.Set(null, x, y);
+                var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext, newPosition.x, newPosition.y);
+                worldPosition.y -= 2f;
+                var dieAnimationCommand = new DieFromBoundsAnimationCommand(_target.GetTransform(), worldPosition);
+                animationQueue.Enqueue(dieAnimationCommand);
                 return false;
             }
 

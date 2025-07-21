@@ -21,6 +21,7 @@ namespace SampleGame
                     {
                         var moveCommand = new MoveCommand(selectedEntity,target.GetX().Value, target.GetY().Value);
                         moveCommand.Execute(context);
+                        context.GetAnimationQueue().Execute();
                     }
                 }
             }
