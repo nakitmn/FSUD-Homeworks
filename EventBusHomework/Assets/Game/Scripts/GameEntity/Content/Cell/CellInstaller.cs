@@ -12,8 +12,7 @@ namespace SampleGame
             entity.AddTransform(transform);
             entity.AddGameObject(gameObject);
             
-            entity.AddX(new ReactiveInt());
-            entity.AddY(new ReactiveInt());
+            entity.AddBoardPosition(new ReactiveVariable<GameBoardPosition>());
         }
     }
 }

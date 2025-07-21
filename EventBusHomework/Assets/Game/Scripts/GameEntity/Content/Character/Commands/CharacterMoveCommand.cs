@@ -3,14 +3,12 @@
     public struct CharacterMoveCommand : ICommand
     {
         private readonly IGameEntity _source;
-        private readonly int _x;
-        private readonly int _y;
+        private readonly GameBoardPosition _position;
 
-        public CharacterMoveCommand(IGameEntity source, int x, int y)
+        public CharacterMoveCommand(IGameEntity source, GameBoardPosition position)
         {
             _source = source;
-            _x = x;
-            _y = y;
+            _position = position;
         }
 
         public bool Execute(IGameContext gameContext)
@@ -20,7 +18,7 @@
                 return false;
             }
             
-            var moveCommand = new MoveCommand(_source,_x, _y);
+            var moveCommand = new MoveCommand(_source, _position);
             if (moveCommand.Execute(gameContext))
             {
                 _source.GetCurrentMovesCount().Value++;

@@ -1,18 +1,14 @@
-﻿using UnityEngine;
-
-namespace SampleGame
+﻿namespace SampleGame
 {
     public struct CharacterAttackCommand : ICommand
     {
         private readonly IGameEntity _source;
-        private readonly int _x;
-        private readonly int _y;
+        private readonly GameBoardPosition _position;
 
-        public CharacterAttackCommand(IGameEntity source, int x, int y)
+        public CharacterAttackCommand(IGameEntity source, GameBoardPosition position)
         {
             _source = source;
-            _x = x;
-            _y = y;
+            _position = position;
         }
 
         public bool Execute(IGameContext gameContext)
@@ -23,29 +19,28 @@ namespace SampleGame
             }
 
             var gameBoard = gameContext.GetGameBoard();
-            if (gameBoard.IsFree(_x, _y))
+            if (gameBoard.IsFree(_position))
             {
                 return false;
             }
 
-            if (gameBoard.TryGetPosition(_source, out var entityX, out var entityY) == false)
+            if (gameBoard.TryGetPosition(_source, out var entityPosition) == false)
             {
                 return false;
             }
 
-            if (entityX == _x && entityY == _y)
+            if (entityPosition == _position)
             {
                 return false;
             }
 
             var attackRange = _source.GetAttackRange().Value;
-            if (GameBoardMoveUseCase.IsPositionInRange(entityX, entityY, _x, _y, attackRange) == false)
+            if (GameBoardMoveUseCase.IsPositionInRange(entityPosition, _position, attackRange) == false)
             {
                 return false;
             }
 
-            var target = gameBoard.Get(_x, _y);
-
+            var target = gameBoard[_position];
             var attackCommand = new AttackCommand(_source, target);
             attackCommand.Execute(gameContext);
             _source.GetCurrentAttacksCount().Value++;

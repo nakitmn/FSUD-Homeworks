@@ -2,14 +2,14 @@
 {
     public static class GameBoardSetUseCase
     {
-        public static bool Set(in IGameContext gameContext, in IGameEntity entity, in int x, in int y)
+        public static bool Set(in IGameContext gameContext, in IGameEntity entity, in GameBoardPosition position)
         {
             var gameBoard = gameContext.GetGameBoard();
             var gameBoardView = gameContext.GetGameBoardView();
 
-            if (gameBoard.Move(entity, x, y))
+            if (gameBoard.Move(entity, position))
             {
-                var worldPosition = gameBoardView.ToWorldPosition(x,y);
+                var worldPosition = gameBoardView.ToWorldPosition(position);
                 entity.GetTransform().position = worldPosition;
                 return true;
             }

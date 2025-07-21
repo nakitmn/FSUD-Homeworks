@@ -1,5 +1,4 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SampleGame
 {
@@ -32,11 +31,15 @@ namespace SampleGame
                 var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
                 var material = _cellMaterials[materialIndex];
                 cell.GetMaterial().Value = material;
-                cell.GetX().Value = x;
-                cell.GetY().Value = y;
+                cell.GetBoardPosition().Value = new(x, y);
             }
         }
 
+        public Vector3 ToWorldPosition(GameBoardPosition position)
+        {
+            return ToWorldPosition(position.x, position.y);
+        }
+        
         public Vector3 ToWorldPosition(int x, int y)
         {
             var offset = new Vector3(x * _cellOffset, 0f, y * _cellOffset * -1f);

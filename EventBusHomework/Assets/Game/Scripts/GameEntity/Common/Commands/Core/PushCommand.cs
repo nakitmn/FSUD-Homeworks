@@ -21,37 +21,32 @@ namespace SampleGame
             }
             
             var gameBoard = gameContext.GetGameBoard();
-            if (gameBoard.TryGetPosition(_target, out var x, out var y) == false)
+            if (gameBoard.TryGetPosition(_target, out var position) == false)
             {
                 return false;
             }
 
-            var newPosition = new Vector2Int()
-            {
-                x = x + _direction.x,
-                y = y + _direction.y,
-            };
-
-            if (gameBoard.IsInBounds(newPosition.x, newPosition.y) == false)
+            var newPosition = position + _direction;
+            if (gameBoard.IsInBounds(newPosition) == false)
             {
                 var animationQueue = gameContext.GetAnimationQueue();
-                gameBoard.Set(null, x, y);
-                var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext, newPosition.x, newPosition.y);
+                gameBoard[position] = null;
+                var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext, newPosition);
                 worldPosition.y -= 2f;
                 var dieAnimationCommand = new DieFromBoundsAnimationCommand(_target.GetTransform(), worldPosition);
                 animationQueue.Enqueue(dieAnimationCommand);
                 return false;
             }
 
-            if (gameBoard.IsFree(newPosition.x, newPosition.y) == false)
+            if (gameBoard.IsFree(newPosition) == false)
             {
-                var entity = gameBoard.Get(newPosition.x, newPosition.y);
+                var entity = gameBoard[newPosition];
                 var dealDamageCommand = new DealDamageCommand(entity, 1);
                 dealDamageCommand.Execute(gameContext);
                 return new PushCommand(entity, _direction).Execute(gameContext);
             }
 
-            var moveCommand = new MoveCommand(_target, newPosition.x, newPosition.y);
+            var moveCommand = new MoveCommand(_target, newPosition);
             return moveCommand.Execute(gameContext);
         }
     }

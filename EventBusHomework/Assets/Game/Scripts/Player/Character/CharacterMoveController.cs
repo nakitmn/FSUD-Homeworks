@@ -19,7 +19,7 @@ namespace SampleGame
                 target.HasCellTag())
             {
                 var moveCommand =
-                    new CharacterMoveCommand(selectedEntity, target.GetX().Value, target.GetY().Value);
+                    new CharacterMoveCommand(selectedEntity, target.GetBoardPosition().Value);
                 moveCommand.Execute(context);
             }
         }

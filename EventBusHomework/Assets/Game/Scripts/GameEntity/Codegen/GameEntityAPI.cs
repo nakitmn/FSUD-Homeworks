@@ -24,9 +24,8 @@ namespace SampleGame
 		public const int Health = -915003867; // int
 		public const int Damage = 375673178; // int
 		public const int AttackRange = 2128890732; // IValue<int>
-		public const int X = -1213057461; // IReactiveVariable<int>
-		public const int Y = -1061878051; // IReactiveVariable<int>
 		public const int Material = -2050484285; // IReactiveVariable<Material>
+		public const int BoardPosition = 812778532; // IReactiveVariable<GameBoardPosition>
 		public const int MoveRange = -2080720063; // IValue<int>
 		public const int MaxMovesPerTurn = -348710637; // IValue<int>
 		public const int CurrentMovesCount = 254840857; // IReactiveVariable<int>
@@ -167,46 +166,6 @@ namespace SampleGame
 		public static void SetAttackRange(this IGameEntity obj, IValue<int> value) => obj.SetValue(AttackRange, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveVariable<int> GetX(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(X);
-
-		public static ref IReactiveVariable<int> RefX(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(X);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetX(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(X, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddX(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(X, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasX(this IGameEntity obj) => obj.HasValue(X);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelX(this IGameEntity obj) => obj.DelValue(X);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetX(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(X, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveVariable<int> GetY(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(Y);
-
-		public static ref IReactiveVariable<int> RefY(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(Y);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetY(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(Y, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddY(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(Y, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasY(this IGameEntity obj) => obj.HasValue(Y);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelY(this IGameEntity obj) => obj.DelValue(Y);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetY(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(Y, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<Material> GetMaterial(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<Material>>(Material);
 
 		public static ref IReactiveVariable<Material> RefMaterial(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<Material>>(Material);
@@ -225,6 +184,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetMaterial(this IGameEntity obj, IReactiveVariable<Material> value) => obj.SetValue(Material, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<GameBoardPosition> GetBoardPosition(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<GameBoardPosition>>(BoardPosition);
+
+		public static ref IReactiveVariable<GameBoardPosition> RefBoardPosition(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<GameBoardPosition>>(BoardPosition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetBoardPosition(this IGameEntity obj, out IReactiveVariable<GameBoardPosition> value) => obj.TryGetValueUnsafe(BoardPosition, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddBoardPosition(this IGameEntity obj, IReactiveVariable<GameBoardPosition> value) => obj.AddValue(BoardPosition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasBoardPosition(this IGameEntity obj) => obj.HasValue(BoardPosition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelBoardPosition(this IGameEntity obj) => obj.DelValue(BoardPosition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetBoardPosition(this IGameEntity obj, IReactiveVariable<GameBoardPosition> value) => obj.SetValue(BoardPosition, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IValue<int> GetMoveRange(this IGameEntity obj) => obj.GetValueUnsafe<IValue<int>>(MoveRange);

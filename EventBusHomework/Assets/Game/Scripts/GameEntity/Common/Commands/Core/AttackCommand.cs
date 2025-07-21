@@ -19,13 +19,9 @@ namespace SampleGame
             if (dealDamageCommand.Execute(gameContext))
             {
                 var gameBoard = gameContext.GetGameBoard();
-                gameBoard.TryGetPosition(_source, out var sourceX, out var sourceY);
-                gameBoard.TryGetPosition(_target, out var targetX, out var targetY);
-                var pushDirection = new Vector2Int()
-                {
-                    x = targetX - sourceX,
-                    y = targetY - sourceY,
-                };
+                gameBoard.TryGetPosition(_source, out var sourcePosition);
+                gameBoard.TryGetPosition(_target, out var targetPosition);
+                var pushDirection = (targetPosition - sourcePosition).ToVector2Int();
                 var pushCommand = new PushCommand(_target, pushDirection);
                 pushCommand.Execute(gameContext);
                 return true;

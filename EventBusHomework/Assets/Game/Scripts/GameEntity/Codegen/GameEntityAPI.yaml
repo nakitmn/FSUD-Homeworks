@@ -23,11 +23,10 @@ values:
 - Health: int
 - Damage: int
 - AttackRange: IValue<int>
+- Material: IReactiveVariable<Material>
   
 #GameBoard
-- X: IReactiveVariable<int>
-- Y: IReactiveVariable<int>
-- Material: IReactiveVariable<Material>
+- BoardPosition: IReactiveVariable<GameBoardPosition>
 - MoveRange: IValue<int>
   
 #Turn

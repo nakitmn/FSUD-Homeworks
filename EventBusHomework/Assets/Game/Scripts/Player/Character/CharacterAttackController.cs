@@ -20,16 +20,16 @@ namespace SampleGame
                 if (target.HasCellTag())
                 {
                     var attackCommand =
-                        new CharacterAttackCommand(selectedEntity, target.GetX().Value, target.GetY().Value);
+                        new CharacterAttackCommand(selectedEntity, target.GetBoardPosition().Value);
                     attackCommand.Execute(context);
                 }
 
                 if (target.HasCharacterTag())
                 {
                     var gameBoard = context.GetGameBoard();
-                    if (gameBoard.TryGetPosition(target, out var x, out var y))
+                    if (gameBoard.TryGetPosition(target, out var position))
                     {
-                        var attackCommand = new CharacterAttackCommand(selectedEntity, x, y);
+                        var attackCommand = new CharacterAttackCommand(selectedEntity, position);
                         attackCommand.Execute(context);
                     }
                 }

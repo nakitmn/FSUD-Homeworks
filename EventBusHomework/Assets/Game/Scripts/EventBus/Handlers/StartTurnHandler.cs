@@ -30,5 +30,6 @@ namespace SampleGame
             CharacterTurnUseCase.ResetCharacters(_context);
             _context.GetTurn().Value++;
         }
+        
     }
 }
