@@ -2,8 +2,21 @@
 
 namespace SampleGame
 {
-    public static class GameBoardMoveUseCase
+    public static class GameBoardUseCase
     {
+        public static bool Set(in IGameContext gameContext, in IGameEntity entity, in GameBoardPosition position)
+        {
+            var gameBoard = gameContext.GetGameBoard();
+            if (gameBoard.Move(entity, position))
+            {
+                var worldPosition = GetWorldPosition(gameContext,position);
+                entity.GetTransform().position = worldPosition;
+                return true;
+            }
+
+            return false;
+        }
+        
         public static bool Move(in IGameContext gameContext, in IGameEntity entity, in GameBoardPosition targetPosition)
         {
             var gameBoard = gameContext.GetGameBoard();

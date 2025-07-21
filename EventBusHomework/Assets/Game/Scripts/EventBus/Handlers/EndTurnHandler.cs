@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using Atomic.Entities;
+﻿using Atomic.Entities;
 using Atomic.Events;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SampleGame
 {
@@ -36,149 +32,18 @@ namespace SampleGame
 
         private async UniTaskVoid HandleAsync()
         {
-            await HandleEnemies(_context);
-            SpawnEnemies(_context);
+            _context.GetSelectedCharacter().Value = null;
+            await EnemyUseCase.HandleEnemiesTurn(_context);
+            EnemyUseCase.TrySpawnEnemies(_context);
             _context.GetTurn().Value++;
-            
-            if (IsLose(_context))
+
+            GameStateUseCase.UpdateCurrentState(_context);
+            if (_context.GetCurrentState().Value != GameState.Running)
             {
-                _context.GetCurrentState().Value = GameState.Lose;
                 return;
             }
-            
-            if (IsWin(_context))
-            {
-                _context.GetCurrentState().Value = GameState.Win;
-                return;
-            }
-            
+
             _eventBus.InvokeStartTurn();
-        }
-
-        private bool IsWin(IGameContext context)
-        {
-            return IsLastWaveSpawned(context) && HasAliveEnemies(context) == false;
-        }
-
-        private bool HasAliveEnemies(IGameContext context)
-        {
-            var enemies = context.GetEnemies();
-            return enemies.Exists(enemy => HealthUseCase.Exists(enemy));
-        }
-
-        private bool IsLastWaveSpawned(IGameContext context)
-        {
-            var currentTurn = context.GetTurn().Value;
-            var waves = context.GetWaves();
-            var lastWave = waves[^1];
-            return currentTurn > lastWave.turn;
-        }
-
-        private bool IsLose(IGameContext context)
-        {
-            return HasAliveCharacters(context) == false;
-        }
-
-        private bool HasAliveCharacters(IGameContext context)
-        {
-            var characters = context.GetCharacters();
-            return Array.Exists(characters, character => HealthUseCase.Exists(character));
-        }
-
-        private async UniTask HandleEnemies(IGameContext context)
-        {
-            var enemies = context.GetEnemies();
-            var animationQueue = context.GetAnimationQueue();
-
-            foreach (IGameEntity enemy in enemies)
-            {
-                if (HealthUseCase.Exists(enemy) == false)
-                {
-                    continue;
-                }
-                
-                SelectTarget(context, enemy);
-                var target = enemy.GetTarget().Value;
-                if (target == null)
-                {
-                    continue;
-                }
-
-                var path = EnemyUseCase.FindPathToTarget(context,enemy);
-                var targetPosition = GameBoardMoveUseCase.GetBoardPosition(context, target);
-                var movePosition = path[0];
-                
-                var characterMoveCommand = new CharacterMoveCommand(enemy, movePosition);
-                if (characterMoveCommand.Execute(context))
-                {
-                    await UniTask.WaitWhile(() => animationQueue.IsActive);
-                }
-
-                var attackCommand = new CharacterAttackCommand(enemy, targetPosition);
-                if (attackCommand.Execute(context))
-                {
-                    await UniTask.WaitWhile(() => animationQueue.IsActive);
-                }
-            }
-        }
-
-        private void SpawnEnemies(IGameContext context)
-        {
-            if (TryGetCurrentWave(context, out var wave) == false)
-            {
-                return;
-            }
-
-            var gameBoard = context.GetGameBoard();
-            var spawnPoints = wave.points;
-            var prefab = wave.prefab;
-            var enemies = context.GetEnemies();
-
-            foreach (var position in spawnPoints)
-            {
-                if (gameBoard.IsFree(position) == false)
-                {
-                    var entity = gameBoard[position];
-                    var dealDamageCommand = new DealDamageCommand(entity, 1);
-                    if (dealDamageCommand.Execute(context))
-                    {
-                        context.GetAnimationQueue().Execute();
-                    }
-                }
-                else
-                {
-                    var enemyEntity = (IGameEntity) GameEntity.Create(prefab, Vector3.zero, Quaternion.identity);
-                    GameBoardSetUseCase.Set(context, enemyEntity, position);
-                    enemies.Add(enemyEntity);
-                }
-            }
-        }
-
-        private bool TryGetCurrentWave(IGameContext context, out SpawnWave currentWave)
-        {
-            var currentTurn = context.GetTurn().Value;
-            var waves = context.GetWaves();
-
-            foreach (var wave in waves)
-            {
-                if (wave.turn == currentTurn)
-                {
-                    currentWave = wave;
-                    return true;
-                }
-            }
-
-            currentWave = default;
-            return false;
-        }
-
-        private static void SelectTarget(IGameContext context, IGameEntity entity)
-        {
-            var characters = context.GetCharacters();
-            var aliveCharacters = characters.Where(x => HealthUseCase.Exists(x)).ToArray();
-            entity.GetTarget().Value = aliveCharacters.Length > 0
-                ? aliveCharacters[Random.Range(0, aliveCharacters.Length)]
-                : null;
         }
     }
 }

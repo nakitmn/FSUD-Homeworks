@@ -16,7 +16,7 @@ namespace SampleGame
         {
             foreach (var installer in _installers)
             {
-                GameBoardSetUseCase.Set(context, installer.character, installer.position);
+                GameBoardUseCase.Set(context, installer.character, installer.position);
             }
         }
 

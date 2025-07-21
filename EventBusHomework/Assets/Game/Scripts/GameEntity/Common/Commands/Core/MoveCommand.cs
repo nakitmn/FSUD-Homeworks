@@ -13,12 +13,12 @@
 
         public bool Execute(IGameContext gameContext)
         {
-            if (GameBoardMoveUseCase.Move(gameContext, _source, _position) == false)
+            if (GameBoardUseCase.Move(gameContext, _source, _position) == false)
             {
                 return false;
             }
 
-            var worldPosition = GameBoardMoveUseCase.GetWorldPosition(gameContext, _source);
+            var worldPosition = GameBoardUseCase.GetWorldPosition(gameContext, _source);
             var moveAnimationCommand = new MoveAnimationCommand(_source.GetTransform(), worldPosition);
             gameContext.GetAnimationQueue().Enqueue(moveAnimationCommand);
             return true;
