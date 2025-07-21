@@ -48,6 +48,6 @@ namespace Atomic.Entities
     public abstract class SceneEntityInstaller<T> : SceneEntityInstaller where T : class, IEntity
     {
         public sealed override void Install(IEntity entity) => this.Install((T) entity);
-        protected abstract void Install(T context);
+        protected abstract void Install(T entity);
     }
 }

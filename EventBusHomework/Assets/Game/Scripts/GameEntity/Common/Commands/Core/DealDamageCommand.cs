@@ -26,7 +26,7 @@ namespace SampleGame
 
         private bool DealDamage()
         {
-            if (_target.GetHealth() == 0)
+            if (HealthUseCase.Exists(_target) == false)
             {
                 return false;
             }

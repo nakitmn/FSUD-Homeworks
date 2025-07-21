@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CharacterInstaller : SceneEntityInstaller<IGameEntity>
+    public sealed class EnemyInstaller : SceneEntityInstaller<IGameEntity>
     {
         [SerializeField] private int _health = 10;
         [SerializeField] private int _movesPerTurn = 1;
@@ -15,7 +15,7 @@ namespace SampleGame
 
         protected override void Install(IGameEntity entity)
         {
-            entity.AddCharacterTag();
+            entity.AddEnemyTag();
 
             entity.AddTransform(transform);
             entity.AddGameObject(gameObject);
@@ -28,8 +28,8 @@ namespace SampleGame
             entity.AddMaxAttacksPerTurn(new Const<int>(_attacksPerTurn));
             entity.AddCurrentMovesCount(new ReactiveInt());
             entity.AddCurrentAttacksCount(new ReactiveInt());
-
-            //entity.WhenUpdate(_ => entity.GetGameObject().SetActive(entity.GetHealth() > 0));
+            
+            entity.AddTarget(new ReactiveVariable<IGameEntity>());
         }
     }
 }

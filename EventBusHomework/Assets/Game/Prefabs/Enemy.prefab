@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3736099196701877730}
   - component: {fileID: 2466268858443728016}
-  - component: {fileID: 5032266061735835839}
+  - component: {fileID: 851419776455167999}
   - component: {fileID: 6648243994039046316}
   m_Layer: 0
   m_Name: Enemy
@@ -54,14 +54,14 @@ MonoBehaviour:
   overrideName: 0
   entityName: 
   installers:
-  - {fileID: 5032266061735835839}
+  - {fileID: 851419776455167999}
   children: []
   _onlySelectedGizmos: 0
   _onlyEditModeGizmos: 0
   _tagCapacity: 0
   _valueCapacity: 0
   _behaviourCapacity: 0
---- !u!114 &5032266061735835839
+--- !u!114 &851419776455167999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418919058207694930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34482da438d4fc9868189c0f302ece9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d7fbd8f5523422ca0cb6d8b9b935dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10

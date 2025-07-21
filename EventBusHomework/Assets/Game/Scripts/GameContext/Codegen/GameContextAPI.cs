@@ -25,6 +25,7 @@ namespace SampleGame
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int Turn = -2146256263; // IReactiveVariable<int>
+		public const int Enemies = -1212189790; // List<IGameEntity>
 		public const int SpawnPoints = -616390853; // List<GameBoardPosition>
 		public const int SpawnCount = -1002427847; // IValue<int>
 		public const int SpawnTurnRate = -547472981; // IValue<int>
@@ -192,6 +193,26 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetTurn(this IGameContext obj, IReactiveVariable<int> value) => obj.SetValue(Turn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static List<IGameEntity> GetEnemies(this IGameContext obj) => obj.GetValueUnsafe<List<IGameEntity>>(Enemies);
+
+		public static ref List<IGameEntity> RefEnemies(this IGameContext obj) => ref obj.GetValueUnsafe<List<IGameEntity>>(Enemies);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetEnemies(this IGameContext obj, out List<IGameEntity> value) => obj.TryGetValueUnsafe(Enemies, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddEnemies(this IGameContext obj, List<IGameEntity> value) => obj.AddValue(Enemies, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasEnemies(this IGameContext obj) => obj.HasValue(Enemies);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelEnemies(this IGameContext obj) => obj.DelValue(Enemies);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetEnemies(this IGameContext obj, List<IGameEntity> value) => obj.SetValue(Enemies, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static List<GameBoardPosition> GetSpawnPoints(this IGameContext obj) => obj.GetValueUnsafe<List<GameBoardPosition>>(SpawnPoints);

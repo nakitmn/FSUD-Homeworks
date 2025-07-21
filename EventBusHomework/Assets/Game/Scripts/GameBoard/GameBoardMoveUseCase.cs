@@ -37,6 +37,13 @@ namespace SampleGame
             return gameBoardView.ToWorldPosition(position.x, position.y);
         }
         
+        public static GameBoardPosition GetBoardPosition(in IGameContext gameContext, in IGameEntity entity)
+        {
+            var gameBoard = gameContext.GetGameBoard();
+            gameBoard.TryGetPosition(entity, out var entityPosition);
+            return entityPosition;
+        }
+        
         public static void GetDistance(in GameBoardPosition originPosition, in GameBoardPosition targetPosition, out int distanceX, out int distanceY)
         {
             distanceX = Mathf.Abs(originPosition.x) - Mathf.Abs(targetPosition.x);

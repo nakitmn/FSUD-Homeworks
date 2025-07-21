@@ -14,6 +14,7 @@ imports:
 
 tags:
 - Character
+- Enemy
 - Cell
 - Pushable
 
@@ -34,3 +35,6 @@ values:
 - CurrentMovesCount: IReactiveVariable<int>
 - MaxAttacksPerTurn: IValue<int>
 - CurrentAttacksCount: IReactiveVariable<int>
+  
+#Enemy
+- Target: IReactiveVariable<IGameEntity>

@@ -14,6 +14,7 @@ namespace SampleGame
 	{
 		///Tags
 		public const int Character = 294335127;
+		public const int Enemy = 979269037;
 		public const int Cell = 1807034588;
 		public const int Pushable = -1762021740;
 
@@ -31,6 +32,7 @@ namespace SampleGame
 		public const int CurrentMovesCount = 254840857; // IReactiveVariable<int>
 		public const int MaxAttacksPerTurn = 1469536621; // IValue<int>
 		public const int CurrentAttacksCount = 887529444; // IReactiveVariable<int>
+		public const int Target = 1103309514; // IReactiveVariable<IGameEntity>
 
 
 		///Tag Extensions
@@ -43,6 +45,15 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelCharacterTag(this IGameEntity obj) => obj.DelTag(Character);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasEnemyTag(this IGameEntity obj) => obj.HasTag(Enemy);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AddEnemyTag(this IGameEntity obj) => obj.AddTag(Enemy);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelEnemyTag(this IGameEntity obj) => obj.DelTag(Enemy);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasCellTag(this IGameEntity obj) => obj.HasTag(Cell);
@@ -304,5 +315,25 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCurrentAttacksCount(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(CurrentAttacksCount, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<IGameEntity> GetTarget(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(Target);
+
+		public static ref IReactiveVariable<IGameEntity> RefTarget(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(Target);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTarget(this IGameEntity obj, out IReactiveVariable<IGameEntity> value) => obj.TryGetValueUnsafe(Target, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddTarget(this IGameEntity obj, IReactiveVariable<IGameEntity> value) => obj.AddValue(Target, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTarget(this IGameEntity obj) => obj.HasValue(Target);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTarget(this IGameEntity obj) => obj.DelValue(Target);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTarget(this IGameEntity obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(Target, value);
     }
 }
