@@ -13,6 +13,5 @@ imports:
 - Atomic.Entities
 
 events:
-- Hello()
-- Attack(IEntity source, IEntity target)
-- PostAttack(IEntity source, IEntity target)
+- StartTurn()
+- EndTurn()

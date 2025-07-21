@@ -14,56 +14,40 @@ namespace SampleGame
 	public static class EventAPI
 	{
 		///Events
-		public const int Hello = -137262718;
-		public const int Attack = 1080829965;
-		public const int PostAttack = 303188910;
+		public const int StartTurn = 1138966150;
+		public const int EndTurn = 1950703458;
 
 
 		///Event Extensions
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposeHello(this IEventBus bus) => bus.Dispose(Hello);
+		public static bool DisposeStartTurn(this IEventBus bus) => bus.Dispose(StartTurn);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription SubscribeHello(this IEventBus bus, Action action) => bus.Subscribe(Hello, action);
+		public static Subscription SubscribeStartTurn(this IEventBus bus, Action action) => bus.Subscribe(StartTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribeHello(this IEventBus bus, Action action) => bus.Unsubscribe(Hello, action);
+		public static void UnsubscribeStartTurn(this IEventBus bus, Action action) => bus.Unsubscribe(StartTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokeHello(this IEventBus bus) => bus.Invoke(Hello);
+		public static void InvokeStartTurn(this IEventBus bus) => bus.Invoke(StartTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedHello(this IEventBus bus) => bus.IsSubscribed(Hello);
-
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposeAttack(this IEventBus bus) => bus.Dispose(Attack);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription<IEntity, IEntity> SubscribeAttack(this IEventBus bus, Action<IEntity, IEntity> action) => bus.Subscribe(Attack, action);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribeAttack(this IEventBus bus, Action<IEntity, IEntity> action) => bus.Unsubscribe(Attack, action);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokeAttack(this IEventBus bus, IEntity source, IEntity target) => bus.Invoke(Attack, source, target);
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedAttack(this IEventBus bus) => bus.IsSubscribed(Attack);
+		public static bool IsSubscribedStartTurn(this IEventBus bus) => bus.IsSubscribed(StartTurn);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposePostAttack(this IEventBus bus) => bus.Dispose(PostAttack);
+		public static bool DisposeEndTurn(this IEventBus bus) => bus.Dispose(EndTurn);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription<IEntity, IEntity> SubscribePostAttack(this IEventBus bus, Action<IEntity, IEntity> action) => bus.Subscribe(PostAttack, action);
+		public static Subscription SubscribeEndTurn(this IEventBus bus, Action action) => bus.Subscribe(EndTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribePostAttack(this IEventBus bus, Action<IEntity, IEntity> action) => bus.Unsubscribe(PostAttack, action);
+		public static void UnsubscribeEndTurn(this IEventBus bus, Action action) => bus.Unsubscribe(EndTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokePostAttack(this IEventBus bus, IEntity source, IEntity target) => bus.Invoke(PostAttack, source, target);
+		public static void InvokeEndTurn(this IEventBus bus) => bus.Invoke(EndTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedPostAttack(this IEventBus bus) => bus.IsSubscribed(PostAttack);
+		public static bool IsSubscribedEndTurn(this IEventBus bus) => bus.IsSubscribed(EndTurn);
     }
 }

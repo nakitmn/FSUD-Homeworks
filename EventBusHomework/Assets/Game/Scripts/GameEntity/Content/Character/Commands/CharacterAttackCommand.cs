@@ -17,6 +17,11 @@ namespace SampleGame
 
         public bool Execute(IGameContext gameContext)
         {
+            if (CharacterTurnUseCase.CanAttackInTurn(_source) == false)
+            {
+                return false;
+            }
+            
             var gameBoard = gameContext.GetGameBoard();
             if (gameBoard.IsFree(_x, _y))
             {
@@ -28,6 +33,11 @@ namespace SampleGame
                 return false;
             }
 
+            if (entityX == _x && entityY == _y)
+            {
+                return false;
+            }
+            
             var attackRange = _source.GetAttackRange().Value;
 
             var distanceX = Mathf.Abs(entityX) - Mathf.Abs(_x);
@@ -41,6 +51,7 @@ namespace SampleGame
 
             var attackCommand = new AttackCommand(_source, target);
             attackCommand.Execute(gameContext);
+            _source.GetCurrentAttacksCount().Value++;
             gameContext.GetAnimationQueue().Execute();
             return true;
         }

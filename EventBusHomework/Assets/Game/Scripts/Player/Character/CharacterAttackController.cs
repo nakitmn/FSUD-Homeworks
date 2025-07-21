@@ -7,31 +7,30 @@ namespace SampleGame
     {
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) == false)
             {
-                var selectedEntity = context.GetSelectedCharacter().Value;
-                if (selectedEntity == null)
+                return;
+            }
+
+            var selectedEntity = context.GetSelectedCharacter().Value;
+
+            if (selectedEntity != null &&
+                RaycastUseCase.RaycastTarget(context, Input.mousePosition, out IGameEntity target))
+            {
+                if (target.HasCellTag())
                 {
-                    return;
+                    var attackCommand =
+                        new CharacterAttackCommand(selectedEntity, target.GetX().Value, target.GetY().Value);
+                    attackCommand.Execute(context);
                 }
 
-                if (RaycastUseCase.RaycastTarget(context, Input.mousePosition, out IGameEntity target))
+                if (target.HasCharacterTag())
                 {
-                    if (target.HasCellTag())
+                    var gameBoard = context.GetGameBoard();
+                    if (gameBoard.TryGetPosition(target, out var x, out var y))
                     {
-                        var attackCommand =
-                            new CharacterAttackCommand(selectedEntity, target.GetX().Value, target.GetY().Value);
+                        var attackCommand = new CharacterAttackCommand(selectedEntity, x, y);
                         attackCommand.Execute(context);
-                    }
-
-                    if (target.HasCharacterTag())
-                    {
-                        var gameBoard = context.GetGameBoard();
-                        if (gameBoard.TryGetPosition(target, out var x, out var y))
-                        {
-                            var attackCommand = new CharacterAttackCommand(selectedEntity, x, y);
-                            attackCommand.Execute(context);
-                        }
                     }
                 }
             }

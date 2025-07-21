@@ -29,3 +29,9 @@ values:
 - Y: IReactiveVariable<int>
 - Material: IReactiveVariable<Material>
 - MoveRange: IValue<int>
+  
+#Turn
+- MaxMovesPerTurn: IValue<int>
+- CurrentMovesCount: IReactiveVariable<int>
+- MaxAttacksPerTurn: IValue<int>
+- CurrentAttacksCount: IReactiveVariable<int>

@@ -20,8 +20,12 @@ values:
 - AnimationQueue: AnimationQueue
 - Camera: Camera
 - SelectedCharacter: IReactiveVariable<IGameEntity>
+- Characters: IGameEntity[]
     
   #GameBoard
 - GameBoard: GameBoard
 - GameBoardView: GameBoardView
+ 
+  #Turn 
+- Turn: IReactiveVariable<int>
 

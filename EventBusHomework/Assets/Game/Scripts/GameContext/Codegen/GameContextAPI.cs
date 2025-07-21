@@ -20,8 +20,10 @@ namespace SampleGame
 		public const int AnimationQueue = -1133279405; // AnimationQueue
 		public const int Camera = 1018227507; // Camera
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
+		public const int Characters = 1970553566; // IGameEntity[]
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int GameBoardView = 1364106545; // GameBoardView
+		public const int Turn = -2146256263; // IReactiveVariable<int>
 
 
 		///Value Extensions
@@ -107,6 +109,26 @@ namespace SampleGame
 		public static void SetSelectedCharacter(this IGameContext obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(SelectedCharacter, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IGameEntity[] GetCharacters(this IGameContext obj) => obj.GetValueUnsafe<IGameEntity[]>(Characters);
+
+		public static ref IGameEntity[] RefCharacters(this IGameContext obj) => ref obj.GetValueUnsafe<IGameEntity[]>(Characters);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCharacters(this IGameContext obj, out IGameEntity[] value) => obj.TryGetValueUnsafe(Characters, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCharacters(this IGameContext obj, IGameEntity[] value) => obj.AddValue(Characters, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCharacters(this IGameContext obj) => obj.HasValue(Characters);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCharacters(this IGameContext obj) => obj.DelValue(Characters);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCharacters(this IGameContext obj, IGameEntity[] value) => obj.SetValue(Characters, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static GameBoard GetGameBoard(this IGameContext obj) => obj.GetValueUnsafe<GameBoard>(GameBoard);
 
 		public static ref GameBoard RefGameBoard(this IGameContext obj) => ref obj.GetValueUnsafe<GameBoard>(GameBoard);
@@ -145,5 +167,25 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetGameBoardView(this IGameContext obj, GameBoardView value) => obj.SetValue(GameBoardView, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<int> GetTurn(this IGameContext obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(Turn);
+
+		public static ref IReactiveVariable<int> RefTurn(this IGameContext obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(Turn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTurn(this IGameContext obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(Turn, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddTurn(this IGameContext obj, IReactiveVariable<int> value) => obj.AddValue(Turn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTurn(this IGameContext obj) => obj.HasValue(Turn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTurn(this IGameContext obj) => obj.DelValue(Turn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTurn(this IGameContext obj, IReactiveVariable<int> value) => obj.SetValue(Turn, value);
     }
 }

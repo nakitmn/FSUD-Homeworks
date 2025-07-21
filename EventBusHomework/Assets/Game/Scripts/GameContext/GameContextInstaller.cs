@@ -1,4 +1,5 @@
-﻿using Atomic.Elements;
+﻿using System.Linq;
+using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Events;
 using UnityEngine;
@@ -21,11 +22,15 @@ namespace SampleGame
             entity.AddCamera(_camera);
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddAnimationQueue(new AnimationQueue());
+            entity.AddTurn(new ReactiveInt(1));
+            entity.AddCharacters(_characterInstallers.Select(x=>x.character).ToArray());
             
             entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<CharacterSelectController>();
             entity.AddBehaviour<CharacterMoveController>();
             entity.AddBehaviour<CharacterAttackController>();
+            entity.AddBehaviour<StartTurnHandler>();
+            entity.AddBehaviour<EndTurnHandler>();
         }
     }
 }

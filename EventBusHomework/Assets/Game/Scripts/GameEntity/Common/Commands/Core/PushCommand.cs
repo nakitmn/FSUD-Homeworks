@@ -15,6 +15,11 @@ namespace SampleGame
 
         public bool Execute(IGameContext gameContext)
         {
+            if (_direction == Vector2Int.zero)
+            {
+                return false;
+            }
+            
             var gameBoard = gameContext.GetGameBoard();
             if (gameBoard.TryGetPosition(_target, out var x, out var y) == false)
             {

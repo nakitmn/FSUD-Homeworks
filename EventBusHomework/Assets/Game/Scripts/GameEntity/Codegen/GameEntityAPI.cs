@@ -28,6 +28,10 @@ namespace SampleGame
 		public const int Y = -1061878051; // IReactiveVariable<int>
 		public const int Material = -2050484285; // IReactiveVariable<Material>
 		public const int MoveRange = -2080720063; // IValue<int>
+		public const int MaxMovesPerTurn = -348710637; // IValue<int>
+		public const int CurrentMovesCount = 254840857; // IReactiveVariable<int>
+		public const int MaxAttacksPerTurn = 1469536621; // IValue<int>
+		public const int CurrentAttacksCount = 887529444; // IReactiveVariable<int>
 
 
 		///Tag Extensions
@@ -241,5 +245,85 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetMoveRange(this IGameEntity obj, IValue<int> value) => obj.SetValue(MoveRange, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<int> GetMaxMovesPerTurn(this IGameEntity obj) => obj.GetValueUnsafe<IValue<int>>(MaxMovesPerTurn);
+
+		public static ref IValue<int> RefMaxMovesPerTurn(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<int>>(MaxMovesPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetMaxMovesPerTurn(this IGameEntity obj, out IValue<int> value) => obj.TryGetValueUnsafe(MaxMovesPerTurn, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddMaxMovesPerTurn(this IGameEntity obj, IValue<int> value) => obj.AddValue(MaxMovesPerTurn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasMaxMovesPerTurn(this IGameEntity obj) => obj.HasValue(MaxMovesPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelMaxMovesPerTurn(this IGameEntity obj) => obj.DelValue(MaxMovesPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetMaxMovesPerTurn(this IGameEntity obj, IValue<int> value) => obj.SetValue(MaxMovesPerTurn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<int> GetCurrentMovesCount(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(CurrentMovesCount);
+
+		public static ref IReactiveVariable<int> RefCurrentMovesCount(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(CurrentMovesCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCurrentMovesCount(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(CurrentMovesCount, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCurrentMovesCount(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(CurrentMovesCount, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCurrentMovesCount(this IGameEntity obj) => obj.HasValue(CurrentMovesCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCurrentMovesCount(this IGameEntity obj) => obj.DelValue(CurrentMovesCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCurrentMovesCount(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(CurrentMovesCount, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<int> GetMaxAttacksPerTurn(this IGameEntity obj) => obj.GetValueUnsafe<IValue<int>>(MaxAttacksPerTurn);
+
+		public static ref IValue<int> RefMaxAttacksPerTurn(this IGameEntity obj) => ref obj.GetValueUnsafe<IValue<int>>(MaxAttacksPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetMaxAttacksPerTurn(this IGameEntity obj, out IValue<int> value) => obj.TryGetValueUnsafe(MaxAttacksPerTurn, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddMaxAttacksPerTurn(this IGameEntity obj, IValue<int> value) => obj.AddValue(MaxAttacksPerTurn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasMaxAttacksPerTurn(this IGameEntity obj) => obj.HasValue(MaxAttacksPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelMaxAttacksPerTurn(this IGameEntity obj) => obj.DelValue(MaxAttacksPerTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetMaxAttacksPerTurn(this IGameEntity obj, IValue<int> value) => obj.SetValue(MaxAttacksPerTurn, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<int> GetCurrentAttacksCount(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(CurrentAttacksCount);
+
+		public static ref IReactiveVariable<int> RefCurrentAttacksCount(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(CurrentAttacksCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetCurrentAttacksCount(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(CurrentAttacksCount, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddCurrentAttacksCount(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(CurrentAttacksCount, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasCurrentAttacksCount(this IGameEntity obj) => obj.HasValue(CurrentAttacksCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelCurrentAttacksCount(this IGameEntity obj) => obj.DelValue(CurrentAttacksCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetCurrentAttacksCount(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(CurrentAttacksCount, value);
     }
 }

@@ -7,23 +7,20 @@ namespace SampleGame
     {
         public void OnUpdate(IGameContext context, in float deltaTime)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) == false)
             {
-                var selectedEntity = context.GetSelectedCharacter().Value;
-                if (selectedEntity == null)
-                {
-                    return;
-                }
+                return;
+            }
+            
+            var selectedEntity = context.GetSelectedCharacter().Value;
                 
-                if (RaycastUseCase.RaycastTarget(context,Input.mousePosition, out IGameEntity target))
-                {
-                    if (target.HasCellTag())
-                    {
-                        var moveCommand = new MoveCommand(selectedEntity,target.GetX().Value, target.GetY().Value);
-                        moveCommand.Execute(context);
-                        context.GetAnimationQueue().Execute();
-                    }
-                }
+            if (selectedEntity != null &&
+                RaycastUseCase.RaycastTarget(context, Input.mousePosition, out IGameEntity target) &&
+                target.HasCellTag())
+            {
+                var moveCommand =
+                    new CharacterMoveCommand(selectedEntity, target.GetX().Value, target.GetY().Value);
+                moveCommand.Execute(context);
             }
         }
     }
