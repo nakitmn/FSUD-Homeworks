@@ -18,3 +18,7 @@ events:
 - Damaged(IGameEntity target, int damage)
 - Attack(IGameEntity target, IGameEntity source)
 - Moved(IGameEntity target, GameBoardPosition position)
+- PushedOut(IGameEntity target, GameBoardPosition startPosition, Vector2Int pushDirection)
+- PushedInTarget(IGameEntity pushedEntity, IGameEntity targetEntity)
+- Pushed(IGameEntity target, GameBoardPosition startPosition, Vector2Int pushDirection)
+- Died(IGameEntity target)

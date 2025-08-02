@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SampleGame
+﻿namespace SampleGame
 {
     public struct AttackCommand : ICommand
     {
@@ -16,19 +14,25 @@ namespace SampleGame
         public bool Execute(IGameContext gameContext)
         {
             gameContext.GetEventBus().InvokeAttack(_target, _source);
-            var dealDamageCommand = new DealDamageCommand(_target, _source.GetDamage());
-            if (dealDamageCommand.Execute(gameContext))
+            
+            if (HealthUseCase.DealDamage(_target, _source.GetDamage()) == false)
             {
-                var gameBoard = gameContext.GetGameBoard();
-                gameBoard.TryGetPosition(_source, out var sourcePosition);
-                gameBoard.TryGetPosition(_target, out var targetPosition);
-                var pushDirection = (targetPosition - sourcePosition).ToVector2Int();
-                var pushCommand = new PushCommand(_target, pushDirection);
-                pushCommand.Execute(gameContext);
+                return false;
+            }
+
+            if (HealthUseCase.Exists(_target) == false)
+            {
+                gameContext.GetEventBus().InvokeDied(_target);
                 return true;
             }
 
-            return false;
+            var gameBoard = gameContext.GetGameBoard();
+            gameBoard.TryGetPosition(_source, out var sourcePosition);
+            gameBoard.TryGetPosition(_target, out var targetPosition);
+            var pushDirection = (targetPosition - sourcePosition).ToVector2Int();
+            var pushCommand = new PushCommand(_target, pushDirection);
+            pushCommand.Execute(gameContext);
+            return true;
         }
     }
 }

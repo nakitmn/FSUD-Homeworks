@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SampleGame
+﻿namespace SampleGame
 {
     public struct DealDamageCommand : ICommand
     {
@@ -15,7 +13,7 @@ namespace SampleGame
 
         public bool Execute(IGameContext gameContext)
         {
-            if (DealDamage())
+            if (HealthUseCase.DealDamage(_target,_damage))
             {
                 gameContext.GetEventBus().InvokeDamaged(_target, _damage);
                 //gameContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(_target.GetTransform()));
@@ -23,18 +21,6 @@ namespace SampleGame
             }
 
             return false;
-        }
-
-        private bool DealDamage()
-        {
-            if (HealthUseCase.Exists(_target) == false)
-            {
-                return false;
-            }
-
-            var health = _target.GetHealth();
-            _target.SetHealth(Mathf.Max(0, health - _damage));
-            return true;
         }
     }
 }
