@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3736099196701877730}
-  - component: {fileID: 2466268858443728016}
-  - component: {fileID: 851419776455167999}
-  - component: {fileID: 6648243994039046316}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -33,66 +30,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7696596633853015833}
-  - {fileID: 2065928992562026275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2466268858443728016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418919058207694930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a2191119be454e880fc16a2f457462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  installOnAwake: 1
-  installInEditMode: 0
-  disposeValues: 1
-  overrideName: 0
-  entityName: 
-  installers:
-  - {fileID: 851419776455167999}
-  children: []
-  _onlySelectedGizmos: 0
-  _onlyEditModeGizmos: 0
-  _tagCapacity: 0
-  _valueCapacity: 0
-  _behaviourCapacity: 0
---- !u!114 &851419776455167999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418919058207694930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7fbd8f5523422ca0cb6d8b9b935dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 10
-  _movesPerTurn: 1
-  _attacksPerTurn: 1
-  _damage: 1
-  _moveRange: 1
-  _attackRange: 1
---- !u!114 &6648243994039046316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418919058207694930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603a745f80e14d1d8cd57cf70a50187f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entities:
-  - {fileID: 2466268858443728016}
 --- !u!1 &4101291377231343653
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,72 +150,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &9207279421482389276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2065928992562026275}
-  - component: {fileID: 6757174467727796971}
-  - component: {fileID: 6597991936791067883}
-  m_Layer: 0
-  m_Name: <Collider>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2065928992562026275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9207279421482389276}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3736099196701877730}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6757174467727796971
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9207279421482389276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &6597991936791067883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9207279421482389276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa4a64a628b4c0c92b1d2ac20322885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _source: {fileID: 2466268858443728016}

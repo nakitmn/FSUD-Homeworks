@@ -1,0 +1,17 @@
+header: EventBusAPI
+entityType: IEventBus
+aggressiveInlining: true
+
+namespace: SampleGame
+className: EventAPI
+directory: Assets/Game/Scripts/Core/EventBus/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Events
+- System
+- Atomic.Entities
+
+events:
+- StartTurn()
+- EndTurn()

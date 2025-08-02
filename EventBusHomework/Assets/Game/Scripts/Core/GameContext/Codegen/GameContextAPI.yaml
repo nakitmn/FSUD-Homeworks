@@ -1,0 +1,26 @@
+header: EntityAPI
+entityType: IGameContext
+aggressiveInlining: true
+unsafeAccess: true
+
+namespace: SampleGame
+className: GameContextAPI
+directory: Assets/Game/Scripts/Core/GameContext/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Entities
+- Atomic.Events
+- Atomic.Elements
+- System.Collections.Generic
+
+tags:
+
+values:
+- EventBus: IEventBus
+- EntityWorld: IEntityWorld
+- GameBoard: GameBoard
+- SelectedCharacter: IReactiveVariable<IGameEntity>
+- CurrentState: IReactiveVariable<GameState>
+- Turn: IReactiveVariable<int>
+- Waves: List<SpawnWave>

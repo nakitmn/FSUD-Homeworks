@@ -1,0 +1,35 @@
+header: EntityAPI
+entityType: IGameEntity
+aggressiveInlining: true
+unsafeAccess: true
+
+namespace: SampleGame
+className: GameEntityAPI
+directory: Assets/Game/Scripts/Core/GameEntity/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Entities
+- Atomic.Elements
+- DG.Tweening
+
+tags:
+- Character
+- Enemy
+- Cell
+- Pushable
+
+values:
+- Health: int
+- Damage: int
+- AttackRange: IValue<int>
+- MoveRange: IValue<int>
+  
+#Turn
+- MaxMovesPerTurn: IValue<int>
+- CurrentMovesCount: IReactiveVariable<int>
+- MaxAttacksPerTurn: IValue<int>
+- CurrentAttacksCount: IReactiveVariable<int>
+  
+#Enemy
+- Target: IReactiveVariable<IGameEntity>

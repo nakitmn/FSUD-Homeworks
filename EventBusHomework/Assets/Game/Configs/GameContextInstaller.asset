@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132e61c08959432b866419ee271847c1, type: 3}
+  m_Name: GameContextInstaller
+  m_EditorClassIdentifier: 
+  _gameBoardSize: {x: 6, y: 6}
+  _characterInstallers:
+  - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
+    position:
+      x: 0
+      y: 0
+  - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
+    position:
+      x: 1
+      y: 1
+  - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
+    position:
+      x: 3
+      y: 3
+  _waves:
+  - turn: 1
+    prefab: {fileID: 11400000, guid: 16c798ece4626f34a88d623c0712e78e, type: 2}
+    points:
+    - x: 1
+      y: 0
+    - x: 0
+      y: 1
+  - turn: 3
+    prefab: {fileID: 11400000, guid: 16c798ece4626f34a88d623c0712e78e, type: 2}
+    points:
+    - x: 3
+      y: 3
+  - turn: 5
+    prefab: {fileID: 11400000, guid: 16c798ece4626f34a88d623c0712e78e, type: 2}
+    points:
+    - x: 0
+      y: 0
+    - x: 1
+      y: 1
+    - x: 2
+      y: 2
+    - x: 3
+      y: 3
