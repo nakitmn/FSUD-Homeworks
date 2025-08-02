@@ -17,6 +17,7 @@ namespace SampleGame
         {
             if (DealDamage())
             {
+                gameContext.GetEventBus().InvokeDamaged(_target, _damage);
                 //gameContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(_target.GetTransform()));
                 return true;
             }

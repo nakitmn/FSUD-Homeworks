@@ -16,6 +16,7 @@ namespace SampleGame
 		///Events
 		public const int StartTurn = 1138966150;
 		public const int EndTurn = 1950703458;
+		public const int Damaged = 326473335;
 
 
 		///Event Extensions
@@ -49,5 +50,20 @@ namespace SampleGame
 		public static void InvokeEndTurn(this IEventBus bus) => bus.Invoke(EndTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsSubscribedEndTurn(this IEventBus bus) => bus.IsSubscribed(EndTurn);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DisposeDamaged(this IEventBus bus) => bus.Dispose(Damaged);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Subscription<IGameEntity, int> SubscribeDamaged(this IEventBus bus, Action<IGameEntity, int> action) => bus.Subscribe(Damaged, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void UnsubscribeDamaged(this IEventBus bus, Action<IGameEntity, int> action) => bus.Unsubscribe(Damaged, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void InvokeDamaged(this IEventBus bus, IGameEntity target, int damage) => bus.Invoke(Damaged, target, damage);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsSubscribedDamaged(this IEventBus bus) => bus.IsSubscribed(Damaged);
     }
 }

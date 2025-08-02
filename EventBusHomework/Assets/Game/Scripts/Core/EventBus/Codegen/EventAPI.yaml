@@ -15,3 +15,4 @@ imports:
 events:
 - StartTurn()
 - EndTurn()
+- Damaged(IGameEntity target, int damage)
