@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] private GameContextInstaller _gameContextInstaller;
         [SerializeField] private SceneEntityWorld _entityWorld;
+        [SerializeField] private EntityWorldView _view;
         
         private GameContext _gameContext;
 
@@ -19,6 +20,8 @@ namespace Game
             _gameContextInstaller.Install(_gameContext);
 
             _entityWorld.Add(_gameContext);
+            
+            _view.Show(_entityWorld);
         }
     }
 }

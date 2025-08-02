@@ -40,18 +40,7 @@ namespace SampleGame
             return gameBoard.Move(entity, clampedTargetPosition);
         }
 
-        /*public static Vector3 GetWorldPosition(in IGameContext gameContext, in IGameEntity entity)
-        {
-            var gameBoard = gameContext.GetGameBoard();
-            gameBoard.TryGetPosition(entity, out var entityPosition);
-            return GetWorldPosition(gameContext, entityPosition);
-        }
-        
-        public static Vector3 GetWorldPosition(in IGameContext gameContext, in GameBoardPosition position)
-        {
-            var gameBoardView = gameContext.GetGameBoardView();
-            return gameBoardView.ToWorldPosition(position.x, position.y);
-        }*/
+
         
         public static GameBoardPosition GetBoardPosition(in IGameContext gameContext, in IGameEntity entity)
         {

@@ -9,6 +9,8 @@ namespace SampleGame
     
     public sealed class GameEntity : Entity, IGameEntity
     {
-        
+        public GameEntity(string name) : base(name)
+        {
+        }
     }
 }

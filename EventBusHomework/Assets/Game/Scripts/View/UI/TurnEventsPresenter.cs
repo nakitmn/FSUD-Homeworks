@@ -48,27 +48,27 @@ namespace SampleGame
 
         private void OnDied(IGameEntity target)
         {
-            _text.text += $"\n{target.Name} was died!";
+            _text.text += $"\n{target.Name}({target.Id}) was died!";
         }
 
         private void OnPushed(IGameEntity target, GameBoardPosition startPosition, Vector2Int direction)
         {
-            _text.text += $"\n{target.Name} was pushed to {startPosition + direction}!";
+            _text.text += $"\n{target.Name}({target.Id}) was pushed to {startPosition + direction}!";
         }
 
         private void OnPushedInTarget(IGameEntity pushedEntity, IGameEntity target)
         {
-            _text.text += $"\n{pushedEntity.Name} bounds with {target.Name}!";
+            _text.text += $"\n{pushedEntity.Name}({pushedEntity.Id}) bounds with {target.Name}({target.Id})!";
         }
 
         private void OnPushedOut(IGameEntity target, GameBoardPosition startPosition, Vector2Int direction)
         {
-            _text.text += $"\n{target.Name} was pushed out!";
+            _text.text += $"\n{target.Name}({target.Id}) was pushed out!";
         }
 
         private void OnMoved(IGameEntity entity, GameBoardPosition position)
         {
-            _text.text += $"\n{entity.Name} moved to {position}";
+            _text.text += $"\n{entity.Name}({entity.Id}) moved to {position}";
         }
 
         private void OnTurnEnded()
@@ -78,7 +78,7 @@ namespace SampleGame
 
         private void OnAttack(IGameEntity target, IGameEntity source)
         {
-            _text.text += $"\n{target.Name} attacks {source.Name}";
+            _text.text += $"\n{source.Name}({source.Id}) attacks {target.Name}({target.Id})";
         }
 
         private void OnTurnStarted()
@@ -88,7 +88,7 @@ namespace SampleGame
 
         private void OnDamaged(IGameEntity target, int damage)
         {
-            _text.text += $"\n{target.Name} was damaged: {damage}";
+            _text.text += $"\n{target.Name}({target.Id}) was damaged: {damage}";
         }
     }
 }

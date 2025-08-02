@@ -1,0 +1,22 @@
+header: EntityAPI
+entityType: IViewContext
+aggressiveInlining: true
+unsafeAccess: true
+
+namespace: Game.View
+className: ViewContextAPI
+directory: Assets/Game/Scripts/View/ViewContext/Codegen
+ 
+imports:
+- UnityEngine
+- Atomic.Entities
+- SampleGame
+
+tags:
+
+
+values:
+- Camera: Camera
+- AnimationQueue: AnimationQueue
+- WorldView: EntityWorldView
+- GameBoardPresenter: GameBoardPresenter
