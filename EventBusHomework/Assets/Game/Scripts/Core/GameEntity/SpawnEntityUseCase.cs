@@ -8,6 +8,7 @@ namespace SampleGame
         {
             var gameEntity = new GameEntity();
             installer.Install(gameEntity);
+            context.GetEntityWorld().Add(gameEntity);
             return gameEntity;
         }
     }

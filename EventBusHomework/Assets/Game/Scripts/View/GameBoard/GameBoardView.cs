@@ -4,7 +4,7 @@ namespace SampleGame
 {
     public sealed class GameBoardView : MonoBehaviour
     {
-        [SerializeField] private GameObject _cellPrefab;
+        [SerializeField] private GameBoardCellView _cellPrefab;
         [SerializeField] private Transform _container;
         [SerializeField] private float _cellOffset;
         [SerializeField] private Material[] _cellMaterials;
@@ -24,12 +24,13 @@ namespace SampleGame
             for (var y = 0; y < gameBoard.Height; y++)
             {
                 var spawnPosition = ToWorldPosition(x, y);
-                var cellObject = Instantiate(_cellPrefab, spawnPosition, Quaternion.identity, _container);
+                var view = Instantiate(_cellPrefab, spawnPosition, Quaternion.identity, _container);
                 var index = gameBoard.Width * x + y;
-                cellObject.name = $"Cell[{index}]";
+                view.gameObject.name = $"Cell[{index}]";
                 var materialOffset = (int) Mathf.Repeat(x, 2);
                 var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
                 var material = _cellMaterials[materialIndex];
+                view.SetMaterial(material);
             }
         }
 
