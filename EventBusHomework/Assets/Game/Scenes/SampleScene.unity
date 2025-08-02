@@ -1282,6 +1282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201200287}
   - component: {fileID: 1201200288}
+  - component: {fileID: 1201200289}
   m_Layer: 0
   m_Name: GameBoard
   m_TagString: Untagged
@@ -1322,6 +1323,20 @@ MonoBehaviour:
   _cellMaterials:
   - {fileID: 2100000, guid: 833efafb3797a95468bf443f69ee381b, type: 2}
   - {fileID: 2100000, guid: 61faa84ea4221d943b50d1156b28336b, type: 2}
+--- !u!114 &1201200289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201200286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4a92a636b64a6b856a4c36e941823a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _presenter: {fileID: 1201200288}
+  _highlightMaterial: {fileID: 2100000, guid: 1b2683d0feb82b24eba55188bd23a4d5, type: 2}
 --- !u!1 &1414107598
 GameObject:
   m_ObjectHideFlags: 0
