@@ -22,6 +22,8 @@ namespace SampleGame
             _eventBus.SubscribeStartTurn(OnTurnStarted);
             _eventBus.SubscribeEndTurn(OnTurnEnded);
             _eventBus.SubscribeDamaged(OnDamaged);
+            _eventBus.SubscribeAttack(OnAttack);
+            _eventBus.SubscribeMoved(OnMoved);
         }
 
         private void OnDisable()
@@ -29,11 +31,23 @@ namespace SampleGame
             _eventBus.UnsubscribeStartTurn(OnTurnStarted);
             _eventBus.UnsubscribeEndTurn(OnTurnEnded);
             _eventBus.UnsubscribeDamaged(OnDamaged);
+            _eventBus.UnsubscribeAttack(OnAttack);
+            _eventBus.UnsubscribeMoved(OnMoved);
+        }
+
+        private void OnMoved(IGameEntity entity, GameBoardPosition position)
+        {
+            _text.text += $"\n{entity.Name} moved to {position}";
         }
 
         private void OnTurnEnded()
         {
             _text.text += $"\nTurn Ended!";
+        }
+
+        private void OnAttack(IGameEntity target, IGameEntity source)
+        {
+            _text.text += $"\n{target.Name} attacks {source.Name}";
         }
 
         private void OnTurnStarted()

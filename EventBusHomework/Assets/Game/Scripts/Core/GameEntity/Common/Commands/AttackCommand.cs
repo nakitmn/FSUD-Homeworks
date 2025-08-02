@@ -15,6 +15,7 @@ namespace SampleGame
 
         public bool Execute(IGameContext gameContext)
         {
+            gameContext.GetEventBus().InvokeAttack(_target, _source);
             var dealDamageCommand = new DealDamageCommand(_target, _source.GetDamage());
             if (dealDamageCommand.Execute(gameContext))
             {

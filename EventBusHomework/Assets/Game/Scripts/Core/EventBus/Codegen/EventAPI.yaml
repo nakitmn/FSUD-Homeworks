@@ -16,3 +16,5 @@ events:
 - StartTurn()
 - EndTurn()
 - Damaged(IGameEntity target, int damage)
+- Attack(IGameEntity target, IGameEntity source)
+- Moved(IGameEntity target, GameBoardPosition position)
