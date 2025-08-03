@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Events;
@@ -9,8 +10,15 @@ namespace SampleGame
     [CreateAssetMenu(menuName = "Game/GameContextInstaller")]
     public sealed class GameContextInstaller : ScriptableEntityInstaller<IGameContext>
     {
+        [Serializable]
+        public class CharacterInstaller
+        {
+            public ScriptableEntityInstaller character;
+            public GameBoardPosition position;
+        }
+        
         [SerializeField] private Vector2Int _gameBoardSize;
-        [SerializeField] private CharacterSetController.CharacterInstaller[] _characterInstallers;
+        [SerializeField] private CharacterInstaller[] _characterInstallers;
         [SerializeField] private SpawnWave[] _waves;
         
         protected override void Install(IGameContext entity)
@@ -22,9 +30,18 @@ namespace SampleGame
             entity.AddWaves(new List<SpawnWave>(_waves));
             entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));
             
-            entity.AddBehaviour(new CharacterSetController(_characterInstallers));
             entity.AddBehaviour<StartTurnHandler>();
             entity.AddBehaviour<EndTurnHandler>();
+
+            entity.WhenEnable(() =>
+            {
+                foreach (var installer in _characterInstallers)
+                {
+                    SpawnEntityUseCase.Spawn(entity, installer.character, installer.position);
+                }
+                
+                entity.GetEventBus().InvokeStartTurn();
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Atomic.Entities;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,22 +7,27 @@ namespace SampleGame
 {
     public struct SpawnAnimationCommand : IAnimationCommand
     {
-        private readonly Transform _target;
+        private readonly EntityWorldView _worldView;
+        private readonly IGameEntity _entity;
         private readonly Vector3 _position;
 
-        public SpawnAnimationCommand(Transform target, Vector3 position)
+        public SpawnAnimationCommand(EntityWorldView worldView, IGameEntity entity, Vector3 position)
         {
-            _target = target;
+            _worldView = worldView;
+            _entity = entity;
             _position = position;
         }
 
         public async UniTask Execute()
         {
-            _target.DOKill();
-            _target.position = _position;
-            await _target.DOScale(Vector3.one, 0.5f)
+            _worldView.SpawnView(_entity);
+            var view = _worldView.GetView(_entity);
+            var transform = view.transform;
+            transform.position = _position;
+            
+            await transform.DOScale(Vector3.one, 0.5f)
                 .ChangeStartValue(Vector3.zero)
-                .SetLink(_target.gameObject)
+                .SetLink(transform.gameObject)
                 .AsyncWaitForCompletion();
         }
     }

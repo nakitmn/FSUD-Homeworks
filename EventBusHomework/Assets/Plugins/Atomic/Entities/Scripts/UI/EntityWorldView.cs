@@ -61,7 +61,7 @@ namespace Atomic.Entities
 
         protected virtual string GetEntityName(IEntity entity) => entity.Name;
 
-        private void SpawnView(IEntity entity)
+        public void SpawnView(IEntity entity)
         {
             string name = this.GetEntityName(entity);
             EntityView view = _viewPool.Rent(name);
@@ -72,7 +72,7 @@ namespace Atomic.Entities
             this.OnViewAdded?.Invoke(entity, view);
         }
 
-        private void UnspawnView(IEntity entity)
+        public void UnspawnView(IEntity entity)
         {
             if (!_activeViews.Remove(entity, out EntityView view))
                 return;

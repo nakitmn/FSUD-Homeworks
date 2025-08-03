@@ -20,8 +20,6 @@ namespace Game
             _gameContextInstaller.Install(_gameContext);
 
             _entityWorld.Add(_gameContext);
-            
-            _view.Show(_entityWorld);
         }
     }
 }

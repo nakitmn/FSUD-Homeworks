@@ -26,11 +26,13 @@ namespace SampleGame
 
         private void OnSpawned(IGameEntity entity, GameBoardPosition position)
         {
-            var view = _viewContext.GetWorldView().GetView(entity);
-            new SpawnAnimationCommand(
-                view.transform,
+            var spawnAnimationCommand = new SpawnAnimationCommand(
+                _viewContext.GetWorldView(),
+                entity,
                 GameBoardViewUseCase.GetWorldPosition(_viewContext, position)
-            ).Execute();
+            );
+
+            _viewContext.GetAnimationQueue().Enqueue(spawnAnimationCommand);
         }
     }
 }
