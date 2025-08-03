@@ -22,8 +22,6 @@
             if (moveCommand.Execute(gameContext))
             {
                 _source.GetCurrentMovesCount().Value++;
-                // TODO: start visual
-                // gameContext.GetAnimationQueue().Execute();
                 return true;
             }
             

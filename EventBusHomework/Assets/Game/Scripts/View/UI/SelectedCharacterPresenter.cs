@@ -1,4 +1,5 @@
 ﻿using Atomic.Elements;
+using Game.View;
 using TMPro;
 using UnityEngine;
 
@@ -13,8 +14,8 @@ namespace SampleGame
 
         private void Awake()
         {
-            var gameContext = GameContext.Instance;
-            _selectedCharacter = gameContext.GetSelectedCharacter();
+            var context = ViewContext.Instance;
+            _selectedCharacter = context.GetSelectedCharacter();
         }
 
         private void OnEnable()

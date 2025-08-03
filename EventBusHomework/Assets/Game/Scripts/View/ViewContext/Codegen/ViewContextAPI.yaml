@@ -10,6 +10,7 @@ directory: Assets/Game/Scripts/View/ViewContext/Codegen
 imports:
 - UnityEngine
 - Atomic.Entities
+- Atomic.Elements
 - SampleGame
 
 tags:
@@ -20,3 +21,4 @@ values:
 - AnimationQueue: AnimationQueue
 - WorldView: EntityWorldView
 - GameBoardPresenter: GameBoardPresenter
+- SelectedCharacter: IReactiveVariable<IGameEntity>

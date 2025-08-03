@@ -1,35 +1,34 @@
 ﻿using Atomic.Entities;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CharacterMoveController : IInit, IUpdate<IGameContext>
+    public sealed class CharacterMoveController : IInit, IUpdate<IViewContext>
     {
-        private Camera _camera;
+        private GameContext _gameContext;
 
         public void Init(in IEntity entity)
         {
-            _camera = Camera.main;
+            _gameContext = GameContext.Instance;
         }
-        
-        public void OnUpdate(IGameContext context, in float deltaTime)
+
+        public void OnUpdate(IViewContext context, in float deltaTime)
         {
             if (InputUseCase.IsMove(context) == false)
             {
                 return;
             }
-            
+
             var selectedEntity = context.GetSelectedCharacter().Value;
-                
+
             if (selectedEntity != null &&
-                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out IGameEntity target) &&
-                target.HasCellTag())
+                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out GameBoardCellView cellView))
             {
-                //TODO: Move Command 
+                new CharacterMoveCommand(selectedEntity, context.GetGameBoardPresenter().GetBoardPosition(cellView))
+                    .Execute(_gameContext);
                 
-                /*var moveCommand =
-                    new CharacterMoveCommand(selectedEntity, target.GetBoardPosition().Value);
-                moveCommand.Execute(context);*/
+                context.GetAnimationQueue().Execute();
             }
         }
     }

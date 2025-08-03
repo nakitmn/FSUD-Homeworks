@@ -20,7 +20,6 @@ values:
 - EventBus: IEventBus
 - EntityWorld: IEntityWorld
 - GameBoard: GameBoard
-- SelectedCharacter: IReactiveVariable<IGameEntity>
 - CurrentState: IReactiveVariable<GameState>
 - Turn: IReactiveVariable<int>
 - Waves: List<SpawnWave>

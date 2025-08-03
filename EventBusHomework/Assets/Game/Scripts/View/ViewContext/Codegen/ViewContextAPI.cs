@@ -6,6 +6,7 @@ using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using Atomic.Entities;
+using Atomic.Elements;
 using SampleGame;
 
 namespace Game.View
@@ -19,6 +20,7 @@ namespace Game.View
 		public const int AnimationQueue = -1133279405; // AnimationQueue
 		public const int WorldView = -301363708; // EntityWorldView
 		public const int GameBoardPresenter = 2061873695; // GameBoardPresenter
+		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 
 
 		///Value Extensions
@@ -102,5 +104,25 @@ namespace Game.View
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetGameBoardPresenter(this IViewContext obj, GameBoardPresenter value) => obj.SetValue(GameBoardPresenter, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<IGameEntity> GetSelectedCharacter(this IViewContext obj) => obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
+
+		public static ref IReactiveVariable<IGameEntity> RefSelectedCharacter(this IViewContext obj) => ref obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSelectedCharacter(this IViewContext obj, out IReactiveVariable<IGameEntity> value) => obj.TryGetValueUnsafe(SelectedCharacter, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddSelectedCharacter(this IViewContext obj, IReactiveVariable<IGameEntity> value) => obj.AddValue(SelectedCharacter, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSelectedCharacter(this IViewContext obj) => obj.HasValue(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSelectedCharacter(this IViewContext obj) => obj.DelValue(SelectedCharacter);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSelectedCharacter(this IViewContext obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(SelectedCharacter, value);
     }
 }

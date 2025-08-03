@@ -1,25 +1,51 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
+using Atomic.Events;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CharacterSelectController : IInit, IUpdate<IGameContext>
+    public sealed class CharacterSelectController : IInit<IViewContext>, IEnable, IDisable, IUpdate<IViewContext>
     {
-        private Camera _camera;
+        private IReactiveVariable<IGameEntity> _selectedCharacter;
+        private IEventBus _eventBus;
 
-        public void Init(in IEntity entity)
+        public void Init(IViewContext context)
         {
-            _camera = Camera.main;
+            var gameContext = GameContext.Instance;
+            _eventBus = gameContext.GetEventBus();
+            _selectedCharacter = context.GetSelectedCharacter();
         }
 
-        public void OnUpdate(IGameContext context, in float deltaTime)
+        public void Enable(in IEntity entity)
+        {
+            _eventBus.SubscribeStartPlayerTurn(ClearSelection);
+            _eventBus.SubscribeEndPlayerTurn(ClearSelection);
+        }
+
+        public void Disable(in IEntity entity)
+        {
+            _eventBus.UnsubscribeStartPlayerTurn(ClearSelection);
+            _eventBus.UnsubscribeEndPlayerTurn(ClearSelection);
+        }
+
+        public void OnUpdate(IViewContext context, in float deltaTime)
         {
             if (InputUseCase.IsSelect(context) &&
-                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out IGameEntity target) &&
-                target.HasCharacterTag())
+                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
             {
-                context.GetSelectedCharacter().Value = target;
+                var gameEntity = (IGameEntity) target.Entity;
+                if (gameEntity.HasCharacterTag())
+                {
+                    _selectedCharacter.Value = gameEntity;
+                }
             }
+        }
+
+        private void ClearSelection()
+        {
+            _selectedCharacter.Value = null;
         }
     }
 }

@@ -20,7 +20,6 @@ namespace SampleGame
 		public const int EventBus = -103062940; // IEventBus
 		public const int EntityWorld = 1757640864; // IEntityWorld
 		public const int GameBoard = -1386833193; // GameBoard
-		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int CurrentState = -386580614; // IReactiveVariable<GameState>
 		public const int Turn = -2146256263; // IReactiveVariable<int>
 		public const int Waves = 1316085542; // List<SpawnWave>
@@ -87,26 +86,6 @@ namespace SampleGame
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetGameBoard(this IGameContext obj, GameBoard value) => obj.SetValue(GameBoard, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IReactiveVariable<IGameEntity> GetSelectedCharacter(this IGameContext obj) => obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
-
-		public static ref IReactiveVariable<IGameEntity> RefSelectedCharacter(this IGameContext obj) => ref obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetSelectedCharacter(this IGameContext obj, out IReactiveVariable<IGameEntity> value) => obj.TryGetValueUnsafe(SelectedCharacter, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddSelectedCharacter(this IGameContext obj, IReactiveVariable<IGameEntity> value) => obj.AddValue(SelectedCharacter, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasSelectedCharacter(this IGameContext obj) => obj.HasValue(SelectedCharacter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelSelectedCharacter(this IGameContext obj) => obj.DelValue(SelectedCharacter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetSelectedCharacter(this IGameContext obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(SelectedCharacter, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<GameState> GetCurrentState(this IGameContext obj) => obj.GetValueUnsafe<IReactiveVariable<GameState>>(CurrentState);

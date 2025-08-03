@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using SampleGame;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Game.View
             entity.AddAnimationQueue(new AnimationQueue());
             entity.AddWorldView(_entityWorldView);
             entity.AddGameBoardPresenter(_gameBoardPresenter);
+            entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             
             entity.AddBehaviour<TurnsObserver>();
             entity.AddBehaviour<DealDamageObserver>();
@@ -24,6 +26,10 @@ namespace Game.View
             entity.AddBehaviour<PushObserver>();
             entity.AddBehaviour<DieObserver>();
             entity.AddBehaviour<SpawnObserver>();
+            
+            entity.AddBehaviour<CharacterAttackController>();
+            entity.AddBehaviour<CharacterMoveController>();
+            entity.AddBehaviour<CharacterSelectController>();
         }
     }
 }

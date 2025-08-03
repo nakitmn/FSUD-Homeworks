@@ -1,18 +1,19 @@
 ﻿using Atomic.Entities;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CharacterAttackController : IInit,IUpdate<IGameContext>
+    public sealed class CharacterAttackController : IInit<IViewContext>,IUpdate<IViewContext>
     {
-        private Camera _camera;
+        private GameContext _gameContext;
 
-        public void Init(in IEntity entity)
+        public void Init(IViewContext context)
         {
-            _camera = Camera.main;
+            _gameContext = GameContext.Instance;
         }
 
-        public void OnUpdate(IGameContext context, in float deltaTime)
+        public void OnUpdate(IViewContext context, in float deltaTime)
         {
             if (InputUseCase.IsAttack(context) == false)
             {
@@ -22,26 +23,13 @@ namespace SampleGame
             var selectedEntity = context.GetSelectedCharacter().Value;
 
             if (selectedEntity != null &&
-                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out IGameEntity target))
+                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
             {
-                //TODO: Attack Command 
-                
-                if (target.HasCellTag())
-                {
-                    /*var attackCommand =
-                        new CharacterAttackCommand(selectedEntity, target.GetBoardPosition().Value);
-                    attackCommand.Execute(context);*/
-                }
+                new CharacterAttackCommand(selectedEntity,  
+                    GameBoardUseCase.GetBoardPosition(_gameContext, (IGameEntity) target.Entity))
+                    .Execute(_gameContext);
 
-                if (target.HasCharacterTag())
-                {
-                    /*var gameBoard = context.GetGameBoard();
-                    if (gameBoard.TryGetPosition(target, out var position))
-                    {
-                        var attackCommand = new CharacterAttackCommand(selectedEntity, position);
-                        attackCommand.Execute(context);
-                    }*/
-                }
+                context.GetAnimationQueue().Execute();
             }
         }
     }

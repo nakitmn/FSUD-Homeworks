@@ -64,6 +64,20 @@ namespace SampleGame
             return transform.position + offset;
         }
 
+        public GameBoardPosition GetBoardPosition(GameBoardCellView view)
+        {
+            for (var x = 0; x < _views.GetLength(0); x++)
+            for (var y = 0; y < _views.GetLength(1); y++)
+            {
+                if (_views[x, y] == view)
+                {
+                    return new GameBoardPosition(x, y);
+                }
+            }
+
+            return GameBoardPosition.Invalid;
+        }
+
         public void ClearMaterials()
         {
             for (var x = 0; x < _views.GetLength(0); x++)

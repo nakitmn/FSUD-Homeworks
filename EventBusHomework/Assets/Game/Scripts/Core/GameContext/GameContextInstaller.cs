@@ -25,7 +25,6 @@ namespace SampleGame
         {
             entity.AddEventBus(new EventBus());
             entity.AddGameBoard(new GameBoard(_gameBoardSize.x,_gameBoardSize.y));
-            entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddTurn(new ReactiveInt(1));
             entity.AddWaves(new List<SpawnWave>(_waves));
             entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));

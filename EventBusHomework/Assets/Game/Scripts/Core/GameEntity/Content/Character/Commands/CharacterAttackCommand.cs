@@ -44,10 +44,6 @@
             var attackCommand = new AttackCommand(_source, target);
             attackCommand.Execute(gameContext);
             _source.GetCurrentAttacksCount().Value++;
-            
-            // TODO: start visual
-            //gameContext.GetAnimationQueue().Execute();
-            
             return true;
         }
     }

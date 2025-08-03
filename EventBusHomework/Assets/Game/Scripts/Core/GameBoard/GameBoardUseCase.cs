@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Atomic.Entities;
+using UnityEngine;
 
 namespace SampleGame
 {
@@ -54,7 +55,7 @@ namespace SampleGame
             distanceX = Mathf.Abs(originPosition.x) - Mathf.Abs(targetPosition.x);
             distanceY = Mathf.Abs(originPosition.y) - Mathf.Abs(targetPosition.y);
         }
-        
+
         public static bool IsPositionInRange(in GameBoardPosition originPosition, in GameBoardPosition targetPosition, in int range)
         {
             GetDistance(originPosition, targetPosition, out var distanceX, out var distanceY);
