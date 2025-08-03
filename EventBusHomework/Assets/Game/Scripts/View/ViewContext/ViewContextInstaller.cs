@@ -17,7 +17,7 @@ namespace Game.View
             entity.AddWorldView(_entityWorldView);
             entity.AddGameBoardPresenter(_gameBoardPresenter);
             
-            entity.AddBehaviour<TurnAnimationsPresenter>();
+            entity.AddBehaviour<TurnsObserver>();
             entity.AddBehaviour<DealDamageObserver>();
             entity.AddBehaviour<MoveObserver>();
             entity.AddBehaviour<PushObserver>();

@@ -28,7 +28,7 @@ namespace SampleGame
 
         private void OnClicked()
         {
-            _eventBus.InvokeEndTurn();
+            _eventBus.InvokeEndPlayerTurn();
         }
     }
 }

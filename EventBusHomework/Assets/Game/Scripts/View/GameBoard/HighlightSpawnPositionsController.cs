@@ -25,12 +25,12 @@ namespace SampleGame
 
         private void OnEnable()
         {
-            _eventBus.SubscribeStartTurn(OnTurnStarted);
+            _eventBus.SubscribeStartPlayerTurn(OnTurnStarted);
         }
 
         private void OnDisable()
         {
-            _eventBus.UnsubscribeStartTurn(OnTurnStarted);
+            _eventBus.UnsubscribeStartPlayerTurn(OnTurnStarted);
         }
 
         private void OnTurnStarted()

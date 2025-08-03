@@ -14,8 +14,10 @@ namespace SampleGame
 	public static class EventAPI
 	{
 		///Events
-		public const int StartTurn = 1138966150;
-		public const int EndTurn = 1950703458;
+		public const int StartPlayerTurn = -225180363;
+		public const int EndPlayerTurn = -1841842288;
+		public const int StartEnemyTurn = 1939014648;
+		public const int EndEnemyTurn = 1622111079;
 		public const int Spawned = -959104060;
 		public const int Damaged = 326473335;
 		public const int Attack = 1080829965;
@@ -30,33 +32,63 @@ namespace SampleGame
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposeStartTurn(this IEventBus bus) => bus.Dispose(StartTurn);
+		public static bool DisposeStartPlayerTurn(this IEventBus bus) => bus.Dispose(StartPlayerTurn);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription SubscribeStartTurn(this IEventBus bus, Action action) => bus.Subscribe(StartTurn, action);
+		public static Subscription SubscribeStartPlayerTurn(this IEventBus bus, Action action) => bus.Subscribe(StartPlayerTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribeStartTurn(this IEventBus bus, Action action) => bus.Unsubscribe(StartTurn, action);
+		public static void UnsubscribeStartPlayerTurn(this IEventBus bus, Action action) => bus.Unsubscribe(StartPlayerTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokeStartTurn(this IEventBus bus) => bus.Invoke(StartTurn);
+		public static void InvokeStartPlayerTurn(this IEventBus bus) => bus.Invoke(StartPlayerTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedStartTurn(this IEventBus bus) => bus.IsSubscribed(StartTurn);
+		public static bool IsSubscribedStartPlayerTurn(this IEventBus bus) => bus.IsSubscribed(StartPlayerTurn);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposeEndTurn(this IEventBus bus) => bus.Dispose(EndTurn);
+		public static bool DisposeEndPlayerTurn(this IEventBus bus) => bus.Dispose(EndPlayerTurn);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription SubscribeEndTurn(this IEventBus bus, Action action) => bus.Subscribe(EndTurn, action);
+		public static Subscription SubscribeEndPlayerTurn(this IEventBus bus, Action action) => bus.Subscribe(EndPlayerTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribeEndTurn(this IEventBus bus, Action action) => bus.Unsubscribe(EndTurn, action);
+		public static void UnsubscribeEndPlayerTurn(this IEventBus bus, Action action) => bus.Unsubscribe(EndPlayerTurn, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokeEndTurn(this IEventBus bus) => bus.Invoke(EndTurn);
+		public static void InvokeEndPlayerTurn(this IEventBus bus) => bus.Invoke(EndPlayerTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedEndTurn(this IEventBus bus) => bus.IsSubscribed(EndTurn);
+		public static bool IsSubscribedEndPlayerTurn(this IEventBus bus) => bus.IsSubscribed(EndPlayerTurn);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DisposeStartEnemyTurn(this IEventBus bus) => bus.Dispose(StartEnemyTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Subscription SubscribeStartEnemyTurn(this IEventBus bus, Action action) => bus.Subscribe(StartEnemyTurn, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void UnsubscribeStartEnemyTurn(this IEventBus bus, Action action) => bus.Unsubscribe(StartEnemyTurn, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void InvokeStartEnemyTurn(this IEventBus bus) => bus.Invoke(StartEnemyTurn);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsSubscribedStartEnemyTurn(this IEventBus bus) => bus.IsSubscribed(StartEnemyTurn);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DisposeEndEnemyTurn(this IEventBus bus) => bus.Dispose(EndEnemyTurn);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Subscription SubscribeEndEnemyTurn(this IEventBus bus, Action action) => bus.Subscribe(EndEnemyTurn, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void UnsubscribeEndEnemyTurn(this IEventBus bus, Action action) => bus.Unsubscribe(EndEnemyTurn, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void InvokeEndEnemyTurn(this IEventBus bus) => bus.Invoke(EndEnemyTurn);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsSubscribedEndEnemyTurn(this IEventBus bus) => bus.IsSubscribed(EndEnemyTurn);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

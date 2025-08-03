@@ -7,23 +7,27 @@ namespace SampleGame
     {
         public bool IsActive { get; private set; }
         
-        private readonly List<IAnimationCommand> _animationCommands = new();
+        private readonly Queue<IAnimationCommand> _animationCommands = new();
 
         public void Enqueue(IAnimationCommand command)
         {
-            _animationCommands.Add(command);
+            _animationCommands.Enqueue(command);
         }
 
         public async UniTask Execute()
         {
-            IsActive = true;
-            
-            foreach (var command in _animationCommands)
+            if (IsActive)
             {
-                await command.Execute();
+                return;
             }
             
-            _animationCommands.Clear();
+            IsActive = true;
+            
+            while (_animationCommands.Count > 0)
+            {
+                await _animationCommands.Dequeue().Execute();
+            }
+            
             IsActive = false;
         }
     }

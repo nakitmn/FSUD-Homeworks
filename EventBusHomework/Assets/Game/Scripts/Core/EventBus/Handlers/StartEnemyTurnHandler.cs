@@ -3,7 +3,7 @@ using Atomic.Events;
 
 namespace SampleGame
 {
-    public sealed class EndTurnHandler : IInit<IGameContext>, IEnable, IDisable
+    public sealed class StartEnemyTurnHandler : IInit<IGameContext>, IEnable, IDisable
     {
         private IEventBus _eventBus;
         private IGameContext _context;
@@ -16,28 +16,20 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _eventBus.SubscribeEndTurn(OnTurnEnd);
+            _eventBus.SubscribeStartEnemyTurn(OnTurnStart);
         }
 
         public void Disable(in IEntity entity)
         {
-            _eventBus.UnsubscribeEndTurn(OnTurnEnd);
+            _eventBus.UnsubscribeStartEnemyTurn(OnTurnStart);
         }
 
-        private void OnTurnEnd()
+        private void OnTurnStart()
         {
-            _context.GetSelectedCharacter().Value = null;
+            CharacterTurnUseCase.ResetEnemies(_context);
             EnemyUseCase.HandleEnemiesTurn(_context);
             EnemyUseCase.TrySpawnEnemies(_context);
-            _context.GetTurn().Value++;
-
-            GameStateUseCase.UpdateCurrentState(_context);
-            if (_context.GetCurrentState().Value != GameState.Running)
-            {
-                return;
-            }
-
-            _eventBus.InvokeStartTurn();
+            _eventBus.InvokeEndEnemyTurn();
         }
     }
 }

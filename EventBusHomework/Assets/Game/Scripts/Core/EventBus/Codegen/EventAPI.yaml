@@ -13,8 +13,10 @@ imports:
 - Atomic.Entities
 
 events:
-- StartTurn()
-- EndTurn()
+- StartPlayerTurn()
+- EndPlayerTurn()
+- StartEnemyTurn()
+- EndEnemyTurn()
 - Spawned(IGameEntity entity, GameBoardPosition position)
 - Damaged(IGameEntity target, int damage)
 - Attack(IGameEntity target, IGameEntity source)

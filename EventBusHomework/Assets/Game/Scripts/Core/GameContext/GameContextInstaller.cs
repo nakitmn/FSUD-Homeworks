@@ -30,8 +30,10 @@ namespace SampleGame
             entity.AddWaves(new List<SpawnWave>(_waves));
             entity.AddCurrentState(new ReactiveVariable<GameState>(GameState.Running));
             
-            entity.AddBehaviour<StartTurnHandler>();
-            entity.AddBehaviour<EndTurnHandler>();
+            entity.AddBehaviour<StartPlayerTurnHandler>();
+            entity.AddBehaviour<EndPlayerTurnHandler>();
+            entity.AddBehaviour<StartEnemyTurnHandler>();
+            entity.AddBehaviour<EndEnemyTurnHandler>();
 
             entity.WhenEnable(() =>
             {
@@ -40,7 +42,7 @@ namespace SampleGame
                     SpawnEntityUseCase.Spawn(entity, installer.character, installer.position);
                 }
                 
-                entity.GetEventBus().InvokeStartTurn();
+                entity.GetEventBus().InvokeStartPlayerTurn();
             });
         }
     }

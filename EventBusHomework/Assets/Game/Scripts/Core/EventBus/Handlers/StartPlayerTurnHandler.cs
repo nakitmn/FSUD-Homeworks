@@ -3,7 +3,7 @@ using Atomic.Events;
 
 namespace SampleGame
 {
-    public sealed class StartTurnHandler : IInit<IGameContext>, IEnable, IDisable
+    public sealed class StartPlayerTurnHandler : IInit<IGameContext>, IEnable, IDisable
     {
         private IEventBus _eventBus;
         private IGameContext _context;
@@ -16,12 +16,12 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _eventBus.SubscribeStartTurn(OnTurnStart);
+            _eventBus.SubscribeStartPlayerTurn(OnTurnStart);
         }
 
         public void Disable(in IEntity entity)
         {
-            _eventBus.UnsubscribeStartTurn(OnTurnStart);
+            _eventBus.UnsubscribeStartPlayerTurn(OnTurnStart);
         }
 
         private void OnTurnStart()

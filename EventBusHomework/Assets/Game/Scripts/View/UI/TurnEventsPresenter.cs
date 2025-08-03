@@ -18,8 +18,10 @@ namespace SampleGame
 
         private void OnEnable()
         {
-            _eventBus.SubscribeStartTurn(OnTurnStarted);
-            _eventBus.SubscribeEndTurn(OnTurnEnded);
+            _eventBus.SubscribeStartPlayerTurn(OnPlayerTurnStarted);
+            _eventBus.SubscribeEndPlayerTurn(OnPlayerTurnEnded);
+            _eventBus.SubscribeStartEnemyTurn(OnEnemyTurnStarted);
+            _eventBus.SubscribeEndEnemyTurn(OnEnemyTurnEnded);
             _eventBus.SubscribeDamaged(OnDamaged);
             _eventBus.SubscribeAttack(OnAttack);
             _eventBus.SubscribeMoved(OnMoved);
@@ -34,8 +36,10 @@ namespace SampleGame
 
         private void OnDisable()
         {
-            _eventBus.UnsubscribeStartTurn(OnTurnStarted);
-            _eventBus.UnsubscribeEndTurn(OnTurnEnded);
+            _eventBus.UnsubscribeStartPlayerTurn(OnPlayerTurnStarted);
+            _eventBus.UnsubscribeEndPlayerTurn(OnPlayerTurnEnded);
+            _eventBus.UnsubscribeStartEnemyTurn(OnEnemyTurnStarted);
+            _eventBus.UnsubscribeEndEnemyTurn(OnEnemyTurnEnded);
             _eventBus.UnsubscribeDamaged(OnDamaged);
             _eventBus.UnsubscribeAttack(OnAttack);
             _eventBus.UnsubscribeMoved(OnMoved);
@@ -43,7 +47,7 @@ namespace SampleGame
             _eventBus.UnsubscribePushedOut(OnPushedOut);
             _eventBus.UnsubscribePushedInTarget(OnPushedInTarget);
             _eventBus.UnsubscribePushed(OnPushed);
-            
+
             _eventBus.UnsubscribeDied(OnDied);
             _eventBus.UnsubscribeSpawned(OnSpawned);
         }
@@ -78,19 +82,29 @@ namespace SampleGame
             _text.text += $"\n{entity.Name}({entity.Id}) moved to {position}";
         }
 
-        private void OnTurnEnded()
-        {
-            _text.text += $"\nTurn Ended!";
-        }
-
         private void OnAttack(IGameEntity target, IGameEntity source)
         {
             _text.text += $"\n{source.Name}({source.Id}) attacks {target.Name}({target.Id})";
         }
 
-        private void OnTurnStarted()
+        private void OnPlayerTurnStarted()
         {
-            _text.text += $"\nTurn Started!";
+            _text.text += $"\nPlayer turn started!";
+        }
+
+        private void OnPlayerTurnEnded()
+        {
+            _text.text += $"\nPlayer turn ended!";
+        }
+
+        private void OnEnemyTurnEnded()
+        {
+            _text.text += $"\nEnemy turn ended!";
+        }
+
+        private void OnEnemyTurnStarted()
+        {
+            _text.text += $"\nEnemy turn started!";
         }
 
         private void OnDamaged(IGameEntity target, int damage)
