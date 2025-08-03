@@ -22,3 +22,4 @@ values:
 - WorldView: EntityWorldView
 - GameBoardPresenter: GameBoardPresenter
 - SelectedCharacter: IReactiveVariable<IGameEntity>
+- InputCondition: IValue<bool> 

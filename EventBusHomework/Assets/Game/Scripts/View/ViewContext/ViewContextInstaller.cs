@@ -18,6 +18,7 @@ namespace Game.View
             entity.AddWorldView(_entityWorldView);
             entity.AddGameBoardPresenter(_gameBoardPresenter);
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
+            entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));
             
             entity.AddBehaviour<TurnsObserver>();
             entity.AddBehaviour<DealDamageObserver>();

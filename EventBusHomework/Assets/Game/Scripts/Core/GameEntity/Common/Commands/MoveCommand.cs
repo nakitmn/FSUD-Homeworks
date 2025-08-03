@@ -18,10 +18,7 @@
                 return false;
             }
 
-            gameContext.GetEventBus().InvokeMoved(_source, _position);
-            /*var worldPosition = GameBoardUseCase.GetWorldPosition(gameContext, _source);
-            var moveAnimationCommand = new MoveAnimationCommand(_source.GetTransform(), worldPosition);
-            gameContext.GetAnimationQueue().Enqueue(moveAnimationCommand);*/
+            gameContext.GetEventBus().InvokeMoved(_source, GameBoardUseCase.GetBoardPosition(gameContext, _source));
             return true;
         }
     }

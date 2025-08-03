@@ -21,6 +21,7 @@ namespace Game.View
 		public const int WorldView = -301363708; // EntityWorldView
 		public const int GameBoardPresenter = 2061873695; // GameBoardPresenter
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
+		public const int InputCondition = 1207100273; // IValue<bool>
 
 
 		///Value Extensions
@@ -124,5 +125,25 @@ namespace Game.View
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetSelectedCharacter(this IViewContext obj, IReactiveVariable<IGameEntity> value) => obj.SetValue(SelectedCharacter, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<bool> GetInputCondition(this IViewContext obj) => obj.GetValueUnsafe<IValue<bool>>(InputCondition);
+
+		public static ref IValue<bool> RefInputCondition(this IViewContext obj) => ref obj.GetValueUnsafe<IValue<bool>>(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetInputCondition(this IViewContext obj, out IValue<bool> value) => obj.TryGetValueUnsafe(InputCondition, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddInputCondition(this IViewContext obj, IValue<bool> value) => obj.AddValue(InputCondition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasInputCondition(this IViewContext obj) => obj.HasValue(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelInputCondition(this IViewContext obj) => obj.DelValue(InputCondition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetInputCondition(this IViewContext obj, IValue<bool> value) => obj.SetValue(InputCondition, value);
     }
 }
