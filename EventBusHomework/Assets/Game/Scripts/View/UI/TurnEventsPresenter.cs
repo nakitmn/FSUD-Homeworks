@@ -29,6 +29,7 @@ namespace SampleGame
             _eventBus.SubscribePushed(OnPushed);
 
             _eventBus.SubscribeDied(OnDied);
+            _eventBus.SubscribeSpawned(OnSpawned);
         }
 
         private void OnDisable()
@@ -44,6 +45,12 @@ namespace SampleGame
             _eventBus.UnsubscribePushed(OnPushed);
             
             _eventBus.UnsubscribeDied(OnDied);
+            _eventBus.UnsubscribeSpawned(OnSpawned);
+        }
+
+        private void OnSpawned(IGameEntity entity, GameBoardPosition position)
+        {
+            _text.text += $"\n{entity.Name}({entity.Id}) was spawned at {position}";
         }
 
         private void OnDied(IGameEntity target)

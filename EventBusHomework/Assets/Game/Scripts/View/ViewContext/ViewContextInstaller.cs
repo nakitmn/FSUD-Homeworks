@@ -22,6 +22,7 @@ namespace Game.View
             entity.AddBehaviour<MoveObserver>();
             entity.AddBehaviour<PushObserver>();
             entity.AddBehaviour<DieObserver>();
+            entity.AddBehaviour<SpawnObserver>();
         }
     }
 }

@@ -53,16 +53,11 @@ namespace SampleGame
                 {
                     var entity = gameBoard[position];
                     var dealDamageCommand = new DealDamageCommand(entity, 1);
-                    if (dealDamageCommand.Execute(context))
-                    {
-                        // TODO: start visual
-                        //context.GetAnimationQueue().Execute();
-                    }
+                    dealDamageCommand.Execute(context);
                 }
                 else
                 {
-                    var enemyEntity = SpawnEntityUseCase.Spawn(context, wave.prefab);
-                    GameBoardUseCase.Set(context, enemyEntity, position);
+                    SpawnEntityUseCase.Spawn(context, wave.prefab, position);
                 }
             }
 

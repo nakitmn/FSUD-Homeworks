@@ -15,6 +15,7 @@ imports:
 events:
 - StartTurn()
 - EndTurn()
+- Spawned(IGameEntity entity, GameBoardPosition position)
 - Damaged(IGameEntity target, int damage)
 - Attack(IGameEntity target, IGameEntity source)
 - Moved(IGameEntity target, GameBoardPosition position)

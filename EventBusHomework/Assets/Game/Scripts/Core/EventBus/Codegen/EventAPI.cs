@@ -16,6 +16,7 @@ namespace SampleGame
 		///Events
 		public const int StartTurn = 1138966150;
 		public const int EndTurn = 1950703458;
+		public const int Spawned = -959104060;
 		public const int Damaged = 326473335;
 		public const int Attack = 1080829965;
 		public const int Moved = 120431345;
@@ -56,6 +57,21 @@ namespace SampleGame
 		public static void InvokeEndTurn(this IEventBus bus) => bus.Invoke(EndTurn);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsSubscribedEndTurn(this IEventBus bus) => bus.IsSubscribed(EndTurn);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DisposeSpawned(this IEventBus bus) => bus.Dispose(Spawned);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Subscription<IGameEntity, GameBoardPosition> SubscribeSpawned(this IEventBus bus, Action<IGameEntity, GameBoardPosition> action) => bus.Subscribe(Spawned, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void UnsubscribeSpawned(this IEventBus bus, Action<IGameEntity, GameBoardPosition> action) => bus.Unsubscribe(Spawned, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void InvokeSpawned(this IEventBus bus, IGameEntity entity, GameBoardPosition position) => bus.Invoke(Spawned, entity, position);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsSubscribedSpawned(this IEventBus bus) => bus.IsSubscribed(Spawned);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

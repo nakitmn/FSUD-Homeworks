@@ -23,8 +23,7 @@ namespace SampleGame
         {
             foreach (var installer in _installers)
             {
-                var entity = SpawnEntityUseCase.Spawn(context, installer.character);
-                GameBoardUseCase.Set(context, entity, installer.position);
+                SpawnEntityUseCase.Spawn(context, installer.character, installer.position);
             }
         }
     }
