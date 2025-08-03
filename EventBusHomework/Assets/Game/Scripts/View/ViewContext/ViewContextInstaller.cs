@@ -10,6 +10,7 @@ namespace Game.View
         [SerializeField] private Camera _camera;
         [SerializeField] private EntityWorldView _entityWorldView;
         [SerializeField] private GameBoardPresenter _gameBoardPresenter;
+        [SerializeField] private SelectedMarkerView _markerView;
         
         protected override void Install(IViewContext entity)
         {
@@ -31,6 +32,8 @@ namespace Game.View
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<CharacterMoveController>();
             entity.AddBehaviour<CharacterSelectController>();
+            
+            entity.AddBehaviour(new SelectedCharacterBehavior(_markerView));
         }
     }
 }
