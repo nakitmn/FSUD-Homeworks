@@ -18,9 +18,10 @@ namespace Game.View
             entity.AddGameBoardPresenter(_gameBoardPresenter);
             
             entity.AddBehaviour<TurnAnimationsPresenter>();
-            entity.AddBehaviour<DealDamagePresenter>();
-            entity.AddBehaviour<MovePresenter>();
-            entity.AddBehaviour<PushPresenter>();
+            entity.AddBehaviour<DealDamageObserver>();
+            entity.AddBehaviour<MoveObserver>();
+            entity.AddBehaviour<PushObserver>();
+            entity.AddBehaviour<DieObserver>();
         }
     }
 }

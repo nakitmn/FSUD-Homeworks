@@ -3,7 +3,7 @@ using Game.View;
 
 namespace SampleGame
 {
-    public sealed class MovePresenter : IInit, IEnable, IDisable
+    public sealed class MoveObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;

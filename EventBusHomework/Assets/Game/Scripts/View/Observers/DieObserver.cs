@@ -3,7 +3,7 @@ using Game.View;
 
 namespace SampleGame
 {
-    public sealed class DealDamagePresenter : IInit, IEnable, IDisable
+    public sealed class DieObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
@@ -16,18 +16,18 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _gameContext.GetEventBus().SubscribeDamaged(OnDamaged);
+            _gameContext.GetEventBus().SubscribeDied(OnDied);
         }
 
         public void Disable(in IEntity entity)
         {
-            _gameContext.GetEventBus().UnsubscribeDamaged(OnDamaged);
+            _gameContext.GetEventBus().UnsubscribeDied(OnDied);
         }
 
-        private void OnDamaged(IGameEntity target, int damage)
+        private void OnDied(IGameEntity target)
         {
             var view = _viewContext.GetWorldView().GetView(target);
-            _viewContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(view.transform));
+            _viewContext.GetAnimationQueue().Enqueue(new DieAnimationCommand(view.transform));
         }
     }
 }
