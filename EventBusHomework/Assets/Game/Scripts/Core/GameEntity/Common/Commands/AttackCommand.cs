@@ -1,5 +1,22 @@
 ﻿namespace SampleGame
 {
+    public readonly struct AttackEventData
+    {
+        public readonly IGameEntity Source;
+        public readonly IGameEntity Target;
+        public readonly GameBoardPosition SourcePosition;
+        public readonly GameBoardPosition TargetPosition;
+
+        public AttackEventData(IGameEntity source, IGameEntity target, GameBoardPosition sourcePosition,
+            GameBoardPosition targetPosition)
+        {
+            Source = source;
+            Target = target;
+            SourcePosition = sourcePosition;
+            TargetPosition = targetPosition;
+        }
+    }
+
     public struct AttackCommand : ICommand
     {
         private readonly IGameEntity _source;
@@ -13,25 +30,62 @@
 
         public bool Execute(IGameContext gameContext)
         {
-            gameContext.GetEventBus().InvokeAttack(_target, _source);
-            
+            var gameBoard = gameContext.GetGameBoard();
+            gameBoard.TryGetPosition(_source, out var sourcePosition);
+            gameBoard.TryGetPosition(_target, out var targetPosition);
+
+            gameContext.GetEventBus().InvokeAttackStarted(
+                new AttackEventData(
+                    _source,
+                    _target,
+                    sourcePosition,
+                    targetPosition
+                )
+            );
+
             if (HealthUseCase.DealDamage(_target, _source.GetDamage()) == false)
             {
+                gameContext.GetEventBus().InvokeAttackEnded(
+                    new AttackEventData(
+                        _source,
+                        _target,
+                        sourcePosition,
+                        targetPosition
+                    )
+                );
+                
                 return false;
             }
 
             if (HealthUseCase.Exists(_target) == false)
             {
                 gameContext.GetEventBus().InvokeDied(_target);
+                
+                gameContext.GetEventBus().InvokeAttackEnded(
+                    new AttackEventData(
+                        _source,
+                        _target,
+                        sourcePosition,
+                        targetPosition
+                    )
+                );
+                
                 return true;
             }
-
-            var gameBoard = gameContext.GetGameBoard();
-            gameBoard.TryGetPosition(_source, out var sourcePosition);
-            gameBoard.TryGetPosition(_target, out var targetPosition);
+            
             var pushDirection = (targetPosition - sourcePosition).ToVector2Int();
             var pushCommand = new PushCommand(_target, pushDirection);
             pushCommand.Execute(gameContext);
+            
+            gameContext.GetEventBus().InvokeAttackEnded(
+                new AttackEventData(
+                    _source,
+                    _target,
+                    sourcePosition,
+                    targetPosition
+                )
+            );
+            
             return true;
         }
     }

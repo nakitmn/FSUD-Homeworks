@@ -21,6 +21,7 @@ namespace SampleGame
         {
             _target.DOKill();
             await _target.DOMove(_to, 0.25f)
+                .SetEase(Ease.OutCirc)
                 .ChangeStartValue(_from)
                 .AsyncWaitForCompletion();
         }

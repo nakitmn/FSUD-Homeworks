@@ -20,6 +20,7 @@ namespace Game.View
             entity.AddBehaviour<TurnsObserver>();
             entity.AddBehaviour<DealDamageObserver>();
             entity.AddBehaviour<MoveObserver>();
+            entity.AddBehaviour<AttackObserver>();
             entity.AddBehaviour<PushObserver>();
             entity.AddBehaviour<DieObserver>();
             entity.AddBehaviour<SpawnObserver>();

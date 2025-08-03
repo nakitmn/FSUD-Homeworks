@@ -41,18 +41,27 @@ namespace SampleGame
             _viewContext.GetAnimationQueue().Enqueue(command);
         }
 
-        private void OnPushedInTarget(IGameEntity arg1, IGameEntity arg2)
+        private void OnPushedInTarget(PushInTargetEventData pushData)
         {
+            var command = new PushInTargetAnimationCommand(
+                _viewContext.GetWorldView().GetView(pushData.Source).transform,
+                _viewContext.GetWorldView().GetView(pushData.Target).transform,
+                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.SourcePosition),
+                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.TargetPosition)
+            );
+            _viewContext.GetAnimationQueue().Enqueue(command);
         }
 
         private void OnPushedOut(IGameEntity target, GameBoardPosition sourcePosition, Vector2Int direction)
         {
             var view = _viewContext.GetWorldView().GetView(target);
             var newPosition = sourcePosition + direction;
+            var toPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, newPosition);
+            toPosition.y -= 2f;
             var command = new DieFromBoundsAnimationCommand(
                 view.transform,
                 GameBoardViewUseCase.GetWorldPosition(_viewContext, sourcePosition),
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, newPosition)
+                toPosition
             );
             _viewContext.GetAnimationQueue().Enqueue(command);
         }

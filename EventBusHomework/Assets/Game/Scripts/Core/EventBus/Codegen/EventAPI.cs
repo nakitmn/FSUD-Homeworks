@@ -20,7 +20,8 @@ namespace SampleGame
 		public const int EndEnemyTurn = 1622111079;
 		public const int Spawned = -959104060;
 		public const int Damaged = 326473335;
-		public const int Attack = 1080829965;
+		public const int AttackStarted = 919964588;
+		public const int AttackEnded = -1126054038;
 		public const int Moved = 120431345;
 		public const int PushedOut = -759371857;
 		public const int PushedInTarget = -1011670209;
@@ -122,18 +123,33 @@ namespace SampleGame
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DisposeAttack(this IEventBus bus) => bus.Dispose(Attack);
+		public static bool DisposeAttackStarted(this IEventBus bus) => bus.Dispose(AttackStarted);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription<IGameEntity, IGameEntity> SubscribeAttack(this IEventBus bus, Action<IGameEntity, IGameEntity> action) => bus.Subscribe(Attack, action);
+		public static Subscription<AttackEventData> SubscribeAttackStarted(this IEventBus bus, Action<AttackEventData> action) => bus.Subscribe(AttackStarted, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribeAttack(this IEventBus bus, Action<IGameEntity, IGameEntity> action) => bus.Unsubscribe(Attack, action);
+		public static void UnsubscribeAttackStarted(this IEventBus bus, Action<AttackEventData> action) => bus.Unsubscribe(AttackStarted, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokeAttack(this IEventBus bus, IGameEntity target, IGameEntity source) => bus.Invoke(Attack, target, source);
+		public static void InvokeAttackStarted(this IEventBus bus, AttackEventData eventData) => bus.Invoke(AttackStarted, eventData);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsSubscribedAttack(this IEventBus bus) => bus.IsSubscribed(Attack);
+		public static bool IsSubscribedAttackStarted(this IEventBus bus) => bus.IsSubscribed(AttackStarted);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DisposeAttackEnded(this IEventBus bus) => bus.Dispose(AttackEnded);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Subscription<AttackEventData> SubscribeAttackEnded(this IEventBus bus, Action<AttackEventData> action) => bus.Subscribe(AttackEnded, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void UnsubscribeAttackEnded(this IEventBus bus, Action<AttackEventData> action) => bus.Unsubscribe(AttackEnded, action);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void InvokeAttackEnded(this IEventBus bus, AttackEventData eventData) => bus.Invoke(AttackEnded, eventData);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsSubscribedAttackEnded(this IEventBus bus) => bus.IsSubscribed(AttackEnded);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -170,13 +186,13 @@ namespace SampleGame
 		public static bool DisposePushedInTarget(this IEventBus bus) => bus.Dispose(PushedInTarget);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Subscription<IGameEntity, IGameEntity> SubscribePushedInTarget(this IEventBus bus, Action<IGameEntity, IGameEntity> action) => bus.Subscribe(PushedInTarget, action);
+		public static Subscription<PushInTargetEventData> SubscribePushedInTarget(this IEventBus bus, Action<PushInTargetEventData> action) => bus.Subscribe(PushedInTarget, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void UnsubscribePushedInTarget(this IEventBus bus, Action<IGameEntity, IGameEntity> action) => bus.Unsubscribe(PushedInTarget, action);
+		public static void UnsubscribePushedInTarget(this IEventBus bus, Action<PushInTargetEventData> action) => bus.Unsubscribe(PushedInTarget, action);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void InvokePushedInTarget(this IEventBus bus, IGameEntity pushedEntity, IGameEntity targetEntity) => bus.Invoke(PushedInTarget, pushedEntity, targetEntity);
+		public static void InvokePushedInTarget(this IEventBus bus, PushInTargetEventData pushData) => bus.Invoke(PushedInTarget, pushData);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsSubscribedPushedInTarget(this IEventBus bus) => bus.IsSubscribed(PushedInTarget);
 

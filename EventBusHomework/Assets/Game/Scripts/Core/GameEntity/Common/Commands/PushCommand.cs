@@ -2,6 +2,25 @@
 
 namespace SampleGame
 {
+    public readonly struct PushInTargetEventData
+    {
+        public readonly IGameEntity Source;
+        public readonly IGameEntity Target;
+        public readonly GameBoardPosition SourcePosition;
+        public readonly GameBoardPosition TargetPosition;
+        public readonly Vector2Int PushPosition;
+
+        public PushInTargetEventData(IGameEntity source, IGameEntity target, GameBoardPosition sourcePosition,
+            GameBoardPosition targetPosition, Vector2Int pushPosition)
+        {
+            Source = source;
+            Target = target;
+            SourcePosition = sourcePosition;
+            TargetPosition = targetPosition;
+            PushPosition = pushPosition;
+        }
+    }
+
     public struct PushCommand : ICommand
     {
         private readonly IGameEntity _target;
@@ -32,27 +51,27 @@ namespace SampleGame
                 gameBoard[position] = null;
                 HealthUseCase.Kill(_target);
                 gameContext.GetEventBus().InvokePushedOut(_target, position, _direction);
-
-                // TODO: Move to animation command
-                /*var animationQueue = gameContext.GetAnimationQueue();
-                var worldPosition = GameBoardUseCase.GetWorldPosition(gameContext, newPosition);
-                worldPosition.y -= 2f;
-                var dieAnimationCommand = new DieFromBoundsAnimationCommand(_target.GetTransform(), worldPosition);
-                animationQueue.Enqueue(dieAnimationCommand);*/
-
                 return false;
             }
 
             if (gameBoard.IsFree(newPosition) == false)
             {
                 var entity = gameBoard[newPosition];
-                gameContext.GetEventBus().InvokePushedInTarget(_target, entity);
+                gameContext.GetEventBus().InvokePushedInTarget(
+                    new PushInTargetEventData(
+                        _target,
+                        entity,
+                        position,
+                        newPosition,
+                        _direction
+                    )
+                );
                 HealthUseCase.DealDamage(entity, 1);
                 if (HealthUseCase.Exists(entity))
                 {
                     return new PushCommand(entity, _direction).Execute(gameContext);
                 }
-                
+
                 gameContext.GetEventBus().InvokeDied(_target);
                 return false;
             }
