@@ -3,7 +3,7 @@ using Game.View;
 
 namespace SampleGame
 {
-    public sealed class DieObserver : IInit, IEnable, IDisable
+    public sealed class EnemyTurnEndObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
@@ -16,18 +16,17 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _gameContext.GetEventBus().SubscribeDied(OnDied);
+            _gameContext.GetEventBus().SubscribeEndEnemyTurn(OnEnemyTurnEnded);
         }
 
         public void Disable(in IEntity entity)
         {
-            _gameContext.GetEventBus().UnsubscribeDied(OnDied);
+            _gameContext.GetEventBus().UnsubscribeEndEnemyTurn(OnEnemyTurnEnded);
         }
 
-        private void OnDied(IGameEntity target)
+        private void OnEnemyTurnEnded()
         {
-            var view = _viewContext.GetWorldView().GetView(target);
-            _viewContext.GetAnimationQueue().Enqueue(new DieAnimationCommand(view.transform));
+            _viewContext.GetAnimationQueue().Execute().Forget();
         }
     }
 }

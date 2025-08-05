@@ -3,7 +3,7 @@ using Game.View;
 
 namespace SampleGame
 {
-    public sealed class TurnsObserver : IInit, IEnable, IDisable
+    public sealed class PlayerTurnStartObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
@@ -16,19 +16,12 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _gameContext.GetEventBus().SubscribeEndEnemyTurn(OnEnemyTurnEnded);
             _gameContext.GetEventBus().SubscribeStartPlayerTurn(OnPlayerTurnStart);
         }
 
         public void Disable(in IEntity entity)
         {
-            _gameContext.GetEventBus().UnsubscribeEndEnemyTurn(OnEnemyTurnEnded);
             _gameContext.GetEventBus().UnsubscribeStartPlayerTurn(OnPlayerTurnStart);
-        }
-
-        private void OnEnemyTurnEnded()
-        {
-            _viewContext.GetAnimationQueue().Execute().Forget();
         }
 
         private void OnPlayerTurnStart()

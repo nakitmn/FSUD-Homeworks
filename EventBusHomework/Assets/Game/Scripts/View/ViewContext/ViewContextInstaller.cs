@@ -30,13 +30,14 @@ namespace Game.View
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));
             
-            entity.AddBehaviour<TurnsObserver>();
-            entity.AddBehaviour<DealDamageObserver>();
-            entity.AddBehaviour<MoveObserver>();
-            entity.AddBehaviour<AttackObserver>();
-            entity.AddBehaviour<PushObserver>();
-            entity.AddBehaviour<DieObserver>();
-            entity.AddBehaviour<SpawnObserver>();
+            entity.AddBehaviour<PlayerTurnStartObserver>();
+            entity.AddBehaviour<EnemyTurnEndObserver>();
+            entity.AddBehaviour<DealDamageEntityObserver>();
+            entity.AddBehaviour<MoveEntityObserver>();
+            entity.AddBehaviour<AttackEntityObserver>();
+            entity.AddBehaviour<PushEntityObserver>();
+            entity.AddBehaviour<DieEntityObserver>();
+            entity.AddBehaviour<SpawnEntityObserver>();
             
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<CharacterMoveController>();

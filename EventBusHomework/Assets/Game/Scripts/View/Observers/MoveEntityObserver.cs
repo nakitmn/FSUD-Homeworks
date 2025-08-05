@@ -3,7 +3,7 @@ using Game.View;
 
 namespace SampleGame
 {
-    public sealed class DealDamageObserver : IInit, IEnable, IDisable
+    public sealed class MoveEntityObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
@@ -16,18 +16,21 @@ namespace SampleGame
 
         public void Enable(in IEntity entity)
         {
-            _gameContext.GetEventBus().SubscribeDamaged(OnDamaged);
+            _gameContext.GetEventBus().SubscribeMoved(OnMoved);
         }
 
         public void Disable(in IEntity entity)
         {
-            _gameContext.GetEventBus().UnsubscribeDamaged(OnDamaged);
+            _gameContext.GetEventBus().UnsubscribeMoved(OnMoved);
         }
 
-        private void OnDamaged(IGameEntity target, int damage)
+        private void OnMoved(IGameEntity target, GameBoardPosition position)
         {
             var view = _viewContext.GetWorldView().GetView(target);
-            _viewContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(view.transform));
+            var command = new MoveAnimationCommand(
+                view.transform, 
+                GameBoardViewUseCase.GetWorldPosition(_viewContext, position));
+            _viewContext.GetAnimationQueue().Enqueue(command);
         }
     }
 }

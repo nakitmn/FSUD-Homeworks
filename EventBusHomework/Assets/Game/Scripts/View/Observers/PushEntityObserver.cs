@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class PushObserver : IInit, IEnable, IDisable
+    public sealed class PushEntityObserver : IInit, IEnable, IDisable
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
