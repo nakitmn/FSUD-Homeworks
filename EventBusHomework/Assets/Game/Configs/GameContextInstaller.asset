@@ -13,19 +13,23 @@ MonoBehaviour:
   m_Name: GameContextInstaller
   m_EditorClassIdentifier: 
   _gameBoardSize: {x: 6, y: 6}
-  _characterInstallers:
+  _characterSpawnConfigs:
   - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
     position:
       x: 0
       y: 0
   - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
     position:
-      x: 1
-      y: 1
+      x: 2
+      y: 2
   - character: {fileID: 11400000, guid: c1d37fc15de4c2549883fbb1f6c1f9a9, type: 2}
     position:
-      x: 3
-      y: 3
+      x: 4
+      y: 4
+  - character: {fileID: 11400000, guid: 16c798ece4626f34a88d623c0712e78e, type: 2}
+    position:
+      x: 5
+      y: 5
   _waves:
   - turn: 1
     prefab: {fileID: 11400000, guid: 16c798ece4626f34a88d623c0712e78e, type: 2}
