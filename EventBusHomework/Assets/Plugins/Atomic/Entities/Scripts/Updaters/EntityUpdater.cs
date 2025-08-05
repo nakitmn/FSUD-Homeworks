@@ -33,6 +33,11 @@ namespace Atomic.Entities
         {
             _entities = new List<IEntity>(entities);
         }
+        
+        public EntityUpdater(params IEntity[] entities)
+        {
+            _entities = new List<IEntity>(entities);
+        }
 
         public void Init()
         {
