@@ -15,7 +15,7 @@ namespace SampleGame
         public static IGameEntity Spawn(IGameContext context, ScriptableEntityInstaller installer, GameBoardPosition position)
         {
             var entity = Spawn(context, installer);
-            GameBoardUseCase.Set(context, entity, position);
+            context.GetGameBoard().Set(entity, position);
             context.GetEventBus().InvokeSpawned(entity, position);
             return entity;
         }

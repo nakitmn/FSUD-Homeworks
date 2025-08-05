@@ -7,10 +7,12 @@ namespace SampleGame
     public sealed class CharacterAttackController : IInit<IViewContext>,IUpdate<IViewContext>
     {
         private GameContext _gameContext;
+        private GameBoard _gameBoard;
 
         public void Init(IViewContext context)
         {
             _gameContext = GameContext.Instance;
+            _gameBoard = _gameContext.GetGameBoard();
         }
 
         public void OnUpdate(IViewContext context, in float deltaTime)
@@ -26,7 +28,7 @@ namespace SampleGame
                 RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
             {
                 new CharacterAttackCommand(selectedEntity,  
-                    GameBoardUseCase.GetBoardPosition(_gameContext, (IGameEntity) target.Entity))
+                        _gameBoard.GetBoardPosition((IGameEntity) target.Entity))
                     .Execute(_gameContext);
 
                 context.GetAnimationQueue().Execute();

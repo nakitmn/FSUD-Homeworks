@@ -13,10 +13,11 @@ namespace SampleGame
         }
 
         public static List<GameBoardPosition> FindPathToTarget(IGameContext gameContext, IGameEntity entity,
-            in IGameEntity target)
+            IGameEntity target)
         {
-            var startPosition = GameBoardUseCase.GetBoardPosition(gameContext, entity);
-            var endPosition = GameBoardUseCase.GetBoardPosition(gameContext, target);
+            var gameBoard = gameContext.GetGameBoard();
+            var startPosition = gameBoard.GetBoardPosition(entity);
+            var endPosition = gameBoard.GetBoardPosition(target);
             return PathfindingUseCase.FindPath(gameContext, startPosition, endPosition);
         }
 
@@ -66,6 +67,7 @@ namespace SampleGame
 
         public static void HandleEnemiesTurn(IGameContext context)
         {
+            var gameBoard = context.GetGameBoard();
             var enemies = CharacterTurnUseCase.GetEnemyCharacters(context);
 
             foreach (IGameEntity enemy in enemies)
@@ -83,7 +85,7 @@ namespace SampleGame
                 }
 
                 var path = FindPathToTarget(context, enemy);
-                var targetPosition = GameBoardUseCase.GetBoardPosition(context, target);
+                var targetPosition = gameBoard.GetBoardPosition(target);
                 var movePosition = path[0];
                 var characterMoveCommand = new CharacterMoveCommand(enemy, movePosition);
                 characterMoveCommand.Execute(context);

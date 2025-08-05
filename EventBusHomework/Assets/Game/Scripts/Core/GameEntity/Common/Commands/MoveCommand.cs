@@ -13,12 +13,13 @@
 
         public bool Execute(IGameContext gameContext)
         {
-            if (GameBoardUseCase.Move(gameContext, _source, _position) == false)
+            var gameBoard = gameContext.GetGameBoard();
+            if (gameBoard.Move(_source, _position) == false)
             {
                 return false;
             }
 
-            gameContext.GetEventBus().InvokeMoved(_source, GameBoardUseCase.GetBoardPosition(gameContext, _source));
+            gameContext.GetEventBus().InvokeMoved(_source, gameBoard.GetBoardPosition(_source));
             return true;
         }
     }

@@ -51,6 +51,19 @@ namespace SampleGame
             };
         }
         
+        public static void GetDistance(GameBoardPosition originPosition, GameBoardPosition targetPosition,
+            out int distanceX, out int distanceY)
+        {
+            distanceX = Mathf.Abs(originPosition.x) - Mathf.Abs(targetPosition.x);
+            distanceY = Mathf.Abs(originPosition.y) - Mathf.Abs(targetPosition.y);
+        }
+        
+        public static bool IsPositionInRange(GameBoardPosition originPosition, GameBoardPosition targetPosition, int range)
+        {
+            GetDistance(originPosition, targetPosition, out var distanceX, out var distanceY);
+            return Mathf.Abs(distanceX) <= range && Mathf.Abs(distanceY) <= range;
+        }
+        
         public static GameBoardPosition FromVector2Int(Vector2Int vector)
         {
             return new(vector.x, vector.y);

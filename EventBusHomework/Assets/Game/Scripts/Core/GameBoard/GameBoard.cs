@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace SampleGame
 {
@@ -27,7 +28,7 @@ namespace SampleGame
             return this[position] == null;
         }
 
-        public bool Move(IGameEntity entity, GameBoardPosition position)
+        public bool Set(IGameEntity entity, GameBoardPosition position)
         {
             if (IsFree(position) == false)
             {
@@ -41,6 +42,25 @@ namespace SampleGame
 
             this[position] = entity;
             return true;
+        }
+        
+        public bool Move(IGameEntity entity, GameBoardPosition targetPosition)
+        {
+            if (TryGetPosition(entity, out var entityPosition) == false)
+            {
+                Debug.Log($"Can't find position for {entity.Name}");
+                return false;
+            }
+
+            var moveRange = entity.GetMoveRange().Value;
+            var direction = GameBoardPosition.GetDirection(entityPosition, targetPosition);
+            var clampedDirection = new Vector2Int()
+            {
+                x = Mathf.Clamp(direction.x, -moveRange, moveRange),
+                y = Mathf.Clamp(direction.y, -moveRange, moveRange)
+            };
+            var clampedTargetPosition = entityPosition + clampedDirection;
+            return Set(entity, clampedTargetPosition);
         }
 
         public bool TryGetPosition(IGameEntity entity, out GameBoardPosition position)
@@ -67,6 +87,12 @@ namespace SampleGame
             
             position = GameBoardPosition.Invalid;
             return false;
+        }
+        
+        public GameBoardPosition GetBoardPosition(IGameEntity entity)
+        {
+            TryGetPosition(entity, out var entityPosition);
+            return entityPosition;
         }
 
         public bool IsInBounds(GameBoardPosition position)

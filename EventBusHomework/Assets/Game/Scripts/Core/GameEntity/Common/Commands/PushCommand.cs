@@ -76,7 +76,7 @@ namespace SampleGame
                 return false;
             }
 
-            if (GameBoardUseCase.Move(gameContext, _target, newPosition))
+            if (gameBoard.Move(_target, newPosition))
             {
                 gameContext.GetEventBus().InvokePushed(_target, position, _direction);
                 return true;

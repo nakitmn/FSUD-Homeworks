@@ -35,7 +35,7 @@
             }
 
             var attackRange = _source.GetAttackRange().Value;
-            if (GameBoardUseCase.IsPositionInRange(entityPosition, _position, attackRange) == false)
+            if (GameBoardPosition.IsPositionInRange(entityPosition, _position, attackRange) == false)
             {
                 return false;
             }
