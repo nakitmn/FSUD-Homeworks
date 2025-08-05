@@ -7,6 +7,7 @@ namespace Game.View
     public sealed class SelectedCharacterBehavior : IEnable<IViewContext>, IDisable
     {
         private readonly SelectedMarkerView _markerView;
+        
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private EntityWorldView _entityWorldView;
 
@@ -31,14 +32,12 @@ namespace Game.View
         {
             if (entity == null)
             {
-                _markerView.SetActive(false);
-                _markerView.SetTarget(null);
+                _markerView.Hide();
                 return;
             }
 
             var view = _entityWorldView.GetView(entity);
-            _markerView.SetActive(true);
-            _markerView.SetTarget(view.transform);
+            _markerView.Show(view.transform);
         }
     }
 }

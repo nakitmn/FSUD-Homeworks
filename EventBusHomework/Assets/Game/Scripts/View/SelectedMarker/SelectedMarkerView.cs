@@ -7,18 +7,25 @@ namespace Game.View
     {
         [SerializeField] private PositionConstraint _positionConstraint;
 
-        public void SetTarget(Transform target)
+        public void Show(Transform target)
+        {
+            gameObject.SetActive(true);
+            SetTarget(target);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            SetTarget(null);
+        }
+
+        private void SetTarget(Transform target)
         {
             _positionConstraint.SetSource(0, new ConstraintSource()
             {
                 sourceTransform = target,
                 weight = 1f
             });
-        }
-
-        public void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
         }
     }
 }
