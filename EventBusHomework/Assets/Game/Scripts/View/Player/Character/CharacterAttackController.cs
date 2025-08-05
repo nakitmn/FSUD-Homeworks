@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CharacterAttackController : IInit<IViewContext>,IUpdate<IViewContext>
+    public sealed class CharacterAttackController : IInit<IViewContext>, IUpdate<IViewContext>
     {
         private GameContext _gameContext;
         private GameBoard _gameBoard;
@@ -27,11 +27,12 @@ namespace SampleGame
             if (selectedEntity != null &&
                 RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
             {
-                new CharacterAttackCommand(selectedEntity,  
-                        _gameBoard.GetBoardPosition((IGameEntity) target.Entity))
-                    .Execute(_gameContext);
-
-                context.GetAnimationQueue().Execute();
+                PlayerCommandsUseCase.ExecuteWithVisual(
+                        _gameContext,
+                        context,
+                        new CharacterAttackCommand(selectedEntity,
+                            _gameBoard.GetBoardPosition((IGameEntity) target.Entity))
+                    );
             }
         }
     }

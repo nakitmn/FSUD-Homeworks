@@ -28,12 +28,12 @@ namespace SampleGame
 
         private void OnEnemyTurnEnded()
         {
-            _viewContext.GetAnimationQueue().Execute();
+            _viewContext.GetAnimationQueue().Execute().Forget();
         }
 
         private void OnPlayerTurnStart()
         {
-            _viewContext.GetAnimationQueue().Execute();
+            _viewContext.GetAnimationQueue().Execute().Forget();
         }
     }
 }

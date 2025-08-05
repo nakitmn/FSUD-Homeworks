@@ -14,7 +14,7 @@ namespace SampleGame
             _animationCommands.Enqueue(command);
         }
 
-        public async UniTask Execute()
+        public async UniTaskVoid Execute()
         {
             if (IsActive)
             {

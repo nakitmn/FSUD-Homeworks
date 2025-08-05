@@ -25,10 +25,10 @@ namespace SampleGame
             if (selectedEntity != null &&
                 RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out GameBoardCellView cellView))
             {
-                new CharacterMoveCommand(selectedEntity, context.GetGameBoardPresenter().GetBoardPosition(cellView))
-                    .Execute(_gameContext);
-                
-                context.GetAnimationQueue().Execute();
+                PlayerCommandsUseCase.ExecuteWithVisual(
+                    _gameContext, 
+                    context,   
+                    new CharacterMoveCommand(selectedEntity, context.GetGameBoardPresenter().GetBoardPosition(cellView)));
             }
         }
     }
