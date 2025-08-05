@@ -1,29 +1,32 @@
 ﻿using Atomic.Elements;
+using Atomic.Entities;
 using Game.View;
 using TMPro;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class SelectedCharacterPresenter : MonoBehaviour
+    public sealed class SelectedCharacterPresenter : IEnable<IViewContext>, IDisable
     {
-        [SerializeField] private TMP_Text _view;
+        private readonly TMP_Text _view;
 
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private IGameEntity _cachedCharacter;
 
-        private void Awake()
+        public SelectedCharacterPresenter(TMP_Text view)
+        {
+            _view = view;
+        }
+
+        public void Enable(IViewContext entity)
         {
             var context = ViewContext.Instance;
             _selectedCharacter = context.GetSelectedCharacter();
-        }
-
-        private void OnEnable()
-        {
+            
             _selectedCharacter.Observe(OnSelectedCharacterChanged);
         }
 
-        private void OnDisable()
+        public void Disable(in IEntity entity)
         {
             _selectedCharacter.Unsubscribe(OnSelectedCharacterChanged);
         }

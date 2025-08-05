@@ -1,23 +1,27 @@
-﻿using Atomic.Events;
+﻿using Atomic.Entities;
+using Atomic.Events;
+using Game.View;
 using TMPro;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class TurnEventsPresenter : MonoBehaviour
+    public sealed class TurnEventsPresenter : IEnable<IViewContext>, IDisable
     {
-        [SerializeField] private TMP_Text _text;
+        private readonly TMP_Text _view;
 
         private IEventBus _eventBus;
 
-        private void Awake()
+        public TurnEventsPresenter(TMP_Text view)
+        {
+            _view = view;
+        }
+
+        public void Enable(IViewContext entity)
         {
             var gameContext = GameContext.Instance;
             _eventBus = gameContext.GetEventBus();
-        }
 
-        private void OnEnable()
-        {
             _eventBus.SubscribeStartPlayerTurn(OnPlayerTurnStarted);
             _eventBus.SubscribeEndPlayerTurn(OnPlayerTurnEnded);
             _eventBus.SubscribeStartEnemyTurn(OnEnemyTurnStarted);
@@ -35,7 +39,7 @@ namespace SampleGame
             _eventBus.SubscribeSpawned(OnSpawned);
         }
 
-        private void OnDisable()
+        public void Disable(in IEntity entity)
         {
             _eventBus.UnsubscribeStartPlayerTurn(OnPlayerTurnStarted);
             _eventBus.UnsubscribeEndPlayerTurn(OnPlayerTurnEnded);
@@ -56,67 +60,70 @@ namespace SampleGame
 
         private void OnSpawned(IGameEntity entity, GameBoardPosition position)
         {
-            _text.text += $"\n{entity.Name}({entity.Id}) was spawned at {position}";
+            _view.text += $"\n{entity.Name}({entity.Id}) was spawned at {position}";
         }
 
         private void OnDied(IGameEntity target)
         {
-            _text.text += $"\n{target.Name}({target.Id}) was died!";
+            _view.text += $"\n{target.Name}({target.Id}) was died!";
         }
 
         private void OnPushed(IGameEntity target, GameBoardPosition startPosition, Vector2Int direction)
         {
-            _text.text += $"\n{target.Name}({target.Id}) was pushed to {startPosition + direction}!";
+            _view.text += $"\n{target.Name}({target.Id}) was pushed to {startPosition + direction}!";
         }
 
         private void OnPushedInTarget(PushInTargetEventData pushData)
         {
-            _text.text += $"\n{pushData.Source.Name}({pushData.Source.Id}) bounds with {pushData.Target.Name}({pushData.Target.Id})!";
+            _view.text +=
+                $"\n{pushData.Source.Name}({pushData.Source.Id}) bounds with {pushData.Target.Name}({pushData.Target.Id})!";
         }
 
         private void OnPushedOut(IGameEntity target, GameBoardPosition startPosition, Vector2Int direction)
         {
-            _text.text += $"\n{target.Name}({target.Id}) was pushed out!";
+            _view.text += $"\n{target.Name}({target.Id}) was pushed out!";
         }
 
         private void OnMoved(IGameEntity entity, GameBoardPosition position)
         {
-            _text.text += $"\n{entity.Name}({entity.Id}) moved to {position}";
+            _view.text += $"\n{entity.Name}({entity.Id}) moved to {position}";
         }
 
         private void OnAttackStarted(AttackEventData attackData)
         {
-            _text.text += $"\n{attackData.Source.Name}({attackData.Source.Id}) start attack {attackData.Target.Name}({attackData.Target.Id})";
+            _view.text +=
+                $"\n{attackData.Source.Name}({attackData.Source.Id}) start attack {attackData.Target.Name}({attackData.Target.Id})";
         }
 
         private void OnAttackEnded(AttackEventData attackData)
         {
-            _text.text += $"\n{attackData.Source.Name}({attackData.Source.Id}) completed attack {attackData.Target.Name}({attackData.Target.Id})";
+            _view.text +=
+                $"\n{attackData.Source.Name}({attackData.Source.Id}) completed attack {attackData.Target.Name}({attackData.Target.Id})";
         }
 
         private void OnPlayerTurnStarted()
         {
-            _text.text += $"\nPlayer turn started!";
+            _view.text += $"\nPlayer turn started!";
         }
 
         private void OnPlayerTurnEnded()
         {
-            _text.text += $"\nPlayer turn ended!";
+            _view.text += $"\nPlayer turn ended!";
         }
 
         private void OnEnemyTurnEnded()
         {
-            _text.text += $"\nEnemy turn ended!";
+            _view.text += $"\nEnemy turn ended!";
         }
 
         private void OnEnemyTurnStarted()
         {
-            _text.text += $"\nEnemy turn started!";
+            _view.text += $"\nEnemy turn started!";
         }
 
         private void OnDamaged(IGameEntity target, int damage)
         {
-            _text.text += $"\n{target.Name}({target.Id}) was damaged: {damage}";
+            _view.text += $"\n{target.Name}({target.Id}) was damaged: {damage}";
         }
     }
 }

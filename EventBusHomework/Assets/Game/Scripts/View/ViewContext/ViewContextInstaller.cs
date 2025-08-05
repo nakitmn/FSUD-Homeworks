@@ -1,7 +1,9 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using SampleGame;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.View
 {
@@ -11,6 +13,13 @@ namespace Game.View
         [SerializeField] private EntityWorldView _entityWorldView;
         [SerializeField] private GameBoardPresenter _gameBoardPresenter;
         [SerializeField] private SelectedMarkerView _markerView;
+        
+        [Header("UI")]
+        [SerializeField] private TMP_Text _turnEventsText;
+        [SerializeField] private TMP_Text _selectedCharacterInfoText;
+        [SerializeField] private TMP_Text _gameStateText;
+        [SerializeField] private TMP_Text _currentTurnText;
+        [SerializeField] private Button _endTurnButton;
         
         protected override void Install(IViewContext entity)
         {
@@ -34,6 +43,12 @@ namespace Game.View
             entity.AddBehaviour<CharacterSelectController>();
             
             entity.AddBehaviour(new SelectedCharacterBehavior(_markerView));
+            
+            entity.AddBehaviour(new TurnEventsPresenter(_turnEventsText));
+            entity.AddBehaviour(new SelectedCharacterPresenter(_selectedCharacterInfoText));
+            entity.AddBehaviour(new GameStatePresenter(_gameStateText));
+            entity.AddBehaviour(new CurrentTurnPresenter(_currentTurnText));
+            entity.AddBehaviour(new EndTurnButtonPresenter(_endTurnButton));
         }
     }
 }

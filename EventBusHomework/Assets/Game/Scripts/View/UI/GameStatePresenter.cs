@@ -1,27 +1,30 @@
 ﻿using Atomic.Elements;
+using Atomic.Entities;
+using Game.View;
 using TMPro;
-using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class GameStatePresenter : MonoBehaviour
+    public sealed class GameStatePresenter : IEnable<IViewContext>, IDisable
     {
-        [SerializeField] private TMP_Text _view;
-        
+        private readonly TMP_Text _view;
+
         private IReactiveVariable<GameState> _currentState;
 
-        private void Awake()
+        public GameStatePresenter(TMP_Text view)
+        {
+            _view = view;
+        }
+
+        public void Enable(IViewContext entity)
         {
             var gameContext = GameContext.Instance;
             _currentState = gameContext.GetCurrentState();
-        }
 
-        private void OnEnable()
-        {
             _currentState.Observe(OnStateChanged);
         }
 
-        private void OnDisable()
+        public void Disable(in IEntity entity)
         {
             _currentState.Unsubscribe(OnStateChanged);
         }
