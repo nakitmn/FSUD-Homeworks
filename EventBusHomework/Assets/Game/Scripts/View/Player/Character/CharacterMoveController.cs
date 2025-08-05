@@ -25,7 +25,7 @@ namespace SampleGame
             if (selectedEntity != null &&
                 RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out GameBoardCellView cellView))
             {
-                PlayerCommandsUseCase.ExecuteWithVisual(
+                ViewCommandsUseCase.ExecuteWithVisual(
                     _gameContext, 
                     context,   
                     new CharacterMoveCommand(selectedEntity, context.GetGameBoardPresenter().GetBoardPosition(cellView)));

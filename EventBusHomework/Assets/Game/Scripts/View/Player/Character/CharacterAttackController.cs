@@ -27,7 +27,7 @@ namespace SampleGame
             if (selectedEntity != null &&
                 RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
             {
-                PlayerCommandsUseCase.ExecuteWithVisual(
+                ViewCommandsUseCase.ExecuteWithVisual(
                         _gameContext,
                         context,
                         new CharacterAttackCommand(selectedEntity,

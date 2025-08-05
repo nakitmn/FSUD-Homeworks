@@ -29,23 +29,22 @@ namespace SampleGame
         private void OnAttackStarted(AttackEventData attackData)
         {
             var view = _viewContext.GetWorldView().GetView(attackData.Source);
-            
+
             _viewContext.GetAnimationQueue().Enqueue(
                 new AttackStartAnimationCommand(
-                view.transform,
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition)
+                    view.transform,
+                    GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition)
                 ));
         }
 
         private void OnAttackEnded(AttackEventData attackData)
         {
-            var view = _viewContext.GetWorldView().GetView(attackData.Source);
-            
-            _viewContext.GetAnimationQueue().Enqueue(
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
                 new AttackEndAnimationCommand(
-                    view.transform,
-                    GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.SourcePosition)
-                ));
+                    GameEntityViewUseCase.GetView(_viewContext, attackData.Source).transform,
+                    GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.SourcePosition))
+            );
         }
     }
 }

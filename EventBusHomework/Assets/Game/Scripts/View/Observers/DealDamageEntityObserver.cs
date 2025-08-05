@@ -7,7 +7,7 @@ namespace SampleGame
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
-        
+
         public void Init(in IEntity entity)
         {
             _gameContext = GameContext.Instance;
@@ -26,8 +26,10 @@ namespace SampleGame
 
         private void OnDamaged(IGameEntity target, int damage)
         {
-            var view = _viewContext.GetWorldView().GetView(target);
-            _viewContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(view.transform));
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new DealDamageAnimationCommand(GameEntityViewUseCase.GetView(_viewContext, target).transform)
+            );
         }
     }
 }

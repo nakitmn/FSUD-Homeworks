@@ -7,7 +7,7 @@ namespace SampleGame
     {
         private GameContext _gameContext;
         private ViewContext _viewContext;
-        
+
         public void Init(in IEntity entity)
         {
             _gameContext = GameContext.Instance;
@@ -26,11 +26,12 @@ namespace SampleGame
 
         private void OnMoved(IGameEntity target, GameBoardPosition position)
         {
-            var view = _viewContext.GetWorldView().GetView(target);
-            var command = new MoveAnimationCommand(
-                view.transform, 
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, position));
-            _viewContext.GetAnimationQueue().Enqueue(command);
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new MoveAnimationCommand(
+                    GameEntityViewUseCase.GetView(_viewContext, target).transform,
+                    GameBoardViewUseCase.GetWorldPosition(_viewContext, position))
+            );
         }
     }
 }

@@ -26,8 +26,10 @@ namespace SampleGame
 
         private void OnDied(IGameEntity target)
         {
-            var view = _viewContext.GetWorldView().GetView(target);
-            _viewContext.GetAnimationQueue().Enqueue(new DieAnimationCommand(view.transform));
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new DieAnimationCommand(GameEntityViewUseCase.GetView(_viewContext,target).transform)
+            );
         }
     }
 }
