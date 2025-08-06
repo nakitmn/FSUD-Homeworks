@@ -4,14 +4,14 @@ using SampleGame;
 
 namespace Game.View
 {
-    public sealed class SelectedCharacterBehavior : IEnable<IViewContext>, IDisable
+    public sealed class SelectedCharacterPresenter : IEnable<IViewContext>, IDisable
     {
         private readonly SelectedMarkerView _markerView;
         
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private EntityWorldView _entityWorldView;
 
-        public SelectedCharacterBehavior(SelectedMarkerView markerView)
+        public SelectedCharacterPresenter(SelectedMarkerView markerView)
         {
             _markerView = markerView;
         }

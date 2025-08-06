@@ -1270,13 +1270,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 330585545}
   _entityWorldView: {fileID: 1153234531}
-  _gameBoardView: {fileID: 1201200290}
   _markerView: {fileID: 1925425625}
-  _turnEventsText: {fileID: 1311222493}
-  _selectedCharacterInfoText: {fileID: 1414107600}
-  _gameStateText: {fileID: 527233480}
-  _currentTurnText: {fileID: 828656032}
-  _endTurnButton: {fileID: 40371182}
+  _gameBoardInstaller:
+    _gameBoardView: {fileID: 1201200290}
+  _uiInstaller:
+    _turnEventsText: {fileID: 1311222493}
+    _selectedCharacterInfoText: {fileID: 1414107600}
+    _gameStateText: {fileID: 527233480}
+    _currentTurnText: {fileID: 828656032}
+    _endTurnButton: {fileID: 40371182}
 --- !u!114 &1153234529
 MonoBehaviour:
   m_ObjectHideFlags: 0
