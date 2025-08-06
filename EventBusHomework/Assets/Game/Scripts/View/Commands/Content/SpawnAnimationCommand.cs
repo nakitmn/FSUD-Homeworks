@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public struct SpawnAnimationCommand : IAnimationCommand
+    public readonly struct SpawnAnimationCommand : IAnimationCommand
     {
         private readonly EntityWorldView _worldView;
         private readonly IGameEntity _entity;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public struct DealDamageAnimationCommand : IAnimationCommand
+    public readonly struct DealDamageAnimationCommand : IAnimationCommand
     {
         private readonly Transform _target;
 

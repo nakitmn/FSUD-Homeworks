@@ -21,7 +21,7 @@ namespace SampleGame
         }
     }
 
-    public struct PushCommand : ICommand
+    public readonly struct PushCommand : ICommand
     {
         private readonly IGameEntity _target;
         private readonly Vector2Int _direction;

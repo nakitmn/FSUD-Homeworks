@@ -17,6 +17,21 @@ namespace SampleGame
             new Vector2Int(-1, -1),
             new Vector2Int(1, -1),
         };
+        
+        public static List<GameBoardPosition> FindPathToTarget(IGameContext gameContext, IGameEntity entity)
+        {
+            var target = entity.GetTarget().Value;
+            return FindPathToTarget(gameContext, entity, target);
+        }
+
+        public static List<GameBoardPosition> FindPathToTarget(IGameContext gameContext, IGameEntity entity,
+            IGameEntity target)
+        {
+            var gameBoard = gameContext.GetGameBoard();
+            var startPosition = gameBoard.GetBoardPosition(entity);
+            var endPosition = gameBoard.GetBoardPosition(target);
+            return FindPath(gameContext, startPosition, endPosition);
+        }
 
         public static List<GameBoardPosition> FindPath(in IGameContext gameContext, GameBoardPosition start, GameBoardPosition end)
         {

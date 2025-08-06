@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public struct DieFromBoundsAnimationCommand : IAnimationCommand
+    public readonly struct DieFromBoundsAnimationCommand : IAnimationCommand
     {
         private readonly Transform _target;
         private readonly Vector3 _from;

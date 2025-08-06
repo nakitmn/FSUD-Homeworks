@@ -1,6 +1,6 @@
 ﻿namespace SampleGame
 {
-    public struct MoveCommand : ICommand
+    public readonly struct MoveCommand : ICommand
     {
         private readonly IGameEntity _source;
         private readonly GameBoardPosition _position;

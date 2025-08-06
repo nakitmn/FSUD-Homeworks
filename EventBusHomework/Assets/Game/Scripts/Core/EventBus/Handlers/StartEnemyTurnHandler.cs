@@ -27,8 +27,8 @@ namespace SampleGame
         private void OnTurnStart()
         {
             CharacterTurnUseCase.ResetEnemies(_context);
-            EnemyUseCase.HandleEnemiesTurn(_context);
-            EnemyUseCase.TrySpawnEnemies(_context);
+            EnemyTurnUseCase.HandleEnemiesTurn(_context);
+            EnemySpawnUseCase.TrySpawnEnemies(_context);
             _eventBus.InvokeEndEnemyTurn();
         }
     }

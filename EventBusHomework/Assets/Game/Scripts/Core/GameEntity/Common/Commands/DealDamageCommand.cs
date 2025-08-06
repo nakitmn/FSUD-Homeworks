@@ -1,6 +1,6 @@
 ﻿namespace SampleGame
 {
-    public struct DealDamageCommand : ICommand
+    public readonly struct DealDamageCommand : ICommand
     {
         private readonly IGameEntity _target;
         private readonly int _damage;

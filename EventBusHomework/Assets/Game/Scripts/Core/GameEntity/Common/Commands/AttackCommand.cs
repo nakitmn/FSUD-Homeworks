@@ -17,7 +17,7 @@
         }
     }
 
-    public struct AttackCommand : ICommand
+    public readonly struct AttackCommand : ICommand
     {
         private readonly IGameEntity _source;
         private readonly IGameEntity _target;

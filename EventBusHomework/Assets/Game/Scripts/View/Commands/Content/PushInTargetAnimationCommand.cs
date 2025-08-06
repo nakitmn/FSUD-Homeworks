@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public struct PushInTargetAnimationCommand : IAnimationCommand
+    public readonly struct PushInTargetAnimationCommand : IAnimationCommand
     {
         private readonly Transform _source;
         private readonly Transform _target;
