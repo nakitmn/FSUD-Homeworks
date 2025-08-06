@@ -22,7 +22,7 @@ namespace SampleGame
 		public const int GameBoard = -1386833193; // GameBoard
 		public const int CurrentState = -386580614; // IReactiveVariable<GameState>
 		public const int Turn = -2146256263; // IReactiveVariable<int>
-		public const int Waves = 1316085542; // List<SpawnWave>
+		public const int Waves = 1316085542; // List<EnemyWaveConfig>
 
 
 		///Value Extensions
@@ -128,15 +128,15 @@ namespace SampleGame
 		public static void SetTurn(this IGameContext obj, IReactiveVariable<int> value) => obj.SetValue(Turn, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static List<SpawnWave> GetWaves(this IGameContext obj) => obj.GetValueUnsafe<List<SpawnWave>>(Waves);
+		public static List<EnemyWaveConfig> GetWaves(this IGameContext obj) => obj.GetValueUnsafe<List<EnemyWaveConfig>>(Waves);
 
-		public static ref List<SpawnWave> RefWaves(this IGameContext obj) => ref obj.GetValueUnsafe<List<SpawnWave>>(Waves);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetWaves(this IGameContext obj, out List<SpawnWave> value) => obj.TryGetValueUnsafe(Waves, out value);
+		public static ref List<EnemyWaveConfig> RefWaves(this IGameContext obj) => ref obj.GetValueUnsafe<List<EnemyWaveConfig>>(Waves);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddWaves(this IGameContext obj, List<SpawnWave> value) => obj.AddValue(Waves, value);
+		public static bool TryGetWaves(this IGameContext obj, out List<EnemyWaveConfig> value) => obj.TryGetValueUnsafe(Waves, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddWaves(this IGameContext obj, List<EnemyWaveConfig> value) => obj.AddValue(Waves, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasWaves(this IGameContext obj) => obj.HasValue(Waves);
@@ -145,6 +145,6 @@ namespace SampleGame
 		public static bool DelWaves(this IGameContext obj) => obj.DelValue(Waves);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetWaves(this IGameContext obj, List<SpawnWave> value) => obj.SetValue(Waves, value);
+		public static void SetWaves(this IGameContext obj, List<EnemyWaveConfig> value) => obj.SetValue(Waves, value);
     }
 }

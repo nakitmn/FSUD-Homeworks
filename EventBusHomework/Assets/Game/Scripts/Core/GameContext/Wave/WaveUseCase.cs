@@ -10,7 +10,7 @@
             return currentTurn > lastWave.turn;
         }
         
-        public static bool TryGetCurrentWave(IGameContext context, out SpawnWave currentWave)
+        public static bool TryGetCurrentWave(IGameContext context, out EnemyWaveConfig currentWaveConfig)
         {
             var currentTurn = context.GetTurn().Value;
             var waves = context.GetWaves();
@@ -19,12 +19,12 @@
             {
                 if (wave.turn == currentTurn)
                 {
-                    currentWave = wave;
+                    currentWaveConfig = wave;
                     return true;
                 }
             }
 
-            currentWave = default;
+            currentWaveConfig = default;
             return false;
         }
     }

@@ -4,7 +4,7 @@ using Atomic.Entities;
 namespace SampleGame
 {
     [Serializable]
-    public struct SpawnWave
+    public class EnemyWaveConfig
     {
         public int turn;
         public ScriptableEntityInstaller prefab;

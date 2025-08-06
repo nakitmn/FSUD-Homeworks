@@ -22,4 +22,4 @@ values:
 - GameBoard: GameBoard
 - CurrentState: IReactiveVariable<GameState>
 - Turn: IReactiveVariable<int>
-- Waves: List<SpawnWave>
+- Waves: List<EnemyWaveConfig>

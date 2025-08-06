@@ -2,11 +2,11 @@
 
 namespace SampleGame
 {
-    public sealed class GameRunController : IEnable<IGameContext>
+    public sealed class GameStartController : IEnable<IGameContext>
     {
         private readonly EntitySpawnConfig[] _entitySpawnConfigs;
 
-        public GameRunController(EntitySpawnConfig[] entitySpawnConfigs)
+        public GameStartController(EntitySpawnConfig[] entitySpawnConfigs)
         {
             _entitySpawnConfigs = entitySpawnConfigs;
         }
