@@ -20,6 +20,6 @@ values:
 - Camera: Camera
 - AnimationQueue: AnimationQueue
 - WorldView: EntityWorldView
-- GameBoardPresenter: GameBoardPresenter
+- GameBoardView: GameBoardView
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - InputCondition: IValue<bool> 

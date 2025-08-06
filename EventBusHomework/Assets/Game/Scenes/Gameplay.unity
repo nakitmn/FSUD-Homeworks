@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 330585545}
   _entityWorldView: {fileID: 1153234531}
-  _gameBoardPresenter: {fileID: 1201200288}
+  _gameBoardView: {fileID: 1201200290}
   _markerView: {fileID: 1925425625}
   _turnEventsText: {fileID: 1311222493}
   _selectedCharacterInfoText: {fileID: 1414107600}
@@ -1431,8 +1431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201200287}
-  - component: {fileID: 1201200288}
-  - component: {fileID: 1201200289}
+  - component: {fileID: 1201200290}
   m_Layer: 0
   m_Name: GameBoard
   m_TagString: Untagged
@@ -1455,7 +1454,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1884499146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1201200288
+--- !u!114 &1201200290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1464,7 +1463,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201200286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72840bb981e4e68aba7261be3ca3b90, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f4402a3a5524d0aa2522f73a2426c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 6875461324088407675, guid: 2fcb221f0be333543ae2499cfc6ab2ce, type: 3}
@@ -1473,19 +1472,6 @@ MonoBehaviour:
   _cellMaterials:
   - {fileID: 2100000, guid: 833efafb3797a95468bf443f69ee381b, type: 2}
   - {fileID: 2100000, guid: 61faa84ea4221d943b50d1156b28336b, type: 2}
---- !u!114 &1201200289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201200286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4a92a636b64a6b856a4c36e941823a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _presenter: {fileID: 1201200288}
   _highlightMaterial: {fileID: 2100000, guid: 1b2683d0feb82b24eba55188bd23a4d5, type: 2}
 --- !u!1 &1311222491
 GameObject:

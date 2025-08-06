@@ -28,7 +28,7 @@ namespace SampleGame
                 ViewCommandsUseCase.ExecuteWithVisual(
                     _gameContext, 
                     context,   
-                    new CharacterMoveCommand(selectedEntity, context.GetGameBoardPresenter().GetBoardPosition(cellView)));
+                    new CharacterMoveCommand(selectedEntity, context.GetGameBoardView().GetBoardPosition(cellView)));
             }
         }
     }

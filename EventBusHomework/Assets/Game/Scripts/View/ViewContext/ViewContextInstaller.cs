@@ -3,6 +3,7 @@ using Atomic.Entities;
 using SampleGame;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.View
@@ -11,7 +12,7 @@ namespace Game.View
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private EntityWorldView _entityWorldView;
-        [SerializeField] private GameBoardPresenter _gameBoardPresenter;
+        [SerializeField] private GameBoardView _gameBoardView;
         [SerializeField] private SelectedMarkerView _markerView;
         
         [Header("UI")]
@@ -26,7 +27,7 @@ namespace Game.View
             entity.AddCamera(_camera);
             entity.AddAnimationQueue(new AnimationQueue());
             entity.AddWorldView(_entityWorldView);
-            entity.AddGameBoardPresenter(_gameBoardPresenter);
+            entity.AddGameBoardView(_gameBoardView);
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));
             
@@ -42,6 +43,8 @@ namespace Game.View
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<CharacterMoveController>();
             entity.AddBehaviour<CharacterSelectController>();
+            
+            entity.AddBehaviour<GameBoardPresenter>();
             
             entity.AddBehaviour(new SelectedCharacterBehavior(_markerView));
             

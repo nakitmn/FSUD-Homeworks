@@ -19,7 +19,7 @@ namespace Game.View
 		public const int Camera = 1018227507; // Camera
 		public const int AnimationQueue = -1133279405; // AnimationQueue
 		public const int WorldView = -301363708; // EntityWorldView
-		public const int GameBoardPresenter = 2061873695; // GameBoardPresenter
+		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int InputCondition = 1207100273; // IValue<bool>
 
@@ -87,24 +87,24 @@ namespace Game.View
 		public static void SetWorldView(this IViewContext obj, EntityWorldView value) => obj.SetValue(WorldView, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static GameBoardPresenter GetGameBoardPresenter(this IViewContext obj) => obj.GetValueUnsafe<GameBoardPresenter>(GameBoardPresenter);
+		public static GameBoardView GetGameBoardView(this IViewContext obj) => obj.GetValueUnsafe<GameBoardView>(GameBoardView);
 
-		public static ref GameBoardPresenter RefGameBoardPresenter(this IViewContext obj) => ref obj.GetValueUnsafe<GameBoardPresenter>(GameBoardPresenter);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetGameBoardPresenter(this IViewContext obj, out GameBoardPresenter value) => obj.TryGetValueUnsafe(GameBoardPresenter, out value);
+		public static ref GameBoardView RefGameBoardView(this IViewContext obj) => ref obj.GetValueUnsafe<GameBoardView>(GameBoardView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddGameBoardPresenter(this IViewContext obj, GameBoardPresenter value) => obj.AddValue(GameBoardPresenter, value);
+		public static bool TryGetGameBoardView(this IViewContext obj, out GameBoardView value) => obj.TryGetValueUnsafe(GameBoardView, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasGameBoardPresenter(this IViewContext obj) => obj.HasValue(GameBoardPresenter);
+		public static void AddGameBoardView(this IViewContext obj, GameBoardView value) => obj.AddValue(GameBoardView, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelGameBoardPresenter(this IViewContext obj) => obj.DelValue(GameBoardPresenter);
+		public static bool HasGameBoardView(this IViewContext obj) => obj.HasValue(GameBoardView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetGameBoardPresenter(this IViewContext obj, GameBoardPresenter value) => obj.SetValue(GameBoardPresenter, value);
+		public static bool DelGameBoardView(this IViewContext obj) => obj.DelValue(GameBoardView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetGameBoardView(this IViewContext obj, GameBoardView value) => obj.SetValue(GameBoardView, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IReactiveVariable<IGameEntity> GetSelectedCharacter(this IViewContext obj) => obj.GetValueUnsafe<IReactiveVariable<IGameEntity>>(SelectedCharacter);

@@ -1,91 +1,42 @@
-﻿using UnityEngine;
+﻿using Atomic.Entities;
+using Atomic.Events;
+using Game.View;
 
 namespace SampleGame
 {
-    public sealed class GameBoardPresenter : MonoBehaviour
+    public sealed class GameBoardPresenter : IInit<IViewContext>, IEnable, IDisable
     {
-        [SerializeField] private GameBoardCellView _cellPrefab;
-        [SerializeField] private Transform _container;
-        [SerializeField] private float _cellOffset;
-        [SerializeField] private Material[] _cellMaterials;
-
         private GameContext _gameContext;
-        private GameBoardCellView[,] _views;
-
-        public GameBoardCellView[,] Views => _views;
-
-        private void Awake()
+        private IEventBus _eventBus;
+        private GameBoardView _gameBoardView;
+        
+        public void Init(IViewContext context)
         {
             _gameContext = GameContext.Instance;
-
+            _eventBus = _gameContext.GetEventBus();
+            _gameBoardView = context.GetGameBoardView();
             var gameBoard = _gameContext.GetGameBoard();
-            _views = new GameBoardCellView[gameBoard.Width, gameBoard.Height];
+            
+            _gameBoardView.Create(gameBoard.Width, gameBoard.Height);
+        }
 
-            for (var x = 0; x < gameBoard.Width; x++)
-            for (var y = 0; y < gameBoard.Height; y++)
+        public void Enable(in IEntity entity)
+        {
+            _eventBus.SubscribeStartPlayerTurn(OnTurnStarted);
+        }
+
+        public void Disable(in IEntity entity)
+        {
+            _eventBus.UnsubscribeStartPlayerTurn(OnTurnStarted);
+        }
+
+        private void OnTurnStarted()
+        {
+            _gameBoardView.ClearMaterials();
+
+            if (WaveUseCase.TryGetCurrentWave(_gameContext, out var wave))
             {
-                var spawnPosition = ToWorldPosition(x, y);
-                var index = GetCellIndex(gameBoard.Width, x, y);
-                var material = GetCellMaterialFor(index, x);
-
-                var view = Instantiate(_cellPrefab, spawnPosition, Quaternion.identity, _container);
-
-                _views[x, y] = view;
-                view.gameObject.name = $"Cell[{index}]";
-                view.SetMaterial(material);
-            }
-        }
-
-        private int GetCellIndex(int boardWidth, int x, int y)
-        {
-            return boardWidth * x + y;
-        }
-
-        private Material GetCellMaterialFor(int index, int x)
-        {
-            var materialOffset = (int) Mathf.Repeat(x, 2);
-            var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
-            return _cellMaterials[materialIndex];
-        }
-
-        public GameBoardCellView GetViewAt(GameBoardPosition position)
-        {
-            return _views[position.x, position.y];
-        }
-
-        public Vector3 ToWorldPosition(GameBoardPosition position)
-        {
-            return ToWorldPosition(position.x, position.y);
-        }
-
-        public Vector3 ToWorldPosition(int x, int y)
-        {
-            var offset = new Vector3(x * _cellOffset, 0f, y * _cellOffset * -1f);
-            return transform.position + offset;
-        }
-
-        public GameBoardPosition GetBoardPosition(GameBoardCellView view)
-        {
-            for (var x = 0; x < _views.GetLength(0); x++)
-            for (var y = 0; y < _views.GetLength(1); y++)
-            {
-                if (_views[x, y] == view)
-                {
-                    return new GameBoardPosition(x, y);
-                }
-            }
-
-            return GameBoardPosition.Invalid;
-        }
-
-        public void ClearMaterials()
-        {
-            for (var x = 0; x < _views.GetLength(0); x++)
-            for (var y = 0; y < _views.GetLength(1); y++)
-            {
-                var index = GetCellIndex(_views.GetLength(0), x, y);
-                var material = GetCellMaterialFor(index, x);
-                _views[x, y].SetMaterial(material);
+                _gameBoardView.HighlightCells(wave.points);
             }
         }
     }
