@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
@@ -18,7 +19,9 @@ namespace SampleGame
         public async UniTask Execute()
         {
             _target.DOKill();
-            await _target.DOMove(_position, 0.25f).AsyncWaitForCompletion();
+            await _target.DOMove(_position, .5f)
+                .SetEase(Ease.InOutSine)
+                .AsyncWaitForCompletion();
         }
     }
 }

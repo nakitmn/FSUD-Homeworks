@@ -1,5 +1,7 @@
 ﻿using Atomic.Entities;
 using Game.View;
+using UnityEditor;
+using UnityEngine;
 
 namespace SampleGame
 {
@@ -29,12 +31,23 @@ namespace SampleGame
         private void OnAttackStarted(AttackEventData attackData)
         {
             var view = _viewContext.GetWorldView().GetView(attackData.Source);
+            var animator = view.GetComponentInChildren<Animator>();
+            var targetPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition);
 
-            _viewContext.GetAnimationQueue().Enqueue(
-                new AttackStartAnimationCommand(
-                    view.transform,
-                    GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition)
-                ));
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new RotateToAnimationCommand(view.transform, targetPosition)
+            );
+            
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new JumpAnimatorAnimationCommand(animator)
+            );
+            
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new AttackStartAnimationCommand(view.transform, targetPosition)
+            );
         }
 
         private void OnAttackEnded(AttackEventData attackData)

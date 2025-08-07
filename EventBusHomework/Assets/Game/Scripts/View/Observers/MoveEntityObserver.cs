@@ -1,5 +1,6 @@
 ﻿using Atomic.Entities;
 using Game.View;
+using UnityEngine;
 
 namespace SampleGame
 {
@@ -26,11 +27,28 @@ namespace SampleGame
 
         private void OnMoved(IGameEntity target, GameBoardPosition position)
         {
+            var entityView = GameEntityViewUseCase.GetView(_viewContext, target);
+            var animator = entityView.GetComponentInChildren<Animator>();
+            var targetPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, position);
+
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new MoveAnimationCommand(
-                    GameEntityViewUseCase.GetView(_viewContext, target).transform,
-                    GameBoardViewUseCase.GetWorldPosition(_viewContext, position))
+                new RotateToAnimationCommand(entityView.transform, targetPosition)
+            );
+
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new MoveAnimatorAnimationCommand(animator, true)
+            );
+
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new MoveAnimationCommand(entityView.transform, targetPosition)
+            );
+
+            ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new MoveAnimatorAnimationCommand(animator, false)
             );
         }
     }
