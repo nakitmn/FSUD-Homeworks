@@ -21,6 +21,7 @@ namespace SampleGame
             var targetPosition = _target.position;
             var movePosition = Vector3.Lerp(_source.position, targetPosition, 0.4f);
 
+            new RotateToAnimationCommand(_target, _source.position).Execute();
             await new RotateToAnimationCommand(_source, movePosition).Execute();
             new JumpAnimatorAnimationCommand(animator).Execute();
             await new MoveAnimationCommand(_source, movePosition).Execute();
