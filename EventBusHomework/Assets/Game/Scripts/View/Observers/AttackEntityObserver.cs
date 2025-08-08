@@ -30,34 +30,49 @@ namespace SampleGame
 
         private void OnAttackStarted(AttackEventData attackData)
         {
-            var view = _viewContext.GetWorldView().GetView(attackData.Source);
-            var animator = view.GetComponentInChildren<Animator>();
-            var targetPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition);
+            var sourceView = GameEntityViewUseCase.GetView(_viewContext, attackData.Source);
+            var targetView = GameEntityViewUseCase.GetView(_viewContext, attackData.Target);
 
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new RotateToAnimationCommand(view.transform, targetPosition)
+                new CharacterAttackStartAnimationCommand(sourceView.transform, targetView.transform)
             );
-            
+
+            /*
+                   var animator = sourceView.GetComponentInChildren<Animator>();
+            var targetPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.TargetPosition);
+
+             ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new RotateToAnimationCommand(sourceView.transform, targetPosition)
+            );
+
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
                 new JumpAnimatorAnimationCommand(animator)
             );
-            
+
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new AttackStartAnimationCommand(view.transform, targetPosition)
-            );
+                new AttackStartAnimationCommand(sourceView.transform, targetPosition)
+            );*/
         }
 
         private void OnAttackEnded(AttackEventData attackData)
         {
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new AttackEndAnimationCommand(
+                new CharacterAttackEndAnimationCommand(
                     GameEntityViewUseCase.GetView(_viewContext, attackData.Source).transform,
                     GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.SourcePosition))
             );
+            
+            /*ViewCommandsUseCase.Enqueue(
+                _viewContext,
+                new AttackEndAnimationCommand(
+                    GameEntityViewUseCase.GetView(_viewContext, attackData.Source).transform,
+                    GameBoardViewUseCase.GetWorldPosition(_viewContext, attackData.SourcePosition))
+            );*/
         }
     }
 }
