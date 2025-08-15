@@ -31,6 +31,8 @@ namespace SampleGame
             new UpdateHealthAnimationCommand(
                 sourceCharacterView,
                 HealthUseCase.GetNormalizedHealth(_pushData.Source)).Execute();
+            
+            sourceCharacterView.PlayHit();
 
             await DOTween.Sequence()
                 .Append(

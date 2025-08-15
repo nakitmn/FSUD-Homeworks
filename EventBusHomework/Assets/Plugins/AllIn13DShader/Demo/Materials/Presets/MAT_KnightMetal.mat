@@ -237,7 +237,7 @@ Material:
     - _Hightlights: 0
     - _HightlightsStrength: 1
     - _Hit: 1
-    - _HitBlend: 0
+    - _HitBlend: 0.26728767
     - _HitGlow: 3
     - _Hologram: 0
     - _HologramAccentAlpha: 0.5

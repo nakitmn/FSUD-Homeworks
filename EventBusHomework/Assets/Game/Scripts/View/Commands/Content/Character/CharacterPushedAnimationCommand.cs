@@ -24,6 +24,7 @@ namespace SampleGame
 
             new HitAnimatorAnimationCommand(animator).Execute();
             new UpdateHealthAnimationCommand(characterView, _health).Execute();
+            characterView.PlayHit();
             await new MoveAnimationCommand(_target, _position).Execute();
         }
     }
