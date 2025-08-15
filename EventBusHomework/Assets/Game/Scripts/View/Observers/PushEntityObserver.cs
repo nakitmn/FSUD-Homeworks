@@ -35,25 +35,15 @@ namespace SampleGame
             ViewCommandsUseCase.Enqueue(_viewContext,
                 new CharacterPushedAnimationCommand(
                     GameEntityViewUseCase.GetView(_viewContext, target).transform,
-                    GameBoardViewUseCase.GetWorldPosition(_viewContext, newPosition)
+                    GameBoardViewUseCase.GetWorldPosition(_viewContext, newPosition),
+                    HealthUseCase.GetNormalizedHealth(target)
                 ));
         }
 
         private void OnPushedInTarget(PushInTargetEventData pushData)
         {
-            /*ViewCommandsUseCase.Enqueue(_viewContext, new PushInTargetAnimationCommand(
-                GameEntityViewUseCase.GetView(_viewContext, pushData.Source).transform,
-                GameEntityViewUseCase.GetView(_viewContext, pushData.Target).transform,
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.SourcePosition),
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.TargetPosition)
-            )); */
-            
-            ViewCommandsUseCase.Enqueue(_viewContext, new CharacterPushedInTargetAnimationCommand(
-                GameEntityViewUseCase.GetView(_viewContext, pushData.Source).transform,
-                GameEntityViewUseCase.GetView(_viewContext, pushData.Target).transform,
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.SourcePosition),
-                GameBoardViewUseCase.GetWorldPosition(_viewContext, pushData.TargetPosition)
-            ));
+            ViewCommandsUseCase.Enqueue(_viewContext,
+                new CharacterPushedInTargetAnimationCommand(_viewContext, pushData));
         }
 
         private void OnPushedOut(IGameEntity target, GameBoardPosition sourcePosition, Vector2Int direction)

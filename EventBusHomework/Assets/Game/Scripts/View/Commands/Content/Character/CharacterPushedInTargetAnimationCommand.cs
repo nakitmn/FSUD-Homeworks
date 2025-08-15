@@ -1,41 +1,47 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
 {
     public readonly struct CharacterPushedInTargetAnimationCommand : IAnimationCommand
     {
-        private readonly Transform _source;
-        private readonly Transform _target;
-        private readonly Vector3 _from;
-        private readonly Vector3 _to;
+        private readonly ViewContext _viewContext;
+        private readonly PushInTargetEventData _pushData;
 
-        public CharacterPushedInTargetAnimationCommand(Transform source, Transform target, Vector3 from, Vector3 to)
+        public CharacterPushedInTargetAnimationCommand(ViewContext viewContext, PushInTargetEventData pushData)
         {
-            _source = source;
-            _target = target;
-            _from = from;
-            _to = to;
+            _viewContext = viewContext;
+            _pushData = pushData;
         }
 
         public async UniTask Execute()
         {
-            var animator = _source.GetComponentInChildren<Animator>();
+            var source = GameEntityViewUseCase.GetView(_viewContext, _pushData.Source).transform;
+            var target = GameEntityViewUseCase.GetView(_viewContext, _pushData.Target).transform;
+            var from = GameBoardViewUseCase.GetWorldPosition(_viewContext, _pushData.SourcePosition);
+            var to = GameBoardViewUseCase.GetWorldPosition(_viewContext, _pushData.TargetPosition);
 
-            new RotateToAnimationCommand(_target, _source.position).Execute();
-            new HitAnimatorAnimationCommand(animator).Execute();
-            
+            var sourceCharacterView = source.GetComponent<CharacterView>();
+            var sourceAnimator = source.GetComponentInChildren<Animator>();
+
+            new RotateToAnimationCommand(target, source.position).Execute();
+            new HitAnimatorAnimationCommand(sourceAnimator).Execute();
+            new UpdateHealthAnimationCommand(
+                sourceCharacterView,
+                HealthUseCase.GetNormalizedHealth(_pushData.Source)).Execute();
+
             await DOTween.Sequence()
                 .Append(
-                    _source.DOMove(Vector3.Lerp(_from,_to,0.5f), 0.15f)
+                    source.DOMove(Vector3.Lerp(from, to, 0.5f), 0.15f)
                         .SetEase(Ease.OutCirc)
-                        .ChangeStartValue(_from)
+                        .ChangeStartValue(from)
                 )
                 .AsyncWaitForCompletion();
-
-            _source.DOPunchScale(Vector3.one * 0.1f, 0.25f);
-            _source.DOMove(_from, 0.25f)
+            
+            source.DOPunchScale(Vector3.one * 0.1f, 0.25f);
+            source.DOMove(from, 0.25f)
                 .SetEase(Ease.OutCirc);
         }
     }

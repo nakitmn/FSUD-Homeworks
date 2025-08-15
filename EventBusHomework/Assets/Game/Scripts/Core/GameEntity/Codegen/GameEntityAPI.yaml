@@ -20,7 +20,8 @@ tags:
 - Pushable
 
 values:
-- Health: int
+- Health: IReactiveVariable<int>
+- MaxHealth: IReactiveVariable<int>
 - Damage: int
 - AttackRange: IValue<int>
 - MoveRange: IValue<int>

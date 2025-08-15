@@ -7,7 +7,7 @@ namespace SampleGame
     [CreateAssetMenu(menuName = "Game/EnemyInstaller")]
     public sealed class EnemyInstaller : ScriptableEntityInstaller<IGameEntity>
     {
-        [SerializeField] private Const<int> _health = 10;
+        [SerializeField] private int _health = 10;
         [SerializeField] private Const<int> _movesPerTurn = 1;
         [SerializeField] private Const<int> _attacksPerTurn = 1;
         [SerializeField] private Const<int> _damage = 1;
@@ -18,7 +18,8 @@ namespace SampleGame
         {
             entity.AddEnemyTag();
             
-            entity.AddHealth(_health);
+            entity.AddHealth(new ReactiveInt(_health));
+            entity.AddMaxHealth(new ReactiveInt(_health));
             entity.AddDamage(_damage);
             entity.AddMoveRange(_moveRange);
             entity.AddAttackRange(_attackRange);

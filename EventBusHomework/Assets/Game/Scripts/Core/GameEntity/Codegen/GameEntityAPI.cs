@@ -21,7 +21,8 @@ namespace SampleGame
 
 
 		///Values
-		public const int Health = -915003867; // int
+		public const int Health = -915003867; // IReactiveVariable<int>
+		public const int MaxHealth = 1923500305; // IReactiveVariable<int>
 		public const int Damage = 375673178; // int
 		public const int AttackRange = 2128890732; // IValue<int>
 		public const int MoveRange = -2080720063; // IValue<int>
@@ -74,15 +75,15 @@ namespace SampleGame
 		///Value Extensions
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int GetHealth(this IGameEntity obj) => obj.GetValueUnsafe<int>(Health);
+		public static IReactiveVariable<int> GetHealth(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(Health);
 
-		public static ref int RefHealth(this IGameEntity obj) => ref obj.GetValueUnsafe<int>(Health);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetHealth(this IGameEntity obj, out int value) => obj.TryGetValueUnsafe(Health, out value);
+		public static ref IReactiveVariable<int> RefHealth(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(Health);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddHealth(this IGameEntity obj, int value) => obj.AddValue(Health, value);
+		public static bool TryGetHealth(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(Health, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddHealth(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(Health, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasHealth(this IGameEntity obj) => obj.HasValue(Health);
@@ -91,7 +92,27 @@ namespace SampleGame
 		public static bool DelHealth(this IGameEntity obj) => obj.DelValue(Health);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetHealth(this IGameEntity obj, int value) => obj.SetValue(Health, value);
+		public static void SetHealth(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(Health, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<int> GetMaxHealth(this IGameEntity obj) => obj.GetValueUnsafe<IReactiveVariable<int>>(MaxHealth);
+
+		public static ref IReactiveVariable<int> RefMaxHealth(this IGameEntity obj) => ref obj.GetValueUnsafe<IReactiveVariable<int>>(MaxHealth);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetMaxHealth(this IGameEntity obj, out IReactiveVariable<int> value) => obj.TryGetValueUnsafe(MaxHealth, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddMaxHealth(this IGameEntity obj, IReactiveVariable<int> value) => obj.AddValue(MaxHealth, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasMaxHealth(this IGameEntity obj) => obj.HasValue(MaxHealth);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelMaxHealth(this IGameEntity obj) => obj.DelValue(MaxHealth);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetMaxHealth(this IGameEntity obj, IReactiveVariable<int> value) => obj.SetValue(MaxHealth, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetDamage(this IGameEntity obj) => obj.GetValueUnsafe<int>(Damage);

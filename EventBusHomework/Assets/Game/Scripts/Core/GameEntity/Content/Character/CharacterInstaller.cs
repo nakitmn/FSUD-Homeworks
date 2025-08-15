@@ -7,7 +7,7 @@ namespace SampleGame
     [CreateAssetMenu(menuName = "Game/CharacterInstaller")]
     public sealed class CharacterInstaller : ScriptableEntityInstaller<IGameEntity>
     {
-        [SerializeField] private Const<int> _health = 10;
+        [SerializeField] private int _health = 10;
         [SerializeField] private Const<int> _movesPerTurn = 1;
         [SerializeField] private Const<int> _attacksPerTurn = 1;
         [SerializeField] private Const<int> _damage = 1;
@@ -18,7 +18,8 @@ namespace SampleGame
         {
             entity.AddCharacterTag();
             
-            entity.AddHealth(_health);
+            entity.AddHealth(new ReactiveInt(_health));
+            entity.AddMaxHealth(new ReactiveInt(_health));
             entity.AddDamage(_damage);
             entity.AddMoveRange(_moveRange);
             entity.AddAttackRange(_attackRange);
@@ -27,8 +28,6 @@ namespace SampleGame
             entity.AddMaxAttacksPerTurn(_attacksPerTurn);
             entity.AddCurrentMovesCount(new ReactiveInt());
             entity.AddCurrentAttacksCount(new ReactiveInt());
-
-            //entity.WhenUpdate(_ => entity.GetGameObject().SetActive(entity.GetHealth() > 0));
         }
     }
 }

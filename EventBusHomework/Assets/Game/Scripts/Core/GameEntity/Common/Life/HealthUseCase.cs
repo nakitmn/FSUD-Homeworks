@@ -7,7 +7,7 @@ namespace SampleGame
     {
         public static bool Exists(in IGameEntity entity)
         {
-            return entity.GetHealth() > 0;
+            return entity.GetHealth().Value > 0;
         }
 
         public static bool HasAliveEntities(IEnumerable<IGameEntity> entities)
@@ -31,7 +31,7 @@ namespace SampleGame
             }
 
             var health = entity.GetHealth();
-            entity.SetHealth(Mathf.Max(0, health - damage));
+            health.Value = Mathf.Max(0, health.Value - damage);
             return true;
         }
         
@@ -41,9 +41,14 @@ namespace SampleGame
             {
                 return false;
             }
-            
-            entity.SetHealth(0);
+
+            entity.GetHealth().Value = 0;
             return true;
+        }
+
+        public static float GetNormalizedHealth(IGameEntity entity)
+        {
+            return (float) entity.GetHealth().Value / entity.GetMaxHealth().Value;
         }
     }
 }
