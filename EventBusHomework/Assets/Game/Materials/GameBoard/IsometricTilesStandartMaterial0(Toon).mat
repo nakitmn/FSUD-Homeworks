@@ -273,15 +273,15 @@ Material:
     - _HitGlow: 5
     - _Hologram: 0
     - _HologramAccentAlpha: 0.5
-    - _HologramAccentFrequency: 2
-    - _HologramAccentSpeed: 1
+    - _HologramAccentFrequency: 1
+    - _HologramAccentSpeed: 0.5
     - _HologramAlpha: 1
-    - _HologramBaseAlpha: 0.1
-    - _HologramFrequency: 20
+    - _HologramBaseAlpha: 0.133
+    - _HologramFrequency: 1
     - _HologramLineCenter: 0.5
     - _HologramLineSmoothness: 2
     - _HologramLineSpacing: 2
-    - _HologramScrollSpeed: 2
+    - _HologramScrollSpeed: 1
     - _HueBrightness: 2
     - _HueSaturation: 1.929
     - _HueShift: 72.8
@@ -397,7 +397,7 @@ Material:
     - _HighlightOffset: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightsColor: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
     - _HitColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HologramColor: {r: 1.25, g: 2.8, b: 6.8, a: 1}
+    - _HologramColor: {r: 0.49028653, g: 2.118547, b: 0.39930728, a: 1}
     - _HologramLineDirection: {r: 0, g: 1, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimOffset: {r: 0, g: 0, b: 0, a: 0}

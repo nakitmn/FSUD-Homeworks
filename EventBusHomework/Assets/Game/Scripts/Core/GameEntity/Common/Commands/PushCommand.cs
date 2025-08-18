@@ -72,7 +72,8 @@ namespace SampleGame
                     return new PushCommand(entity, _direction).Execute(gameContext);
                 }
 
-                gameContext.GetEventBus().InvokeDied(_target);
+                gameBoard[newPosition] = null;
+                gameContext.GetEventBus().InvokeDied(entity);
                 return false;
             }
 

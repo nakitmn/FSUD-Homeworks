@@ -59,6 +59,7 @@
 
             if (HealthUseCase.Exists(_target) == false)
             {
+                gameBoard[targetPosition] = null;
                 gameContext.GetEventBus().InvokeDied(_target);
                 
                 gameContext.GetEventBus().InvokeAttackEnded(
