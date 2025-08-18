@@ -22,6 +22,7 @@ namespace SampleGame
 
             new DeathAnimatorAnimationCommand(animator).Execute();
             new UpdateHealthAnimationCommand(characterView, 0).Execute();
+            characterView.PlayHit();
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             
             var target = _target;

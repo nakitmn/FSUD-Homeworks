@@ -1,16 +1,17 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.View;
 using UnityEngine;
 
 namespace SampleGame
 {
-    public readonly struct DieFromBoundsAnimationCommand : IAnimationCommand
+    public readonly struct CharacterDieFromBoundsAnimationCommand : IAnimationCommand
     {
         private readonly Transform _target;
         private readonly Vector3 _from;
         private readonly Vector3 _to;
 
-        public DieFromBoundsAnimationCommand(Transform target, Vector3 from, Vector3 to)
+        public CharacterDieFromBoundsAnimationCommand(Transform target, Vector3 from, Vector3 to)
         {
             _target = target;
             _from = from;
@@ -19,6 +20,13 @@ namespace SampleGame
 
         public async UniTask Execute()
         {
+            var animator = _target.GetComponentInChildren<Animator>();
+            var characterView = _target.GetComponent<CharacterView>();
+
+            new HitAnimatorAnimationCommand(animator).Execute();
+            new UpdateHealthAnimationCommand(characterView, 0).Execute();
+            characterView.PlayHit();
+            
             _target.DOKill();
             _target.position = _from;
             await DOTween.Sequence()

@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public readonly struct DealDamageAnimationCommand : IAnimationCommand
+    public readonly struct CharacterDealDamageAnimationCommand : IAnimationCommand
     {
         private readonly Transform _target;
         private readonly float _health;
 
-        public DealDamageAnimationCommand(Transform target, float health)
+        public CharacterDealDamageAnimationCommand(Transform target, float health)
         {
             _target = target;
             _health = health;

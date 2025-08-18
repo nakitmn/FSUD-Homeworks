@@ -52,7 +52,7 @@ namespace SampleGame
             var toPosition = GameBoardViewUseCase.GetWorldPosition(_viewContext, newPosition);
             toPosition.y -= 2f;
             ViewCommandsUseCase.Enqueue(_viewContext,
-                new DieFromBoundsAnimationCommand(
+                new CharacterDieFromBoundsAnimationCommand(
                     GameEntityViewUseCase.GetView(_viewContext, target).transform,
                     GameBoardViewUseCase.GetWorldPosition(_viewContext, sourcePosition),
                     toPosition
