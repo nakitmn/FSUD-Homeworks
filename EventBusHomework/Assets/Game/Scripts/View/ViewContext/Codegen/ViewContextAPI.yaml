@@ -23,3 +23,5 @@ values:
 - GameBoardView: GameBoardView
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - InputCondition: IValue<bool> 
+- PrefabPool: GenericPrefabPool
+- WaterSplashEffect: GameObject

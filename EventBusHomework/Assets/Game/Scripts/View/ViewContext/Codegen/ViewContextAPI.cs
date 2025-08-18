@@ -22,6 +22,8 @@ namespace Game.View
 		public const int GameBoardView = 1364106545; // GameBoardView
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int InputCondition = 1207100273; // IValue<bool>
+		public const int PrefabPool = -98831589; // GenericPrefabPool
+		public const int WaterSplashEffect = -986058579; // GameObject
 
 
 		///Value Extensions
@@ -145,5 +147,45 @@ namespace Game.View
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetInputCondition(this IViewContext obj, IValue<bool> value) => obj.SetValue(InputCondition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GenericPrefabPool GetPrefabPool(this IViewContext obj) => obj.GetValueUnsafe<GenericPrefabPool>(PrefabPool);
+
+		public static ref GenericPrefabPool RefPrefabPool(this IViewContext obj) => ref obj.GetValueUnsafe<GenericPrefabPool>(PrefabPool);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetPrefabPool(this IViewContext obj, out GenericPrefabPool value) => obj.TryGetValueUnsafe(PrefabPool, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddPrefabPool(this IViewContext obj, GenericPrefabPool value) => obj.AddValue(PrefabPool, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasPrefabPool(this IViewContext obj) => obj.HasValue(PrefabPool);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelPrefabPool(this IViewContext obj) => obj.DelValue(PrefabPool);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetPrefabPool(this IViewContext obj, GenericPrefabPool value) => obj.SetValue(PrefabPool, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject GetWaterSplashEffect(this IViewContext obj) => obj.GetValueUnsafe<GameObject>(WaterSplashEffect);
+
+		public static ref GameObject RefWaterSplashEffect(this IViewContext obj) => ref obj.GetValueUnsafe<GameObject>(WaterSplashEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetWaterSplashEffect(this IViewContext obj, out GameObject value) => obj.TryGetValueUnsafe(WaterSplashEffect, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddWaterSplashEffect(this IViewContext obj, GameObject value) => obj.AddValue(WaterSplashEffect, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasWaterSplashEffect(this IViewContext obj) => obj.HasValue(WaterSplashEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelWaterSplashEffect(this IViewContext obj) => obj.DelValue(WaterSplashEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetWaterSplashEffect(this IViewContext obj, GameObject value) => obj.SetValue(WaterSplashEffect, value);
     }
 }

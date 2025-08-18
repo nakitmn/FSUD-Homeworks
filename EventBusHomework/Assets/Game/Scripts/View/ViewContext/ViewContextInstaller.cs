@@ -7,6 +7,8 @@ namespace Game.View
 {
     public sealed class ViewContextInstaller : SceneEntityInstaller<IViewContext>
     {
+        [SerializeField] private Transform _poolContainer;
+        [SerializeField] private GameObject _waterSplash;
         [SerializeField] private Camera _camera;
         [SerializeField] private EntityWorldView _entityWorldView;
         [SerializeField] private SelectedMarkerView _markerView;
@@ -18,6 +20,8 @@ namespace Game.View
             entity.AddCamera(_camera);
             entity.AddAnimationQueue(new AnimationQueue());
             entity.AddWorldView(_entityWorldView);
+            entity.AddPrefabPool(new GenericPrefabPool(_poolContainer));
+            entity.AddWaterSplashEffect(_waterSplash);
            
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));

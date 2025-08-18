@@ -1273,6 +1273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bac148192c4100ac0ad04d5a9dba52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolContainer: {fileID: 125111042}
+  _waterSplash: {fileID: 1402041941817024963, guid: f45c1b3ca539f3948b644f38ba1e7015, type: 3}
   _camera: {fileID: 330585545}
   _entityWorldView: {fileID: 1153234531}
   _markerView: {fileID: 1925425625}
@@ -1639,6 +1641,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1461531333}
     m_Modifications:
+    - target: {fileID: 2242215352348315274, guid: 8cff76e430d68eb42bab59f8f938e15b, type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: a178653da33b47343bf81631dfdd5ace, type: 2}
     - target: {fileID: 2752566565988697106, guid: 8cff76e430d68eb42bab59f8f938e15b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
