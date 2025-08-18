@@ -16,7 +16,6 @@
             if (HealthUseCase.DealDamage(_target,_damage))
             {
                 gameContext.GetEventBus().InvokeDamaged(_target, _damage);
-                //gameContext.GetAnimationQueue().Enqueue(new DealDamageAnimationCommand(_target.GetTransform()));
                 return true;
             }
 

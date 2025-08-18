@@ -28,7 +28,9 @@ namespace SampleGame
         {
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new DealDamageAnimationCommand(GameEntityViewUseCase.GetView(_viewContext, target).transform)
+                new DealDamageAnimationCommand(
+                    GameEntityViewUseCase.GetView(_viewContext, target).transform, 
+                    HealthUseCase.GetNormalizedHealth(target))
             );
         }
     }
