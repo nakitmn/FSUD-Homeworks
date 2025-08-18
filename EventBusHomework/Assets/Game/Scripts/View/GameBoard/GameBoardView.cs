@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SampleGame
@@ -82,6 +83,23 @@ namespace SampleGame
                 {
                     _views[x, y].SetMaterial(_highlightMaterial);
                 }
+            }
+        }
+        
+        public void ResetMoveEnabled()
+        {
+            for (var x = 0; x < _views.GetLength(0); x++)
+            for (var y = 0; y < _views.GetLength(1); y++)
+            {
+                _views[x, y].PlayMoveDisabled();
+            }
+        }
+
+        public void SetMoveEnabled(IEnumerable<GameBoardPosition> positions)
+        {
+            foreach (var position in positions)
+            {
+                _views[position.x, position.y].PlayMoveEnabled();
             }
         }
 

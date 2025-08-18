@@ -29,6 +29,8 @@ namespace SampleGame
                     _gameContext, 
                     context,   
                     new CharacterMoveCommand(selectedEntity, context.GetGameBoardView().GetBoardPosition(cellView)));
+                
+                context.GetSelectedCharacter().Value = null;
             }
         }
     }

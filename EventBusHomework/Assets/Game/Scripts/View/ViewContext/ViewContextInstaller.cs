@@ -43,6 +43,8 @@ namespace Game.View
             entity.AddBehaviour<CharacterAttackController>();
             entity.AddBehaviour<CharacterMoveController>();
             entity.AddBehaviour<CharacterSelectController>();
+            
+            entity.AddBehaviour<SelectedCharacterCellsPresenter>();
         }
     }
 }

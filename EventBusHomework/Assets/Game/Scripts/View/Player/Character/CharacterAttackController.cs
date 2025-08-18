@@ -33,6 +33,8 @@ namespace SampleGame
                         new CharacterAttackCommand(selectedEntity,
                             _gameBoard.GetBoardPosition((IGameEntity) target.Entity))
                     );
+                
+                context.GetSelectedCharacter().Value = null;
             }
         }
     }
