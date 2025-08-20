@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 4
   _movesPerTurn:
-    value: 10
+    value: 1
   _attacksPerTurn:
-    value: 10
+    value: 1
   _damage:
     value: 1
   _moveRange:

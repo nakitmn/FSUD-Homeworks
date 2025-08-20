@@ -232,7 +232,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EmissionEnabled: 0
-    - _EmissionSelfGlow: 1.2
+    - _EmissionSelfGlow: 0.38
     - _EnvironmentReflections: 1
     - _FaceDownCutoff: 0.25
     - _FadeAmount: 0
@@ -253,7 +253,7 @@ Material:
     - _GlossyReflections: 1
     - _GreyScaleStage: 0
     - _Greyscale: 0
-    - _GreyscaleBlend: 0
+    - _GreyscaleBlend: 0.799
     - _GreyscaleLuminosity: 0
     - _HalfLambertWrap: 1
     - _HandDrawn: 0
@@ -269,8 +269,8 @@ Material:
     - _Highlights: 0
     - _HighlightsStrength: 1
     - _Hit: 0
-    - _HitBlend: 0
-    - _HitGlow: 5
+    - _HitBlend: 0.184
+    - _HitGlow: 50
     - _Hologram: 0
     - _HologramAccentAlpha: 0.5
     - _HologramAccentFrequency: 1
@@ -387,16 +387,16 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGlowColor: {r: 1, g: 0.9869999, b: 0.6, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _GlitchOffset: {r: -0.5, g: 0, b: 0, a: 0}
     - _GradientHeightColor01: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _GradientHeightColor02: {r: 1, g: 1, b: 1, a: 1}
-    - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GreyscaleTintColor: {r: 1, g: 0.047118098, b: 0, a: 1}
     - _HeightFogColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
     - _HighlightOffset: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightsColor: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
-    - _HitColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HitColor: {r: 1, g: 0, b: 0, a: 1}
     - _HologramColor: {r: 0.49028653, g: 2.118547, b: 0.39930728, a: 1}
     - _HologramLineDirection: {r: 0, g: 1, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}

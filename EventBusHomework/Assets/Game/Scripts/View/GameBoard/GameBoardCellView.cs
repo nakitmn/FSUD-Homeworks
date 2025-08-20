@@ -6,6 +6,8 @@ namespace SampleGame
     public sealed class GameBoardCellView : MonoBehaviour
     {
         [SerializeField] private Renderer _renderer;
+        [SerializeField] private float _moveHighlightHeight = -0.2f;
+        [SerializeField] private float _moveHighlightDuration = 0.3f;
 
         public void SetMaterial(Material material)
         {
@@ -14,12 +16,12 @@ namespace SampleGame
 
         public void PlayMoveEnabled()
         {
-            transform.DOLocalMoveY(-0.1f, 0.3f);
+            transform.DOLocalMoveY(_moveHighlightHeight, _moveHighlightDuration);
         }
         
         public void PlayMoveDisabled()
         {
-            transform.DOLocalMoveY(0f, 0.3f);
+            transform.DOLocalMoveY(0f, _moveHighlightDuration);
         }
     }
 }
