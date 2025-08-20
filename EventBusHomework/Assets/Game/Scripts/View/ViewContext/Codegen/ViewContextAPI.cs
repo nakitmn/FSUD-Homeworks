@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Atomic.Entities;
 using Atomic.Elements;
-using SampleGame;
+using Game.Core;
 
 namespace Game.View
 {

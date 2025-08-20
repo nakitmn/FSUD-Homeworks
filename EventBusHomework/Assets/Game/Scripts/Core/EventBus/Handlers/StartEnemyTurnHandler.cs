@@ -1,7 +1,7 @@
 ﻿using Atomic.Entities;
 using Atomic.Events;
 
-namespace SampleGame
+namespace Game.Core
 {
     public sealed class StartEnemyTurnHandler : IInit<IGameContext>, IEnable, IDisable
     {

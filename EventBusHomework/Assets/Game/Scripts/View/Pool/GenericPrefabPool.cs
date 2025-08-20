@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public class GenericPrefabPool
     {

@@ -4,7 +4,7 @@ using Atomic.Entities;
 using Atomic.Events;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Core
 {
     [CreateAssetMenu(menuName = "Game/GameContextInstaller")]
     public sealed class GameContextInstaller : ScriptableEntityInstaller<IGameContext>

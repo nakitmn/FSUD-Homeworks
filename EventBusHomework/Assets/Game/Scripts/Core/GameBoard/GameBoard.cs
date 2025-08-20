@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Core
 {
     [Serializable]
     public sealed class GameBoard

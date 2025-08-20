@@ -1,10 +1,10 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Events;
-using Game.View;
+using Game.Core;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class CharacterSelectController : IInit<IViewContext>, IEnable, IDisable, IUpdate<IViewContext>
     {

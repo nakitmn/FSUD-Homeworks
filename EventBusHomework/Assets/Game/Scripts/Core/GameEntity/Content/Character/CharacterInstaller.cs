@@ -2,7 +2,7 @@
 using Atomic.Entities;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Core
 {
     [CreateAssetMenu(menuName = "Game/CharacterInstaller")]
     public sealed class CharacterInstaller : ScriptableEntityInstaller<IGameEntity>

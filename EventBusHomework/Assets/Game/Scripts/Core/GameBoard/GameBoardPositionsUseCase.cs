@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SampleGame
+namespace Game.Core
 {
     public static class GameBoardPositionsUseCase
     {

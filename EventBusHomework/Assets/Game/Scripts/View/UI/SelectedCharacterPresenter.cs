@@ -1,19 +1,18 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using Game.View;
+using Game.Core;
 using TMPro;
-using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
-    public sealed class SelectedCharacterPresenter : IEnable<IViewContext>, IDisable
+    public sealed class SelectedCharacterStatsPresenter : IEnable<IViewContext>, IDisable
     {
         private readonly TMP_Text _view;
 
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private IGameEntity _cachedCharacter;
 
-        public SelectedCharacterPresenter(TMP_Text view)
+        public SelectedCharacterStatsPresenter(TMP_Text view)
         {
             _view = view;
         }

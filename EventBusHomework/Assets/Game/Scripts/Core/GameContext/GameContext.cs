@@ -1,6 +1,6 @@
 ﻿using Atomic.Entities;
 
-namespace SampleGame
+namespace Game.Core
 {
     public interface IGameContext : IEntity
     {

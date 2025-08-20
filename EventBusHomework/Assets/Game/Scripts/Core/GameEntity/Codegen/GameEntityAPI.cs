@@ -9,7 +9,7 @@ using Atomic.Entities;
 using Atomic.Elements;
 using DG.Tweening;
 
-namespace SampleGame
+namespace Game.Core
 {
 	public static class GameEntityAPI
 	{

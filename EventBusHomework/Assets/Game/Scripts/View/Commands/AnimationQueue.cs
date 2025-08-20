@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class AnimationQueue
     {

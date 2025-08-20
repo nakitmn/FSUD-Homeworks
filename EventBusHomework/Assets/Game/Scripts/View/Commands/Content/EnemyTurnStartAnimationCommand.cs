@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct EnemyTurnStartAnimationCommand : IAnimationCommand
     {

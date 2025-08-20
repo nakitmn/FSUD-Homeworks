@@ -1,5 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using Game.Core;
 using SampleGame;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace Game.View
             _gameBoardInstaller.Install(entity);
             _uiInstaller.Install(entity);
             
-            entity.AddBehaviour(new SelectedCharacterPresenter(_markerView));
+            entity.AddBehaviour(new SelectedMarkerPresenter(_markerView));
 
             entity.AddBehaviour<PlayerTurnStartObserver>();
             entity.AddBehaviour<EnemyTurnStartObserver>();

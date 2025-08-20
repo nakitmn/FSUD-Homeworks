@@ -3,7 +3,7 @@ entityType: IGameContext
 aggressiveInlining: true
 unsafeAccess: true
 
-namespace: SampleGame
+namespace: Game.Core
 className: GameContextAPI
 directory: Assets/Game/Scripts/Core/GameContext/Codegen
  

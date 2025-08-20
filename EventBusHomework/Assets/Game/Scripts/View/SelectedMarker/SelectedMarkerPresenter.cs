@@ -1,17 +1,17 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using SampleGame;
+using Game.Core;
 
 namespace Game.View
 {
-    public sealed class SelectedCharacterPresenter : IEnable<IViewContext>, IDisable
+    public sealed class SelectedMarkerPresenter : IEnable<IViewContext>, IDisable
     {
         private readonly SelectedMarkerView _markerView;
         
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private EntityWorldView _entityWorldView;
 
-        public SelectedCharacterPresenter(SelectedMarkerView markerView)
+        public SelectedMarkerPresenter(SelectedMarkerView markerView)
         {
             _markerView = markerView;
         }

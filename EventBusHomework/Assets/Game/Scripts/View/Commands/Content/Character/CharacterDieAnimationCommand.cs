@@ -1,10 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Game.View;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct CharacterDieAnimationCommand : IAnimationCommand
     {

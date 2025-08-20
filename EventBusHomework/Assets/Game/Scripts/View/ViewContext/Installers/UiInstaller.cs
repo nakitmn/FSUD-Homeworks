@@ -23,7 +23,7 @@ namespace Game.View
             entity.AddEndTurnButton(_endTurnButton);
             
             entity.AddBehaviour(new TurnEventsPresenter(_turnEventsText));
-            entity.AddBehaviour(new SampleGame.SelectedCharacterPresenter(_selectedCharacterInfoText));
+            entity.AddBehaviour(new SelectedCharacterStatsPresenter(_selectedCharacterInfoText));
             entity.AddBehaviour(new GameStatePresenter(_gameStateText));
             entity.AddBehaviour(new CurrentTurnPresenter(_currentTurnText));
             entity.AddBehaviour(new EndTurnButtonPresenter(_endTurnButton));

@@ -1,9 +1,10 @@
 ﻿using Atomic.Entities;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Core;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct SpawnAnimationCommand : IAnimationCommand
     {

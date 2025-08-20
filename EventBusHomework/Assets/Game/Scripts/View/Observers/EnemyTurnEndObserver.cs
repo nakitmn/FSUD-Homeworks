@@ -1,7 +1,7 @@
 ﻿using Atomic.Entities;
-using Game.View;
+using Game.Core;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class EnemyTurnEndObserver : IInit, IEnable, IDisable
     {

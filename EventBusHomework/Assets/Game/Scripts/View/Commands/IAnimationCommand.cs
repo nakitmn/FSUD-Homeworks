@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace SampleGame
+namespace Game.View
 {
     public interface IAnimationCommand
     {

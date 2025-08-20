@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class GameBoardCellView : MonoBehaviour
     {

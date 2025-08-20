@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Core
 {
     public static class HealthUseCase
     {

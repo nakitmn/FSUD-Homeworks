@@ -1,7 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct CallbackAnimationCommand : IAnimationCommand
     {

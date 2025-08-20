@@ -10,7 +10,7 @@ using Atomic.Events;
 using Atomic.Elements;
 using System.Collections.Generic;
 
-namespace SampleGame
+namespace Game.Core
 {
 	public static class GameContextAPI
 	{

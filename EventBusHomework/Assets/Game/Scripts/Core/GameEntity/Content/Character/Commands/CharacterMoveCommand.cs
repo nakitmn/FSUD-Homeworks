@@ -1,4 +1,4 @@
-﻿namespace SampleGame
+﻿namespace Game.Core
 {
     public struct CharacterMoveCommand : ICommand
     {

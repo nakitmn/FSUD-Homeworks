@@ -1,10 +1,10 @@
 ﻿using Atomic.Entities;
 using Atomic.Events;
-using Game.View;
+using Game.Core;
 using TMPro;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class TurnEventsPresenter : IEnable<IViewContext>, IDisable
     {

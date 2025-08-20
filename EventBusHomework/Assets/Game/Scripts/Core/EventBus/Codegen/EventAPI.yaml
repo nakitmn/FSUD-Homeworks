@@ -2,7 +2,7 @@ header: EventBusAPI
 entityType: IEventBus
 aggressiveInlining: true
 
-namespace: SampleGame
+namespace: Game.Core
 className: EventAPI
 directory: Assets/Game/Scripts/Core/EventBus/Codegen
  

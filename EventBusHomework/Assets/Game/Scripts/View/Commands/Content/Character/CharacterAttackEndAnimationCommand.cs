@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct CharacterAttackEndAnimationCommand : IAnimationCommand
     {

@@ -1,9 +1,9 @@
 ﻿using Atomic.Entities;
 using Atomic.Events;
-using Game.View;
+using Game.Core;
 using UnityEngine.UI;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class EndTurnButtonPresenter : IEnable<IViewContext>, IDisable
     {

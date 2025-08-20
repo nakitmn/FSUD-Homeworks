@@ -1,7 +1,7 @@
 ﻿using Atomic.Entities;
 using Atomic.Events;
 
-namespace SampleGame
+namespace Game.Core
 {
     public sealed class EndPlayerTurnHandler : IInit<IGameContext>, IEnable, IDisable
     {

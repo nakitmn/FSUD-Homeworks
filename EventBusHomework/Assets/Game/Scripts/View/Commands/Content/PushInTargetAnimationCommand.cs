@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct PushInTargetAnimationCommand : IAnimationCommand
     {

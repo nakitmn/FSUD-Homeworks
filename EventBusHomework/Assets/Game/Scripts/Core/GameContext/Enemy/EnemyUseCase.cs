@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Core
 {
     public static class EnemyUseCase
     {

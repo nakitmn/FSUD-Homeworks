@@ -1,9 +1,9 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using Game.View;
+using Game.Core;
 using TMPro;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class GameStatePresenter : IEnable<IViewContext>, IDisable
     {

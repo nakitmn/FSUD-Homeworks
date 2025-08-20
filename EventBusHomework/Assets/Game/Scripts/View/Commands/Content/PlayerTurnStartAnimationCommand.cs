@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine.UI;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct PlayerTurnStartAnimationCommand : IAnimationCommand
     {

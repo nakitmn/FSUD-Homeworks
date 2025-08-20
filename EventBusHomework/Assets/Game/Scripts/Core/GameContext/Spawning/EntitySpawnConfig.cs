@@ -1,7 +1,7 @@
 ﻿using System;
 using Atomic.Entities;
 
-namespace SampleGame
+namespace Game.Core
 {
     [Serializable]
     public class EntitySpawnConfig

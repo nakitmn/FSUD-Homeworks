@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SampleGame
+namespace Game.Core
 {
     public static class CharacterTurnUseCase
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public static class RaycastUseCase
     {

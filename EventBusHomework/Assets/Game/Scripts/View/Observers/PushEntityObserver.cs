@@ -1,8 +1,8 @@
 ﻿using Atomic.Entities;
-using Game.View;
+using Game.Core;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class PushEntityObserver : IInit, IEnable, IDisable
     {

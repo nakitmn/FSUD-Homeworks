@@ -1,8 +1,8 @@
 ﻿using Atomic.Entities;
 using Atomic.Events;
-using Game.View;
+using Game.Core;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class GameBoardPresenter : IInit<IViewContext>, IEnable, IDisable
     {

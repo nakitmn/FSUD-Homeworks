@@ -1,4 +1,5 @@
 ﻿using Atomic.Entities;
+using Game.Core;
 using SampleGame;
 
 namespace Game.View

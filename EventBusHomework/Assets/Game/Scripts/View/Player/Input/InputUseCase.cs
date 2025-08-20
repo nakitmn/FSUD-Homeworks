@@ -1,7 +1,6 @@
-﻿using Game.View;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public static class InputUseCase
     {

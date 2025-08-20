@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class TurnView : MonoBehaviour
     {

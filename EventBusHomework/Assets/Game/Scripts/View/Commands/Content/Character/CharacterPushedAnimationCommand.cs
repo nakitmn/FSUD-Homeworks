@@ -1,8 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.View;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     public readonly struct CharacterPushedAnimationCommand : IAnimationCommand
     {

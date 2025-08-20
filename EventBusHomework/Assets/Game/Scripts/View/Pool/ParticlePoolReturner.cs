@@ -1,7 +1,6 @@
-﻿using Game.View;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SampleGame
+namespace Game.View
 {
     [RequireComponent(typeof(ParticleSystem))]
     public sealed class ParticlePoolReturner : MonoBehaviour

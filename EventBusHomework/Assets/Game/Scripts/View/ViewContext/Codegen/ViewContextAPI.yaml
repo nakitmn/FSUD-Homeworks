@@ -12,7 +12,7 @@ imports:
 - UnityEngine.UI
 - Atomic.Entities
 - Atomic.Elements
-- SampleGame
+- Game.Core
 
 tags:
 

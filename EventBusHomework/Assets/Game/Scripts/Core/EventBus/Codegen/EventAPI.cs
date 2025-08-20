@@ -9,7 +9,7 @@ using Atomic.Events;
 using System;
 using Atomic.Entities;
 
-namespace SampleGame
+namespace Game.Core
 {
 	public static class EventAPI
 	{

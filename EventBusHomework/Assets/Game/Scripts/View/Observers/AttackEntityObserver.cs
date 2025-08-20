@@ -1,9 +1,7 @@
 ﻿using Atomic.Entities;
-using Game.View;
-using UnityEditor;
-using UnityEngine;
+using Game.Core;
 
-namespace SampleGame
+namespace Game.View
 {
     public sealed class AttackEntityObserver : IInit, IEnable, IDisable
     {
