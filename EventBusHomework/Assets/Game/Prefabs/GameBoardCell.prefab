@@ -410,6 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 87028487286714316}
+  _moveHighlightHeight: -0.2
+  _moveHighlightDuration: 0.3
 --- !u!114 &8873283291882580318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,6 +620,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_TypeC_Big.001
       objectReference: {fileID: 0}
+    - target: {fileID: 6253730327501573169, guid: e9835bb89200a294088aab530a85dd76, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     m_RemovedComponents:
     - {fileID: 5947882672590715274, guid: e9835bb89200a294088aab530a85dd76, type: 3}
     m_RemovedGameObjects: []
@@ -693,6 +699,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3654016894501547674, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     - target: {fileID: 4020262024857585250, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
       propertyPath: m_Name
       value: LittleStone.011 (1)
@@ -867,6 +877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_TypeC_Big.001 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6253730327501573169, guid: e9835bb89200a294088aab530a85dd76, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     m_RemovedComponents:
     - {fileID: 5947882672590715274, guid: e9835bb89200a294088aab530a85dd76, type: 3}
     m_RemovedGameObjects: []
@@ -942,6 +956,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3654016894501547674, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     - target: {fileID: 4020262024857585250, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
       propertyPath: m_Name
       value: LittleStone.011 (3)
@@ -1025,6 +1043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_TypeC_Big.001 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6253730327501573169, guid: e9835bb89200a294088aab530a85dd76, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     m_RemovedComponents:
     - {fileID: 5947882672590715274, guid: e9835bb89200a294088aab530a85dd76, type: 3}
     m_RemovedGameObjects: []
@@ -1044,6 +1066,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 364904710151885391}
     m_Modifications:
+    - target: {fileID: 2260551506525865963, guid: f85dc2d53c634ff48a92e307704dde58, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     - target: {fileID: 8525212450073158314, guid: f85dc2d53c634ff48a92e307704dde58, type: 3}
       propertyPath: m_Name
       value: BigStone.003
@@ -1258,6 +1284,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3654016894501547674, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     - target: {fileID: 4020262024857585250, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
       propertyPath: m_Name
       value: LittleStone.011 (2)
@@ -1428,6 +1458,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3654016894501547674, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
     - target: {fileID: 4020262024857585250, guid: 03413b03ec5f1dd4c8e341927e64958a, type: 3}
       propertyPath: m_Name
       value: LittleStone.011
