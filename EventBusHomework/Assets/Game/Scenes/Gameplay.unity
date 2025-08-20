@@ -2195,10 +2195,8 @@ MonoBehaviour:
   _cellPrefab: {fileID: 6875461324088407675, guid: 2fcb221f0be333543ae2499cfc6ab2ce, type: 3}
   _container: {fileID: 1201200287}
   _cellOffset: 1.75
-  _cellMaterials:
-  - {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
-  - {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
-  _highlightMaterial: {fileID: 2100000, guid: 3d3c10bc2d11e0d4097367cbac94f078, type: 2}
+  _defaultMaterial: {fileID: 2100000, guid: 4b641fd79ddf0e3418b248d35bdfba56, type: 2}
+  _highlightMaterial: {fileID: 2100000, guid: 0c03609949a147544907e4019f8549c6, type: 2}
 --- !u!4 &1215525682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8888654626051131777, guid: b59d2aed96a80834a92871dfe32aaaeb, type: 3}

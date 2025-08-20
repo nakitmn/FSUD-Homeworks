@@ -9,7 +9,7 @@ namespace SampleGame
         [SerializeField] private GameBoardCellView _cellPrefab;
         [SerializeField] private Transform _container;
         [SerializeField] private float _cellOffset;
-        [SerializeField] private Material[] _cellMaterials;
+        [SerializeField] private Material _defaultMaterial;
         [SerializeField] private Material _highlightMaterial;
 
         private GameBoardCellView[,] _views;
@@ -23,13 +23,12 @@ namespace SampleGame
             {
                 var spawnPosition = ToWorldPosition(x, y);
                 var index = GetCellIndex(width, x, y);
-                var material = GetCellMaterialFor(index, x);
 
                 var view = Instantiate(_cellPrefab, spawnPosition, Quaternion.identity, _container);
 
                 _views[x, y] = view;
                 view.gameObject.name = $"Cell[{index}]";
-                view.SetMaterial(material);
+                view.SetMaterial(_defaultMaterial);
             }
         }
         
@@ -68,9 +67,7 @@ namespace SampleGame
             for (var x = 0; x < _views.GetLength(0); x++)
             for (var y = 0; y < _views.GetLength(1); y++)
             {
-                var index = GetCellIndex(_views.GetLength(0), x, y);
-                var material = GetCellMaterialFor(index, x);
-                _views[x, y].SetMaterial(material);
+                _views[x, y].SetMaterial(_defaultMaterial);
             }
         }
 
@@ -106,13 +103,6 @@ namespace SampleGame
         private int GetCellIndex(int boardWidth, int x, int y)
         {
             return boardWidth * x + y;
-        }
-
-        private Material GetCellMaterialFor(int index, int x)
-        {
-            var materialOffset = (int) Mathf.Repeat(x, 2);
-            var materialIndex = (int) Mathf.Repeat(index + materialOffset, _cellMaterials.Length);
-            return _cellMaterials[materialIndex];
         }
     }
 }
