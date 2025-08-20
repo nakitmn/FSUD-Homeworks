@@ -14,14 +14,12 @@ namespace SampleGame
 
         public void PlayMoveEnabled()
         {
-            transform.DOLocalMoveY(0.1f, 0.3f);
-            transform.DOScale(Vector3.one * 1.1f, 0.3f);
+            transform.DOLocalMoveY(-0.1f, 0.3f);
         }
         
         public void PlayMoveDisabled()
         {
             transform.DOLocalMoveY(0f, 0.3f);
-            transform.DOScale(Vector3.one, 0.3f);
         }
     }
 }
