@@ -6,6 +6,11 @@ namespace SampleGame
     {
         [SerializeField] private GameObject[] _bottomDecors;
         [SerializeField] private GameObject[] _topDecors;
+
+        private static readonly float[] _decorRotations = new[]
+        {
+            0f, 90f, 180f, 270f
+        };
         
         private void Start()
         {
@@ -19,9 +24,21 @@ namespace SampleGame
                 decor.SetActive(Random.value < 0.5f);
             }
 
-            foreach (var decor in _topDecors)
+            var decorIndex = Random.Range(0, _topDecors.Length);
+            for (var i = 0; i < _topDecors.Length; i++)
             {
-                decor.SetActive(Random.value < 0.5f);
+                var decor = _topDecors[i];
+                if (i == decorIndex)
+                {
+                    decor.SetActive(true);
+                    var rotation = decor.transform.rotation.eulerAngles;
+                    rotation.y = _decorRotations[Random.Range(0, _decorRotations.Length)];
+                    decor.transform.rotation = Quaternion.Euler(rotation);
+                }
+                else
+                {
+                    decor.SetActive(false);
+                }
             }
         }
     }
