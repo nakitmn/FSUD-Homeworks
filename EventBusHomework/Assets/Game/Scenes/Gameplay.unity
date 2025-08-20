@@ -2022,8 +2022,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _caption: {fileID: 4669304961949099250}
   _canvasGroup: {fileID: 1454325702}
-  _playerTurnColor: {r: 0, g: 0.85882354, b: 1, a: 1}
-  _enemyTurnColor: {r: 1, g: 0, b: 0.047058824, a: 1}
+  _playerTurnColor: {r: 0.2, g: 0.94509804, b: 0.34509805, a: 1}
+  _enemyTurnColor: {r: 0.8784314, g: 0.05490196, b: 0.08627451, a: 1}
 --- !u!225 &1454325702
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2485,8 +2485,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294957824
-  m_fontColor: {r: 0, g: 0.85882354, b: 1, a: 1}
+    rgba: 4279175116
+  m_fontColor: {r: 0.8018868, g: 0.02647741, b: 0.057493754, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
