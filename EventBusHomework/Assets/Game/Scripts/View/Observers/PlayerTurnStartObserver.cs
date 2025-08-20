@@ -26,7 +26,9 @@ namespace SampleGame
 
         private void OnPlayerTurnStart()
         {
-            _viewContext.GetAnimationQueue().Execute().Forget();
+            var animationQueue = _viewContext.GetAnimationQueue();
+            animationQueue.Enqueue(new PlayerTurnStartAnimationCommand(_viewContext.GetTurnView(), _viewContext.GetEndTurnButton()));
+            animationQueue.Execute().Forget();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Game.View
             entity.AddPrefabPool(new GenericPrefabPool(_poolContainer));
             entity.AddWaterSplashEffect(_waterSplash);
             entity.AddDeathEffect(_deathEffect);
-           
+            
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));
             

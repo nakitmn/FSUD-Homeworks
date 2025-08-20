@@ -10,6 +10,7 @@ namespace Game.View
     [Serializable]
     public sealed class UiInstaller : IEntityInstaller<IViewContext>
     {
+        [SerializeField] private TurnView _turnView;
         [SerializeField] private TMP_Text _turnEventsText;
         [SerializeField] private TMP_Text _selectedCharacterInfoText;
         [SerializeField] private TMP_Text _gameStateText;
@@ -18,6 +19,9 @@ namespace Game.View
         
         public void Install(IViewContext entity)
         {
+            entity.AddTurnView(_turnView);
+            entity.AddEndTurnButton(_endTurnButton);
+            
             entity.AddBehaviour(new TurnEventsPresenter(_turnEventsText));
             entity.AddBehaviour(new SampleGame.SelectedCharacterPresenter(_selectedCharacterInfoText));
             entity.AddBehaviour(new GameStatePresenter(_gameStateText));

@@ -9,6 +9,7 @@ directory: Assets/Game/Scripts/View/ViewContext/Codegen
  
 imports:
 - UnityEngine
+- UnityEngine.UI
 - Atomic.Entities
 - Atomic.Elements
 - SampleGame
@@ -24,6 +25,10 @@ values:
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - InputCondition: IValue<bool> 
 - PrefabPool: GenericPrefabPool
+
+  #UI
+- TurnView: TurnView
+- EndTurnButton: Button
   
   #VFX
 - WaterSplashEffect: GameObject

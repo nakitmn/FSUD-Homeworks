@@ -5,6 +5,7 @@
 using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 using Atomic.Entities;
 using Atomic.Elements;
 using SampleGame;
@@ -23,6 +24,8 @@ namespace Game.View
 		public const int SelectedCharacter = 112705328; // IReactiveVariable<IGameEntity>
 		public const int InputCondition = 1207100273; // IValue<bool>
 		public const int PrefabPool = -98831589; // GenericPrefabPool
+		public const int TurnView = 360539027; // TurnView
+		public const int EndTurnButton = 1038563267; // Button
 		public const int WaterSplashEffect = -986058579; // GameObject
 		public const int DeathEffect = -510842403; // GameObject
 
@@ -168,6 +171,46 @@ namespace Game.View
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetPrefabPool(this IViewContext obj, GenericPrefabPool value) => obj.SetValue(PrefabPool, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static TurnView GetTurnView(this IViewContext obj) => obj.GetValueUnsafe<TurnView>(TurnView);
+
+		public static ref TurnView RefTurnView(this IViewContext obj) => ref obj.GetValueUnsafe<TurnView>(TurnView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTurnView(this IViewContext obj, out TurnView value) => obj.TryGetValueUnsafe(TurnView, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddTurnView(this IViewContext obj, TurnView value) => obj.AddValue(TurnView, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTurnView(this IViewContext obj) => obj.HasValue(TurnView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTurnView(this IViewContext obj) => obj.DelValue(TurnView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTurnView(this IViewContext obj, TurnView value) => obj.SetValue(TurnView, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Button GetEndTurnButton(this IViewContext obj) => obj.GetValueUnsafe<Button>(EndTurnButton);
+
+		public static ref Button RefEndTurnButton(this IViewContext obj) => ref obj.GetValueUnsafe<Button>(EndTurnButton);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetEndTurnButton(this IViewContext obj, out Button value) => obj.TryGetValueUnsafe(EndTurnButton, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddEndTurnButton(this IViewContext obj, Button value) => obj.AddValue(EndTurnButton, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasEndTurnButton(this IViewContext obj) => obj.HasValue(EndTurnButton);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelEndTurnButton(this IViewContext obj) => obj.DelValue(EndTurnButton);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetEndTurnButton(this IViewContext obj, Button value) => obj.SetValue(EndTurnButton, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static GameObject GetWaterSplashEffect(this IViewContext obj) => obj.GetValueUnsafe<GameObject>(WaterSplashEffect);
