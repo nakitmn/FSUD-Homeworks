@@ -34,6 +34,7 @@ namespace Game.View
             entity.AddBehaviour(new SelectedCharacterPresenter(_markerView));
 
             entity.AddBehaviour<PlayerTurnStartObserver>();
+            entity.AddBehaviour<EnemyTurnStartObserver>();
             entity.AddBehaviour<EnemyTurnEndObserver>();
             entity.AddBehaviour<DealDamageEntityObserver>();
             entity.AddBehaviour<MoveEntityObserver>();
