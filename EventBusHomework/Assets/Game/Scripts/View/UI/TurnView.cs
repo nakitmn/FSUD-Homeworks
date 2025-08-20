@@ -8,6 +8,13 @@ namespace SampleGame
     {
         [SerializeField] private TMP_Text _caption;
         [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private Color _playerTurnColor;
+        [SerializeField] private Color _enemyTurnColor;
+
+        public void SetPlayerTurn(bool value)
+        {
+            _caption.color = value ? _playerTurnColor: _enemyTurnColor;
+        }
 
         public void SetCaption(string caption)
         {

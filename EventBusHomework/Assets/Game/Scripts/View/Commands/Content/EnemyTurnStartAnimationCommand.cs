@@ -15,6 +15,7 @@ namespace SampleGame
 
         public async UniTask Execute()
         {
+            _turnView.SetPlayerTurn(false);
             _turnView.SetCaption("enemy turn!");
             await _turnView.Enable().AsyncWaitForCompletion();
             await UniTask.Delay(TimeSpan.FromSeconds(0.75f));
