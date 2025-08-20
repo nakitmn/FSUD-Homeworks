@@ -24,4 +24,7 @@ values:
 - SelectedCharacter: IReactiveVariable<IGameEntity>
 - InputCondition: IValue<bool> 
 - PrefabPool: GenericPrefabPool
+  
+  #VFX
 - WaterSplashEffect: GameObject
+- DeathEffect: GameObject

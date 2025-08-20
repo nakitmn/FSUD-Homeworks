@@ -9,6 +9,7 @@ namespace Game.View
     {
         [SerializeField] private Transform _poolContainer;
         [SerializeField] private GameObject _waterSplash;
+        [SerializeField] private GameObject _deathEffect;
         [SerializeField] private Camera _camera;
         [SerializeField] private EntityWorldView _entityWorldView;
         [SerializeField] private SelectedMarkerView _markerView;
@@ -22,6 +23,7 @@ namespace Game.View
             entity.AddWorldView(_entityWorldView);
             entity.AddPrefabPool(new GenericPrefabPool(_poolContainer));
             entity.AddWaterSplashEffect(_waterSplash);
+            entity.AddDeathEffect(_deathEffect);
            
             entity.AddSelectedCharacter(new ReactiveVariable<IGameEntity>());
             entity.AddInputCondition(new BaseFunction<bool>(() => entity.GetAnimationQueue().IsActive == false));

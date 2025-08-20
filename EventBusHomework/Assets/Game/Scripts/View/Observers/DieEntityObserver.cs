@@ -28,7 +28,7 @@ namespace SampleGame
         {
             ViewCommandsUseCase.Enqueue(
                 _viewContext,
-                new CharacterDieAnimationCommand(GameEntityViewUseCase.GetView(_viewContext,target).transform)
+                new CharacterDieAnimationCommand(_viewContext, GameEntityViewUseCase.GetView(_viewContext,target).transform)
             );
         }
     }

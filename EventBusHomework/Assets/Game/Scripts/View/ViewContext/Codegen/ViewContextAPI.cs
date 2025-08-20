@@ -24,6 +24,7 @@ namespace Game.View
 		public const int InputCondition = 1207100273; // IValue<bool>
 		public const int PrefabPool = -98831589; // GenericPrefabPool
 		public const int WaterSplashEffect = -986058579; // GameObject
+		public const int DeathEffect = -510842403; // GameObject
 
 
 		///Value Extensions
@@ -187,5 +188,25 @@ namespace Game.View
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWaterSplashEffect(this IViewContext obj, GameObject value) => obj.SetValue(WaterSplashEffect, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject GetDeathEffect(this IViewContext obj) => obj.GetValueUnsafe<GameObject>(DeathEffect);
+
+		public static ref GameObject RefDeathEffect(this IViewContext obj) => ref obj.GetValueUnsafe<GameObject>(DeathEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetDeathEffect(this IViewContext obj, out GameObject value) => obj.TryGetValueUnsafe(DeathEffect, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddDeathEffect(this IViewContext obj, GameObject value) => obj.AddValue(DeathEffect, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasDeathEffect(this IViewContext obj) => obj.HasValue(DeathEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelDeathEffect(this IViewContext obj) => obj.DelValue(DeathEffect);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetDeathEffect(this IViewContext obj, GameObject value) => obj.SetValue(DeathEffect, value);
     }
 }
