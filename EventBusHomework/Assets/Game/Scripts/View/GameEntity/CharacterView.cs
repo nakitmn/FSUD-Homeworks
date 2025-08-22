@@ -12,12 +12,14 @@ namespace Game.View
         [SerializeField] private float _hitDuration = 0.3f;
         [SerializeField] private float _minValue;
         [SerializeField] private float _maxValue;
-        
-        public void SetMaxHealth(int health)
+
+        private int _hitPropertyId;
+
+        private void Awake()
         {
-            _healthBar.SetValue(health,health);
+            _hitPropertyId = Shader.PropertyToID(_numericPropertyName);
         }
-        
+
         public void SetHealth(float healthNormalized)
         {
             _healthBar.Value = healthNormalized;
@@ -25,19 +27,20 @@ namespace Game.View
 
         public void PlayHit()
         {
-            var propertyShaderID = Shader.PropertyToID(_numericPropertyName);
-            
             foreach (var renderer in _hitRenderers)
             {
                 DOVirtual.Float(0f, 1f, _hitDuration, normalizedTime =>
                 {
-                    float curveValue = _animationCurve.Evaluate(normalizedTime);
-                    float remappedValue = Mathf.Lerp(_minValue, _maxValue, curveValue);
-
+                    var curveValue = _animationCurve.Evaluate(normalizedTime);
+                    var remappedValue = Mathf.Lerp(_minValue, _maxValue, curveValue);
                     var materials = renderer.materials;
                     for (int i = 0; i < materials.Length; i++)
+                    {
                         if (materials[i] != null)
-                            materials[i].SetFloat(propertyShaderID, remappedValue);
+                        {
+                            materials[i].SetFloat(_hitPropertyId, remappedValue);
+                        }
+                    }
                 });
             }
         }
