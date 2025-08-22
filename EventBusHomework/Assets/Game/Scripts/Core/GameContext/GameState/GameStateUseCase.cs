@@ -2,7 +2,7 @@
 {
     public static class GameStateUseCase
     {
-        public static void UpdateCurrentState(in IGameContext context)
+        public static void UpdateCurrentState(IGameContext context)
         {
             var currentState = context.GetCurrentState();
             
@@ -21,14 +21,14 @@
             currentState.Value = GameState.Running;
         }
 
-        public static bool IsWin(in IGameContext context)
+        public static bool IsWin(IGameContext context)
         {
             return WaveUseCase.IsLastWaveSpawned(context) && EnemyUseCase.HasAliveEnemies(context) == false;
         }
 
-        public static bool IsLose(in IGameContext context)
+        public static bool IsLose(IGameContext context)
         {
-            return PlayerCharactersUseCase.HasAliveCharacters(context) == false;
+            return CharacterTurnUseCase.HasAlivePlayerCharacters(context) == false;
         }
     }
 }

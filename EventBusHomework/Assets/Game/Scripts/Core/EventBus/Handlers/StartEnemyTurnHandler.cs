@@ -26,7 +26,7 @@ namespace Game.Core
 
         private void OnTurnStart()
         {
-            CharacterTurnUseCase.ResetEnemies(_context);
+            CharacterTurnUseCase.ResetEnemiesTurn(_context);
             EnemyTurnUseCase.HandleEnemiesTurn(_context);
             EnemySpawnUseCase.TrySpawnEnemies(_context);
             _eventBus.InvokeEndEnemyTurn();

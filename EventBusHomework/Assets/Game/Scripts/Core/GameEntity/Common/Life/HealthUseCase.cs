@@ -5,7 +5,7 @@ namespace Game.Core
 {
     public static class HealthUseCase
     {
-        public static bool Exists(in IGameEntity entity)
+        public static bool Exists(IGameEntity entity)
         {
             return entity.GetHealth().Value > 0;
         }

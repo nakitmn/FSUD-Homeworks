@@ -26,8 +26,8 @@ namespace Game.Core
 
         private void OnTurnStart()
         {
-            CharacterTurnUseCase.ResetCharacters(_context);
-            CharacterTurnUseCase.ResetEnemies(_context);
+            CharacterTurnUseCase.ResetPlayerCharactersTurn(_context);
+            CharacterTurnUseCase.ResetEnemiesTurn(_context);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public static class WaveUseCase
     {
-        public static bool IsLastWaveSpawned(in IGameContext context)
+        public static bool IsLastWaveSpawned(IGameContext context)
         {
             var currentTurn = context.GetTurn().Value;
             var waves = context.GetWaves();
