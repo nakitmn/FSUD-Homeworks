@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Core
 {
     [Serializable]
-    public struct GameBoardPosition
+    public struct GameBoardPosition : IEquatable<GameBoardPosition>
     {
         public int x;
         public int y;
@@ -77,6 +77,21 @@ namespace Game.Core
         public override string ToString()
         {
             return $"[{x};{y}]";
+        }
+
+        public bool Equals(GameBoardPosition other)
+        {
+            return x == other.x && y == other.y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GameBoardPosition other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(x, y);
         }
     }
 }
