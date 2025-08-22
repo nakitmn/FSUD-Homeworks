@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using Game.Core;
 using UnityEngine;
 
@@ -8,11 +9,16 @@ namespace Game.View
     {
         private GameContext _gameContext;
         private GameBoard _gameBoard;
+        private Camera _camera;
+        private IReactiveVariable<IGameEntity> _selectedCharacter;
 
         public void Init(IViewContext context)
         {
             _gameContext = GameContext.Instance;
             _gameBoard = _gameContext.GetGameBoard();
+            
+            _camera = context.GetCamera();
+            _selectedCharacter = context.GetSelectedCharacter();
         }
 
         public void OnUpdate(IViewContext context, in float deltaTime)
@@ -22,19 +28,13 @@ namespace Game.View
                 return;
             }
 
-            var selectedEntity = context.GetSelectedCharacter().Value;
-
-            if (selectedEntity != null &&
-                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
+            if (_selectedCharacter.Value != null &&
+                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out EntityView target))
             {
-                ViewCommandsUseCase.ExecuteWithVisual(
-                        _gameContext,
-                        context,
-                        new CharacterAttackCommand(selectedEntity,
-                            _gameBoard.GetBoardPosition((IGameEntity) target.Entity))
-                    );
-                
-                context.GetSelectedCharacter().Value = null;
+                var targetBoardPosition = _gameBoard.GetBoardPosition((IGameEntity) target.Entity);
+                var command = new CharacterAttackCommand(_selectedCharacter.Value, targetBoardPosition);
+                ViewCommandsUseCase.ExecuteWithAnimation(_gameContext, context, command);
+                _selectedCharacter.Value = null;
             }
         }
     }

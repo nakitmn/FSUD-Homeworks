@@ -1,16 +1,24 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using Game.Core;
 using UnityEngine;
 
 namespace Game.View
 {
-    public sealed class CharacterMoveController : IInit, IUpdate<IViewContext>
+    public sealed class CharacterMoveController : IInit<IViewContext>, IUpdate<IViewContext>
     {
         private GameContext _gameContext;
+        private IReactiveVariable<IGameEntity> _selectedCharacter;
+        private Camera _camera;
+        private GameBoardView _gameBoardView;
 
-        public void Init(in IEntity entity)
+        public void Init(IViewContext context)
         {
             _gameContext = GameContext.Instance;
+            
+            _selectedCharacter = context.GetSelectedCharacter();
+            _gameBoardView = context.GetGameBoardView();
+            _camera = context.GetCamera();
         }
 
         public void OnUpdate(IViewContext context, in float deltaTime)
@@ -20,17 +28,13 @@ namespace Game.View
                 return;
             }
 
-            var selectedEntity = context.GetSelectedCharacter().Value;
-
-            if (selectedEntity != null &&
-                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out GameBoardCellView cellView))
+            if (_selectedCharacter.Value != null &&
+                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out GameBoardCellView cellView))
             {
-                ViewCommandsUseCase.ExecuteWithVisual(
-                    _gameContext, 
-                    context,   
-                    new CharacterMoveCommand(selectedEntity, context.GetGameBoardView().GetBoardPosition(cellView)));
-                
-                context.GetSelectedCharacter().Value = null;
+                var boardPosition = _gameBoardView.GetBoardPosition(cellView);
+                var command = new CharacterMoveCommand(_selectedCharacter.Value, boardPosition);
+                ViewCommandsUseCase.ExecuteWithAnimation(_gameContext, context, command);
+                _selectedCharacter.Value = null;
             }
         }
     }

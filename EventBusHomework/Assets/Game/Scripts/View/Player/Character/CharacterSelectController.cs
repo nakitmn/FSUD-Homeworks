@@ -10,12 +10,15 @@ namespace Game.View
     {
         private IReactiveVariable<IGameEntity> _selectedCharacter;
         private IEventBus _eventBus;
+        private Camera _camera;
 
         public void Init(IViewContext context)
         {
             var gameContext = GameContext.Instance;
             _eventBus = gameContext.GetEventBus();
+            
             _selectedCharacter = context.GetSelectedCharacter();
+            _camera = context.GetCamera();
         }
 
         public void Enable(in IEntity entity)
@@ -33,12 +36,14 @@ namespace Game.View
         public void OnUpdate(IViewContext context, in float deltaTime)
         {
             if (InputUseCase.IsSelect(context) &&
-                RaycastUseCase.RaycastTarget(context.GetCamera(), Input.mousePosition, out EntityView target))
+                RaycastUseCase.RaycastTarget(_camera, Input.mousePosition, out EntityView target))
             {
                 var gameEntity = (IGameEntity) target.Entity;
                 if (gameEntity.HasCharacterTag())
                 {
-                    _selectedCharacter.Value = gameEntity;
+                    _selectedCharacter.Value = _selectedCharacter.Value == gameEntity 
+                        ? null 
+                        : gameEntity;
                 }
             }
         }
